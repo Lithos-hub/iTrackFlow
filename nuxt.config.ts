@@ -32,6 +32,9 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.scss"],
+  tailwindcss: {
+    exposeConfig: true,
+  },
   modules: [
     "@pinia/nuxt", // https://pinia.vuejs.org/ssr/nuxt.html
     "@nuxtjs/tailwindcss", // https://tailwindcss.nuxtjs.org

@@ -1,9 +1,15 @@
 <template>
-  <div class="p-8 text-center">iTrackFlow</div>
+  <div>
+    <LandingHeroSection />
+  </div>
 </template>
 
 <script lang="ts">
 export default {
   name: "PageHomepage",
 };
+
+definePageMeta({
+  layout: "landing-default",
+});
 </script>
