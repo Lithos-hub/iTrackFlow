@@ -2,10 +2,14 @@
 	<NuxtLayout>
 		<Html lang="en" :data-route-path="$route?.path">
 			<Head>
-				<Title>Template</Title>
+				<Title>iTrackFlow</Title>
 				<Meta name="language" content="en" />
-				<Meta property="og:title" content="Template" />
-				<Meta name="twitter:title" content="Template" />
+				<Meta
+					property="og:title"
+					content="iTrackFlow - The Collaborative Platform for Creative Musicians" />
+				<Meta
+					name="twitter:title"
+					content="iTrackFlow - The Collaborative Platform for Creative Musicians" />
 				<Meta name="description" content="Template" />
 				<Meta property="og:description" content="Template" />
 				<Meta name="twitter:description" content="Template" />
@@ -33,11 +37,11 @@ const nuxtApp = useNuxtApp();
 
 <style lang="scss">
 body {
-	@apply min-h-screen bg-white dark:bg-gray-800 dark:text-gray-200;
+	@apply min-h-screen bg-white dark:bg-black dark:text-gray-200;
 }
 
 .bg-1 {
-	background: radial-gradient($primary, transparent);
+	background: radial-gradient(rgb(146, 31, 228), transparent);
 	animation: motion1 12s ease-out infinite;
 	border-radius: 50%;
 	mix-blend-mode: exclusion;
@@ -46,7 +50,7 @@ body {
 	filter: blur(200px);
 }
 .bg-2 {
-	background: radial-gradient($secondary, transparent);
+	background: radial-gradient(rgb(191, 23, 118), transparent);
 	animation: motion2 15s ease-in infinite alternate;
 	border-radius: 50%;
 	mix-blend-mode: color-dodge;
@@ -55,7 +59,7 @@ body {
 	filter: blur(200px);
 }
 .bg-3 {
-	background: radial-gradient($tertiary, transparent);
+	background: radial-gradient(rgb(23, 176, 214), transparent);
 	animation: motion3 12s ease infinite alternate;
 	border-radius: 50%;
 	mix-blend-mode: screen;

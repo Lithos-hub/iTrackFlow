@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'vue';
+import type { ButtonHTMLAttributes } from 'vue';
 
 import { Size, Color, Radius, Variant } from '@/enums';
 

@@ -21,12 +21,32 @@ module.exports = {
 			'5xl': '3840px',
 		},
 		extend: {
-			colors: {},
+			colors: {
+				primary: '#5B9BE6',
+				secondary: '#EC4D94',
+				tertiary: '#E98E87',
+				dark: '#101010',
+				success: '#3bb273',
+				info: '#5438dc',
+				warning: '#ef7b45',
+				danger: '#ef233c',
+			},
 			flex: {
 				2: '2 2 0%',
 				3: '3 3 0%',
 			},
 		},
+	},
+	resolve: {
+		safelist: [
+			{
+				pattern: /col-(span|start|end)-\d+/,
+			},
+			{
+				pattern:
+					/^(bg|text|border)-(slate|gray|zinc|neutral|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(-)?(100|200|300|400|500|600|700|800|900)?$/,
+			},
+		],
 	},
 	darkMode: 'class',
 };

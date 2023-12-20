@@ -8,6 +8,6 @@ export default {
 };
 
 definePageMeta({
-	layout: 'AppLayoutDefault',
+	layout: 'app-default',
 });
 </script>
