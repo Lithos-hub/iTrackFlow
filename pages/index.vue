@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <LandingHeroSection />
-  </div>
+	<div>
+		<LandingHeroSection />
+	</div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "PageHomepage",
+	name: 'PageHomepage',
 };
 
 definePageMeta({
-  layout: "landing-default",
+	layout: 'landing-default',
 });
 </script>

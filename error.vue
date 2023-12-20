@@ -1,23 +1,23 @@
 <template>
-  <div>
-    <button @click="handleError">Clear errors</button>
-    <pre>
+	<div>
+		<button @click="handleError">Clear errors</button>
+		<pre>
     {{ props }}
   </pre
-    >
-  </div>
+		>
+	</div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "ErrorPage",
+	name: 'ErrorPage',
 };
 </script>
 
 <script setup lang="ts">
 const props = defineProps<{
-  error?: unknown;
+	error?: unknown;
 }>();
 
-const handleError = () => clearError({ redirect: "/" });
+const handleError = () => clearError({ redirect: '/' });
 </script>

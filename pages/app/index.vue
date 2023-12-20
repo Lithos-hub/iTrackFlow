@@ -1,13 +1,13 @@
 <template>
-  <div>App main page</div>
+	<div>App main page</div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "AppHomePage",
+	name: 'AppHomePage',
 };
 
 definePageMeta({
-  layout: "AppLayoutDefault",
+	layout: 'AppLayoutDefault',
 });
 </script>
