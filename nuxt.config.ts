@@ -43,7 +43,12 @@ export default defineNuxtConfig({
 		'@morev/vue-transitions/nuxt', // https://github.com/MorevM/vue-transitions
 		'@nuxt/image', // https://image.nuxt.com
 		'@nuxtjs/color-mode', // https://color-mode.nuxtjs.org
+		'@nuxtjs/eslint-module',
+		'@vueuse/nuxt',
 	],
+	eslint: {
+		lintOnStart: false,
+	},
 	colorMode: {
 		classSuffix: '',
 	},

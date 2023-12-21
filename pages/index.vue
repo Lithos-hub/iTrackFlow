@@ -1,43 +1,44 @@
 <template>
 	<div>
+		<Head>
+			<title>{{ title }}</title>
+		</Head>
 		<LandingHeroSection ref="heroRef" />
 		<LandingProductSection ref="productRef" />
 	</div>
 </template>
 
-<script lang="ts">
-export default {
-	name: 'PageHomepage',
-};
+<script setup lang="ts">
+import { useIntersectionObserver } from '@vueuse/core';
 
 definePageMeta({
+	name: 'HomePage',
 	layout: 'landing-default',
 });
 
-const { setObserver } = useIntersectionObserver({
-	threshold: 0.5,
-	root: null,
-	rootMargin: '50px 50px 50px 50px',
-});
-const { isIntersecting } = storeToRefs(useIntersectionObserver());
+const heroRef = ref<Element>(null!);
+const productRef = ref<Element>(null!);
 
-const heroRef = ref<HTMLElement | null>(null);
-const productRef = ref<HTMLElement | null>(null);
+const heroIsVisible = ref(false);
+const productIsVisible = ref(false);
 
-const heroIsVisible = computed(() => setObserver('#hero'));
-const productIsVisible = computed(() => setObserver('#product'));
+useIntersectionObserver(
+	heroRef as MaybeRefOrGetter,
+	([{ isIntersecting }], _) => (heroIsVisible.value = isIntersecting),
+);
+useIntersectionObserver(
+	productRef as MaybeRefOrGetter,
+	([{ isIntersecting }], _) => (productIsVisible.value = isIntersecting),
+);
 
 const title = computed(() => {
-	if (heroIsVisible.value) {
-		return 'Hero is visible';
-	}
-	if (productIsVisible.value) {
-		return 'Product is visible';
-	}
-	return 'Nothing is visible';
+	if (heroIsVisible.value) return 'iTrackFlow - The collaborative tool for creative musicians';
+	if (productIsVisible.value) return 'iTrackFlow - Product section title';
+	return 'iTrackFlow - The collaborative tool for creative musicians';
 });
 
-onMounted(() => {
-	setObserver('#product');
+useSeoMeta({
+	title,
+	description: 'iTrackFlow - Empower musical creativity with iTrackFlow',
 });
 </script>
