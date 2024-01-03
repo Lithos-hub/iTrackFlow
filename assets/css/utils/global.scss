@@ -1,2 +1,7 @@
 @import 'variables';
 @import 'colors';
+@import 'fonts';
+
+.default_margin {
+	@apply mx-[10vw];
+}

@@ -2,9 +2,24 @@
 	<button
 		:disabled="disabled"
 		data-testid="iui-button"
-		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`">
-		<slot v-if="!text" class="button__slot"></slot>
-		<span v-else>{{ text }}</span>
+		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`"
+		:style="{
+			border:
+				variant === 'outline' ? `1px solid ${tailwindColor}` : variant === 'stealth' ? 'none' : '',
+			background:
+				variant === 'outline' ? 'transparent' : variant === 'stealth' ? `${tailwindColor}30` : '',
+			color: variant === 'outline' ? tailwindColor : variant === 'stealth' ? tailwindColor : '',
+		}">
+		<div class="flex items-center justify-center gap-2.5">
+			<div v-if="icon && iconLeft">
+				<BaseIcon :icon="icon" class="w-6 h-6" />
+			</div>
+			<slot v-if="!text" class="button__slot"></slot>
+			<span v-else>{{ text }}</span>
+			<div v-if="icon && iconRight">
+				<BaseIcon :icon="icon" class="w-6 h-6" />
+			</div>
+		</div>
 	</button>
 </template>
 
@@ -20,55 +35,62 @@ const { color, disabled, variant } = withDefaults(defineProps<Button>(), {
 	radius: 'md',
 	variant: 'solid',
 	text: '',
+	icon: '',
+});
+
+const tailwindColor = computed(() => {
+	let colorReference;
+
+	switch (color) {
+		case 'primary':
+			colorReference = 'blue';
+			break;
+		case 'secondary':
+			colorReference = 'pink';
+			break;
+		case 'tertiary':
+			colorReference = 'orange';
+			break;
+		case 'success':
+			colorReference = 'green';
+			break;
+		case 'info':
+			colorReference = 'blue';
+			break;
+		case 'warning':
+			colorReference = 'orange';
+			break;
+		case 'danger':
+			colorReference = 'red';
+			break;
+		default:
+			colorReference = 'blue';
+			break;
+	}
+
+	return getTailwindColor(colorReference);
 });
 
 const computedColor = computed(() => {
 	if (disabled) return 'disabled';
-	if (variant === 'solid') return color;
-	else return 'white';
+	return color || 'white';
 });
 </script>
 
 <style lang="scss" scoped>
 .button {
-	@apply text-white rounded-md hover:opacity-90 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125;
+	@apply text-white rounded-md hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125;
 
 	&__solid {
 		@apply bg-inherit;
 	}
 
 	&__outline {
-		@apply border-2 border-cyan-500 bg-none;
-	}
-
-	&__ghost {
-		@apply bg-none border border-primary hover:bg-primary;
-	}
-
-	&__neon {
-		@apply border hover:bg-white hover:text-dark hover:font-extrabold;
-
-		box-shadow:
-			0px 0px 1px white,
-			0px 0px 2.5px rgb(191, 250, 255),
-			0px 0px 5px rgb(136, 255, 255),
-			0px 0px 7px blue,
-			0px 0px 10px blue;
-		text-shadow:
-			0px 0px 1px white,
-			0px 0px 2px rgb(191, 250, 255),
-			0px 0px 4px rgb(136, 255, 255),
-			0px 0px 6px blue,
-			0px 0px 7px blue;
-
-		&:hover {
-			filter: drop-shadow(0 0 10px #3eb4db);
-			text-shadow: none;
-		}
+		@apply border-2 bg-opacity-0;
 	}
 
 	&__stealth {
-		@apply bg-primary/10 border-none text-primary hover:bg-primary/20 hover:text-white hover:brightness-125;
+		@apply bg-inherit border-none text-primary hover:text-white hover:brightness-125;
 	}
 
 	&__cyber {
@@ -99,25 +121,16 @@ const computedColor = computed(() => {
 		}
 	}
 
-	&__synth {
-		@apply bg-dark transition-all;
-		filter: drop-shadow(2px 2px #e11d48) drop-shadow(-2px -2px #06b6d4);
-
-		&:hover {
-			filter: drop-shadow(-2.5px -2.5px #e11d48) drop-shadow(2.5px 2.5px #06b6d4);
-		}
-	}
-
 	&__primary {
-		@apply bg-gradient-to-tr from-cyan-500 to-indigo-600;
+		@apply bg-primary;
 	}
 
 	&__secondary {
-		@apply bg-gradient-to-tr from-rose-500 to-pink-600;
+		@apply bg-secondary;
 	}
 
 	&__tertiary {
-		@apply bg-transparent border border-slate-500;
+		@apply bg-tertiary;
 	}
 
 	&__success {
@@ -185,4 +198,3 @@ const computedColor = computed(() => {
 	}
 }
 </style>
-./iui-button.interfaces

@@ -37,7 +37,7 @@ const nuxtApp = useNuxtApp();
 
 <style lang="scss">
 body {
-	@apply min-h-screen bg-white dark:bg-black dark:text-gray-200;
+	@apply h-screen bg-white dark:bg-black dark:text-gray-200;
 }
 
 .bg-1 {

@@ -1,0 +1,32 @@
+@font-face {
+	font-family: openSans;
+	src: url('/assets/fonts/open-sans.ttf');
+}
+
+* {
+	font-family: openSans, sans-serif;
+}
+
+h1 {
+	@apply text-[50px];
+}
+
+h2 {
+	@apply text-[40px];
+}
+
+h3 {
+	@apply text-[30px];
+}
+
+h4 {
+	@apply text-[25px];
+}
+
+h5 {
+	@apply text-[20px];
+}
+
+h6 {
+	@apply text-[15px];
+}

@@ -1,5 +1,7 @@
 <template>
-	<section id="product" class="h-screen items-center justify-center grid grid-cols-2 gap-5">
+	<section
+		id="product"
+		class="h-screen items-center justify-center grid grid-cols-2 gap-5 default_margin">
 		<div class="">
 			<h3 class="text-[100px]">Title 1</h3>
 		</div>
