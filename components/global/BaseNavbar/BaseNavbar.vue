@@ -1,25 +1,42 @@
 <template>
-	<nav class="fixed top-0 left-0 w-full py-2 backdrop-blur-lg">
-		<div class="default_margin flex justify-between items-center">
-			<h3 class="gradient__text--primary">iTrackFlow</h3>
-			<ul class="flex gap-5">
-				<li>
-					<RouterLink to="/app/projects">
-						<BaseButton variant="stealth">Home</BaseButton>
-					</RouterLink>
-				</li>
-				<li>
-					<RouterLink to="/">
-						<BaseButton color="danger" class="flex gap-2" icon="logout" icon-right>
-							Logout
-						</BaseButton>
-					</RouterLink>
-				</li>
-			</ul>
+	<nav class="w-full backdrop-blur-lg">
+		<div class="flex justify-between p-2">
+			<RouterLink to="/">
+				<h3 class="gradient__text--primary">iTrackFlow</h3>
+			</RouterLink>
+
+			<div class="flex gap-5 items-center">
+				<RouterLink v-if="!user" to="/authentication/login">
+					<BaseButton variant="outline" color="success">
+						{{ $t('authentication.login') }}
+					</BaseButton>
+				</RouterLink>
+				<BaseButton
+					v-else
+					color="danger"
+					class="flex gap-2"
+					icon="logout"
+					icon-right
+					@click="logout">
+					Logout
+				</BaseButton>
+				<div class="cursor-pointer duration-200 hover:scale-110" @click="toggleLanguage">
+					<BaseIcon v-if="language === 'es'" icon="spain_flag" view-box="0 0 38 38" />
+					<BaseIcon v-else icon="uk_flag" view-box="0 0 38 38" />
+				</div>
+				<ToggleMode />
+			</div>
 		</div>
 	</nav>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLanguageStore } from '@/store/languageStore';
+import { useUserStore } from '@/store/userStore';
 
-<style scoped></style>
+const { language } = storeToRefs(useLanguageStore());
+const { user } = storeToRefs(useUserStore());
+
+const { toggleLanguage } = useLanguageStore();
+const { logout } = useUserStore();
+</script>

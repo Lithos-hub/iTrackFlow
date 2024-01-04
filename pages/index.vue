@@ -13,7 +13,7 @@ import { useIntersectionObserver } from '@vueuse/core';
 
 definePageMeta({
 	name: 'HomePage',
-	layout: 'landing-default',
+	layout: 'default',
 });
 
 const heroRef = ref<Element>(null!);

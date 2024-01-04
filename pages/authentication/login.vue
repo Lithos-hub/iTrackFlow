@@ -36,7 +36,7 @@
 <script setup lang="ts">
 definePageMeta({
 	name: 'LoginPage',
-	layout: 'authentication-default',
+	layout: 'default',
 });
 // TODO: Check if the user has an active session
 // If so, redirect to /app/projects

@@ -7,7 +7,7 @@
 		}">
 		<div v-if="!newCard" class="projectCard__card">
 			<img src="/img/hero-2.png" alt="Project image" />
-			<h3>{{ project.name }}</h3>
+			<h3>{{ project?.name }}</h3>
 		</div>
 		<div v-else class="projectCard__card">
 			<div class="text-[60px]">+</div>
@@ -16,19 +16,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-	project: {
-		type: Object as PropType<{
-			id: number;
-			name: string;
-		}>,
-		default: null,
-	},
-	newCard: {
-		type: Boolean,
-		default: false,
-	},
-});
+import { ProjectCard } from './ProjectCard.interfaces';
+
+defineProps<ProjectCard>();
 </script>
 
 <style lang="scss" scoped>

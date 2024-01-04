@@ -41,7 +41,7 @@
 <script setup lang="ts">
 definePageMeta({
 	name: 'RegisterPage',
-	layout: 'authentication-default',
+	layout: 'default',
 });
 </script>
 

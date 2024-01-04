@@ -15,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import { Project } from '@/interfaces';
+import { Project } from '@/components/app/ProjectCard.interfaces';
 
 definePageMeta({
-	layout: 'app-default',
+	layout: 'default',
 });
 
 const projects = ref<Project[]>([

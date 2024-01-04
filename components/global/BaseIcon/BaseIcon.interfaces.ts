@@ -22,6 +22,7 @@ export type IconName =
 export interface Icon {
 	icon: IconName;
 	color?: ColorName;
+	viewBox?: string;
 }
 
 export type IconsBundle = Record<
