@@ -1,6 +1,6 @@
 <template>
 	<button>
-		<NuxtImg
+		<!-- <NuxtImg
 			v-if="lightMode"
 			src="/icons/moon.svg"
 			alt="Toggle dark mode"
@@ -13,7 +13,9 @@
 			alt="Toggle light mode"
 			width="35px"
 			height="35px"
-			@click="toggleDarkMode" />
+			@click="toggleDarkMode" /> -->
+		<BaseIcon v-if="lightMode" icon="moon" color="black" class="w-7 h-7" @click="toggleDarkMode" />
+		<BaseIcon v-else icon="sun" color="white" class="w-7 h-7" @click="toggleDarkMode" />
 	</button>
 </template>
 

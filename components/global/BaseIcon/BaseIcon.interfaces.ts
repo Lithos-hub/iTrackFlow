@@ -15,7 +15,9 @@ export type IconName =
 	| 'alertHexagon'
 	| 'checkmarkCircle'
 	| 'informationCircle'
-	| 'logout';
+	| 'logout'
+	| 'sun'
+	| 'moon';
 
 export interface Icon {
 	icon: IconName;

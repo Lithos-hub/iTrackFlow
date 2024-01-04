@@ -1,20 +1,33 @@
 <template>
 	<div class="container rounded-2xl py-10 flex flex-col items-center justify-center gap-10">
 		<div class="flex flex-col items-center justify-center gap-5 bg-dark p-10 rounded-2xl w-[500px]">
-			<h2 class="text-primary">Login</h2>
-			<p>{{ $t('welcome') }}</p>
+			<h2 class="text-primary">
+				{{ $t('authentication.login') }}
+			</h2>
 
-			<BaseInput type="text" placeholder="Write your email" label="Email" />
+			<BaseInput
+				type="email"
+				:placeholder="$t('authentication.email_placeholder')"
+				:label="$t('authentication.email')" />
 
-			<BaseInput type="password" placeholder="Write your password" label="Password" />
+			<BaseInput
+				type="password"
+				:placeholder="$t('authentication.password_placeholder')"
+				:label="$t('authentication.password')" />
 
-			<BaseButton color="primary">Login</BaseButton>
+			<BaseButton color="primary">
+				{{ $t('authentication.login') }}
+			</BaseButton>
 		</div>
 
 		<div class="flex gap-2 items-center">
-			<p>Don't have an account?</p>
+			<p>
+				{{ $t('authentication.dont_have_account') }}
+			</p>
 			<RouterLink to="/authentication/register">
-				<BaseButton variant="stealth" color="secondary">Register</BaseButton>
+				<BaseButton variant="stealth" color="secondary">
+					{{ $t('authentication.register') }}
+				</BaseButton>
 			</RouterLink>
 		</div>
 	</div>

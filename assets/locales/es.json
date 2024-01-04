@@ -7,5 +7,17 @@
 		"subtitle_2": "con ",
 		"subtitle_3": "iTrackFlow",
 		"get_started": "Comenzar"
+	},
+	"authentication": {
+		"login": "Iniciar sesión",
+		"register": "Registrarse",
+		"email": "Email",
+		"email_placeholder": "Introduce tu email",
+		"password": "Contraseña",
+		"password_placeholder": "Introduce tu contraseña",
+		"confirm_password": "Confirmar contraseña",
+		"confirm_password_placeholder": "Confirma tu contraseña",
+		"already_have_account": "¿Ya tienes una cuenta?",
+		"dont_have_account": "¿No tienes una cuenta?"
 	}
 }

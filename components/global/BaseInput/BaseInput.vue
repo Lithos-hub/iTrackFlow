@@ -4,8 +4,9 @@
 		<input
 			v-bind="$attrs"
 			class="input"
+			:value="modelValue"
 			@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
-		<small v-if="!valid" class="text-red-500 ml-3">{{ errorMessage }}</small>
+		<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
 	</div>
 </template>
 
@@ -13,7 +14,9 @@
 import { Input } from './BaseInput.interfaces';
 
 defineEmits(['update:modelValue']);
-defineProps<Input>();
+withDefaults(defineProps<Input>(), {
+	modelValue: '',
+});
 </script>
 
 <style lang="scss" scoped>

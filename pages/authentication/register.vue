@@ -1,24 +1,41 @@
 <template>
-	<div class="container rounded-2xl py-10 flex flex-col items-center justify-center gap-10">
+	<section class="container rounded-2xl py-10 flex flex-col items-center justify-center gap-10">
 		<div class="flex flex-col items-center justify-center gap-5 bg-dark p-10 rounded-2xl w-[500px]">
-			<h2 class="text-secondary">Register</h2>
+			<h2 class="text-secondary">
+				{{ $t('authentication.register') }}
+			</h2>
 
-			<BaseInput type="text" placeholder="Write your email" label="Email" />
+			<BaseInput
+				type="email"
+				:placeholder="$t('authentication.email_placeholder')"
+				:label="$t('authentication.email')" />
 
-			<BaseInput type="password" placeholder="Write your password" label="Password" />
+			<BaseInput
+				type="password"
+				:placeholder="$t('authentication.password_placeholder')"
+				:label="$t('authentication.password')" />
 
-			<BaseInput type="password" placeholder="Write again your password" label="Password" />
+			<BaseInput
+				type="password"
+				:placeholder="$t('authentication.confirm_password_placeholder')"
+				:label="$t('authentication.confirm_password')" />
 
-			<BaseButton color="primary">Create account</BaseButton>
+			<BaseButton color="primary">
+				{{ $t('authentication.register') }}
+			</BaseButton>
 		</div>
 
 		<div class="flex gap-2 items-center">
-			<p>Do you have an account?</p>
+			<p>
+				{{ $t('authentication.already_have_account') }}
+			</p>
 			<RouterLink to="/authentication/login">
-				<BaseButton variant="stealth" color="primary">Login</BaseButton>
+				<BaseButton variant="stealth" color="primary">
+					{{ $t('authentication.login') }}
+				</BaseButton>
 			</RouterLink>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup lang="ts">
