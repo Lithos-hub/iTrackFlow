@@ -1,18 +1,20 @@
 <template>
-	<nav class="w-full backdrop-blur-lg">
+	<nav class="w-full backdrop-blur-lg bg-dark dark:bg-transparent">
 		<div class="flex justify-between p-2">
 			<RouterLink to="/">
 				<h3 class="gradient__text--primary">iTrackFlow</h3>
 			</RouterLink>
 
 			<div class="flex gap-5 items-center">
-				<RouterLink v-if="!user" to="/authentication/login">
+				<RouterLink
+					v-if="!user && !$route.path.includes('/authentication')"
+					to="/authentication/login">
 					<BaseButton variant="outline" color="success">
 						{{ $t('authentication.login') }}
 					</BaseButton>
 				</RouterLink>
 				<BaseButton
-					v-else
+					v-else-if="user"
 					color="danger"
 					class="flex gap-2"
 					icon="logout"
