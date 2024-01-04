@@ -1,6 +1,8 @@
 <template>
 	<div class="flex flex-col gap-5">
-		<h1 class="uppercase font-bold">My projects</h1>
+		<h1 class="uppercase font-bold">
+			{{ $t('app.projects.title') }}
+		</h1>
 		<ul class="flex gap-10">
 			<li v-for="{ category, id, ...rest } of projects" :key="id">
 				<RouterLink :to="`/app/projects/${category}/${id}`">
@@ -8,7 +10,9 @@
 				</RouterLink>
 			</li>
 			<li>
-				<AppProjectCard :project="null" new-card />
+				<RouterLink to="/app/projects/new">
+					<AppProjectCard />
+				</RouterLink>
 			</li>
 		</ul>
 	</div>

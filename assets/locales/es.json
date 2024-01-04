@@ -19,5 +19,10 @@
 		"confirm_password_placeholder": "Confirma tu contraseña",
 		"already_have_account": "¿Ya tienes una cuenta?",
 		"dont_have_account": "¿No tienes una cuenta?"
+	},
+	"app": {
+		"projects": {
+			"title": "Mis proyectos"
+		}
 	}
 }

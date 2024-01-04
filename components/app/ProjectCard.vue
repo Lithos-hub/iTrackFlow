@@ -1,18 +1,18 @@
 <template>
-	<div
+	<article
 		class="projectCard__wrapper"
 		:class="{
-			'bg-success': newCard,
-			'bg-[#202020]': !newCard,
+			'bg-success/20 border border-green-500/50': !project,
+			'bg-dark/50 border border-white/10': project,
 		}">
-		<div v-if="!newCard" class="projectCard__card">
+		<div v-if="project" class="projectCard__card">
 			<img src="/img/hero-2.png" alt="Project image" />
 			<h3>{{ project?.name }}</h3>
 		</div>
 		<div v-else class="projectCard__card">
 			<div class="text-[60px]">+</div>
 		</div>
-	</div>
+	</article>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +23,7 @@ defineProps<ProjectCard>();
 
 <style lang="scss" scoped>
 .projectCard__wrapper {
-	@apply border border-white/10 rounded-2xl h-full min-w-[100px];
+	@apply rounded-2xl h-full min-w-[100px] shadow-xl hover:scale-105 duration-200;
 }
 
 .projectCard__card {

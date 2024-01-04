@@ -9,6 +9,5 @@ export interface Project {
 }
 
 export interface ProjectCard {
-	project: Project | null;
-	newCard?: boolean;
+	project?: Project;
 }

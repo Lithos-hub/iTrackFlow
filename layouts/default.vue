@@ -1,10 +1,10 @@
 <template>
-	<div class="flex flex-col">
+	<div class="flex flex-col flex-grow h-screen">
 		<header>
 			<BaseNavbar />
 		</header>
 
-		<div class="margin_default">
+		<div class="flex flex-1 margin_default mx-auto">
 			<slot />
 		</div>
 	</div>
