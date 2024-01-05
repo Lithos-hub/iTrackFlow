@@ -35,15 +35,8 @@ export default defineNuxtConfig({
 	},
 	vite: {
 		plugins: [eslintPlugin()],
-		css: {
-			preprocessorOptions: {
-				scss: {
-					additionalData: '@import "@/assets/css/utils/global.scss";',
-				},
-			},
-		},
 	},
-	css: ['~/assets/css/main.scss'],
+	css: ['@/assets/css/main.scss'],
 	tailwindcss: {
 		exposeConfig: true,
 	},

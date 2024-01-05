@@ -1,6 +1,6 @@
 <template>
 	<div class="container rounded-2xl py-10 flex flex-col items-center justify-center gap-10">
-		<div class="flex flex-col items-center justify-center gap-5 bg-dark p-10 rounded-2xl w-[500px]">
+		<div class="default_card flex flex-col items-center justify-center gap-5 w-[500px]">
 			<h2 class="text-primary">
 				{{ $t('authentication.login') }}
 			</h2>
