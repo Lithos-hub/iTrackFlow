@@ -10,15 +10,20 @@
 		<!-- Dropdown -->
 		<div ref="dropdown" class="flex flex-col w-full">
 			<label v-if="label" class="m-2 font-medium">{{ label }}</label>
-			<div class="relative cursor-pointer" @click="isSelecting = true">
+			<div
+				class="relative cursor-pointer"
+				@click="isSelecting = true"
+				@onmouseover="isHovering = true"
+				@onmouseleave="isHovering = false">
 				<!-- Dropdown selected options chips -->
 				<ul
-					class="flex flex-wrap gap-1 text-center absolute top-1/2 left-6 -translate-y-1/2 overflow-y-scroll max-h-[35px]">
+					class="flex flex-wrap w-2/3 gap-1 text-center absolute top-1/2 left-1 -translate-y-1/2 overflow-y-scroll max-h-[35px]">
 					<li
-						v-for="(item, i) of checkbox"
+						v-for="({ label, value }, i) of selectedItems"
 						:key="i"
-						class="m-1 px-2 py-1 bg-primary text-white rounded-full text-[12px]">
-						{{ item }}
+						class="m-1 px-2 py-1 bg-primary text-white rounded-full text-[12px]"
+						@click="onItemClick(value)">
+						{{ label }}
 					</li>
 				</ul>
 				<!-- Dropdown input -->
@@ -28,7 +33,7 @@
 						dropdown__bordered: bordered,
 						dropdown: !bordered,
 					}"
-					:placeholder="placeholder"
+					:placeholder="!modelValue.length ? placeholder : ''"
 					class="cursor-pointer" />
 				<!-- <i ></i> -->
 				<BaseIcon
@@ -41,18 +46,26 @@
 				<div v-if="isSelecting" class="z-50 absolute top-[60px] w-full rounded-lg bg-dark">
 					<ul class="max-h-[200px] overflow-auto rounded-lg border border-gray-300">
 						<li
-							v-for="(item, i) of props.data"
+							v-for="({ label, value }, i) of props.data"
 							:key="i"
 							class="p-2 bg-dark hover:bg-primary/10 cursor-pointer border-b last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
-							@click="onItemClick(item)">
+							@click="onItemClick(value)">
 							<div class="flex items-center pl-3">
 								<input
-									v-model="checkbox"
+									v-model="model"
 									type="checkbox"
-									:value="item"
+									:value="value"
 									class="mr-5 w-4 h-4 cursor-pointer" />
-								<div>{{ item }}</div>
+								<div>{{ label }}</div>
 							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- Dropdown tooltip -->
+				<div v-if="isHovering" class="absolute top-[60px] w-full rounded-lg bg-dark">
+					<ul>
+						<li v-for="(item, i) of modelValue" :key="i">
+							{{ item }}
 						</li>
 					</ul>
 				</div>
@@ -67,21 +80,23 @@ import { BaseDropdown } from './BaseDropdown.interfaces';
 
 const props = defineProps<BaseDropdown>();
 
-const emit = defineEmits(['update:modelValue', 'on-select']);
+const model = defineModel();
 
 const dropdown = ref();
 
-const checkbox: Ref<string[]> = ref([]);
-
 const isSelecting: Ref<boolean> = ref(false);
+const isHovering: Ref<boolean> = ref(false);
 
-const onItemClick = (item: string): void => {
-	if (!checkbox.value.includes(item)) {
-		checkbox.value.push(item);
+const selectedItems = computed(() => {
+	return props.data.filter((item) => model.value.includes(item.value));
+});
+
+const onItemClick = (itemValue: unknown) => {
+	if (model.value.includes(itemValue)) {
+		model.value.splice(model.value.indexOf(itemValue), 1);
 	} else {
-		checkbox.value.splice(checkbox.value.indexOf(item), 1);
+		model.value.push(itemValue);
 	}
-	emit('on-select', checkbox);
 };
 </script>
 
@@ -95,7 +110,7 @@ select {
 }
 
 .dropdown {
-	@apply p-3 pl-5 rounded-lg hover:shadow-lg focus:outline-none w-full text-transparent cursor-pointer;
+	@apply rounded-lg hover:shadow-lg focus:outline-none w-full text-transparent cursor-pointer;
 
 	&__bordered {
 		@apply border border-gray-300;

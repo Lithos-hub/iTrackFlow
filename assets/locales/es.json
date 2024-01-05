@@ -22,7 +22,17 @@
 	},
 	"app": {
 		"projects": {
-			"title": "Mis proyectos"
+			"title": "Mis proyectos",
+			"create": "Crear nuevo proyecto",
+			"project_name": "Nombre del proyecto",
+			"project_name_placeholder": "Introduce el nombre del proyecto",
+			"project_description": "Descripción del proyecto",
+			"project_description_placeholder": "Introduce la descripción del proyecto",
+			"project_category": "Categoría del proyecto",
+			"project_category_placeholder": "Introduce la categoría del proyecto",
+			"project_team_members": "Miembros del equipo",
+			"project_team_members_placeholder": "Introduce los miembros del equipo",
+			"project_create_submit": "Crear proyecto"
 		}
 	}
 }

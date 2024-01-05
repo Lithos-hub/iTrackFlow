@@ -1,6 +1,6 @@
 export interface DropdownItem {
 	label: string;
-	value: string;
+	value: unknown;
 }
 
 export interface BaseDropdown {

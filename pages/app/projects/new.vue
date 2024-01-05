@@ -3,19 +3,25 @@
 		<BaseCard>
 			<template #title>
 				<h2 class="text-primary">
-					{{ $t('projects.new_project') }}
+					{{ $t('app.projects.create') }}
 				</h2>
 			</template>
 
-			<form ref="formRef" class="bg-dark p-10 rounded-2xl shadow-xl">
-				<BaseInput label="Project name" placeholder="Write the name of your project" />
+			<form ref="formRef" class="bg-dark rounded-2xl shadow-xl w-full">
+				<BaseInput
+					:label="$t('app.projects.project_name')"
+					:placeholder="$t('app.projects.project_name_placeholder')" />
+				<BaseDropdown
+					v-model="selectedTeamMembers"
+					:label="$t('app.projects.project_team_members')"
+					:placeholder="$t('app.projects.project_team_members_placeholder')"
+					:data="teamMembers" />
 			</form>
 
 			<template #actions>
 				<BaseButton color="primary" @click="submit">
-					{{ $t('projects.create') }}
+					{{ $t('app.projects.project_create_submit') }}
 				</BaseButton>
-				<BaseDropdown label="Team members" :data="['a', 'b', 'c', 1, 2, 3, 4, 5, 6]" />
 			</template>
 		</BaseCard>
 	</div>
@@ -29,11 +35,30 @@ definePageMeta({
 
 const formRef = ref<HTMLFormElement | null>(null);
 
+const selectedTeamMembers = ref<any[]>([]);
+
+const teamMembers = ref<any[]>([
+	{
+		label: 'John Doe',
+		value: 1,
+	},
+	{
+		label: 'Jane Doe',
+		value: 2,
+	},
+	{
+		label: 'John Smith',
+		value: 3,
+	},
+	{
+		label: 'Jane Smith',
+		value: 4,
+	},
+]);
+
 const submit = () => {
 	if (!formRef.value) return;
 
 	formRef.value.submit();
 };
 </script>
-
-<style scoped></style>

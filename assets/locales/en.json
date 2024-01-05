@@ -21,7 +21,17 @@
 	},
 	"app": {
 		"projects": {
-			"title": "My Projects"
+			"title": "My Projects",
+			"create": "Create a new project",
+			"project_name": "Project name",
+			"project_name_placeholder": "Enter your project name",
+			"project_description": "Project description",
+			"project_description_placeholder": "Enter your project description",
+			"project_category": "Project category",
+			"project_category_placeholder": "Enter your project category",
+			"project_team_members": "Project team members",
+			"project_team_members_placeholder": "Enter your project team members",
+			"project_create_submit": "Create project"
 		}
 	}
 }
