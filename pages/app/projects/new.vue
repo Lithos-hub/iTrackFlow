@@ -7,7 +7,7 @@
 				</h2>
 			</template>
 
-			<form ref="formRef" class="bg-dark rounded-2xl shadow-xl w-full">
+			<form ref="formRef" class="bg-dark rounded-2xl shadow-xl w-full flex flex-col gap-5">
 				<BaseInput
 					:label="$t('app.projects.project_name')"
 					:placeholder="$t('app.projects.project_name_placeholder')" />

@@ -12,6 +12,7 @@ export const useLanguageStore = defineStore('language', () => {
 
 	onMounted(() => {
 		language.value = localStorage.getItem('language') as string | 'es';
+		locale.value = language.value;
 	});
 
 	return {
