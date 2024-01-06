@@ -2,14 +2,14 @@
 	<section
 		id="product"
 		class="h-screen items-center justify-center grid grid-cols-2 gap-5 default_margin">
-		<div class="">
+		<article>
 			<h3 class="text-[100px]">Title 1</h3>
-		</div>
-		<div class="border min-h-[250px] p-5">Image 1</div>
-		<div class="border min-h-[250px] p-5">Image 2</div>
-		<div class="">
+		</article>
+		<article class="border min-h-[250px] p-5">Image 1</article>
+		<article class="border min-h-[250px] p-5">Image 2</article>
+		<article>
 			<h3 class="text-[100px]">Title 2</h3>
-		</div>
+		</article>
 	</section>
 </template>
 

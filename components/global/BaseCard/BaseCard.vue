@@ -13,6 +13,6 @@
 
 <style lang="scss" scoped>
 .card__wrapper {
-	@apply bg-dark p-10 rounded-2xl flex flex-col gap-5 justify-center items-center;
+	@apply bg-white border border-dark/10 dark:bg-dark dark:border-white/10 shadow-xl p-10 rounded-2xl flex flex-col gap-5 justify-center items-center;
 }
 </style>

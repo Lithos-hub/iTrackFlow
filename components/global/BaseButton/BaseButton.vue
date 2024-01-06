@@ -11,7 +11,7 @@
 			color: variant === 'outline' ? tailwindColor : variant === 'stealth' ? tailwindColor : '',
 		}">
 		<div class="flex items-center justify-center gap-2.5">
-			<div v-if="icon && iconLeft">
+			<div v-if="icon || iconLeft">
 				<BaseIcon :icon="icon" class="w-6 h-6" />
 			</div>
 			<slot v-if="!text" class="button__slot"></slot>
