@@ -5,19 +5,46 @@
 			<div
 				v-if="isSelecting"
 				class="fixed top-0 left-0 w-full h-full z-0"
-				@click="isSelecting = false" />
+				@click="toggleSelecting" />
 		</Teleport>
 		<!-- Dropdown -->
 		<div ref="dropdown" class="flex flex-col w-full">
 			<label v-if="label" class="m-2 font-medium">{{ label }}</label>
-			<div
-				class="relative cursor-pointer"
-				@click="isSelecting = true"
-				@onmouseover="isHovering = true"
-				@onmouseleave="isHovering = false">
+			<div class="relative cursor-pointer">
 				<!-- Dropdown selected options chips -->
-				<ul
-					class="flex flex-wrap w-2/3 gap-1 text-center absolute top-1/2 left-1 -translate-y-1/2 overflow-y-scroll max-h-[35px]">
+				<p v-if="!multiselect" class="absolute top-1/2 left-5 -translate-y-1/2">
+					{{ selectedItem?.label }}
+				</p>
+				<div class="relative">
+					<!-- Dropdown input -->
+					<BaseInput
+						:value="modelValue"
+						:class="{
+							dropdown__bordered: bordered,
+							dropdown: !bordered,
+						}"
+						:placeholder="!modelValue.length || multiselect ? placeholder : ''"
+						class="cursor-pointer"
+						@click="isSelecting = true" />
+					<div class="flex gap-1 absolute right-0 px-2 top-1/2 -translate-y-1/2">
+						<!-- Remove -->
+						<BaseIcon
+							v-if="modelValue.length && !multiselect"
+							icon="close"
+							class="icon h-7 w-7"
+							@click="removeItem" />
+						<!-- Chevron -->
+						<BaseIcon
+							icon="chevron"
+							class="h-7 w-7 duration-200"
+							:class="{
+								'rotate-180': isSelecting,
+							}" />
+					</div>
+				</div>
+
+				<!-- Chips -->
+				<ul v-if="multiselect" class="flex flex-wrap w-auto gap-1 my-2 text-center">
 					<li
 						v-for="({ label, value }, i) of selectedItems"
 						:key="i"
@@ -26,49 +53,31 @@
 						{{ label }}
 					</li>
 				</ul>
-				<!-- Dropdown input -->
-				<BaseInput
-					:value="modelValue"
-					:class="{
-						dropdown__bordered: bordered,
-						dropdown: !bordered,
-					}"
-					:placeholder="!modelValue.length ? placeholder : ''"
-					class="cursor-pointer" />
-				<!-- <i ></i> -->
-				<BaseIcon
-					icon="chevron"
-					class="absolute right-5 top-1/2 -translate-y-1/2 text-[12px] duration-200 h-7 w-7"
-					:class="{
-						'rotate-180': isSelecting,
-					}" />
+
 				<!-- Dropdown list -->
-				<div v-if="isSelecting" class="z-50 absolute top-[60px] w-full rounded-lg bg-dark">
-					<ul class="max-h-[200px] overflow-auto rounded-lg border border-gray-300">
-						<li
-							v-for="({ label, value }, i) of props.data"
-							:key="i"
-							class="p-2 bg-dark hover:bg-primary/10 cursor-pointer border-b last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
-							@click="onItemClick(value)">
-							<div class="flex items-center pl-3">
-								<input
-									v-model="model"
-									type="checkbox"
-									:value="value"
-									class="mr-5 w-4 h-4 cursor-pointer" />
-								<div>{{ label }}</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<!-- Dropdown tooltip -->
-				<div v-if="isHovering" class="absolute top-[60px] w-full rounded-lg bg-dark">
-					<ul>
-						<li v-for="(item, i) of modelValue" :key="i">
-							{{ item }}
-						</li>
-					</ul>
-				</div>
+				<Transition name="fade">
+					<div
+						v-if="isSelecting"
+						class="z-50 absolute top-[40px] w-full rounded-lg bg-dark duration-200">
+						<ul class="max-h-[200px] overflow-auto rounded-lg border border-gray-300">
+							<li
+								v-for="({ label, value }, i) of props.data"
+								:key="i"
+								class="p-2 bg-dark hover:bg-primary/10 cursor-pointer border-b last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
+								@click="onItemClick(value)">
+								<div class="flex items-center pl-3">
+									<input
+										v-if="multiselect"
+										v-model="model"
+										type="checkbox"
+										:value="value"
+										class="mr-5 w-4 h-4 cursor-pointer" />
+									<div>{{ label }}</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</Transition>
 			</div>
 		</div>
 	</div>
@@ -80,23 +89,40 @@ import { BaseDropdown } from './BaseDropdown.interfaces';
 
 const props = defineProps<BaseDropdown>();
 
-const model = defineModel();
+const model = defineModel({
+	type: Array as PropType<unknown[]>,
+});
 
 const dropdown = ref();
 
 const isSelecting: Ref<boolean> = ref(false);
-const isHovering: Ref<boolean> = ref(false);
 
-const selectedItems = computed(() => {
-	return props.data.filter((item) => model.value.includes(item.value));
-});
+const selectedItems = computed(() =>
+	props.data.filter(({ value }) => model.value?.includes(value)),
+);
+const selectedItem = computed(() => props.data.find(({ value }) => model.value?.at(0) === value));
+
+const addOrRemoveItem = (itemValue: unknown) => {
+	model.value = model.value?.includes(itemValue)
+		? model.value?.filter((value) => value !== itemValue)
+		: [...(model.value as unknown[]), itemValue];
+};
 
 const onItemClick = (itemValue: unknown) => {
-	if (model.value.includes(itemValue)) {
-		model.value.splice(model.value.indexOf(itemValue), 1);
-	} else {
-		model.value.push(itemValue);
+	addOrRemoveItem(itemValue);
+
+	if (!props.multiselect) {
+		toggleSelecting();
+		model.value = model.value?.includes(itemValue) ? [] : [itemValue];
 	}
+};
+
+const toggleSelecting = () => {
+	isSelecting.value = !isSelecting.value;
+};
+
+const removeItem = () => {
+	model.value = [];
 };
 </script>
 

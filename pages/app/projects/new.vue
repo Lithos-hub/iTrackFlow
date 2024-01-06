@@ -1,6 +1,6 @@
 <template>
-	<div class="relative">
-		<BaseCard>
+	<div class="relative h-[calc(100vh-61px)] flex flex-col justify-center items-center">
+		<BaseCard class="max-w-[500px]">
 			<template #title>
 				<h2 class="text-primary">
 					{{ $t('app.projects.create') }}
@@ -16,6 +16,11 @@
 					:label="$t('app.projects.project_team_members')"
 					:placeholder="$t('app.projects.project_team_members_placeholder')"
 					:data="teamMembers" />
+				<BaseDropdown
+					v-model="selectedCategory"
+					:label="$t('app.projects.project_category')"
+					:placeholder="$t('app.projects.project_category_placeholder')"
+					:data="categories" />
 			</form>
 
 			<template #actions>
@@ -33,11 +38,14 @@ definePageMeta({
 	layout: 'default',
 });
 
+const { t } = useI18n();
+
 const formRef = ref<HTMLFormElement | null>(null);
 
-const selectedTeamMembers = ref<any[]>([]);
+const selectedTeamMembers = ref<unknown[]>([]);
+const selectedCategory = ref<unknown[]>([]);
 
-const teamMembers = ref<any[]>([
+const teamMembers = [
 	{
 		label: 'John Doe',
 		value: 1,
@@ -50,11 +58,18 @@ const teamMembers = ref<any[]>([
 		label: 'John Smith',
 		value: 3,
 	},
+];
+
+const categories = [
 	{
-		label: 'Jane Smith',
-		value: 4,
+		label: t('app.projects.production'),
+		value: 'production',
 	},
-]);
+	{
+		label: t('app.projects.harmony'),
+		value: 'harmony',
+	},
+];
 
 const submit = () => {
 	if (!formRef.value) return;

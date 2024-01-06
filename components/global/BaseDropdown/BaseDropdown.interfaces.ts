@@ -9,4 +9,5 @@ export interface BaseDropdown {
 	modelValue: string[];
 	bordered?: boolean;
 	data: DropdownItem[];
+	multiselect?: boolean;
 }

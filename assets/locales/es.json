@@ -24,6 +24,8 @@
 		"projects": {
 			"title": "Mis proyectos",
 			"create": "Crear nuevo proyecto",
+			"harmony": "Armonía",
+			"production": "Producción",
 			"project_name": "Nombre del proyecto",
 			"project_name_placeholder": "Introduce el nombre del proyecto",
 			"project_description": "Descripción del proyecto",
