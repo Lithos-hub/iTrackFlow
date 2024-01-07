@@ -34,7 +34,13 @@
 			"project_category_placeholder": "Introduce la categoría del proyecto",
 			"project_team_members": "Miembros del equipo",
 			"project_team_members_placeholder": "Introduce los miembros del equipo",
-			"project_create_submit": "Crear proyecto"
+			"project_create_submit": "Crear proyecto",
+			"track_name": "Nombre de la pista",
+			"composition": "Composición",
+			"recording": "Grabación",
+			"mixing": "Mezcla",
+			"mastering": "Masterización",
+			"delete": "Eliminar"
 		}
 	}
 }

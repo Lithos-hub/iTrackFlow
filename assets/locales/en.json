@@ -34,7 +34,13 @@
 			"project_category_placeholder": "Enter your project category",
 			"project_team_members": "Project team members",
 			"project_team_members_placeholder": "Enter your project team members",
-			"project_create_submit": "Create project"
+			"project_create_submit": "Create project",
+			"track_name": "Track name",
+			"composition": "Composition",
+			"recording": "Recording",
+			"mixing": "Mixing",
+			"mastering": "Mastering",
+			"delete": "Delete track"
 		}
 	}
 }

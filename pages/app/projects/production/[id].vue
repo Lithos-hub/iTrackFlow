@@ -1,40 +1,66 @@
 <template>
 	<section class="h-[calc(100vh-61px)] w-screen bg-white dark:bg-dark">
-		<div class="default_margin flex flex-col gap-5">
-			<h2>{{ projectName }}</h2>
-			<table>
+		<section class="default_margin flex flex-col gap-5 py-5">
+			<h3>
+				Project name:
+				<span class="font-bold">{{ projectName }}</span>
+			</h3>
+
+			<table :key="tableKey">
 				<thead>
 					<tr>
-						<th>Track name</th>
-						<th>Composition</th>
-						<th>Recording</th>
-						<th>Mixing</th>
-						<th>Mastering</th>
-						<th>Delete</th>
+						<th>{{ $t('app.projects.track_name') }}</th>
+						<th>{{ $t('app.projects.composition') }}</th>
+						<th>{{ $t('app.projects.recording') }}</th>
+						<th>{{ $t('app.projects.mixing') }}</th>
+						<th>{{ $t('app.projects.mastering') }}</th>
+						<th>{{ $t('app.projects.delete') }}</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr
-						v-for="{ id, trackName, composition, recording, mixing, mastering } in trackList"
-						:key="id">
-						<td>{{ trackName }}</td>
-						<td>{{ composition }}</td>
-						<td>{{ recording }}</td>
-						<td>{{ mixing }}</td>
-						<td>{{ mastering }}</td>
+					<tr v-for="({ composition, recording, mixing, mastering }, i) of trackList" :key="i">
+						<td>
+							<BaseInput v-model="trackList[i].trackName" />
+						</td>
+						<td @click="toggleCheck(i, 'composition')">
+							<BaseIcon
+								class="mx-auto"
+								:icon="composition ? 'check' : 'uncheck'"
+								:color="composition ? 'green' : 'red'" />
+						</td>
+						<td @click="toggleCheck(i, 'recording')">
+							<BaseIcon
+								class="mx-auto"
+								:icon="recording ? 'check' : 'uncheck'"
+								:color="recording ? 'green' : 'red'" />
+						</td>
+						<td @click="toggleCheck(i, 'mixing')">
+							<BaseIcon
+								class="mx-auto"
+								:icon="mixing ? 'check' : 'uncheck'"
+								:color="mixing ? 'green' : 'red'" />
+						</td>
+						<td @click="toggleCheck(i, 'mastering')">
+							<BaseIcon
+								class="mx-auto"
+								:icon="mastering ? 'check' : 'uncheck'"
+								:color="mastering ? 'green' : 'red'" />
+						</td>
 						<td>
 							<BaseButton icon="remove" color="danger" />
 						</td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</section>
 	</section>
 </template>
 
 <script setup lang="ts">
-const projectName = 'Project name';
+type Column = 'composition' | 'recording' | 'mixing' | 'mastering';
 
+const projectName = 'Project #n';
+const tableKey = ref(0);
 const trackList = ref([
 	{
 		id: 1,
@@ -61,6 +87,14 @@ const trackList = ref([
 		mastering: true,
 	},
 ]);
+
+const toggleCheck = (index: number, column: Column) => {
+	trackList.value[index][column] = !trackList.value[index][column];
+
+	// TODO: update in DB
+
+	tableKey.value++;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -69,19 +103,24 @@ table {
 	border-collapse: collapse;
 
 	& thead {
-		@apply bg-primary dark:bg-primary/10 dark:border dark:border-primary;
+		@apply dark:border dark:border-primary;
 
 		& th {
-			@apply text-white;
-			padding: 1rem;
-			text-align: left;
+			@apply text-center p-5 text-black dark:text-white border border-dark/10 dark:border-primary;
+
+			&:first-child {
+				@apply bg-primary dark:bg-primary/50 text-white dark:text-white;
+			}
 		}
 	}
 
 	& tbody {
 		& tr {
 			& td {
-				@apply p-5 border-b border-primary/10;
+				&:first-child {
+					@apply font-bold text-primary;
+				}
+				@apply p-5 border border-primary/10 text-center [&:not(:first-child)]:hover:bg-dark/10 [&:not(:first-child)]:hover:dark:bg-primary/20 cursor-pointer;
 			}
 		}
 	}
