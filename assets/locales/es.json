@@ -40,7 +40,8 @@
 			"recording": "Grabación",
 			"mixing": "Mezcla",
 			"mastering": "Masterización",
-			"delete": "Eliminar"
+			"delete": "Eliminar",
+			"audio": "Escuchar pista"
 		}
 	}
 }

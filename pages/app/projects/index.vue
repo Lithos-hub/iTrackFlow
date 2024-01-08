@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { Project } from '@/components/app/ProjectCard.interfaces';
+import { Project } from '@/components/app/ProjectCard/ProjectCard.interfaces';
 
 definePageMeta({
 	layout: 'default',

@@ -82,7 +82,7 @@ const computedColor = computed(() => {
 
 <style lang="scss" scoped>
 .button {
-	@apply text-white rounded-md hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125;
+	@apply text-white hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125;
 
 	&__default {
 		@apply hover:opacity-100;

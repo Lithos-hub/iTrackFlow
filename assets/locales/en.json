@@ -40,7 +40,8 @@
 			"recording": "Recording",
 			"mixing": "Mixing",
 			"mastering": "Mastering",
-			"delete": "Delete track"
+			"delete": "Delete track",
+			"audio": "Listen track"
 		}
 	}
 }

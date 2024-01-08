@@ -19,11 +19,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="({ composition, recording, mixing, mastering }, i) of trackList" :key="i">
+					<tr
+						v-for="({ id, composition, recording, mixing, mastering, audioPath }, i) of trackList"
+						:key="i">
 						<td>
 							<BaseInput v-model="trackList[i].trackName" variant="underline" color="primary" />
 						</td>
-						<td @click="toggleCheck(i, 'composition')">
+						<td
+							@click="toggleCheck(i, 'composition')"
+							@contextmenu="($event) => onCellClick({ column: 'composition', id }, $event)">
 							<BaseIcon
 								class="mx-auto"
 								:icon="composition ? 'check' : 'uncheck'"
@@ -47,8 +51,14 @@
 								:icon="mastering ? 'check' : 'uncheck'"
 								:color="mastering ? 'green' : 'red'" />
 						</td>
-						<td>
-							<BaseButton icon="play" color="none" variant="default" />
+						<td @click="togglePlay(id)">
+							<BaseIcon
+								v-if="audioPath"
+								:key="trackPlaying"
+								class="mx-auto"
+								:icon="trackPlaying === id ? 'pause' : 'play'"
+								:color="lightMode ? 'black' : 'white'" />
+							<div v-else class="text-red-400 font-bold">No audio available</div>
 						</td>
 						<td>
 							<BaseButton icon="trash" color="danger" />
@@ -57,22 +67,36 @@
 				</tbody>
 			</table>
 		</section>
+		<!-- Floating menu -->
+		<AppFloatMenu v-if="isFloatMenuOpened" :client-x="clientX" :client-y="clientY" />
 	</section>
 </template>
 
 <script setup lang="ts">
+import { FloatMenuTarget } from '@/components/app/FloatMenu/FloatMenu.interfaces';
+
+import { useScreenStore } from '@/store/screenStore';
+import { useFloatMenuStore } from '@/store/floatMenuStore';
+
 type Column = 'composition' | 'recording' | 'mixing' | 'mastering';
 
 const projectName = 'Project #n';
+
+const { lightMode } = storeToRefs(useScreenStore());
+
+const { isFloatMenuOpened, clientX, clientY } = storeToRefs(useFloatMenuStore());
+const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore();
+
 const tableKey = ref(0);
 const trackList = ref([
 	{
 		id: 1,
 		trackName: 'Track name #1',
 		composition: true,
-		recording: true,
+		recording: false,
 		mixing: false,
 		mastering: false,
+		audioPath: null,
 	},
 	{
 		id: 2,
@@ -81,6 +105,7 @@ const trackList = ref([
 		recording: true,
 		mixing: true,
 		mastering: false,
+		audioPath: 'path',
 	},
 	{
 		id: 3,
@@ -89,21 +114,34 @@ const trackList = ref([
 		recording: true,
 		mixing: true,
 		mastering: true,
+		audioPath: 'path',
 	},
 ]);
+const trackPlaying = ref<number | undefined>(undefined);
 
 const toggleCheck = (index: number, column: Column) => {
 	trackList.value[index][column] = !trackList.value[index][column];
 
 	// TODO: update in DB
-
 	tableKey.value++;
 };
 
-onMounted(async () => {
-	const { data } = await useFetch('/api/file-system');
-	console.log(data);
-});
+const togglePlay = (index: number) => {
+	if (trackPlaying.value === index) {
+		trackPlaying.value = 0;
+	} else {
+		trackPlaying.value = index;
+	}
+};
+
+const onCellClick = ({ column, id }: FloatMenuTarget, event) => {
+	event.preventDefault();
+	setFloatMenuTarget({ column, id });
+	setPosition(event.clientX, event.clientY);
+	toggleFloatMenu();
+};
+
+watch(lightMode, () => tableKey.value++);
 </script>
 
 <style lang="scss" scoped>
