@@ -6,4 +6,5 @@ export enum Color {
 	success = 'success',
 	warning = 'warning',
 	danger = 'danger',
+	none = 'none',
 }

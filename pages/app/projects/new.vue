@@ -7,7 +7,7 @@
 				</h2>
 			</template>
 
-			<form ref="formRef" class="bg-dark rounded-2xl shadow-xl w-full flex flex-col gap-5">
+			<form ref="formRef" class="bg-white dark:bg-dark rounded-2xl w-full flex flex-col gap-5">
 				<BaseInput
 					:label="$t('app.projects.project_name')"
 					:placeholder="$t('app.projects.project_name_placeholder')" />
@@ -15,6 +15,7 @@
 					v-model="selectedTeamMembers"
 					:label="$t('app.projects.project_team_members')"
 					:placeholder="$t('app.projects.project_team_members_placeholder')"
+					multiselect
 					:data="teamMembers" />
 				<BaseDropdown
 					v-model="selectedCategory"

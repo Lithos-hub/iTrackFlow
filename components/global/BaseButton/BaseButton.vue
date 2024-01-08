@@ -12,12 +12,12 @@
 		}">
 		<div class="flex items-center justify-center gap-2.5">
 			<div v-if="icon || iconLeft">
-				<BaseIcon :icon="icon" class="w-6 h-6" />
+				<BaseIcon :icon="icon" />
 			</div>
 			<slot v-if="!text" class="button__slot"></slot>
 			<span v-else>{{ text }}</span>
 			<div v-if="icon && iconRight">
-				<BaseIcon :icon="icon" class="w-6 h-6" />
+				<BaseIcon :icon="icon" />
 			</div>
 		</div>
 	</button>
@@ -63,6 +63,9 @@ const tailwindColor = computed(() => {
 		case 'danger':
 			colorReference = 'red';
 			break;
+		case 'none':
+			colorReference = 'transparent';
+			break;
 		default:
 			colorReference = 'blue';
 			break;
@@ -80,6 +83,10 @@ const computedColor = computed(() => {
 <style lang="scss" scoped>
 .button {
 	@apply text-white rounded-md hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125;
+
+	&__default {
+		@apply hover:opacity-100;
+	}
 
 	&__solid {
 		@apply bg-inherit;

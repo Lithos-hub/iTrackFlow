@@ -3,4 +3,5 @@ export enum Variant {
 	outline = 'outline',
 	ghost = 'ghost',
 	stealth = 'stealth',
+	default = 'default',
 }

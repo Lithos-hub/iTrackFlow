@@ -14,13 +14,14 @@
 						<th>{{ $t('app.projects.recording') }}</th>
 						<th>{{ $t('app.projects.mixing') }}</th>
 						<th>{{ $t('app.projects.mastering') }}</th>
+						<th>{{ $t('app.projects.audio') }}</th>
 						<th>{{ $t('app.projects.delete') }}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="({ composition, recording, mixing, mastering }, i) of trackList" :key="i">
 						<td>
-							<BaseInput v-model="trackList[i].trackName" />
+							<BaseInput v-model="trackList[i].trackName" variant="underline" color="primary" />
 						</td>
 						<td @click="toggleCheck(i, 'composition')">
 							<BaseIcon
@@ -47,7 +48,10 @@
 								:color="mastering ? 'green' : 'red'" />
 						</td>
 						<td>
-							<BaseButton icon="remove" color="danger" />
+							<BaseButton icon="play" color="none" variant="default" />
+						</td>
+						<td>
+							<BaseButton icon="trash" color="danger" />
 						</td>
 					</tr>
 				</tbody>
@@ -95,6 +99,11 @@ const toggleCheck = (index: number, column: Column) => {
 
 	tableKey.value++;
 };
+
+onMounted(async () => {
+	const { data } = await useFetch('/api/file-system');
+	console.log(data);
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,3 +1,5 @@
+type Variant = 'default' | 'underline' | 'bordered' | 'rounded' | 'filled';
+
 export interface Input {
 	label?: string;
 	icon?: string;
@@ -6,4 +8,6 @@ export interface Input {
 	iconRight?: boolean;
 	valid?: boolean;
 	errorMessage?: string;
+	variant?: Variant;
+	color?: string;
 }

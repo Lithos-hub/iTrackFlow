@@ -267,4 +267,5 @@ export const TAILWIND_COLORS: TailwindColors = {
 		'800': '#1e293b',
 		'900': '#0f172a',
 	},
+	transparent: 'transparent',
 };

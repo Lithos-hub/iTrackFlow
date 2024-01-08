@@ -4,6 +4,8 @@ import { ColorName, TailwindColors, RGB } from '@/interfaces';
 export const getTailwindColor = (color: ColorName, shade?: string | number): string => {
 	if (color === 'black' || color === 'white') return TAILWIND_COLORS[color] as string;
 
+	if (color === 'transparent') return 'transparent';
+
 	const colorValue = TAILWIND_COLORS[color] as TailwindColors;
 	return colorValue[(shade ? shade.toString() : '500') as keyof typeof colorValue] as string;
 };

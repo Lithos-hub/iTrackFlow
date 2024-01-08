@@ -22,7 +22,8 @@ export type ColorName =
 	| 'warmGray'
 	| 'white'
 	| 'yellow'
-	| 'lightBlue';
+	| 'lightBlue'
+	| 'transparent';
 
 export type TailwindColors = {
 	[key in ColorName]: string | { [key: string]: string };

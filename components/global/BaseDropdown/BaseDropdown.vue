@@ -18,7 +18,7 @@
 				<div class="relative">
 					<!-- Dropdown input -->
 					<BaseInput
-						:value="modelValue"
+						:value="selectedItem?.label"
 						:class="{
 							dropdown__bordered: bordered,
 							dropdown: !bordered,
@@ -31,12 +31,14 @@
 						<BaseIcon
 							v-if="modelValue.length && !multiselect"
 							icon="close"
-							class="icon h-7 w-7"
+							color="gray"
+							class="icon"
 							@click="removeItem" />
 						<!-- Chevron -->
 						<BaseIcon
 							icon="chevron"
-							class="h-7 w-7 duration-200"
+							color="gray"
+							class="duration-200"
 							:class="{
 								'rotate-180': isSelecting,
 							}" />
@@ -58,12 +60,12 @@
 				<Transition name="fade">
 					<div
 						v-if="isSelecting"
-						class="z-50 absolute top-[40px] w-full rounded-lg bg-dark duration-200">
+						class="z-50 absolute top-[40px] w-full rounded-lg bg-white dark:bg-dark duration-200">
 						<ul class="max-h-[200px] overflow-auto rounded-lg border border-gray-300">
 							<li
 								v-for="({ label, value }, i) of props.data"
 								:key="i"
-								class="p-2 bg-dark hover:bg-primary/10 cursor-pointer border-b last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
+								class="p-2 bg-white dark:bg-dark hover:bg-primary/10 cursor-pointer border-b last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
 								@click="onItemClick(value)">
 								<div class="flex items-center pl-3">
 									<input
