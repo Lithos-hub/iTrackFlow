@@ -14,6 +14,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/eslint-module',
 		'@vueuse/nuxt',
 		'@nuxtjs/i18n',
+		'nuxt-svg-icons',
 	],
 	typescript: {
 		tsConfig: {
@@ -48,5 +49,10 @@ export default defineNuxtConfig({
 	},
 	colorMode: {
 		classSuffix: '',
+	},
+	nuxtSvgIcons: {
+		svg4vue: {
+			assetsDirName: 'assets/icons',
+		},
 	},
 });
