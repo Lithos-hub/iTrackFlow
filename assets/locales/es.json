@@ -6,7 +6,13 @@
 		"subtitle_1": "creatividad musical ",
 		"subtitle_2": "con ",
 		"subtitle_3": "iTrackFlow",
-		"get_started": "Comenzar"
+		"get_started": "Comenzar",
+		"product": {
+			"title_1": "Armonía",
+			"description_1": "Dedica tiempo a la esencia de tu música. La sección de armonía te permite detallar las progresiones armónicas con facilidad, proporcionándote una visión clara de la estructura musical que estás construyendo.",
+			"title_2": "Producción",
+			"description_2": "Impulsa tu proyecto hacia el éxito con la sección de producción. Utiliza la tabla de checks para rastrear cada etapa del proceso, desde la grabación hasta el  mastering. Nunca pierdas de vista el progreso y alcanza tus metas de producción de manera eficiente."
+		}
 	},
 	"authentication": {
 		"login": "Iniciar sesión",

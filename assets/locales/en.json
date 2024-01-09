@@ -6,7 +6,13 @@
 		"subtitle_1": "musical creativity ",
 		"subtitle_2": "with ",
 		"subtitle_3": "iTrackFlow",
-		"get_started": "Get started"
+		"get_started": "Get started",
+		"product": {
+			"title_1": "Harmony",
+			"description_1": "Spend time on the essence of your music. The harmony section allows you to detail harmonic progressions progressions with ease, giving you a clear view of the musical structure you are building. structure you are building.",
+			"title_2": "Production",
+			"description_2": "Drive your project to success with the production section. Use the checkerboard to track every stage of the process, from recording to mastering. Never lose track of progress and reach your production goals efficiently."
+		}
 	},
 	"authentication": {
 		"login": "Login",

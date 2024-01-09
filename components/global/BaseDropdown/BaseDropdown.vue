@@ -4,8 +4,8 @@
 		<Teleport to="body">
 			<div
 				v-if="isSelecting"
-				class="fixed top-0 left-0 w-full h-full z-0"
-				@click="toggleSelecting" />
+				class="fixed top-0 left-0 w-full h-full z-10"
+				@click="isSelecting = false" />
 		</Teleport>
 		<!-- Dropdown -->
 		<div ref="dropdown" class="flex flex-col w-full">

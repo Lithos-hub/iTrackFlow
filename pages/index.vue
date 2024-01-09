@@ -13,7 +13,28 @@ import { useIntersectionObserver } from '@vueuse/core';
 
 definePageMeta({
 	name: 'HomePage',
-	layout: 'default',
+	layout: 'landing',
+});
+
+const { locale } = useI18n();
+
+const seoTexts = computed(() => {
+	if (locale.value === 'es') {
+		return {
+			hero_title: 'iTrackFlow - La herramienta colaborativa para músicos creativos',
+			product_title:
+				'iTrackFlow - Gestiona tu creación musical desde la armonía hasta la producción',
+			description:
+				'iTrackFlow es la plataforma esencial para músicos, bandas y compositores que buscan llevar su creatividad al siguiente nivel. Organiza, gestiona y potencia tu proceso creativo con herramientas especializadas en la composición, producción y colaboración musical. ¡Regístrate ahora y descubre un nuevo mundo de posibilidades musicales!',
+		};
+	} else {
+		return {
+			hero_title: 'iTrackFlow - The collaborative tool for creative musicians',
+			product_title: 'iTrackFlow - Manage your musical creation from harmony to production',
+			description:
+				'iTrackFlow is the essential platform for musicians, bands and composers looking to take their creativity to the next level. Organize, manage and power your creative process with tools specialized in music composition, production and collaboration. Sign up now and discover a new world of musical possibilities!',
+		};
+	}
 });
 
 const heroRef = ref<Element>(null!);
@@ -32,14 +53,14 @@ useIntersectionObserver(
 );
 
 const title = computed(() => {
-	if (heroIsVisible.value) return 'iTrackFlow - The collaborative tool for creative musicians';
-	if (productIsVisible.value) return 'iTrackFlow - Product section title';
-	return 'iTrackFlow - The collaborative tool for creative musicians';
+	if (heroIsVisible.value) return seoTexts.value.hero_title;
+	if (productIsVisible.value) return seoTexts.value.product_title;
+	return 'iTrackFlow';
 });
 
 useSeoMeta({
 	title,
-	description: 'iTrackFlow - Empower musical creativity with iTrackFlow',
+	description: seoTexts.value.description,
 });
 
 onMounted(() => {

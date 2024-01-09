@@ -22,6 +22,7 @@
 					:label="$t('app.projects.project_category')"
 					:placeholder="$t('app.projects.project_category_placeholder')"
 					:data="categories" />
+				<BaseButton variant="stealth" color="secondary">Imagen del proyecto</BaseButton>
 			</form>
 
 			<template #actions>

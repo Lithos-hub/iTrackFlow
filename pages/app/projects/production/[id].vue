@@ -170,7 +170,7 @@ const onCellClick = ({ column, id }: FloatMenuTarget, event) => {
 const addTrack = () => {
 	trackList.value.push({
 		id: trackList.value.length + 1,
-		trackName: 'Track name #4',
+		trackName: '',
 		composition: false,
 		recording: false,
 		mixing: false,
