@@ -20,7 +20,7 @@
 				{{ $t('app.projects.production') }}
 			</small>
 		</div>
-		<div v-else class="projectCard__card text-black dark:text-white">
+		<div v-else class="projectCard__card text-dark dark:text-white">
 			<p class="text-center w-full font-bold">
 				{{ $t('app.projects.create') }}
 			</p>
@@ -40,6 +40,6 @@ defineProps<ProjectCard>();
 }
 
 .projectCard__card {
-	@apply flex flex-col justify-center items-center h-full w-[250px] p-5 hover:opacity-50 cursor-pointer;
+	@apply flex flex-col justify-center items-center h-full w-auto p-5 hover:opacity-50 cursor-pointer;
 }
 </style>

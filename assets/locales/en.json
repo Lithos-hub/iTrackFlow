@@ -21,9 +21,16 @@
 		"dont_have_account": "Don't have an account?"
 	},
 	"app": {
+		"ui": {
+			"go_back": "Go back",
+			"add_comment": "Add a comment",
+			"add_audio": "Add an audio file"
+		},
 		"projects": {
 			"title": "My Projects",
 			"create": "Create a new project",
+			"name": "Project name: ",
+			"add_track": "Add track",
 			"harmony": "Harmony",
 			"production": "Production",
 			"project_name": "Project name",
@@ -41,7 +48,8 @@
 			"mixing": "Mixing",
 			"mastering": "Mastering",
 			"delete": "Delete track",
-			"audio": "Listen track"
+			"audio": "Listen track",
+			"no_audio": "No audio file"
 		}
 	}
 }

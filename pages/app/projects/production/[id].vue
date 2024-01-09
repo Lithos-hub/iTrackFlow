@@ -1,18 +1,23 @@
 <template>
-	<section class="h-[calc(100vh-61px)] w-screen bg-white dark:bg-dark">
+	<section class="h-full w-full bg-white dark:bg-dark">
 		<section class="default_margin py-5">
-			<BaseButton
-				variant="stealth"
-				color="secondary"
-				icon="chevron-rounded-left"
-				icon-left
-				class="my-5"
-				@click="$router.back()">
-				Go back
-			</BaseButton>
+			<div class="flex justify-between">
+				<BaseButton
+					variant="stealth"
+					color="secondary"
+					icon="chevron-rounded-left"
+					icon-left
+					class="my-5"
+					@click="$router.back()">
+					{{ $t('app.ui.go_back') }}
+				</BaseButton>
+				<BaseButton color="success" icon="add" icon-right class="my-5" @click="addTrack">
+					{{ $t('app.projects.add_track') }}
+				</BaseButton>
+			</div>
 			<div class="flex flex-col gap-5">
 				<h3>
-					Project name:
+					{{ $t('app.projects.name') }}
 					<span class="font-bold">{{ projectName }}</span>
 				</h3>
 
@@ -76,7 +81,9 @@
 									class="mx-auto"
 									:icon="trackPlaying === id ? 'pause' : 'play'"
 									:color="lightMode ? 'black' : 'white'" />
-								<div v-else class="text-red-400 font-bold">No audio available</div>
+								<div v-else class="text-red-400 font-bold">
+									{{ $t('app.projects.no_audio') }}
+								</div>
 							</td>
 							<td>
 								<BaseButton icon="trash" color="danger" />
@@ -158,6 +165,18 @@ const onCellClick = ({ column, id }: FloatMenuTarget, event) => {
 	setFloatMenuTarget({ column, id });
 	setPosition(event.clientX, event.clientY);
 	toggleFloatMenu();
+};
+
+const addTrack = () => {
+	trackList.value.push({
+		id: trackList.value.length + 1,
+		trackName: 'Track name #4',
+		composition: false,
+		recording: false,
+		mixing: false,
+		mastering: false,
+		audioPath: null,
+	});
 };
 
 watch(lightMode, () => tableKey.value++);

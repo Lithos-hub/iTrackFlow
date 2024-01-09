@@ -9,7 +9,7 @@
 				<RouterLink
 					v-if="!user && !$route.path.includes('/authentication')"
 					to="/authentication/login">
-					<BaseButton variant="outline" color="success">
+					<BaseButton variant="stealth" color="primary">
 						{{ $t('authentication.login') }}
 					</BaseButton>
 				</RouterLink>

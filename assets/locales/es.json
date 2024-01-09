@@ -21,11 +21,18 @@
 		"dont_have_account": "¿No tienes una cuenta?"
 	},
 	"app": {
+		"ui": {
+			"go_back": "Volver",
+			"add_comment": "Añadir comentario",
+			"add_audio": "Añadir audio"
+		},
 		"projects": {
 			"title": "Mis proyectos",
 			"create": "Crear nuevo proyecto",
+			"name": "Nombre del proyecto: ",
 			"harmony": "Armonía",
 			"production": "Producción",
+			"add_track": "Añadir pista",
 			"project_name": "Nombre del proyecto",
 			"project_name_placeholder": "Introduce el nombre del proyecto",
 			"project_description": "Descripción del proyecto",
@@ -41,7 +48,8 @@
 			"mixing": "Mezcla",
 			"mastering": "Masterización",
 			"delete": "Eliminar",
-			"audio": "Escuchar pista"
+			"audio": "Escuchar pista",
+			"no_audio": "No hay pista de audio"
 		}
 	}
 }

@@ -1,5 +1,5 @@
 <template>
-	<section class="flex flex-col gap-5">
+	<section class="flex flex-col gap-5 default_margin">
 		<h2 class="uppercase font-bold">
 			{{ $t('app.projects.title') }}
 		</h2>
@@ -27,6 +27,51 @@ definePageMeta({
 });
 
 const projects = ref<Project[]>([
+	{
+		id: 1,
+		name: 'Project 1',
+		category: 'harmony',
+	},
+	{
+		id: 2,
+		name: 'Project 2',
+		category: 'production',
+	},
+	{
+		id: 3,
+		name: 'Project 3',
+		category: 'production',
+	},
+	{
+		id: 1,
+		name: 'Project 1',
+		category: 'harmony',
+	},
+	{
+		id: 2,
+		name: 'Project 2',
+		category: 'production',
+	},
+	{
+		id: 3,
+		name: 'Project 3',
+		category: 'production',
+	},
+	{
+		id: 1,
+		name: 'Project 1',
+		category: 'harmony',
+	},
+	{
+		id: 2,
+		name: 'Project 2',
+		category: 'production',
+	},
+	{
+		id: 3,
+		name: 'Project 3',
+		category: 'production',
+	},
 	{
 		id: 1,
 		name: 'Project 1',

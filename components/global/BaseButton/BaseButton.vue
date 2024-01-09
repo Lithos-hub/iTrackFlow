@@ -11,11 +11,18 @@
 			color: variant === 'outline' ? tailwindColor : variant === 'stealth' ? tailwindColor : '',
 		}">
 		<div class="flex items-center justify-center gap-2.5">
-			<div v-if="icon || iconLeft" class="pt-1">
+			<!-- Left icon -->
+			<div v-if="icon && iconLeft" class="pt-1">
 				<BaseIcon :icon="icon" :size="24" />
 			</div>
+			<!-- Center icon (no text) -->
+			<div v-else-if="icon && !text && !iconLeft && !iconRight" class="pt-1">
+				<BaseIcon :icon="icon" :size="24" />
+			</div>
+			<!-- Text or slot with whatever -->
 			<slot v-if="!text" class="button__slot"></slot>
 			<span v-else>{{ text }}</span>
+			<!-- Right icon -->
 			<div v-if="icon && iconRight" class="pt-1">
 				<BaseIcon :icon="icon" :size="24" />
 			</div>
