@@ -23,6 +23,7 @@ export interface Icon {
 	icon: IconName;
 	color?: ColorName;
 	viewBox?: string;
+	size?: number;
 }
 
 export type IconsBundle = Record<

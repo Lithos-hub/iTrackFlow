@@ -1,71 +1,90 @@
 <template>
 	<section class="h-[calc(100vh-61px)] w-screen bg-white dark:bg-dark">
-		<section class="default_margin flex flex-col gap-5 py-5">
-			<h3>
-				Project name:
-				<span class="font-bold">{{ projectName }}</span>
-			</h3>
+		<section class="default_margin py-5">
+			<BaseButton
+				variant="stealth"
+				color="secondary"
+				icon="chevron-rounded-left"
+				icon-left
+				class="my-5"
+				@click="$router.back()">
+				Go back
+			</BaseButton>
+			<div class="flex flex-col gap-5">
+				<h3>
+					Project name:
+					<span class="font-bold">{{ projectName }}</span>
+				</h3>
 
-			<table :key="tableKey">
-				<thead>
-					<tr>
-						<th>{{ $t('app.projects.track_name') }}</th>
-						<th>{{ $t('app.projects.composition') }}</th>
-						<th>{{ $t('app.projects.recording') }}</th>
-						<th>{{ $t('app.projects.mixing') }}</th>
-						<th>{{ $t('app.projects.mastering') }}</th>
-						<th>{{ $t('app.projects.audio') }}</th>
-						<th>{{ $t('app.projects.delete') }}</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr
-						v-for="({ id, composition, recording, mixing, mastering, audioPath }, i) of trackList"
-						:key="i">
-						<td>
-							<BaseInput v-model="trackList[i].trackName" variant="underline" color="primary" />
-						</td>
-						<td
-							@click="toggleCheck(i, 'composition')"
-							@contextmenu="($event) => onCellClick({ column: 'composition', id }, $event)">
-							<BaseIcon
-								class="mx-auto"
-								:icon="composition ? 'check' : 'uncheck'"
-								:color="composition ? 'green' : 'red'" />
-						</td>
-						<td @click="toggleCheck(i, 'recording')">
-							<BaseIcon
-								class="mx-auto"
-								:icon="recording ? 'check' : 'uncheck'"
-								:color="recording ? 'green' : 'red'" />
-						</td>
-						<td @click="toggleCheck(i, 'mixing')">
-							<BaseIcon
-								class="mx-auto"
-								:icon="mixing ? 'check' : 'uncheck'"
-								:color="mixing ? 'green' : 'red'" />
-						</td>
-						<td @click="toggleCheck(i, 'mastering')">
-							<BaseIcon
-								class="mx-auto"
-								:icon="mastering ? 'check' : 'uncheck'"
-								:color="mastering ? 'green' : 'red'" />
-						</td>
-						<td @click="togglePlay(id)">
-							<BaseIcon
-								v-if="audioPath"
-								:key="trackPlaying"
-								class="mx-auto"
-								:icon="trackPlaying === id ? 'pause' : 'play'"
-								:color="lightMode ? 'black' : 'white'" />
-							<div v-else class="text-red-400 font-bold">No audio available</div>
-						</td>
-						<td>
-							<BaseButton icon="trash" color="danger" />
-						</td>
-					</tr>
-				</tbody>
-			</table>
+				<table :key="tableKey">
+					<thead>
+						<tr>
+							<th>{{ $t('app.projects.track_name') }}</th>
+							<th>{{ $t('app.projects.composition') }}</th>
+							<th>{{ $t('app.projects.recording') }}</th>
+							<th>{{ $t('app.projects.mixing') }}</th>
+							<th>{{ $t('app.projects.mastering') }}</th>
+							<th>{{ $t('app.projects.audio') }}</th>
+							<th>{{ $t('app.projects.delete') }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							v-for="({ id, composition, recording, mixing, mastering, audioPath }, i) of trackList"
+							:key="i">
+							<td>
+								<BaseInput v-model="trackList[i].trackName" variant="underline" color="primary" />
+							</td>
+							<td
+								@click="toggleCheck(i, 'composition')"
+								@contextmenu="($event) => onCellClick({ column: 'composition', id }, $event)">
+								<BaseIcon
+									class="mx-auto"
+									:icon="composition ? 'check' : 'uncheck'"
+									:color="composition ? 'green' : 'red'" />
+							</td>
+							<td
+								@click="toggleCheck(i, 'recording')"
+								@contextmenu="($event) => onCellClick({ column: 'recording', id }, $event)">
+								<BaseIcon
+									class="mx-auto"
+									:icon="recording ? 'check' : 'uncheck'"
+									:color="recording ? 'green' : 'red'" />
+							</td>
+							<td
+								@click="toggleCheck(i, 'mixing')"
+								@contextmenu="($event) => onCellClick({ column: 'mixing', id }, $event)">
+								<BaseIcon
+									class="mx-auto"
+									:icon="mixing ? 'check' : 'uncheck'"
+									:color="mixing ? 'green' : 'red'" />
+							</td>
+							<td
+								@click="toggleCheck(i, 'mastering')"
+								@contextmenu="($event) => onCellClick({ column: 'mastering', id }, $event)">
+								<BaseIcon
+									class="mx-auto"
+									:icon="mastering ? 'check' : 'uncheck'"
+									:color="mastering ? 'green' : 'red'" />
+							</td>
+							<td
+								@click="togglePlay(id)"
+								@contextmenu="($event) => onCellClick({ column: 'audio', id }, $event)">
+								<BaseIcon
+									v-if="audioPath"
+									:key="trackPlaying"
+									class="mx-auto"
+									:icon="trackPlaying === id ? 'pause' : 'play'"
+									:color="lightMode ? 'black' : 'white'" />
+								<div v-else class="text-red-400 font-bold">No audio available</div>
+							</td>
+							<td>
+								<BaseButton icon="trash" color="danger" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</section>
 		<!-- Floating menu -->
 		<AppFloatMenu v-if="isFloatMenuOpened" :client-x="clientX" :client-y="clientY" />

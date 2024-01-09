@@ -42,9 +42,13 @@ useSeoMeta({
 	description: 'iTrackFlow - Empower musical creativity with iTrackFlow',
 });
 
-window.addEventListener('contextmenu', (e) => {
-	e.preventDefault();
-	e.stopImmediatePropagation();
-	console.log('contextmenu');
+onMounted(() => {
+	if (process.server) return;
+
+	window.addEventListener('contextmenu', (e) => {
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		console.log('contextmenu');
+	});
 });
 </script>

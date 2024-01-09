@@ -15,6 +15,38 @@ export const useFloatMenuStore = defineStore('floatMenu', () => {
 						action: () => alert('Add comment'),
 					},
 				];
+			case 'recording':
+				return [
+					{
+						label: 'Add comment',
+						action: () => alert('Add comment'),
+					},
+				];
+			case 'mixing':
+				return [
+					{
+						label: 'Add comment',
+						action: () => alert('Add comment'),
+					},
+				];
+			case 'mastering':
+				return [
+					{
+						label: 'Add comment',
+						action: () => alert('Add comment'),
+					},
+				];
+			case 'audio':
+				return [
+					{
+						label: 'Add comment',
+						action: () => alert('Add comment'),
+					},
+					{
+						label: 'Add audio',
+						action: () => alert('Add audio'),
+					},
+				];
 			default:
 				return [];
 		}
