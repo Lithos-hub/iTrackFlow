@@ -1,5 +1,6 @@
 <template>
 	<button
+		v-bind="$attrs"
 		:disabled="disabled"
 		data-testid="iui-button"
 		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`"

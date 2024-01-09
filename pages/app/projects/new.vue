@@ -22,7 +22,9 @@
 					:label="$t('app.projects.project_category')"
 					:placeholder="$t('app.projects.project_category_placeholder')"
 					:data="categories" />
-				<BaseButton variant="stealth" color="secondary">Imagen del proyecto</BaseButton>
+				<BaseButton variant="stealth" color="secondary" type="button">
+					{{ $t('app.projects.project_image') }}
+				</BaseButton>
 			</form>
 
 			<template #actions>
