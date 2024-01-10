@@ -40,7 +40,6 @@ const { color, disabled, variant } = withDefaults(defineProps<Button>(), {
 	color: 'primary',
 	disabled: false,
 	size: 'md',
-	radius: 'md',
 	variant: 'solid',
 	text: '',
 	icon: '',

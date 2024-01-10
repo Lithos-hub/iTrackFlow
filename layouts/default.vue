@@ -10,7 +10,8 @@
 				class="fixed bottom-5 left-5 text-secondary font-bold">
 				Demo version
 			</div>
-			<div class="container bg-white dark:bg-dark min-h-[calc(100vh-61px)]">
+			<div
+				class="container bg-white dark:bg-dark min-h-[calc(100vh-61px)] py-10 flex flex-col justify-center items-center">
 				<slot />
 			</div>
 		</div>

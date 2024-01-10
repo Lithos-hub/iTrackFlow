@@ -1,6 +1,6 @@
 <template>
 	<section class="h-full w-full bg-white dark:bg-dark">
-		<section class="default_margin py-5">
+		<section class="default_margin">
 			<div class="flex justify-between">
 				<BaseButton
 					variant="stealth"

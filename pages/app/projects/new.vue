@@ -1,45 +1,43 @@
 <template>
-	<div class="relative h-[calc(100vh-61px)] flex flex-col justify-center items-center">
-		<BaseCard class="max-w-[500px]">
-			<template #title>
-				<h2 class="text-primary">
-					{{ $t('app.projects.create') }}
-				</h2>
-			</template>
+	<BaseCard class="max-w-[500px]">
+		<template #title>
+			<h2 class="text-primary">
+				{{ $t('app.projects.create') }}
+			</h2>
+		</template>
 
-			<form ref="formRef" class="bg-white dark:bg-dark rounded-2xl w-full flex flex-col gap-5">
-				<BaseInput
-					:label="$t('app.projects.project_name')"
-					:placeholder="$t('app.projects.project_name_placeholder')" />
-				<BaseDropdown
-					v-model="selectedTeamMembers"
-					:label="$t('app.projects.project_team_members')"
-					:placeholder="$t('app.projects.project_team_members_placeholder')"
-					multiselect
-					:data="teamMembers" />
-				<BaseDropdown
-					v-model="selectedCategory"
-					:label="$t('app.projects.project_category')"
-					:placeholder="$t('app.projects.project_category_placeholder')"
-					:data="categories" />
-				<BaseButton variant="stealth" color="secondary" type="button">
-					{{ $t('app.projects.project_image') }}
-				</BaseButton>
-			</form>
+		<form ref="formRef" class="bg-white dark:bg-dark rounded-2xl w-full flex flex-col gap-5">
+			<BaseInput
+				:label="$t('app.projects.project_name')"
+				:placeholder="$t('app.projects.project_name_placeholder')" />
+			<BaseDropdown
+				v-model="selectedTeamMembers"
+				:label="$t('app.projects.project_team_members')"
+				:placeholder="$t('app.projects.project_team_members_placeholder')"
+				multiselect
+				:data="teamMembers" />
+			<BaseDropdown
+				v-model="selectedCategory"
+				:label="$t('app.projects.project_category')"
+				:placeholder="$t('app.projects.project_category_placeholder')"
+				:data="categories" />
+			<BaseButton variant="stealth" color="secondary" type="button">
+				{{ $t('app.projects.project_image') }}
+			</BaseButton>
+		</form>
 
-			<template #actions>
-				<BaseButton color="primary" @click="submit">
-					{{ $t('app.projects.project_create_submit') }}
-				</BaseButton>
-			</template>
-		</BaseCard>
-	</div>
+		<template #actions>
+			<BaseButton color="primary" @click="submit">
+				{{ $t('app.projects.project_create_submit') }}
+			</BaseButton>
+		</template>
+	</BaseCard>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
 	name: 'NewProjectPage',
-	layout: 'default',
+	layout: 'centered-card',
 });
 
 const { t } = useI18n();

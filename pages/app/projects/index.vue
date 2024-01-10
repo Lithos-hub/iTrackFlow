@@ -3,7 +3,7 @@
 		<h2 class="uppercase font-bold">
 			{{ $t('app.projects.title') }}
 		</h2>
-		<ul class="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 pb-10">
+		<ul class="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
 			<li>
 				<RouterLink to="/app/projects/new">
 					<AppProjectCard />
