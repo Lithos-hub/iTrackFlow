@@ -6,6 +6,9 @@ export const useAudioPlayerStore = defineStore('audio-player', () => {
 	const isPlaying = ref(false);
 	const isPaused = ref(false);
 
+	const audioDuration = ref(0);
+	const audioCurrentTime = ref(0);
+
 	const setAudioSrc = (src: string) => {
 		audioSrc.value = src;
 	};
@@ -13,12 +16,18 @@ export const useAudioPlayerStore = defineStore('audio-player', () => {
 		audioElement.value = element;
 	};
 
+	const setAudioCurrentTime = (duration: number) => {
+		audioCurrentTime.value = duration;
+	};
+
 	const play = () => {
 		if (audioElement.value) {
 			audioElement.value.play();
+			audioDuration.value = audioElement.value.duration;
 			isPlaying.value = true;
 			isPaused.value = false;
-			refreshPlayerKey.value++;
+
+			setInterval(() => setAudioCurrentTime(audioElement.value?.currentTime as number), 1000);
 		}
 	};
 
@@ -54,5 +63,7 @@ export const useAudioPlayerStore = defineStore('audio-player', () => {
 		play,
 		pause,
 		stop,
+		audioDuration,
+		audioCurrentTime,
 	};
 });

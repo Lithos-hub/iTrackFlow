@@ -1,6 +1,6 @@
 <template>
-	<div :key="refreshPlayerKey" class="fixed bottom-0 left-0 bg-dark w-full p-5 flex gap-5">
-		<div class="flex gap-5">
+	<div :key="refreshPlayerKey" class="fixed bottom-0 left-0 bg-[#202020] w-full flex gap-5">
+		<div class="flex gap-5 items-center">
 			<BaseButton
 				v-if="!isPlaying && !isPaused"
 				color="primary"
@@ -16,8 +16,22 @@
 					@click="pause" />
 				<BaseButton v-if="isPlaying" color="secondary" icon="stop" icon-right @click="stop" />
 			</div>
+
+			<span>
+				Playing:
+				<strong>{{ audioTitle }}</strong>
+			</span>
+
+			<div v-if="isPlaying" class="audio__timeline relative flex">
+				<div
+					class="absolute top-0 left-0 bg-primary h-full"
+					:style="{
+						width: `${(audioCurrentTime / audioDuration) * 100}%`,
+					}" />
+			</div>
+			<div>{{ audioTime }}</div>
 		</div>
-		<audio ref="audioRef" :src="audioSrc" class="hidden"></audio>
+		<audio ref="audioRef" :src="audioSrc" class="hidden" controls></audio>
 	</div>
 </template>
 
@@ -25,9 +39,45 @@
 import { useAudioPlayerStore } from '@/store/audioPlayerStore';
 
 const { setAudioSrc, setAudioElement, play, pause, stop } = useAudioPlayerStore();
-const { refreshPlayerKey, audioSrc, isPlaying, isPaused } = storeToRefs(useAudioPlayerStore());
+const { refreshPlayerKey, audioSrc, isPlaying, isPaused, audioDuration, audioCurrentTime } =
+	storeToRefs(useAudioPlayerStore());
 
 const audioRef = ref<HTMLAudioElement>();
+
+const audioTitle = computed(() => {
+	if (audioRef.value) {
+		// TODO: Remove when the Backend is ready
+		return audioSrc.value.split('/').pop()?.split('.').shift();
+	}
+	return '';
+});
+
+const audioTime = computed(() => {
+	if (audioDuration) {
+		// Calculate the time left and the total duration
+		let currentMinutes: string | number = Math.floor(audioCurrentTime.value / 60);
+		let currentSeconds: string | number = Math.floor(audioCurrentTime.value - currentMinutes * 60);
+		let durationMinutes: string | number = Math.floor(audioDuration.value / 60);
+		let durationSeconds: string | number = Math.floor(audioDuration.value - durationMinutes * 60);
+
+		// Add a zero to the single digit time values
+		if (currentSeconds < 10) {
+			currentSeconds = '0' + currentSeconds;
+		}
+		if (durationSeconds < 10) {
+			durationSeconds = '0' + durationSeconds;
+		}
+		if (currentMinutes < 10) {
+			currentMinutes = '0' + currentMinutes;
+		}
+		if (durationMinutes < 10) {
+			durationMinutes = '0' + durationMinutes;
+		}
+
+		// Display the updated duration
+		return `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
+	}
+});
 
 onMounted(() => {
 	setAudioSrc('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
@@ -35,3 +85,11 @@ onMounted(() => {
 	// TODO: Remove when the Backend is ready
 });
 </script>
+
+<style scoped lang="scss">
+.audio__timeline {
+	width: 500px;
+	height: 5px;
+	background-color: #fff;
+}
+</style>
