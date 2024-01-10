@@ -38,7 +38,13 @@
 							v-for="({ id, composition, recording, mixing, mastering, audioPath }, i) of trackList"
 							:key="i">
 							<td>
-								<BaseInput v-model="trackList[i].trackName" variant="underline" color="primary" />
+								<BaseInput
+									v-model="trackList[i].trackName"
+									:placeholder="
+										trackList[i].trackName ? '' : $t('app.projects.track_name_placeholder')
+									"
+									variant="underline"
+									color="primary" />
 							</td>
 							<td
 								@click="toggleCheck(i, 'composition')"

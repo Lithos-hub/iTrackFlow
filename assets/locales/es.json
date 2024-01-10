@@ -50,6 +50,7 @@
 			"project_image": "Imagen del proyecto",
 			"project_create_submit": "Crear proyecto",
 			"track_name": "Nombre de la pista",
+			"track_name_placeholder": "Introduce el nombre de la pista",
 			"composition": "Composición",
 			"recording": "Grabación",
 			"mixing": "Mezcla",

@@ -50,6 +50,7 @@
 			"project_image": "Project image",
 			"project_create_submit": "Create project",
 			"track_name": "Track name",
+			"track_name_placeholder": "Enter your track name",
 			"composition": "Composition",
 			"recording": "Recording",
 			"mixing": "Mixing",
