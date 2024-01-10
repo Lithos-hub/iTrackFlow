@@ -101,16 +101,17 @@
 		</section>
 		<!-- Floating menu -->
 		<AppFloatMenu v-if="isFloatMenuOpened" :client-x="clientX" :client-y="clientY" />
+		<!-- Music player -->
+		<AppMusicPlayer />
 	</section>
 </template>
 
 <script setup lang="ts">
+import type { Column } from './production.interfaces';
 import { FloatMenuTarget } from '@/components/app/FloatMenu/FloatMenu.interfaces';
 
 import { useScreenStore } from '@/store/screenStore';
 import { useFloatMenuStore } from '@/store/floatMenuStore';
-
-type Column = 'composition' | 'recording' | 'mixing' | 'mastering';
 
 const projectName = 'Project #n';
 
