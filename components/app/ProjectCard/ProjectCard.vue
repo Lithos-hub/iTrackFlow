@@ -11,12 +11,12 @@
 			<h3>{{ project?.name }}</h3>
 			<small
 				v-if="project.category === 'harmony'"
-				class="absolute top-0 left-0 bg-secondary/80 dark:bg-secondary/50 border border-secondary-500 p-2 rounded-tl-2xl rounded-br-2xl">
+				class="absolute top-0 left-0 bg-secondary dark:bg-secondary/20 border border-rose-500 p-2 rounded-tl-2xl rounded-br-2xl">
 				{{ $t('app.projects.harmony') }}
 			</small>
 			<small
 				v-if="project.category === 'production'"
-				class="absolute top-0 left-0 bg-primary/80 dark:bg-primary/50 border border-primary-500 p-2 rounded-tl-2xl rounded-br-2xl">
+				class="absolute top-0 left-0 bg-primary dark:bg-primary/20 border border-sky-500 p-2 rounded-tl-2xl rounded-br-2xl">
 				{{ $t('app.projects.production') }}
 			</small>
 		</div>
