@@ -83,9 +83,15 @@
 								@contextmenu="($event) => onCellClick({ column: 'audio', id }, $event)">
 								<BaseIcon
 									v-if="audioPath"
-									:key="trackPlaying"
+									:key="currentTrackPlaying"
 									class="mx-auto"
-									:icon="trackPlaying === id ? 'pause' : 'play'"
+									:icon="
+										currentTrackPlaying === id && !isPlaying
+											? 'pause'
+											: currentTrackPlaying === id && isPlaying
+												? 'play'
+												: 'play'
+									"
 									:color="lightMode ? 'black' : 'white'" />
 								<div v-else class="text-red-400 font-bold">
 									{{ $t('app.projects.no_audio') }}
@@ -112,6 +118,7 @@ import { FloatMenuTarget } from '@/components/app/FloatMenu/FloatMenu.interfaces
 
 import { useScreenStore } from '@/store/screenStore';
 import { useFloatMenuStore } from '@/store/floatMenuStore';
+import { useAudioPlayerStore } from '@/store/audioPlayerStore';
 
 const projectName = 'Project #n';
 
@@ -119,6 +126,9 @@ const { lightMode } = storeToRefs(useScreenStore());
 
 const { isFloatMenuOpened, clientX, clientY } = storeToRefs(useFloatMenuStore());
 const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore();
+
+const { setAudioSrc, play, pause } = useAudioPlayerStore();
+const { isPlaying } = storeToRefs(useAudioPlayerStore());
 
 const tableKey = ref(0);
 const trackList = ref([
@@ -138,7 +148,7 @@ const trackList = ref([
 		recording: true,
 		mixing: true,
 		mastering: false,
-		audioPath: 'path',
+		audioPath: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
 	},
 	{
 		id: 3,
@@ -147,10 +157,10 @@ const trackList = ref([
 		recording: true,
 		mixing: true,
 		mastering: true,
-		audioPath: 'path',
+		audioPath: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
 	},
 ]);
-const trackPlaying = ref<number | undefined>(undefined);
+const currentTrackPlaying = ref<number | undefined>(undefined);
 
 const toggleCheck = (index: number, column: Column) => {
 	trackList.value[index][column] = !trackList.value[index][column];
@@ -159,12 +169,16 @@ const toggleCheck = (index: number, column: Column) => {
 	tableKey.value++;
 };
 
-const togglePlay = (index: number) => {
-	if (trackPlaying.value === index) {
-		trackPlaying.value = 0;
+const togglePlay = (trackId: number) => {
+	const index = trackList.value.findIndex((track) => track.id === trackId);
+	setAudioSrc(trackList.value[index].audioPath as string);
+	currentTrackPlaying.value = trackId;
+	if (isPlaying) {
+		setTimeout(() => pause(), 500);
 	} else {
-		trackPlaying.value = index;
+		setTimeout(() => play(), 500);
 	}
+	tableKey.value++;
 };
 
 const onCellClick = ({ column, id }: FloatMenuTarget, event) => {

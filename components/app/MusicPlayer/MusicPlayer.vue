@@ -6,6 +6,7 @@
 				color="primary"
 				icon="play"
 				icon-right
+				:disabled="!audioSrc"
 				@click="play" />
 			<div class="flex gap-5">
 				<BaseButton
@@ -17,10 +18,11 @@
 				<BaseButton v-if="isPlaying" color="secondary" icon="stop" icon-right @click="stop" />
 			</div>
 
-			<span>
+			<span v-if="audioSrc">
 				Playing:
 				<strong>{{ audioTitle }}</strong>
 			</span>
+			<span v-else>No audio selected</span>
 
 			<div v-if="isPlaying" class="audio__timeline relative flex">
 				<div
@@ -38,19 +40,13 @@
 <script setup lang="ts">
 import { useAudioPlayerStore } from '@/store/audioPlayerStore';
 
-const { setAudioSrc, setAudioElement, play, pause, stop } = useAudioPlayerStore();
+const { setAudioElement, play, pause, stop } = useAudioPlayerStore();
 const { refreshPlayerKey, audioSrc, isPlaying, isPaused, audioDuration, audioCurrentTime } =
 	storeToRefs(useAudioPlayerStore());
 
 const audioRef = ref<HTMLAudioElement>();
 
-const audioTitle = computed(() => {
-	if (audioRef.value) {
-		// TODO: Remove when the Backend is ready
-		return audioSrc.value.split('/').pop()?.split('.').shift();
-	}
-	return '';
-});
+const audioTitle = computed(() => audioRef.value && audioSrc.value.split('/').pop());
 
 const audioTime = computed(() => {
 	if (audioDuration) {
@@ -79,11 +75,7 @@ const audioTime = computed(() => {
 	}
 });
 
-onMounted(() => {
-	setAudioSrc('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-	setAudioElement(audioRef.value as HTMLAudioElement);
-	// TODO: Remove when the Backend is ready
-});
+onMounted(() => setAudioElement(audioRef.value as HTMLAudioElement));
 </script>
 
 <style scoped lang="scss">

@@ -22,10 +22,11 @@ export const useAudioPlayerStore = defineStore('audio-player', () => {
 
 	const play = () => {
 		if (audioElement.value) {
-			audioElement.value.play();
 			audioDuration.value = audioElement.value.duration;
 			isPlaying.value = true;
 			isPaused.value = false;
+
+			setTimeout(() => audioElement.value?.play(), 500);
 
 			setInterval(() => setAudioCurrentTime(audioElement.value?.currentTime as number), 1000);
 		}
@@ -33,9 +34,10 @@ export const useAudioPlayerStore = defineStore('audio-player', () => {
 
 	const pause = () => {
 		if (audioElement.value && isPlaying.value) {
-			audioElement.value.pause();
 			isPlaying.value = false;
 			isPaused.value = true;
+
+			audioElement.value.pause();
 		} else {
 			play();
 		}
