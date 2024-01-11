@@ -57,7 +57,9 @@
 			"mastering": "Mastering",
 			"delete": "Delete track",
 			"audio": "Listen track",
-			"no_audio": "No audio file"
+			"no_audio": "No audio file",
+			"playing": "Playing",
+			"no_audio_selected": "No audio file selected"
 		}
 	}
 }

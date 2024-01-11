@@ -19,10 +19,12 @@
 			</div>
 
 			<span v-if="audioSrc">
-				Playing:
+				{{ $t('app.projects.playing') }}
 				<strong>{{ audioTitle }}</strong>
 			</span>
-			<span v-else>No audio selected</span>
+			<span v-else>
+				{{ $t('app.projects.no_audio_selected') }}
+			</span>
 
 			<div v-if="isPlaying" class="audio__timeline relative flex">
 				<div

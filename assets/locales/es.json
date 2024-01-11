@@ -57,7 +57,9 @@
 			"mastering": "Masterización",
 			"delete": "Eliminar",
 			"audio": "Escuchar pista",
-			"no_audio": "No hay pista de audio"
+			"no_audio": "No hay pista de audio",
+			"playing": "Reproduciendo",
+			"no_audio_selected": "No hay pista de audio seleccionada"
 		}
 	}
 }

@@ -16,10 +16,29 @@
 				</BaseButton>
 			</div>
 			<div class="flex flex-col gap-5">
-				<h3>
-					{{ $t('app.projects.name') }}
-					<span class="font-bold">{{ projectName }}</span>
-				</h3>
+				<div class="flex gap-5 items-center">
+					<div class="flex w-full justify-start items-center gap-5">
+						<h3>
+							{{ $t('app.projects.name') }}
+						</h3>
+
+						<BaseInput
+							v-if="isEditingProjectName"
+							v-model="projectName"
+							autofocus
+							color="primary"
+							class="w-1/2" />
+						<h3 v-else class="font-bold">{{ projectName }}</h3>
+
+						<BaseButton
+							variant="stealth"
+							color="primary"
+							icon="pencil"
+							icon-right
+							class="my-5"
+							@click="isEditingProjectName = !isEditingProjectName" />
+					</div>
+				</div>
 
 				<table :key="tableKey">
 					<thead>
@@ -120,7 +139,7 @@ import { useScreenStore } from '@/store/screenStore';
 import { useFloatMenuStore } from '@/store/floatMenuStore';
 import { useAudioPlayerStore } from '@/store/audioPlayerStore';
 
-const projectName = 'Project #n';
+const projectName = ref('Project #n');
 
 const { lightMode } = storeToRefs(useScreenStore());
 
@@ -161,6 +180,7 @@ const trackList = ref([
 	},
 ]);
 const currentTrackPlaying = ref<number | undefined>(undefined);
+const isEditingProjectName = ref(false);
 
 const toggleCheck = (index: number, column: Column) => {
 	trackList.value[index][column] = !trackList.value[index][column];
