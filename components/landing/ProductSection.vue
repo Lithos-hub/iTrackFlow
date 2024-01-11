@@ -1,24 +1,26 @@
 <template>
-	<section
-		id="product"
-		class="h-screen items-center justify-center grid grid-cols-2 gap-5 default_margin">
-		<article>
-			<h3 class="text-[100px]">
-				{{ $t('landing.product.title_1') }}
-			</h3>
-			<p class="text-justify">
-				{{ $t('landing.product.description_1') }}
-			</p>
+	<section id="product" class="h-screen default_margin">
+		<article class="flex gap-10">
+			<div class="w-1/2 p-5">
+				<h3 class="text-[100px]">
+					{{ $t('landing.product.title_1') }}
+				</h3>
+				<p class="text-justify">
+					{{ $t('landing.product.description_1') }}
+				</p>
+			</div>
+			<img src="/img/product-harmony.jpg" class="w-1/2 p-5" />
 		</article>
-		<article class="border min-h-[250px] p-5">Image 1</article>
-		<article class="border min-h-[250px] p-5">Image 2</article>
-		<article>
-			<h3 class="text-[100px]">
-				{{ $t('landing.product.title_2') }}
-			</h3>
-			<p class="text-justify">
-				{{ $t('landing.product.description_2') }}
-			</p>
+		<article class="flex gap-10">
+			<img src="/img/product-production.jpg" class="w-1/2 p-5" />
+			<div class="w-1/2 p-5">
+				<h3 class="text-[100px]">
+					{{ $t('landing.product.title_2') }}
+				</h3>
+				<p class="text-justify">
+					{{ $t('landing.product.description_2') }}
+				</p>
+			</div>
 		</article>
 	</section>
 </template>
