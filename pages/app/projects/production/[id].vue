@@ -18,25 +18,26 @@
 			<div class="flex flex-col gap-5">
 				<div class="flex gap-5 items-center">
 					<div class="flex w-full justify-start items-center gap-5">
-						<h3>
+						<h4>
 							{{ $t('app.projects.name') }}
-						</h3>
+						</h4>
 
-						<BaseInput
-							v-if="isEditingProjectName"
-							v-model="projectName"
-							autofocus
-							color="primary"
-							class="w-1/2" />
-						<h3 v-else class="font-bold">{{ projectName }}</h3>
+						<div class="w-[350px]">
+							<BaseInput
+								v-if="isEditingProjectName"
+								v-model="projectName"
+								autofocus
+								color="primary" />
+							<h3 v-else class="font-bold">{{ projectNameSplitted }}</h3>
+						</div>
 
 						<BaseButton
+							:key="editingButtonKey"
 							variant="stealth"
-							color="primary"
-							icon="pencil"
-							icon-right
+							:color="isEditingProjectName ? 'success' : 'primary'"
+							:icon="isEditingProjectName ? 'check' : 'pencil'"
 							class="my-5"
-							@click="isEditingProjectName = !isEditingProjectName" />
+							@click="toggleIsEditingProjectName" />
 					</div>
 				</div>
 
@@ -181,6 +182,15 @@ const trackList = ref([
 ]);
 const currentTrackPlaying = ref<number | undefined>(undefined);
 const isEditingProjectName = ref(false);
+const editingButtonKey = ref(0);
+
+const projectNameSplitted = computed(() => {
+	const splitted = projectName.value.split('');
+	if (splitted.length > 50) {
+		return splitted.slice(0, 20).join('') + '...';
+	}
+	return projectName.value;
+});
 
 const toggleCheck = (index: number, column: Column) => {
 	trackList.value[index][column] = !trackList.value[index][column];
@@ -220,6 +230,10 @@ const addTrack = () => {
 	});
 };
 
+const toggleIsEditingProjectName = () => {
+	isEditingProjectName.value = !isEditingProjectName.value;
+	editingButtonKey.value++;
+};
 watch(lightMode, () => tableKey.value++);
 </script>
 
