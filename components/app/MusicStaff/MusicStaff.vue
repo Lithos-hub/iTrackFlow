@@ -18,5 +18,3 @@ onMounted(() => {
 	getChordType(chordName, keySignature);
 });
 </script>
-
-<style scoped></style>
