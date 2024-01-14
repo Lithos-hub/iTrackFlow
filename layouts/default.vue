@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col flex-grow">
+	<div class="flex flex-col flex-grow h-screen">
 		<header class="sticky top-0 left-0">
 			<BaseNavbar />
 		</header>
@@ -11,7 +11,7 @@
 				Demo version
 			</div>
 			<div
-				class="container bg-white dark:bg-dark min-h-[calc(100vh-61px)] py-10 flex flex-col justify-center items-center">
+				class="container bg-white dark:bg-dark h-full py-10 flex flex-col justify-center items-center">
 				<slot />
 			</div>
 		</div>

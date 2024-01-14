@@ -6,6 +6,7 @@ import {
 	TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES,
 	TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
 } from '@/constants/harmonyFormulas';
+import { ChordTypeData } from '~/components/app/MusicStaff/MusicStaff.interfaces';
 
 const getDistanceBetweenNotes = (root: string, targetNote: string, scaleType: string) => {
 	let targetPosition, rootPosition;
@@ -23,7 +24,7 @@ const getDistanceBetweenNotes = (root: string, targetNote: string, scaleType: st
 	}
 };
 
-export const getChordType = (chordName: string, keySignature: string) => {
+export const getChordType = (chordName: string, keySignature: string): ChordTypeData => {
 	// Step 1: Get the tonic of the keySignature
 	const scaleRoot = keySignature.charAt(0);
 
@@ -45,4 +46,6 @@ export const getChordType = (chordName: string, keySignature: string) => {
 	// Step 3.2: Get the chord type
 	const chordType = scaleFormula[distance];
 	console.log(`Chord formula is ${Object.values(chordType.formula).join(' - ')}`);
+
+	return chordType;
 };

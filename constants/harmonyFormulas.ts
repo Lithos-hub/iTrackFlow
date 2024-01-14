@@ -414,7 +414,7 @@ export const LOCRIAN_SCALE_SEMITONES = [0, 1, 3, 5, 6, 8, 10];
 
 export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -422,7 +422,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'I',
 	},
 	2: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -430,7 +430,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'ii',
 	},
 	4: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -438,7 +438,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'iii',
 	},
 	5: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -446,7 +446,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'IV',
 	},
 	7: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -454,7 +454,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'V',
 	},
 	9: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -473,7 +473,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 
 export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -489,7 +489,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'ii',
 	},
 	3: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -497,7 +497,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'III',
 	},
 	5: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -505,7 +505,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'iv',
 	},
 	7: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -513,7 +513,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'v',
 	},
 	8: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -521,7 +521,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'VI',
 	},
 	10: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -532,7 +532,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 
 export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -541,7 +541,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'I',
 	},
 	2: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -550,7 +550,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'ii',
 	},
 	4: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -559,7 +559,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'iii',
 	},
 	5: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -568,7 +568,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'IV',
 	},
 	7: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -577,7 +577,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'V',
 	},
 	9: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -598,7 +598,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 
 export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -616,7 +616,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'ii',
 	},
 	3: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -625,7 +625,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'III',
 	},
 	5: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -634,7 +634,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'iv',
 	},
 	7: {
-		type: 'minor',
+		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
@@ -643,7 +643,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'v',
 	},
 	8: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',
@@ -652,7 +652,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		roman_numeral: 'VI',
 	},
 	10: {
-		type: 'major',
+		type: '',
 		formula: {
 			3: '3',
 			5: '5',

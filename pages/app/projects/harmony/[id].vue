@@ -12,19 +12,23 @@
 					{{ $t('app.ui.go_back') }}
 				</BaseButton>
 			</div>
-			<div class="flex flex-col gap-5">
+
+			<div class="flex justify-between items-start gap-5">
 				<AppProjectHeader :project-id="projectId" />
+				<div class="flex gap-5">
+					<BaseInput v-model="projectTempo" label="Tempo" color="primary" />
+					<BaseInput v-model="projectTimeSignature" label="Time Signature" color="primary" />
+					<BaseInput v-model="projectKeySignature" label="Key Signature" color="primary" />
+				</div>
 			</div>
 
 			<!-- Harmony sheet -->
-			<section class="bg-white p-5 shadow">
-				<h5 class="font-bold text-dark">Tempo: {{ harmonyData.tempo }}</h5>
-				<h5 class="font-bold text-dark">Time Signature: {{ harmonyData.timeSignature }}</h5>
-				<h5 class="font-bold text-dark">Key Signature: {{ harmonyData.keySignature }}</h5>
-				<div class="py-5 border my-5 grid grid-cols-12">
+			<section class="bg-white p-5 mt-5 shadow">
+				<div class="border grid grid-cols-12 mt-5">
 					<AppMusicStaff
 						v-for="(chord, index) in harmonyData.chords"
 						:key="index"
+						:index="index + 1"
 						v-bind="chord"
 						:key-signature="harmonyData.keySignature" />
 				</div>
@@ -45,6 +49,7 @@ const getProject = async () => {
 	console.log(data);
 };
 
+// MOCK
 const harmonyData: HarmonyData = {
 	id: 1,
 	tempo: 120,
@@ -83,6 +88,10 @@ const harmonyData: HarmonyData = {
 		},
 	],
 };
+
+const projectTempo = ref(harmonyData.tempo);
+const projectKeySignature = ref(harmonyData.keySignature);
+const projectTimeSignature = ref(harmonyData.timeSignature);
 
 onMounted(() => getProject());
 </script>

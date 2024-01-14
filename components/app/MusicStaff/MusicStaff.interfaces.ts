@@ -134,4 +134,11 @@ export interface HarmonyData {
 
 export interface MusicStaffProps extends MusicChord {
 	keySignature: string;
+	index: number;
+}
+
+export interface ChordTypeData {
+	type: string;
+	formula: Record<number, string>;
+	roman_numeral: ChordFigure;
 }
