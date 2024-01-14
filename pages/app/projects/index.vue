@@ -19,73 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { Project } from '@/components/app/ProjectCard/ProjectCard.interfaces';
+import projects from '@/__mocks__/projects';
 
 definePageMeta({
 	layout: 'default',
 	middleware: 'auth',
 });
-
-const projects = ref<Project[]>([
-	{
-		id: 1,
-		name: 'Project 1',
-		category: 'harmony',
-	},
-	{
-		id: 2,
-		name: 'Project 2',
-		category: 'production',
-	},
-	{
-		id: 3,
-		name: 'Project 3',
-		category: 'production',
-	},
-	{
-		id: 1,
-		name: 'Project 1',
-		category: 'harmony',
-	},
-	{
-		id: 2,
-		name: 'Project 2',
-		category: 'production',
-	},
-	{
-		id: 3,
-		name: 'Project 3',
-		category: 'production',
-	},
-	{
-		id: 1,
-		name: 'Project 1',
-		category: 'harmony',
-	},
-	{
-		id: 2,
-		name: 'Project 2',
-		category: 'production',
-	},
-	{
-		id: 3,
-		name: 'Project 3',
-		category: 'production',
-	},
-	{
-		id: 1,
-		name: 'Project 1',
-		category: 'harmony',
-	},
-	{
-		id: 2,
-		name: 'Project 2',
-		category: 'production',
-	},
-	{
-		id: 3,
-		name: 'Project 3',
-		category: 'production',
-	},
-]);
 </script>

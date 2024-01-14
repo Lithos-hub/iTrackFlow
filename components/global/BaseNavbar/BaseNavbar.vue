@@ -33,8 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import { useLanguageStore } from '@/store/languageStore';
-import { useUserStore } from '@/store/userStore';
+import { useLanguageStore } from '@/store/language';
+import { useUserStore } from '@/store/user';
 
 const { language } = storeToRefs(useLanguageStore());
 const { user } = storeToRefs(useUserStore());

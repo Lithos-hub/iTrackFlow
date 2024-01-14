@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAudioPlayerStore } from '@/store/audioPlayerStore';
+import { useAudioPlayerStore } from '@/store/audioPlayer';
 
 const { setAudioElement, play, pause, stop } = useAudioPlayerStore();
 const { refreshPlayerKey, audioSrc, isPlaying, isPaused, audioDuration, audioCurrentTime } =
@@ -87,3 +87,4 @@ onMounted(() => setAudioElement(audioRef.value as HTMLAudioElement));
 	background-color: #fff;
 }
 </style>
+~/store/audioPlayer

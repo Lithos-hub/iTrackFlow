@@ -1,6 +1,6 @@
 <template>
 	<section class="h-full w-full bg-white dark:bg-dark">
-		<section class="default_margin">
+		<div class="default_margin">
 			<div class="flex justify-between">
 				<BaseButton
 					variant="stealth"
@@ -16,30 +16,7 @@
 				</BaseButton>
 			</div>
 			<div class="flex flex-col gap-5">
-				<div class="flex gap-5 items-center">
-					<div class="flex w-full justify-start items-center gap-5">
-						<h4>
-							{{ $t('app.projects.name') }}
-						</h4>
-
-						<div class="w-[350px]">
-							<BaseInput
-								v-if="isEditingProjectName"
-								v-model="projectName"
-								autofocus
-								color="primary" />
-							<h3 v-else class="font-bold">{{ projectNameSplitted }}</h3>
-						</div>
-
-						<BaseButton
-							:key="editingButtonKey"
-							variant="stealth"
-							:color="isEditingProjectName ? 'success' : 'primary'"
-							:icon="isEditingProjectName ? 'check' : 'pencil'"
-							class="my-5"
-							@click="toggleIsEditingProjectName" />
-					</div>
-				</div>
+				<AppProjectHeader :project-id="projectId" />
 
 				<table :key="tableKey">
 					<thead>
@@ -124,7 +101,7 @@
 					</tbody>
 				</table>
 			</div>
-		</section>
+		</div>
 		<!-- Floating menu -->
 		<AppFloatMenu v-if="isFloatMenuOpened" :client-x="clientX" :client-y="clientY" />
 		<!-- Music player -->
@@ -133,14 +110,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Column } from './production.interfaces';
 import { FloatMenuTarget } from '@/components/app/FloatMenu/FloatMenu.interfaces';
 
-import { useScreenStore } from '@/store/screenStore';
-import { useFloatMenuStore } from '@/store/floatMenuStore';
-import { useAudioPlayerStore } from '@/store/audioPlayerStore';
+import { useScreenStore } from '@/store/screen';
+import { useFloatMenuStore } from '@/store/floatMenu';
+import { useAudioPlayerStore } from '@/store/audioPlayer';
 
-const projectName = ref('Project #n');
+import { Column } from '~/interfaces/production';
 
 const { lightMode } = storeToRefs(useScreenStore());
 
@@ -150,6 +126,7 @@ const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore()
 const { setAudioSrc, play, pause } = useAudioPlayerStore();
 const { isPlaying } = storeToRefs(useAudioPlayerStore());
 
+const projectId = ref(1);
 const tableKey = ref(0);
 const trackList = ref([
 	{
@@ -181,16 +158,6 @@ const trackList = ref([
 	},
 ]);
 const currentTrackPlaying = ref<number | undefined>(undefined);
-const isEditingProjectName = ref(false);
-const editingButtonKey = ref(0);
-
-const projectNameSplitted = computed(() => {
-	const splitted = projectName.value.split('');
-	if (splitted.length > 50) {
-		return splitted.slice(0, 20).join('') + '...';
-	}
-	return projectName.value;
-});
 
 const toggleCheck = (index: number, column: Column) => {
 	trackList.value[index][column] = !trackList.value[index][column];
@@ -230,11 +197,16 @@ const addTrack = () => {
 	});
 };
 
-const toggleIsEditingProjectName = () => {
-	isEditingProjectName.value = !isEditingProjectName.value;
-	editingButtonKey.value++;
-};
 watch(lightMode, () => tableKey.value++);
+
+const getProject = async () => {
+	const { data } = await useFetch('/api/projects', {
+		method: 'GET',
+	});
+	console.log(data);
+};
+
+onMounted(() => getProject());
 </script>
 
 <style lang="scss" scoped>

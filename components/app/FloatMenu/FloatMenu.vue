@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { FloatMenu } from './FloatMenu.interfaces';
-import { useFloatMenuStore } from '@/store/floatMenuStore';
+import { useFloatMenuStore } from '@/store/floatMenu';
 
 defineProps<FloatMenu>();
 
@@ -31,3 +31,4 @@ li {
 	@apply hover:bg-primary/50 cursor-pointer p-2 duration-200;
 }
 </style>
+~/store/floatMenu
