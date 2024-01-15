@@ -18,13 +18,13 @@
 				<div class="relative">
 					<!-- Dropdown input -->
 					<BaseInput
-						:value="selectedItem?.label"
 						:class="{
 							dropdown__bordered: bordered,
 							dropdown: !bordered,
 						}"
 						:placeholder="!modelValue.length || multiselect ? placeholder : ''"
 						class="cursor-pointer"
+						:color="color"
 						@click="isSelecting = true" />
 					<div class="flex gap-1 absolute right-0 px-2 top-1/2 -translate-y-1/2">
 						<!-- Remove -->
@@ -60,12 +60,12 @@
 				<Transition name="fade">
 					<div
 						v-if="isSelecting"
-						class="z-50 absolute top-[40px] w-full rounded-lg bg-white dark:bg-dark duration-200">
-						<ul class="max-h-[200px] overflow-auto rounded-lg border border-gray-300">
+						class="z-50 absolute top-[50px] w-full rounded bg-white dark:bg-dark duration-200 shadow-xl">
+						<ul class="max-h-[200px] overflow-auto rounded border border-dark/50">
 							<li
 								v-for="({ label, value }, i) of props.data"
 								:key="i"
-								class="p-2 bg-white dark:bg-dark hover:bg-primary/10 cursor-pointer border-b last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
+								class="p-2 bg-white dark:bg-dark hover:bg-primary/10 cursor-pointer border-b border-white/50 last:border-b-0 first:rounded-t last:rounded-b"
 								@click="onItemClick(value)">
 								<div class="flex items-center pl-3">
 									<input

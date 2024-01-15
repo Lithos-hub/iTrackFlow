@@ -13,13 +13,6 @@
 
 <script setup lang="ts">
 import { MusicStaffProps } from './MusicStaff.interfaces';
-// import { getChordType } from '@/utils/chord';
 
 const { chord, romanNumber, index } = defineProps<MusicStaffProps>();
-
-// const figuredChordName = computed(() => {
-// 	if (!chordName) return '';
-// 	const { type } = getChordType(chordName, keySignature);
-// 	return `${chordName}${type}`;
-// });
 </script>

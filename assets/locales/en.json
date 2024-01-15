@@ -32,6 +32,26 @@
 			"add_comment": "Add a comment",
 			"add_audio": "Add an audio file"
 		},
+		"harmony": {
+			"major": "Major",
+			"minor": "Minor",
+			"harmonic_minor": "Harmonic minor",
+			"melodic_minor": "Melodic minor",
+			"pentatonic_major": "Pentatonic major",
+			"pentatonic_minor": "Pentatonic minor",
+			"blues": "Blues",
+			"whole_tone": "Whole tone",
+			"diminished": "Diminished",
+			"augmented": "Augmented",
+			"chromatic": "Chromatic",
+			"ionian": "Ionian",
+			"dorian": "Dorian",
+			"phrygian": "Phrygian",
+			"lydian": "Lydian",
+			"mixolydian": "Mixolydian",
+			"aeolian": "Aeolian",
+			"locrian": "Locrian"
+		},
 		"projects": {
 			"title": "My Projects",
 			"create": "Create a new project",

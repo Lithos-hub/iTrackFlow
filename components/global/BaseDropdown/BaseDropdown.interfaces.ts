@@ -10,4 +10,5 @@ export interface BaseDropdown {
 	bordered?: boolean;
 	data: DropdownItem[];
 	multiselect?: boolean;
+	color?: string;
 }

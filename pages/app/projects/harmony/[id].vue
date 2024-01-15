@@ -7,7 +7,7 @@
 		<div class="flex flex-1 flex-grow">
 			<AppSideMenu :key="sideMenuKey">
 				<strong class="text-primary">Bar options</strong>
-				<BaseDropdown v-model="selectedChord" label="Chord" :data="chordsToSelect" />
+				<BaseDropdown v-model="selectedChord" label="Chord" :data="chordsList" />
 			</AppSideMenu>
 
 			<section class="h-full w-full">
@@ -26,8 +26,17 @@
 
 					<div class="grid grid-cols-5 w-full gap-5">
 						<BaseInput v-model="tempo" label="Tempo" color="primary" />
-						<BaseInput v-model="timeSignature" label="Time Signature" color="primary" />
-						<BaseInput v-model="keySignature" label="Key Signature" color="primary" />
+						<BaseDropdown
+							v-model="timeSignature"
+							label="Time Signature"
+							color="primary"
+							:data="TimeSignaturesList" />
+						<BaseDropdown v-model="rootNote" label="Root note" color="primary" :data="NotesList" />
+						<BaseDropdown
+							v-model="scaleType"
+							label="Scale type"
+							color="primary"
+							:data="scalesTypesFormatted" />
 						<BaseInput
 							v-model="numberOfBars"
 							debounced
@@ -45,7 +54,7 @@
 								:index="index + 1"
 								v-bind="chord"
 								:is-active="selectedBar === index"
-								:key-signature="harmonyData.keySignature"
+								:key-signature="harmonyData.scaleType"
 								@click="selectBar(chord, index)" />
 						</div>
 					</section>
@@ -58,6 +67,7 @@
 <script setup lang="ts">
 import { HarmonyData, MusicChord } from '@/components/app/MusicStaff/MusicStaff.interfaces';
 import { DropdownItem } from '@/components/global/BaseDropdown/BaseDropdown.interfaces';
+import { NotesList, TimeSignaturesList, ScaleTypesList } from '@/assets/data';
 
 definePageMeta({
 	layout: 'harmony',
@@ -71,12 +81,14 @@ const getProject = async () => {
 	console.log(data);
 };
 
+const { t } = useI18n();
 // MOCK
 const harmonyData = ref<HarmonyData>({
 	id: 1,
 	tempo: 120,
 	timeSignature: '4/4',
-	keySignature: 'C - minor',
+	rootNote: 'C',
+	scaleType: 'minor',
 	chords: [
 		{
 			id: 1,
@@ -96,23 +108,32 @@ const harmonyData = ref<HarmonyData>({
 	],
 });
 
-const chordsToSelect = computed(
+const chordsList = computed(
 	() =>
-		getAvailableChords(harmonyData.value.keySignature)?.map(
-			({ nomenclature, note, romanNumber }) => ({
-				label: `${note}${nomenclature} - (${romanNumber})`,
-				value: `${note}${nomenclature} - (${romanNumber})`,
-			}),
-		) as DropdownItem[],
+		getAvailableChords({
+			rootNote: harmonyData.value.rootNote,
+			scaleType: harmonyData.value.scaleType,
+		})?.map(({ nomenclature, note, romanNumber }) => ({
+			label: `${note}${nomenclature} - (${romanNumber})`,
+			value: `${note}${nomenclature} - (${romanNumber})`,
+		})) as DropdownItem[],
 );
 
 const sideMenuKey = ref(0);
 const tempo = ref(harmonyData.value.tempo);
-const keySignature = ref(harmonyData.value.keySignature);
-const timeSignature = ref(harmonyData.value.timeSignature);
+const rootNote = ref(harmonyData.value.rootNote);
+const scaleType = ref([harmonyData.value.scaleType]);
+const timeSignature = ref([harmonyData.value.timeSignature]);
 const numberOfBars = ref(20);
 const selectedBar = ref(0);
 const selectedChord = ref<string[]>([]);
+
+const scalesTypesFormatted = computed(() => {
+	return ScaleTypesList.map(({ label, value }) => ({
+		label: t(label),
+		value,
+	}));
+});
 
 const staffs = computed(() => {
 	return [

@@ -32,6 +32,26 @@
 			"add_comment": "Añadir comentario",
 			"add_audio": "Añadir audio"
 		},
+		"harmony": {
+			"major": "Mayor",
+			"minor": "Menor",
+			"harmonic_minor": "Menor armónica",
+			"melodic_minor": "Menor melódica",
+			"pentatonic_major": "Pentatónica mayor",
+			"pentatonic_minor": "Pentatónica menor",
+			"blues": "Blues",
+			"whole_tone": "Tono entero",
+			"diminished": "Disminuido",
+			"augmented": "Aumentado",
+			"chromatic": "Cromático",
+			"ionian": "Jónico",
+			"dorian": "Dórico",
+			"phrygian": "Frigio",
+			"lydian": "Lidio",
+			"mixolydian": "Mixolidio",
+			"aeolian": "Eólico",
+			"locrian": "Locrio"
+		},
 		"projects": {
 			"title": "Mis proyectos",
 			"create": "Crear nuevo proyecto",

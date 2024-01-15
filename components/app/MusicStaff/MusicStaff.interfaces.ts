@@ -90,11 +90,14 @@ export type ScaleType =
 	| 'lydian'
 	| 'mixolydian'
 	| 'aeolian'
-	| 'locrian';
+	| 'locrian'
+	| 'whole_tone'
+	| 'diminished'
+	| 'augmented';
 
 type ChordName = `${ChordRoot}${ChordType}`;
 
-export type KeySignature =
+export type Note =
 	| 'C'
 	| 'C#'
 	| 'Db'
@@ -106,7 +109,76 @@ export type KeySignature =
 	| 'F#'
 	| 'Gb'
 	| 'G'
-	| 'G#';
+	| 'G#'
+	| 'Ab'
+	| 'A'
+	| 'A#'
+	| 'Bb'
+	| 'B'
+	| 'Cb'
+	| 'B#';
+
+export type TimeSignature =
+	| '2/2'
+	| '2/4'
+	| '2/8'
+	| '2/16'
+	| '2/32'
+	| '2/64'
+	| '3/2'
+	| '3/4'
+	| '3/8'
+	| '3/16'
+	| '3/32'
+	| '3/64'
+	| '4/2'
+	| '4/4'
+	| '4/8'
+	| '4/16'
+	| '4/32'
+	| '4/64'
+	| '5/2'
+	| '5/4'
+	| '5/8'
+	| '5/16'
+	| '5/32'
+	| '5/64'
+	| '6/2'
+	| '6/4'
+	| '6/8'
+	| '6/16'
+	| '6/32'
+	| '6/64'
+	| '7/2'
+	| '7/4'
+	| '7/8'
+	| '7/16'
+	| '7/32'
+	| '7/64'
+	| '8/2'
+	| '8/4'
+	| '8/8'
+	| '8/16'
+	| '8/32'
+	| '8/64'
+	| '9/2'
+	| '9/4'
+	| '9/8'
+	| '9/16'
+	| '9/32'
+	| '9/64'
+	| '12/2'
+	| '12/4'
+	| '12/8'
+	| '12/16'
+	| '12/32'
+	| '12/64'
+	| '16/2'
+	| '16/4'
+	| '16/8'
+	| '16/16'
+	| '16/32'
+	| '16/64';
 
 export interface MusicChord {
 	id: number;
@@ -117,8 +189,9 @@ export interface MusicChord {
 export interface HarmonyData {
 	id: number;
 	tempo: number;
-	timeSignature: string;
-	keySignature: string;
+	rootNote: Note;
+	timeSignature: TimeSignature;
+	scaleType: ScaleType;
 	chords: MusicChord[];
 }
 
