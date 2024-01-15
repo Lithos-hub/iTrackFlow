@@ -1,5 +1,5 @@
 <template>
-	<nav class="w-full backdrop-blur-lg bg-transparent shadow">
+	<nav class="w-full backdrop-blur-lg bg-transparent shadow z-50">
 		<div class="flex justify-between p-2 px-5">
 			<RouterLink to="/">
 				<h4 class="gradient__text--primary font-bold">iTrackFlow</h4>

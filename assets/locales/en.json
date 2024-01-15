@@ -37,6 +37,8 @@
 			"create": "Create a new project",
 			"name": "Project name",
 			"add_track": "Add track",
+			"add_project": "Add project",
+			"delete_project": "Delete project",
 			"harmony": "Harmony",
 			"production": "Production",
 			"project_name": "Project name",

@@ -1,5 +1,5 @@
 <template>
-	<section class="h-full w-full bg-white dark:bg-dark">
+	<section class="h-full w-full">
 		<div class="default_margin">
 			<div class="flex justify-between">
 				<BaseButton
@@ -24,7 +24,7 @@
 					<BaseInput v-model="projectYear" label="Year" color="primary" />
 				</div>
 
-				<table :key="tableKey">
+				<table :key="tableKey" class="bg-white dark:bg-dark">
 					<thead>
 						<tr>
 							<th>{{ $t('app.projects.track_name') }}</th>

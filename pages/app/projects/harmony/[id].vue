@@ -1,5 +1,5 @@
 <template>
-	<section class="h-full w-full bg-white dark:bg-dark">
+	<section class="h-full w-full">
 		<div class="default_margin">
 			<div class="flex justify-between">
 				<BaseButton
@@ -14,7 +14,6 @@
 			</div>
 
 			<div class="grid grid-cols-5 w-full gap-5">
-				<BaseInput v-model="projectName" label="Project name" color="primary" />
 				<BaseInput v-model="projectTempo" label="Tempo" color="primary" />
 				<BaseInput v-model="projectTimeSignature" label="Time Signature" color="primary" />
 				<BaseInput v-model="projectKeySignature" label="Key Signature" color="primary" />
@@ -105,7 +104,6 @@ const staffs = computed(() => {
 	];
 });
 
-const projectName = ref('Project name');
 const projectTempo = ref(harmonyData.tempo);
 const projectKeySignature = ref(harmonyData.keySignature);
 const projectTimeSignature = ref(harmonyData.timeSignature);

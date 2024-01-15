@@ -39,6 +39,8 @@
 			"harmony": "Armonía",
 			"production": "Producción",
 			"add_track": "Añadir pista",
+			"add_project": "Añadir proyecto",
+			"delete_project": "Eliminar proyecto",
 			"project_name": "Nombre del proyecto",
 			"project_name_placeholder": "Introduce el nombre del proyecto",
 			"project_description": "Descripción del proyecto",
