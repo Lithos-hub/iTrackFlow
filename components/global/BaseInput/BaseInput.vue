@@ -1,7 +1,18 @@
 <template>
 	<div class="flex flex-col w-full">
 		<label v-if="label" class="m-2 font-medium">{{ label }}</label>
-		<input v-bind="$attrs" v-model="model" :class="`input input__${variant} border-${color}`" />
+		<input
+			v-if="!debounced"
+			v-bind="$attrs"
+			v-model="model"
+			:class="`input input__${variant} border-${color}`" />
+		<input
+			v-else
+			v-bind="$attrs"
+			:class="`input input__${variant} border-${color}`"
+			:value="model"
+			@input="onDebouncedInput" />
+
 		<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
 	</div>
 </template>
@@ -9,12 +20,16 @@
 <script setup lang="ts">
 import { Input } from './BaseInput.interfaces';
 
-withDefaults(defineProps<Input>(), {
+const { debounced } = withDefaults(defineProps<Input>(), {
 	modelValue: '',
-	variant: 'default',
+	variant: 'rounded',
 });
-
+const emit = defineEmits(['update:modelValue']);
 const model = defineModel();
+
+const onDebouncedInput = debounce((event: Event) => {
+	emit('update:modelValue', (event.target as HTMLInputElement).value);
+}, 1000);
 </script>
 
 <style lang="scss" scoped>
@@ -30,7 +45,7 @@ const model = defineModel();
 	}
 
 	&__bordered {
-		@apply text-black dark:text-white border-2 border-gray-300 dark:border-gray-700;
+		@apply text-black dark:text-white border-2;
 	}
 
 	&__rounded {

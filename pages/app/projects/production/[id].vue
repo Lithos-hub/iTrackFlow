@@ -16,7 +16,13 @@
 				</BaseButton>
 			</div>
 			<div class="flex flex-col gap-5">
-				<AppProjectHeader :project-id="projectId" />
+				<div class="grid grid-cols-5 w-full gap-5">
+					<BaseInput v-model="projectName" label="Project name" color="primary" />
+					<BaseInput v-model="projectComposer" label="Composer" color="primary" />
+					<BaseInput v-model="projectArranger" label="Arranger" color="primary" />
+					<BaseInput v-model="projectGenre" label="Genre" color="primary" />
+					<BaseInput v-model="projectYear" label="Year" color="primary" />
+				</div>
 
 				<table :key="tableKey">
 					<thead>
@@ -126,7 +132,12 @@ const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore()
 const { setAudioSrc, play, pause } = useAudioPlayerStore();
 const { isPlaying } = storeToRefs(useAudioPlayerStore());
 
-const projectId = ref(1);
+const projectName = ref("Project's name");
+const projectComposer = ref("Project's composer");
+const projectArranger = ref("Project's arranger");
+const projectGenre = ref("Project's genre");
+const projectYear = ref("Project's year");
+
 const tableKey = ref(0);
 const trackList = ref([
 	{

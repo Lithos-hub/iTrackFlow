@@ -35,7 +35,7 @@
 		"projects": {
 			"title": "My Projects",
 			"create": "Create a new project",
-			"name": "Project name: ",
+			"name": "Project name",
 			"add_track": "Add track",
 			"harmony": "Harmony",
 			"production": "Production",

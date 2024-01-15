@@ -13,20 +13,24 @@
 				</BaseButton>
 			</div>
 
-			<div class="flex justify-between items-start gap-5">
-				<AppProjectHeader :project-id="projectId" />
-				<div class="flex gap-5">
-					<BaseInput v-model="projectTempo" label="Tempo" color="primary" />
-					<BaseInput v-model="projectTimeSignature" label="Time Signature" color="primary" />
-					<BaseInput v-model="projectKeySignature" label="Key Signature" color="primary" />
-				</div>
+			<div class="grid grid-cols-5 w-full gap-5">
+				<BaseInput v-model="projectName" label="Project name" color="primary" />
+				<BaseInput v-model="projectTempo" label="Tempo" color="primary" />
+				<BaseInput v-model="projectTimeSignature" label="Time Signature" color="primary" />
+				<BaseInput v-model="projectKeySignature" label="Key Signature" color="primary" />
+				<BaseInput
+					v-model="numberOfBars"
+					debounced
+					type="number"
+					label="Number of bars"
+					color="primary" />
 			</div>
 
 			<!-- Harmony sheet -->
 			<section class="bg-white p-5 mt-5 shadow">
 				<div class="border grid grid-cols-12 mt-5">
 					<AppMusicStaff
-						v-for="(chord, index) in harmonyData.chords"
+						v-for="(chord, index) of staffs"
 						:key="index"
 						:index="index + 1"
 						v-bind="chord"
@@ -39,8 +43,6 @@
 
 <script setup lang="ts">
 import { HarmonyData } from '@/components/app/MusicStaff/MusicStaff.interfaces';
-
-const projectId = ref(1);
 
 const getProject = async () => {
 	const { data } = await useFetch('/api/projects', {
@@ -89,6 +91,21 @@ const harmonyData: HarmonyData = {
 	],
 };
 
+const numberOfBars = ref(20);
+
+const staffs = computed(() => {
+	return [
+		...harmonyData.chords,
+		...new Array(numberOfBars.value - harmonyData.chords.length).fill({
+			id: new Date().getTime(),
+			chordName: '',
+			chordType: '',
+			chordFigure: '',
+		}),
+	];
+});
+
+const projectName = ref('Project name');
 const projectTempo = ref(harmonyData.tempo);
 const projectKeySignature = ref(harmonyData.keySignature);
 const projectTimeSignature = ref(harmonyData.timeSignature);

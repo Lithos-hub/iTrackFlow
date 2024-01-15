@@ -10,4 +10,5 @@ export interface Input {
 	errorMessage?: string;
 	variant?: Variant;
 	color?: string;
+	debounced?: boolean;
 }
