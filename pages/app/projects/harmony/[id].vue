@@ -5,9 +5,28 @@
 		</header>
 
 		<div class="flex flex-1 flex-grow">
-			<AppSideMenu :key="sideMenuKey">
+			<AppSideMenu :key="sideMenuKey" class="w-[450px] flex flex-col gap-5">
 				<strong class="text-primary">Bar options</strong>
-				<BaseDropdown v-model="selectedChord" label="Chord" :data="chordsList" />
+				<BaseDropdown
+					v-model="selectedChord"
+					label="Select chord by key Signature"
+					:data="chordListByKeySignature"
+					no-cleanable />
+				<hr />
+				<strong>Select other chord</strong>
+				<div class="flex gap-5">
+					<BaseDropdown
+						v-model="selectedOtherChordRoot"
+						label="Root note"
+						:data="NotesList"
+						no-cleanable />
+					<BaseDropdown
+						v-model="selectedOtherChordType"
+						label="Chord type"
+						:data="ChordTypesList"
+						no-cleanable />
+					<BaseButton icon="add" color="success" @click="addOtherChord" />
+				</div>
 			</AppSideMenu>
 
 			<section class="h-full w-full">
@@ -30,12 +49,19 @@
 							v-model="timeSignature"
 							label="Time Signature"
 							color="primary"
+							no-cleanable
 							:data="TimeSignaturesList" />
-						<BaseDropdown v-model="rootNote" label="Root note" color="primary" :data="NotesList" />
+						<BaseDropdown
+							v-model="rootNote"
+							label="Root note"
+							color="primary"
+							no-cleanable
+							:data="NotesList" />
 						<BaseDropdown
 							v-model="scaleType"
 							label="Scale type"
 							color="primary"
+							no-cleanable
 							:data="scalesTypesFormatted" />
 						<BaseInput
 							v-model="numberOfBars"
@@ -67,7 +93,7 @@
 <script setup lang="ts">
 import { HarmonyData, MusicChord } from '@/components/app/MusicStaff/MusicStaff.interfaces';
 import { DropdownItem } from '@/components/global/BaseDropdown/BaseDropdown.interfaces';
-import { NotesList, TimeSignaturesList, ScaleTypesList } from '@/assets/data';
+import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
 
 definePageMeta({
 	layout: 'harmony',
@@ -108,7 +134,7 @@ const harmonyData = ref<HarmonyData>({
 	],
 });
 
-const chordsList = computed(
+const chordListByKeySignature = computed(
 	() =>
 		getAvailableChords({
 			rootNote: harmonyData.value.rootNote,
@@ -120,13 +146,19 @@ const chordsList = computed(
 );
 
 const sideMenuKey = ref(0);
+
+// Header
 const tempo = ref(harmonyData.value.tempo);
 const rootNote = ref(harmonyData.value.rootNote);
 const scaleType = ref([harmonyData.value.scaleType]);
 const timeSignature = ref([harmonyData.value.timeSignature]);
 const numberOfBars = ref(20);
 const selectedBar = ref(0);
+
+// Sidemenu
 const selectedChord = ref<string[]>([]);
+const selectedOtherChordRoot = ref<string[]>([]);
+const selectedOtherChordType = ref<string[]>([]);
 
 const scalesTypesFormatted = computed(() => {
 	return ScaleTypesList.map(({ label, value }) => ({
@@ -159,6 +191,18 @@ const selectChord = (chord: string) => {
 		id: new Date().getTime(),
 		chord: chordName,
 		romanNumber: romanNumber.replace('(', '').replace(')', ''),
+	};
+
+	harmonyData.value.chords = newStaffs;
+	sideMenuKey.value++;
+};
+
+const addOtherChord = () => {
+	const newStaffs = [...staffs.value];
+	newStaffs[selectedBar.value] = {
+		id: new Date().getTime(),
+		chord: `${selectedOtherChordRoot.value[0]}${selectedOtherChordType.value[0]}`,
+		romanNumber: '',
 	};
 
 	harmonyData.value.chords = newStaffs;

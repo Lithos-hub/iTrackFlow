@@ -11,4 +11,5 @@ export interface BaseDropdown {
 	data: DropdownItem[];
 	multiselect?: boolean;
 	color?: string;
+	noCleanable?: boolean;
 }

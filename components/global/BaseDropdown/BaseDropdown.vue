@@ -29,7 +29,7 @@
 					<div class="flex gap-1 absolute right-0 px-2 top-1/2 -translate-y-1/2">
 						<!-- Remove -->
 						<BaseIcon
-							v-if="modelValue.length && !multiselect"
+							v-if="modelValue.length && !multiselect && !noCleanable"
 							icon="close"
 							color="gray"
 							class="icon"
