@@ -419,7 +419,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: '3',
 			5: '5',
 		},
-		roman_numeral: 'I',
+		romanNumber: 'I',
 	},
 	2: {
 		type: 'm',
@@ -427,7 +427,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: '5',
 		},
-		roman_numeral: 'ii',
+		romanNumber: 'ii',
 	},
 	4: {
 		type: 'm',
@@ -435,7 +435,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: '5',
 		},
-		roman_numeral: 'iii',
+		romanNumber: 'iii',
 	},
 	5: {
 		type: '',
@@ -443,7 +443,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: '3',
 			5: '5',
 		},
-		roman_numeral: 'IV',
+		romanNumber: 'IV',
 	},
 	7: {
 		type: '',
@@ -451,7 +451,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: '3',
 			5: '5',
 		},
-		roman_numeral: 'V',
+		romanNumber: 'V',
 	},
 	9: {
 		type: 'm',
@@ -459,7 +459,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: '5',
 		},
-		roman_numeral: 'vi',
+		romanNumber: 'vi',
 	},
 	11: {
 		type: 'dim',
@@ -467,7 +467,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: 'b5',
 		},
-		roman_numeral: 'vii',
+		romanNumber: 'vii',
 	},
 };
 
@@ -478,7 +478,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: '5',
 		},
-		roman_numeral: 'i',
+		romanNumber: 'i',
 	},
 	2: {
 		type: 'dim',
@@ -486,7 +486,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: 'b5',
 		},
-		roman_numeral: 'ii',
+		romanNumber: 'ii',
 	},
 	3: {
 		type: '',
@@ -494,7 +494,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: '3',
 			5: '5',
 		},
-		roman_numeral: 'III',
+		romanNumber: 'III',
 	},
 	5: {
 		type: 'm',
@@ -502,7 +502,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: '5',
 		},
-		roman_numeral: 'iv',
+		romanNumber: 'iv',
 	},
 	7: {
 		type: 'm',
@@ -510,7 +510,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: 'b3',
 			5: '5',
 		},
-		roman_numeral: 'v',
+		romanNumber: 'v',
 	},
 	8: {
 		type: '',
@@ -518,7 +518,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: '3',
 			5: '5',
 		},
-		roman_numeral: 'VI',
+		romanNumber: 'VI',
 	},
 	10: {
 		type: '',
@@ -526,7 +526,7 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			3: '3',
 			5: '5',
 		},
-		roman_numeral: 'VII',
+		romanNumber: 'VII',
 	},
 };
 
@@ -538,7 +538,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: '7',
 		},
-		roman_numeral: 'I',
+		romanNumber: 'I',
 	},
 	2: {
 		type: 'm',
@@ -547,7 +547,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: 'b7',
 		},
-		roman_numeral: 'ii',
+		romanNumber: 'ii',
 	},
 	4: {
 		type: 'm',
@@ -556,7 +556,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: 'b7',
 		},
-		roman_numeral: 'iii',
+		romanNumber: 'iii',
 	},
 	5: {
 		type: '',
@@ -565,7 +565,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: '7',
 		},
-		roman_numeral: 'IV',
+		romanNumber: 'IV',
 	},
 	7: {
 		type: '',
@@ -574,7 +574,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: '7',
 		},
-		roman_numeral: 'V',
+		romanNumber: 'V',
 	},
 	9: {
 		type: 'm',
@@ -583,7 +583,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: 'b7',
 		},
-		roman_numeral: 'vi',
+		romanNumber: 'vi',
 	},
 	11: {
 		type: 'dim',
@@ -592,7 +592,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: 'b5',
 			7: 'bb7',
 		},
-		roman_numeral: 'vii',
+		romanNumber: 'vii',
 	},
 };
 
@@ -604,7 +604,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: 'b7',
 		},
-		roman_numeral: 'i',
+		romanNumber: 'i',
 	},
 	2: {
 		type: 'dim',
@@ -613,7 +613,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: 'b5',
 			7: 'bb7',
 		},
-		roman_numeral: 'ii',
+		romanNumber: 'ii',
 	},
 	3: {
 		type: '',
@@ -622,7 +622,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: '7',
 		},
-		roman_numeral: 'III',
+		romanNumber: 'III',
 	},
 	5: {
 		type: 'm',
@@ -631,7 +631,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: 'b7',
 		},
-		roman_numeral: 'iv',
+		romanNumber: 'iv',
 	},
 	7: {
 		type: 'm',
@@ -640,7 +640,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: 'b7',
 		},
-		roman_numeral: 'v',
+		romanNumber: 'v',
 	},
 	8: {
 		type: '',
@@ -649,7 +649,7 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: '7',
 		},
-		roman_numeral: 'VI',
+		romanNumber: 'VI',
 	},
 	10: {
 		type: '',
@@ -658,6 +658,6 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 			7: '7',
 		},
-		roman_numeral: 'VII',
+		romanNumber: 'VII',
 	},
 };

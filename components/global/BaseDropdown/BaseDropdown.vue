@@ -102,7 +102,9 @@ const isSelecting: Ref<boolean> = ref(false);
 const selectedItems = computed(() =>
 	props.data.filter(({ value }) => model.value?.includes(value)),
 );
-const selectedItem = computed(() => props.data.find(({ value }) => model.value?.at(0) === value));
+const selectedItem = computed(() =>
+	props.data.find(({ value }) => model.value && model.value[0] === value),
+);
 
 const addOrRemoveItem = (itemValue: unknown) => {
 	model.value = model.value?.includes(itemValue)

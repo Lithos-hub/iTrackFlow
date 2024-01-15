@@ -37,71 +37,62 @@ type ChordFigure =
 	| 'vi'
 	| 'vii';
 
-type ChordExtended =
-	| '2'
-	| '4'
-	| '6'
+type ChordType =
+	| ''
+	| 'm'
+	| 'dim'
+	| 'aug'
 	| '7'
-	| '9'
-	| '11'
-	| '13'
-	| 'sus2'
-	| 'sus4'
-	| 'b5'
-	| '#5'
-	| 'b9'
-	| '#9'
-	| 'b13'
-	| '#13'
-	| 'M7'
 	| 'm7'
-	| 'mM7'
 	| 'dim7'
 	| 'm7b5'
 	| 'aug7'
-	| 'augM7'
-	| 'add9'
-	| 'add11';
+	| 'aug7'
+	| 'sus2'
+	| 'sus4'
+	| 'power'
+	| '7'
+	| '7b5'
+	| '7#5'
+	| '7b9'
+	| '7#9'
+	| '7b5b9'
+	| '7#5#9'
+	| '6'
+	| 'm6'
+	| '9'
+	| '9b5'
+	| '9#5'
+	| '9b5b9'
+	| '9#5#9'
+	| '9'
+	| 'm9'
+	| '11'
+	| '11b5'
+	| '13'
+	| '13b5'
+	| '13'
+	| 'm13';
 
-type ChordType =
+export type ScaleType =
 	| 'major'
 	| 'minor'
-	| 'diminished'
-	| 'augmented'
-	| 'dominant'
-	| 'major7'
-	| 'minor7'
-	| 'diminished7'
-	| 'halfDiminished7'
-	| 'augmented7'
-	| 'augmentedMajor7'
-	| 'suspended2'
-	| 'suspended4'
-	| 'power'
-	| 'dominant7'
-	| 'dominant7Flat5'
-	| 'dominant7Sharp5'
-	| 'dominant7Flat9'
-	| 'dominant7Sharp9'
-	| 'dominant7Flat5Flat9'
-	| 'dominant7Sharp5Sharp9'
-	| 'major6'
-	| 'minor6'
-	| 'dominant9'
-	| 'dominant9Flat5'
-	| 'dominant9Sharp5'
-	| 'dominant9Flat5Flat9'
-	| 'dominant9Sharp5Sharp9'
-	| 'major9'
-	| 'minor9'
-	| 'dominant11'
-	| 'dominant11Flat5'
-	| 'dominant13'
-	| 'dominant13Flat5'
-	| 'major13'
-	| 'minor13';
+	| 'harmonic_minor'
+	| 'melodic_minor'
+	| 'pentatonic_major'
+	| 'pentatonic_minor'
+	| 'blues_major'
+	| 'blues_minor'
+	| 'chromatic'
+	| 'ionian'
+	| 'dorian'
+	| 'phrygian'
+	| 'lydian'
+	| 'mixolydian'
+	| 'aeolian'
+	| 'locrian';
 
-type ChordName = `${ChordFigure}${ChordExtended | ''}` | `${ChordFigure}${ChordType | ''}`;
+type ChordName = `${ChordRoot}${ChordType}`;
 
 export type KeySignature =
 	| 'C'
@@ -119,9 +110,8 @@ export type KeySignature =
 
 export interface MusicChord {
 	id: number;
-	chordName: ChordRoot;
-	chordType: ChordType;
-	chordFigure: ChordName;
+	chord: ChordName;
+	romanNumber: ChordFigure;
 }
 
 export interface HarmonyData {
@@ -135,10 +125,11 @@ export interface HarmonyData {
 export interface MusicStaffProps extends MusicChord {
 	keySignature: string;
 	index: number;
+	isActive: boolean;
 }
 
 export interface ChordTypeData {
 	type: string;
 	formula: Record<number, string>;
-	roman_numeral: ChordFigure;
+	romanNumber: ChordFigure;
 }

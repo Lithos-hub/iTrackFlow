@@ -4,6 +4,8 @@
 			<BaseNavbar />
 		</header>
 
+		<AppSideMenu />
+
 		<div class="flex flex-1 flex-grow">
 			<div class="p-10 w-full">
 				<div
@@ -25,6 +27,6 @@ const { activeSession } = storeToRefs(useUserStore());
 
 <script lang="ts">
 export default {
-	name: 'Default',
+	name: 'Sidemenu',
 };
 </script>
