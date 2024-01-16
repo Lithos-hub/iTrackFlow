@@ -1,20 +1,20 @@
 <template>
 	<div class="flex flex-col h-screen w-full">
-		<header class="sticky top-0 left-0">
+		<header class="sticky top-0 left-0 z-50">
 			<BaseNavbar />
 		</header>
 
 		<div class="flex flex-1 flex-grow">
-			<AppSideMenu :key="sideMenuKey" class="w-[450px] flex flex-col gap-5">
-				<strong class="text-primary">Bar options</strong>
+			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
+				<strong class="text-primary">Bar #{{ selectedBar + 1 }} options</strong>
 				<BaseDropdown
 					v-model="selectedChord"
-					label="Select chord by key Signature"
+					:label="`Select chord for key signature: ${harmonyData.rootNote} ${harmonyData.scaleType}`"
 					:data="chordListByKeySignature"
 					no-cleanable />
 				<hr />
 				<strong>Select other chord</strong>
-				<div class="flex gap-5">
+				<div class="flex gap-5 items-end">
 					<BaseDropdown
 						v-model="selectedOtherChordRoot"
 						label="Root note"

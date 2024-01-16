@@ -12,7 +12,7 @@
 					{{ $t('app.ui.go_back') }}
 				</BaseButton>
 				<BaseButton color="success" icon="add" icon-right class="my-5" @click="addTrack">
-					{{ $t('app.projects.add_track') }}
+					{{ $t('app.production.add_track') }}
 				</BaseButton>
 			</div>
 			<div class="flex flex-col gap-5">
@@ -27,13 +27,13 @@
 				<table :key="tableKey" class="bg-white dark:bg-dark">
 					<thead>
 						<tr>
-							<th>{{ $t('app.projects.track_name') }}</th>
-							<th>{{ $t('app.projects.composition') }}</th>
-							<th>{{ $t('app.projects.recording') }}</th>
-							<th>{{ $t('app.projects.mixing') }}</th>
-							<th>{{ $t('app.projects.mastering') }}</th>
-							<th>{{ $t('app.projects.audio') }}</th>
-							<th>{{ $t('app.projects.delete') }}</th>
+							<th>{{ $t('app.production.track_name') }}</th>
+							<th>{{ $t('app.production.composition') }}</th>
+							<th>{{ $t('app.production.recording') }}</th>
+							<th>{{ $t('app.production.mixing') }}</th>
+							<th>{{ $t('app.production.mastering') }}</th>
+							<th>{{ $t('app.production.audio') }}</th>
+							<th>{{ $t('app.production.delete') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,7 +44,7 @@
 								<BaseInput
 									v-model="trackList[i].trackName"
 									:placeholder="
-										trackList[i].trackName ? '' : $t('app.projects.track_name_placeholder')
+										trackList[i].trackName ? '' : $t('app.production.track_name_placeholder')
 									"
 									variant="underline"
 									color="primary" />
@@ -97,7 +97,7 @@
 									"
 									:color="lightMode ? 'black' : 'white'" />
 								<div v-else class="text-red-400 font-bold">
-									{{ $t('app.projects.no_audio') }}
+									{{ $t('app.production.no_audio') }}
 								</div>
 							</td>
 							<td>

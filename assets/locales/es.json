@@ -32,6 +32,36 @@
 			"add_comment": "Añadir comentario",
 			"add_audio": "Añadir audio"
 		},
+		"audio_player": {
+			"play": "Reproducir",
+			"pause": "Pausar",
+			"stop": "Detener",
+			"loop": "Repetir",
+			"mute": "Silenciar",
+			"unmute": "Activar sonido",
+			"volume": "Volumen",
+			"speed": "Velocidad",
+			"playing": "Reproduciendo",
+			"no_audio_selected": "No hay pista de audio seleccionada"
+		},
+		"projects": {
+			"title": "Mis proyectos",
+			"create": "Crear nuevo proyecto",
+			"name": "Nombre del proyecto",
+			"harmony": "Armonía",
+			"production": "Producción",
+			"add_project": "Añadir proyecto",
+			"project_name": "Nombre del proyecto",
+			"project_name_placeholder": "Introduce el nombre del proyecto",
+			"project_description": "Descripción del proyecto",
+			"project_description_placeholder": "Introduce la descripción del proyecto",
+			"project_category": "Categoría del proyecto",
+			"project_category_placeholder": "Introduce la categoría del proyecto",
+			"project_team_members": "Miembros del equipo",
+			"project_team_members_placeholder": "Introduce los miembros del equipo",
+			"project_image": "Imagen del proyecto",
+			"project_create_submit": "Crear proyecto"
+		},
 		"harmony": {
 			"major": "Mayor",
 			"minor": "Menor",
@@ -50,27 +80,16 @@
 			"lydian": "Lidio",
 			"mixolydian": "Mixolidio",
 			"aeolian": "Eólico",
-			"locrian": "Locrio"
+			"locrian": "Locrio",
+			"tempo": "Tempo",
+			"time_signature": "Compás",
+			"root_note": "Tónica",
+			"scale_type": "Modo de escala",
+			"number_of_bars": "Número de compases"
 		},
-		"projects": {
-			"title": "Mis proyectos",
-			"create": "Crear nuevo proyecto",
-			"name": "Nombre del proyecto",
-			"harmony": "Armonía",
-			"production": "Producción",
+		"production": {
 			"add_track": "Añadir pista",
-			"add_project": "Añadir proyecto",
 			"delete_project": "Eliminar proyecto",
-			"project_name": "Nombre del proyecto",
-			"project_name_placeholder": "Introduce el nombre del proyecto",
-			"project_description": "Descripción del proyecto",
-			"project_description_placeholder": "Introduce la descripción del proyecto",
-			"project_category": "Categoría del proyecto",
-			"project_category_placeholder": "Introduce la categoría del proyecto",
-			"project_team_members": "Miembros del equipo",
-			"project_team_members_placeholder": "Introduce los miembros del equipo",
-			"project_image": "Imagen del proyecto",
-			"project_create_submit": "Crear proyecto",
 			"track_name": "Nombre de la pista",
 			"track_name_placeholder": "Introduce el nombre de la pista",
 			"composition": "Composición",
@@ -79,9 +98,7 @@
 			"mastering": "Masterización",
 			"delete": "Eliminar",
 			"audio": "Escuchar pista",
-			"no_audio": "No hay pista de audio",
-			"playing": "Reproduciendo",
-			"no_audio_selected": "No hay pista de audio seleccionada"
+			"no_audio": "No hay pista de audio"
 		}
 	}
 }
