@@ -44,22 +44,22 @@
 					</div>
 
 					<div class="grid grid-cols-5 w-full gap-5">
-						<BaseInput v-model="tempo" label="Tempo" color="primary" />
+						<BaseInput v-model="tempo" :label="$t('app.harmony.tempo')" color="primary" />
 						<BaseDropdown
 							v-model="timeSignature"
-							label="Time Signature"
+							:label="$t('app.harmony.time_signature')"
 							color="primary"
 							no-cleanable
 							:data="TimeSignaturesList" />
 						<BaseDropdown
 							v-model="rootNote"
-							label="Root note"
+							:label="$t('app.harmony.root_note')"
 							color="primary"
 							no-cleanable
 							:data="NotesList" />
 						<BaseDropdown
 							v-model="scaleType"
-							label="Scale type"
+							:label="$t('app.harmony.scale_type')"
 							color="primary"
 							no-cleanable
 							:data="scalesTypesFormatted" />
@@ -67,7 +67,7 @@
 							v-model="numberOfBars"
 							debounced
 							type="number"
-							label="Number of bars"
+							:label="$t('app.harmony.number_of_bars')"
 							color="primary" />
 					</div>
 

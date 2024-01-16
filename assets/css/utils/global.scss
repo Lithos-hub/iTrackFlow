@@ -88,3 +88,18 @@ label {
 			right top 15px;
 	}
 }
+
+.selected__pulse {
+	animation: pulse 0.5s infinite alternate-reverse;
+}
+
+@keyframes pulse {
+	0% {
+		@apply bg-primary/80;
+		box-shadow: inset 0 0 0 0rem rgba(0, 0, 0.1);
+	}
+	100% {
+		@apply bg-primary/50;
+		box-shadow: inset 0 0 0 0.1rem rgba(0, 0, 0, 0.2);
+	}
+}
