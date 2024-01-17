@@ -1,6 +1,6 @@
 <template>
 	<section class="h-full w-full">
-		<div class="default_margin">
+		<div class="app_margin">
 			<div class="flex justify-between">
 				<BaseButton
 					variant="stealth"

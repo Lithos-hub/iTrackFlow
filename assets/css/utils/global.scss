@@ -40,6 +40,10 @@ hr {
 	@apply mx-[10vw];
 }
 
+.app_margin {
+	@apply mx-10;
+}
+
 // Transitions
 .fade-enter-active,
 .fade-leave-active {

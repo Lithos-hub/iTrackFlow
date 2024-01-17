@@ -5,7 +5,7 @@
 		</header>
 
 		<div class="flex flex-1">
-			<div class="container">
+			<div class="default_margin">
 				<slot />
 			</div>
 		</div>

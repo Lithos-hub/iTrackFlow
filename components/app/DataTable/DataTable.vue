@@ -20,7 +20,8 @@
 								:color="color"
 								@click="onClick((data as Project).id)" />
 						</div>
-						<slot :name="`table:${key}`" v-bind="data" />
+						<slot v-else-if="$slots[`table:${key}`]" :name="`table:${key}`" v-bind="data" />
+						<span v-else>{{ data[key] }}</span>
 					</td>
 				</tr>
 			</tbody>
@@ -75,7 +76,7 @@ table {
 				&:first-child {
 					@apply font-bold text-primary;
 				}
-				@apply p-5 border border-primary/10 text-center [&:not(:first-child)]:hover:bg-dark/10 [&:not(:first-child)]:hover:dark:bg-primary/20 cursor-pointer;
+				@apply p-1 border border-primary/10 text-center [&:not(:first-child)]:hover:bg-dark/10 [&:not(:first-child)]:hover:dark:bg-primary/20 cursor-pointer;
 			}
 		}
 	}

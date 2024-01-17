@@ -32,6 +32,16 @@
 			"add_comment": "Añadir comentario",
 			"add_audio": "Añadir audio"
 		},
+		"dataTable": {
+			"name": "Nombre del proyecto",
+			"category": "Categoría",
+			"image": "Portada del proyecto",
+			"actions": "Acciones",
+			"harmony": "Armonía",
+			"production": "Producción",
+			"year": "Año",
+			"description": "Descripción"
+		},
 		"audio_player": {
 			"play": "Reproducir",
 			"pause": "Pausar",
@@ -47,13 +57,9 @@
 		"projects": {
 			"title": "Mis proyectos",
 			"create": "Crear nuevo proyecto",
-			"name": "Nombre del proyecto",
-			"category": "Categoría",
-			"image": "Portada del proyecto",
-			"actions": "Acciones",
+			"add_project": "Añadir proyecto",
 			"harmony": "Armonía",
 			"production": "Producción",
-			"add_project": "Añadir proyecto",
 			"project_name": "Nombre del proyecto",
 			"project_name_placeholder": "Introduce el nombre del proyecto",
 			"project_description": "Descripción del proyecto",

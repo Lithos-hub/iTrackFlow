@@ -7,6 +7,7 @@ export interface Project {
 	updated_at?: string;
 	image?: string;
 	category: 'harmony' | 'production';
+	year?: number;
 }
 
 export interface ProjectRow {
