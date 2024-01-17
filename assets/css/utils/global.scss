@@ -15,6 +15,10 @@ label {
 	@apply dark:text-slate-200 text-dark;
 }
 
+hr {
+	@apply border-primary/20;
+}
+
 // Scrollbar
 ::-webkit-scrollbar {
 	width: 0.25rem;

@@ -95,6 +95,7 @@ const model = defineModel({
 	type: Array as PropType<unknown[]>,
 });
 
+const emit = defineEmits(['input', 'change']);
 const dropdown = ref();
 
 const isSelecting: Ref<boolean> = ref(false);
@@ -128,6 +129,14 @@ const toggleSelecting = () => {
 const removeItem = () => {
 	model.value = [];
 };
+
+watch(
+	() => model.value,
+	(value) => {
+		emit('input', value);
+		emit('change', value);
+	},
+);
 </script>
 
 <style lang="scss" scoped>

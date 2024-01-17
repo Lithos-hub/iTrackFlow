@@ -1,4 +1,4 @@
-import { Project } from '~/components/app/ProjectCard/ProjectCard.interfaces';
+import { Project } from '~/components/app/ProjectRow/ProjectRow.interfaces';
 
 export const useProjectStore = defineStore('project', () => {
 	const projects = ref<Project[]>([]);

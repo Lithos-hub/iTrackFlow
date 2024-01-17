@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes } from 'vue';
 
 import { Size, Color, Radius, Variant } from '@/enums';
 
-type ColorType = `${Color}`;
+export type ColorType = `${Color}`;
 type SizeType = `${Size}`;
 type RadiusType = `${Radius}`;
 type VariantType = `${Variant}`;

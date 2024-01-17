@@ -24,12 +24,20 @@ const { debounced } = withDefaults(defineProps<Input>(), {
 	modelValue: '',
 	variant: 'rounded',
 });
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'input', 'change']);
 const model = defineModel();
 
 const onDebouncedInput = debounce((event: Event) => {
 	emit('update:modelValue', (event.target as HTMLInputElement).value);
 }, 1000);
+
+watch(
+	() => model.value,
+	(value) => {
+		emit('input', value);
+		emit('change', value);
+	},
+);
 </script>
 
 <style lang="scss" scoped>

@@ -5,9 +5,10 @@ export interface Project {
 	owner?: string;
 	created_at?: string;
 	updated_at?: string;
+	image?: string;
 	category: 'harmony' | 'production';
 }
 
-export interface ProjectCard {
+export interface ProjectRow {
 	project?: Project;
 }

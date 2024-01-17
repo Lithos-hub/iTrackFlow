@@ -27,6 +27,15 @@
 						no-cleanable />
 					<BaseButton icon="add" color="success" @click="addOtherChord" />
 				</div>
+				<hr />
+				<strong>Split</strong>
+				<div class="flex gap-5 items-end">
+					<BaseDropdown
+						v-model="selectedSplitOption"
+						label="Number of splits"
+						:data="splitOptions"
+						@input="splitBar" />
+				</div>
 			</AppSideMenu>
 
 			<section class="h-full w-full">
@@ -117,19 +126,22 @@ const harmonyData = ref<HarmonyData>({
 	scaleType: 'minor',
 	chords: [
 		{
-			id: 1,
+			id: new Date().getTime(),
 			chord: 'Cm',
 			romanNumber: 'i',
+			splits: 1,
 		},
 		{
-			id: 2,
+			id: new Date().getTime(),
 			chord: 'Gm',
 			romanNumber: 'v',
+			splits: 1,
 		},
 		{
-			id: 3,
+			id: new Date().getTime(),
 			chord: 'Eb',
 			romanNumber: 'III',
+			splits: 1,
 		},
 	],
 });
@@ -159,6 +171,7 @@ const selectedBar = ref(0);
 const selectedChord = ref<string[]>([]);
 const selectedOtherChordRoot = ref<string[]>([]);
 const selectedOtherChordType = ref<string[]>([]);
+const selectedSplitOption = ref<number[]>([]);
 
 const scalesTypesFormatted = computed(() => {
 	return ScaleTypesList.map(({ label, value }) => ({
@@ -178,6 +191,14 @@ const staffs = computed(() => {
 	];
 });
 
+const splitOptions = computed(() => {
+	const numberOfSplits = timeSignature.value.at(0)?.charAt(0);
+	return new Array(Number(numberOfSplits)).fill(0).map((_, index) => ({
+		label: `${index + 1}`,
+		value: index + 1,
+	}));
+});
+
 const selectBar = ({ chord, romanNumber }: MusicChord, index) => {
 	selectedBar.value = index;
 	selectedChord.value = [`${chord} - (${romanNumber})`];
@@ -188,6 +209,7 @@ const selectChord = (chord: string) => {
 	const [chordName, romanNumber] = chord.split(' - ');
 	const newStaffs = [...staffs.value];
 	newStaffs[selectedBar.value] = {
+		...newStaffs[selectedBar.value],
 		id: new Date().getTime(),
 		chord: chordName,
 		romanNumber: romanNumber.replace('(', '').replace(')', ''),
@@ -205,6 +227,16 @@ const addOtherChord = () => {
 		romanNumber: '',
 	};
 
+	harmonyData.value.chords = newStaffs;
+	sideMenuKey.value++;
+};
+
+const splitBar = () => {
+	const newStaffs = [...staffs.value];
+	newStaffs[selectedBar.value] = {
+		...newStaffs[selectedBar.value],
+		splits: selectedSplitOption.value[0],
+	};
 	harmonyData.value.chords = newStaffs;
 	sideMenuKey.value++;
 };

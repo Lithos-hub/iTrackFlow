@@ -32,6 +32,10 @@
 			"add_comment": "Add a comment",
 			"add_audio": "Add an audio file"
 		},
+		"dataTable": {
+			"harmony": "Harmony",
+			"production": "Production"
+		},
 		"audio_player": {
 			"play": "Play",
 			"pause": "Pause",
@@ -48,6 +52,9 @@
 			"title": "My Projects",
 			"create": "Create a new project",
 			"name": "Project name",
+			"category": "Categoy",
+			"image": "Image",
+			"actions": "Actions",
 			"add_project": "Add project",
 			"harmony": "Harmony",
 			"production": "Production",

@@ -184,6 +184,7 @@ export interface MusicChord {
 	id: number;
 	chord: ChordName;
 	romanNumber: ChordFigure;
+	splits: number;
 }
 
 export interface HarmonyData {

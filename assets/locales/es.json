@@ -48,6 +48,9 @@
 			"title": "Mis proyectos",
 			"create": "Crear nuevo proyecto",
 			"name": "Nombre del proyecto",
+			"category": "Categoría",
+			"image": "Portada del proyecto",
+			"actions": "Acciones",
 			"harmony": "Armonía",
 			"production": "Producción",
 			"add_project": "Añadir proyecto",
@@ -84,7 +87,7 @@
 			"tempo": "Tempo",
 			"time_signature": "Compás",
 			"root_note": "Tónica",
-			"scale_type": "Modo de escala",
+			"scale_type": "Tipo de escala",
 			"number_of_bars": "Número de compases"
 		},
 		"production": {
