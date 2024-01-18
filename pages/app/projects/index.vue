@@ -19,7 +19,11 @@
 				</BaseButton>
 			</RouterLink>
 		</div>
-		<AppDataTable :table-key="tableKey" :data-list="dataList" :headers="headersList">
+		<AppDataTable
+			:table-key="tableKey"
+			:data-list="projectsList"
+			:actions-list="actionsList"
+			:headers="headersList">
 			<template #table:name="{ name, category, id }">
 				<RouterLink :to="`/app/projects/${category}/${id}`" class="underline text-cyan-500">
 					{{ name }}
@@ -49,8 +53,8 @@ definePageMeta({
 const { t } = useI18n();
 
 const tableKey = ref(0);
-const onEdit = (id: string) => alert('Editing ' + id);
-const onDelete = (id: string) => alert('Deleting ' + id);
+const onEdit = (id: number) => alert('Editing ' + id);
+const onDelete = (id: number) => alert('Deleting ' + id);
 
 const projectsList = ref<Project[]>([
 	{
@@ -71,16 +75,16 @@ const projectsList = ref<Project[]>([
 	},
 ]);
 
-const tableActions: Actions[] = [
+const actionsList: Actions[] = [
 	{
 		icon: 'pencil',
 		color: 'primary',
-		onClick: (id) => onEdit(id),
+		onClick: (id) => onEdit(id as number),
 	},
 	{
 		icon: 'trash',
 		color: 'danger',
-		onClick: (id) => onDelete(id),
+		onClick: (id) => onDelete(id as number),
 	},
 ];
 
@@ -91,12 +95,5 @@ const headersList = computed(() =>
 			label: t(`app.dataTable.${key}`),
 			key,
 		})),
-);
-
-const dataList = computed(() =>
-	projectsList.value.map((project) => ({
-		...project,
-		actions: tableActions,
-	})),
 );
 </script>

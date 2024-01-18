@@ -2,7 +2,12 @@ import { TAILWIND_COLORS } from '@/constants/colors';
 import { ColorName, TailwindColors, RGB } from '@/interfaces';
 
 export const getTailwindColor = (color: ColorName, shade?: string | number): string => {
-	if (color === 'black' || color === 'white') return TAILWIND_COLORS[color] as string;
+	if (color === 'black') {
+		return (TAILWIND_COLORS[color] as string) + '000';
+	}
+	if (color === 'white') {
+		return (TAILWIND_COLORS[color] as string) + 'fff';
+	}
 
 	if (color === 'transparent') return 'transparent';
 

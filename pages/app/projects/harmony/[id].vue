@@ -81,8 +81,12 @@
 					</div>
 
 					<!-- Harmony sheet -->
-					<section class="bg-white p-5 mt-5 shadow">
-						<div class="border grid grid-cols-12 mt-5">
+					<section class="bg-white p-5 mt-5 shadow relative">
+						<div
+							class="border grid"
+							:style="{
+								'grid-template-columns': `repeat(${zoomLevel}, 1fr)`,
+							}">
 							<AppMusicStaff
 								v-for="(chord, index) of staffs"
 								:key="index"
@@ -91,6 +95,23 @@
 								:is-active="selectedBar === index"
 								:key-signature="harmonyData.scaleType"
 								@click="selectBar(chord, index)" />
+						</div>
+						<!-- Sheet zoom controls -->
+						<div class="bg-dark border border-dark absolute right-5 bottom-5 rounded">
+							<div class="flex flex-col gap-1 p-1">
+								<BaseButton
+									icon="zoom-in"
+									color="white"
+									variant="stealth"
+									icon-color="white"
+									@click="zoomIn" />
+								<BaseButton
+									icon="zoom-out"
+									color="white"
+									variant="stealth"
+									icon-color="white"
+									@click="zoomOut" />
+							</div>
 						</div>
 					</section>
 				</div>
@@ -173,6 +194,9 @@ const selectedOtherChordRoot = ref<string[]>([]);
 const selectedOtherChordType = ref<string[]>([]);
 const selectedSplitOption = ref<number[]>([]);
 
+// Sheet
+const zoomLevel = ref(8);
+
 const scalesTypesFormatted = computed(() => {
 	return ScaleTypesList.map(({ label, value }) => ({
 		label: t(label),
@@ -239,6 +263,16 @@ const splitBar = () => {
 	};
 	harmonyData.value.chords = newStaffs;
 	sideMenuKey.value++;
+};
+
+const zoomIn = () => {
+	if (zoomLevel.value === 12) return;
+	zoomLevel.value += 1;
+};
+
+const zoomOut = () => {
+	if (zoomLevel.value === 3) return;
+	zoomLevel.value -= 1;
 };
 
 watch(

@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from 'vue';
 
+import { ColorName } from '@/interfaces';
 import { Size, Color, Radius, Variant } from '@/enums';
 
 export type ColorType = `${Color}`;
@@ -8,7 +9,7 @@ type RadiusType = `${Radius}`;
 type VariantType = `${Variant}`;
 
 export interface Button extends /* @vue-ignore */ ButtonHTMLAttributes {
-	color?: ColorType;
+	color?: ColorType | ColorName;
 	disabled?: boolean;
 	size?: SizeType;
 	radius?: RadiusType;
@@ -17,4 +18,5 @@ export interface Button extends /* @vue-ignore */ ButtonHTMLAttributes {
 	icon?: string;
 	iconLeft?: boolean;
 	iconRight?: boolean;
+	iconColor?: ColorName;
 }

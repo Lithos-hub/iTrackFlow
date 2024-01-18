@@ -3,14 +3,14 @@
 		<table :key="props.tableKey" class="bg-white dark:bg-dark">
 			<thead>
 				<tr>
-					<th v-for="{ label, key } of props.headers" :key="key">
+					<th v-for="{ label, key } of headersList" :key="key">
 						{{ label }}
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(data, i) of props.dataList" :key="i">
-					<td v-for="{ key } of headers" :key="key">
+				<tr v-for="(data, i) of dataListMap" :key="i">
+					<td v-for="{ key } of headersList" :key="key">
 						<img v-if="key === 'image'" :src="data[key]" class="mx-auto h-[100px]" />
 						<div v-else-if="key === 'actions'" class="flex gap-5 justify-center">
 							<BaseButton
@@ -18,7 +18,7 @@
 								:key="icon"
 								:icon="icon"
 								:color="color"
-								@click="onClick((data as Project).id)" />
+								@click="onClick(data.id)" />
 						</div>
 						<slot v-else-if="$slots[`table:${key}`]" :name="`table:${key}`" v-bind="data" />
 						<span v-else>{{ data[key] }}</span>
@@ -41,7 +41,8 @@ interface Head {
 interface Props {
 	tableKey: number;
 	headers: Head[];
-	dataList: Project[] | Actions[];
+	dataList: Project[];
+	actionsList?: Actions[];
 }
 
 interface Slots {
@@ -49,6 +50,19 @@ interface Slots {
 }
 
 const props = defineProps<Props>();
+
+const dataListMap = computed(() =>
+	props.dataList.map((project) => ({
+		...project,
+		actions: props.actionsList,
+	})),
+);
+
+const headersList = computed(() => {
+	return props.actionsList
+		? [...props.headers, { label: 'Actions', key: 'actions' }]
+		: props.headers;
+});
 
 defineSlots<Slots>();
 </script>

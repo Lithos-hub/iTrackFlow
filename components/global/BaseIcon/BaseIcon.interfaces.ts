@@ -2,22 +2,26 @@ import type { ColorName } from '@/interfaces';
 
 export type IconName =
 	| string
+	| 'add'
+	| 'check'
+	| 'chevron-rounded-left'
 	| 'chevron'
 	| 'close'
-	| 'heart'
 	| 'eye'
-	| 'layers'
-	| 'layout'
-	| 'like'
-	| 'bulb'
-	| 'check'
-	| 'alertTriangle'
-	| 'alertHexagon'
-	| 'checkmarkCircle'
-	| 'informationCircle'
+	| 'heart'
 	| 'logout'
+	| 'moon'
+	| 'pause'
+	| 'pencil'
+	| 'like'
+	| 'play'
+	| 'save'
+	| 'stop'
+	| 'trash'
 	| 'sun'
-	| 'moon';
+	| 'uncheck'
+	| 'zoom-in'
+	| 'zoom-out';
 
 export interface Icon {
 	icon: IconName;
