@@ -198,9 +198,7 @@ export interface HarmonyData {
 }
 
 export interface MusicStaffProps extends MusicChord {
-	keySignature: string;
 	index: number;
-	selectedBar: string;
 }
 
 export interface ChordTypeData {

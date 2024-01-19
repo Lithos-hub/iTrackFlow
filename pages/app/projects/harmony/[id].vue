@@ -6,7 +6,7 @@
 
 		<div class="flex flex-1 flex-grow">
 			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
-				<strong class="text-primary">Bar #{{ selectedBarLabel + 1 }} options</strong>
+				<strong class="text-primary">Bar #{{ selectedBarIndex + 1 }} options</strong>
 				<BaseDropdown
 					v-model="selectedChord"
 					:label="`Select chord for key signature: ${harmonyData.rootNote} ${harmonyData.scaleType}`"
@@ -94,9 +94,7 @@
 								:key="index"
 								:index="index + 1"
 								v-bind="chord"
-								:key-signature="harmonyData.scaleType"
-								:selected-bar="selectedBarLabel"
-								@on-select-bar="(label) => selectBar(chord, { label, index })" />
+								:key-signature="harmonyData.scaleType" />
 						</div>
 						<!-- Sheet zoom controls -->
 						<div class="bg-dark border border-dark fixed right-5 bottom-5 rounded">
@@ -123,9 +121,10 @@
 </template>
 
 <script setup lang="ts">
-import { HarmonyData, MusicChord } from '@/components/app/MusicStaff/MusicStaff.interfaces';
+import { HarmonyData } from '@/components/app/MusicStaff/MusicStaff.interfaces';
 import { DropdownItem } from '@/components/global/BaseDropdown/BaseDropdown.interfaces';
 import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
+import { useHarmonyStore } from '~/store/harmony';
 
 definePageMeta({
 	layout: 'harmony',
@@ -159,7 +158,7 @@ const harmonyData = ref<HarmonyData>({
 			id: new Date().getTime(),
 			chord: 'Gm',
 			romanNumber: 'v',
-			splits: 1,
+			splits: 3,
 		},
 		{
 			id: new Date().getTime(),
@@ -184,14 +183,15 @@ const chordListByKeySignature = computed(
 const sideMenuKey = ref(0);
 const sheetKey = ref(0);
 
+// Pinia
+const { selectedBarIndex } = storeToRefs(useHarmonyStore());
+
 // Header
 const tempo = ref(harmonyData.value.tempo);
 const rootNote = ref(harmonyData.value.rootNote);
 const scaleType = ref([harmonyData.value.scaleType]);
 const timeSignature = ref([harmonyData.value.timeSignature]);
 const numberOfBars = ref(20);
-const selectedBarLabel = ref<string>('');
-const selectedBarIndex = ref<number>(0);
 
 // Sidemenu
 const selectedChord = ref<string[]>([]);
@@ -218,6 +218,7 @@ const staffs = computed(() => {
 			id: new Date().getTime(),
 			chord: '',
 			romanNumber: '',
+			splits: 1,
 		}),
 	];
 });
@@ -230,22 +231,15 @@ const splitOptions = computed(() => {
 	}));
 });
 
-const selectBar = ({ chord, romanNumber }: MusicChord, { label, index }) => {
-	selectedBarLabel.value = label;
-	selectedBarIndex.value = index;
-	selectedChord.value = [`${chord} - (${romanNumber})`];
-	sideMenuKey.value++;
-	sheetKey.value++;
-};
-
 const selectChord = (chord: string) => {
 	const [chordName, romanNumber] = chord.split(' - ');
 	const newStaffs = [...staffs.value];
-	newStaffs[selectedBarIndex.value] = {
-		...newStaffs[selectedBarIndex.value],
+	newStaffs[selectedBarIndex.value - 1] = {
+		...newStaffs[selectedBarIndex.value - 1],
 		id: new Date().getTime(),
 		chord: chordName,
 		romanNumber: romanNumber.replace('(', '').replace(')', ''),
+		splits: 1,
 	};
 
 	harmonyData.value.chords = newStaffs;
@@ -254,10 +248,11 @@ const selectChord = (chord: string) => {
 
 const addOtherChord = () => {
 	const newStaffs = [...staffs.value];
-	newStaffs[selectedBarIndex.value] = {
+	newStaffs[selectedBarIndex.value - 1] = {
 		id: new Date().getTime(),
 		chord: `${selectedOtherChordRoot.value[0]}${selectedOtherChordType.value[0]}`,
 		romanNumber: '',
+		splits: 1,
 	};
 
 	harmonyData.value.chords = newStaffs;
@@ -266,8 +261,8 @@ const addOtherChord = () => {
 
 const splitBar = () => {
 	const newStaffs = [...staffs.value];
-	newStaffs[selectedBarIndex.value] = {
-		...newStaffs[selectedBarIndex.value],
+	newStaffs[selectedBarIndex.value - 1] = {
+		...newStaffs[selectedBarIndex.value - 1],
 		splits: selectedSplitOption.value[0],
 	};
 	harmonyData.value.chords = newStaffs;

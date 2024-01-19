@@ -1,35 +1,85 @@
 <template>
-	<div class="flex flex-col w-full">
+	<client-only class="flex flex-col w-full">
 		<label v-if="label" class="m-2 font-medium">{{ label }}</label>
 		<input
 			v-if="!debounced"
 			v-bind="$attrs"
 			v-model="model"
-			:class="`input input__${variant} border-${color}`" />
+			:class="`input input__${variant} focus:${noOutline ? 'outline-none' : 'ring-2'}`"
+			:style="{
+				borderColor: tailwindColor,
+				color: tailwindColor,
+				outlineColor: tailwindColor,
+			}" />
 		<input
 			v-else
 			v-bind="$attrs"
-			:class="`input input__${variant} border-${color}`"
+			:class="`input input__${variant}`"
 			:value="model"
+			:style="{
+				borderColor: tailwindColor,
+				color: tailwindColor,
+				outlineColor: tailwindColor,
+			}"
 			@input="onDebouncedInput" />
 
 		<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
-	</div>
+	</client-only>
 </template>
 
 <script setup lang="ts">
 import { Input } from './BaseInput.interfaces';
+import { useScreenStore } from '~/store/screen';
 
-const { debounced } = withDefaults(defineProps<Input>(), {
+const { lightMode } = storeToRefs(useScreenStore());
+
+const { debounced, color } = withDefaults(defineProps<Input>(), {
 	modelValue: '',
 	variant: 'rounded',
 });
+
 const emit = defineEmits(['update:modelValue', 'input', 'change']);
 const model = defineModel();
 
 const onDebouncedInput = debounce((event: Event) => {
 	emit('update:modelValue', (event.target as HTMLInputElement).value);
 }, 1000);
+
+const tailwindColor = computed(() => {
+	let colorReference;
+
+	switch (color) {
+		case 'primary':
+			colorReference = 'blue';
+			break;
+		case 'secondary':
+			colorReference = 'pink';
+			break;
+		case 'tertiary':
+			colorReference = 'orange';
+			break;
+		case 'success':
+			colorReference = 'green';
+			break;
+		case 'info':
+			colorReference = 'blue';
+			break;
+		case 'warning':
+			colorReference = 'orange';
+			break;
+		case 'danger':
+			colorReference = 'red';
+			break;
+		case 'none':
+			colorReference = 'transparent';
+			break;
+		default:
+			colorReference = lightMode.value ? 'black' : 'white';
+			break;
+	}
+
+	return getTailwindColor(colorReference);
+});
 
 watch(
 	() => model.value,
@@ -42,7 +92,7 @@ watch(
 
 <style lang="scss" scoped>
 .input {
-	@apply w-full px-5 py-2 focus:ring-2 focus:ring-primary bg-transparent border duration-75 focus:outline-none;
+	@apply w-full px-5 py-2 bg-transparent border duration-75 focus:outline-none;
 
 	&__default {
 		@apply text-black dark:text-white bg-white dark:bg-dark;

@@ -5,7 +5,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-	label: string;
-}>();
+import { MusicStaffSubdivisionLabelProps } from './MusicStaffSubdivisionLabel.interfaces';
+
+const props = defineProps<MusicStaffSubdivisionLabelProps>();
+
+const label = computed(() => {
+	const labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'];
+
+	return `${props.index}${labels[props.subdivision - 1]}`;
+});
 </script>

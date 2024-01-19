@@ -1,3 +1,6 @@
+import { ColorType } from '../BaseButton/BaseButton.interfaces';
+import { ColorName } from '~/interfaces';
+
 type Variant = 'default' | 'underline' | 'bordered' | 'rounded' | 'filled';
 
 export interface Input {
@@ -9,6 +12,7 @@ export interface Input {
 	valid?: boolean;
 	errorMessage?: string;
 	variant?: Variant;
-	color?: string;
+	color?: ColorType | ColorName;
 	debounced?: boolean;
+	noOutline?: boolean;
 }
