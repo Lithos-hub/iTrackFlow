@@ -6,7 +6,7 @@
 
 		<div class="flex flex-1 flex-grow">
 			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
-				<strong class="text-primary">Bar #{{ selectedBar + 1 }} options</strong>
+				<strong class="text-primary">Bar #{{ selectedBarLabel + 1 }} options</strong>
 				<BaseDropdown
 					v-model="selectedChord"
 					:label="`Select chord for key signature: ${harmonyData.rootNote} ${harmonyData.scaleType}`"
@@ -39,7 +39,7 @@
 			</AppSideMenu>
 
 			<section class="h-full w-full">
-				<div class="mx-10">
+				<div class="mx-10 flex flex-col gap-5">
 					<div class="flex justify-between">
 						<BaseButton
 							variant="stealth"
@@ -81,7 +81,9 @@
 					</div>
 
 					<!-- Harmony sheet -->
-					<section class="bg-white p-5 mt-5 shadow relative">
+					<section :key="sheetKey" class="bg-white p-5 shadow relative flex flex-col gap-5">
+						<h2 class="text-center text-gray-900 font-bold italic">"{{ harmonyData.title }}"</h2>
+						<hr />
 						<div
 							class="border grid"
 							:style="{
@@ -92,12 +94,12 @@
 								:key="index"
 								:index="index + 1"
 								v-bind="chord"
-								:is-active="selectedBar === index"
 								:key-signature="harmonyData.scaleType"
-								@click="selectBar(chord, index)" />
+								:selected-bar="selectedBarLabel"
+								@on-select-bar="(label) => selectBar(chord, { label, index })" />
 						</div>
 						<!-- Sheet zoom controls -->
-						<div class="bg-dark border border-dark absolute right-5 bottom-5 rounded">
+						<div class="bg-dark border border-dark fixed right-5 bottom-5 rounded">
 							<div class="flex flex-col gap-1 p-1">
 								<BaseButton
 									icon="zoom-in"
@@ -141,6 +143,7 @@ const { t } = useI18n();
 // MOCK
 const harmonyData = ref<HarmonyData>({
 	id: 1,
+	title: 'Song title',
 	tempo: 120,
 	timeSignature: '4/4',
 	rootNote: 'C',
@@ -179,6 +182,7 @@ const chordListByKeySignature = computed(
 );
 
 const sideMenuKey = ref(0);
+const sheetKey = ref(0);
 
 // Header
 const tempo = ref(harmonyData.value.tempo);
@@ -186,13 +190,16 @@ const rootNote = ref(harmonyData.value.rootNote);
 const scaleType = ref([harmonyData.value.scaleType]);
 const timeSignature = ref([harmonyData.value.timeSignature]);
 const numberOfBars = ref(20);
-const selectedBar = ref(0);
+const selectedBarLabel = ref<string>('');
+const selectedBarIndex = ref<number>(0);
 
 // Sidemenu
 const selectedChord = ref<string[]>([]);
 const selectedOtherChordRoot = ref<string[]>([]);
 const selectedOtherChordType = ref<string[]>([]);
-const selectedSplitOption = ref<number[]>([]);
+const selectedSplitOption = ref<number[]>([
+	harmonyData.value.chords[selectedBarIndex.value].splits,
+]);
 
 // Sheet
 const zoomLevel = ref(8);
@@ -223,17 +230,19 @@ const splitOptions = computed(() => {
 	}));
 });
 
-const selectBar = ({ chord, romanNumber }: MusicChord, index) => {
-	selectedBar.value = index;
+const selectBar = ({ chord, romanNumber }: MusicChord, { label, index }) => {
+	selectedBarLabel.value = label;
+	selectedBarIndex.value = index;
 	selectedChord.value = [`${chord} - (${romanNumber})`];
 	sideMenuKey.value++;
+	sheetKey.value++;
 };
 
 const selectChord = (chord: string) => {
 	const [chordName, romanNumber] = chord.split(' - ');
 	const newStaffs = [...staffs.value];
-	newStaffs[selectedBar.value] = {
-		...newStaffs[selectedBar.value],
+	newStaffs[selectedBarIndex.value] = {
+		...newStaffs[selectedBarIndex.value],
 		id: new Date().getTime(),
 		chord: chordName,
 		romanNumber: romanNumber.replace('(', '').replace(')', ''),
@@ -245,7 +254,7 @@ const selectChord = (chord: string) => {
 
 const addOtherChord = () => {
 	const newStaffs = [...staffs.value];
-	newStaffs[selectedBar.value] = {
+	newStaffs[selectedBarIndex.value] = {
 		id: new Date().getTime(),
 		chord: `${selectedOtherChordRoot.value[0]}${selectedOtherChordType.value[0]}`,
 		romanNumber: '',
@@ -257,12 +266,14 @@ const addOtherChord = () => {
 
 const splitBar = () => {
 	const newStaffs = [...staffs.value];
-	newStaffs[selectedBar.value] = {
-		...newStaffs[selectedBar.value],
+	newStaffs[selectedBarIndex.value] = {
+		...newStaffs[selectedBarIndex.value],
 		splits: selectedSplitOption.value[0],
 	};
 	harmonyData.value.chords = newStaffs;
+
 	sideMenuKey.value++;
+	sheetKey.value++;
 };
 
 const zoomIn = () => {

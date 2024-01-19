@@ -190,6 +190,7 @@ export interface MusicChord {
 export interface HarmonyData {
 	id: number;
 	tempo: number;
+	title: string;
 	rootNote: Note;
 	timeSignature: TimeSignature;
 	scaleType: ScaleType;
@@ -199,7 +200,7 @@ export interface HarmonyData {
 export interface MusicStaffProps extends MusicChord {
 	keySignature: string;
 	index: number;
-	isActive: boolean;
+	selectedBar: string;
 }
 
 export interface ChordTypeData {
