@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="`row-span-${splits} border w-full h-full flex flex-col items-end justify-end p-5 relative ${
+		:class="`row-span-${splits} border w-full h-full flex flex-col items-center p-5 relative ${
 			isActive ? 'selected__pulse' : 'bg-white'
 		} `"
 		@click="selectSubdivision(index, subdivision)">

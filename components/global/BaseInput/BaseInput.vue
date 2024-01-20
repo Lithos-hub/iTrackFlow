@@ -1,30 +1,32 @@
 <template>
-	<client-only class="flex flex-col w-full">
-		<label v-if="label" class="m-2 font-medium">{{ label }}</label>
-		<input
-			v-if="!debounced"
-			v-bind="$attrs"
-			v-model="model"
-			:class="`input input__${variant} focus:${noOutline ? 'outline-none' : 'ring-2'}`"
-			:style="{
-				borderColor: tailwindColor,
-				color: tailwindColor,
-				outlineColor: tailwindColor,
-			}" />
-		<input
-			v-else
-			v-bind="$attrs"
-			:class="`input input__${variant}`"
-			:value="model"
-			:style="{
-				borderColor: tailwindColor,
-				color: tailwindColor,
-				outlineColor: tailwindColor,
-			}"
-			@input="onDebouncedInput" />
+	<div class="flex flex-col w-full">
+		<client-only>
+			<label v-if="label" class="m-2 font-medium">{{ label }}</label>
+			<input
+				v-if="!debounced"
+				v-bind="$attrs"
+				v-model="model"
+				:class="`input input__${variant} focus:${noOutline ? 'outline-none' : 'ring-2'}`"
+				:style="{
+					borderColor: tailwindColor,
+					color: tailwindColor,
+					outlineColor: tailwindColor,
+				}" />
+			<input
+				v-else
+				v-bind="$attrs"
+				:class="`input input__${variant}`"
+				:value="model"
+				:style="{
+					borderColor: tailwindColor,
+					color: tailwindColor,
+					outlineColor: tailwindColor,
+				}"
+				@input="onDebouncedInput" />
 
-		<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
-	</client-only>
+			<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
+		</client-only>
+	</div>
 </template>
 
 <script setup lang="ts">
