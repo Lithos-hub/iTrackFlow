@@ -94,7 +94,8 @@
 			"time_signature": "Time signature",
 			"root_note": "Root note",
 			"scale_type": "Scale type",
-			"number_of_bars": "Number of bars"
+			"number_of_bars": "Number of bars",
+			"lyrics": "Lyrics"
 		},
 		"production": {
 			"add_track": "Add track",

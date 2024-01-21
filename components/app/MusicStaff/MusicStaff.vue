@@ -4,15 +4,20 @@
 		<small class="absolute top-0 left-1 text-black">{{ index }}</small>
 		<div class="flex flex-row grow items-center justify-center">
 			<AppMusicStaffSubdivision
-				v-for="subdivision in splits"
-				:key="subdivision"
-				:subdivision="subdivision"
+				v-for="({ chord, romanNumber }, i) of subdivisionChords"
+				:key="i"
+				:subdivision="i + 1"
 				:splits="splits"
 				:index="index"
 				:chord="chord"
 				:roman-number="romanNumber" />
 		</div>
-		<BaseInput v-model="lyrics" variant="underline" color="primary" no-outline />
+		<BaseInput
+			v-model="lyrics"
+			variant="underline"
+			color="primary"
+			:placeholder="$t('app.harmony.lyrics')"
+			no-outline />
 	</div>
 </template>
 

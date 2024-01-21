@@ -8,7 +8,8 @@
 		<div class="flex flex-col justify-between">
 			<div>
 				<h4 class="text-black font-bold">{{ chord }}</h4>
-				<h5 class="text-black">{{ romanNumber }}</h5>
+				<h5 v-if="romanNumber !== 'atonal'" class="text-black">{{ romanNumber }}</h5>
+				<small v-else class="text-red-500">Atonal</small>
 			</div>
 		</div>
 	</div>
@@ -20,17 +21,18 @@ import { useHarmonyStore } from '~/store/harmony';
 
 const { subdivision, index, splits, romanNumber, chord } = defineProps<MusicStafSubdivisionProps>();
 
-const { selectedBarSplit, selectedBarIndex, selectedChord } = storeToRefs(useHarmonyStore());
-const isActive = computed(() => {
-	return selectedBarSplit.value === subdivision && selectedBarIndex.value === index;
-});
+const { selectedBarSubdivision, selectedBarSplit, selectedBarIndex, selectedChord } =
+	storeToRefs(useHarmonyStore());
+
+const isActive = computed(
+	() => selectedBarSubdivision.value === subdivision && selectedBarIndex.value === index,
+);
 
 const selectSubdivision = (index: number, split: number) => {
 	selectedBarIndex.value = index;
-	selectedBarSplit.value = split;
+	selectedBarSubdivision.value = split;
+	selectedBarSplit.value[0] = splits;
 
 	selectedChord.value = [`${chord} - (${romanNumber})`];
 };
 </script>
-
-<style scoped></style>

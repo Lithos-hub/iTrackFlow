@@ -95,7 +95,7 @@ export type ScaleType =
 	| 'diminished'
 	| 'augmented';
 
-type ChordName = `${ChordRoot}${ChordType}`;
+export type ChordName = `${ChordRoot}${ChordType}`;
 
 export type Note =
 	| 'C'
@@ -180,10 +180,15 @@ export type TimeSignature =
 	| '16/32'
 	| '16/64';
 
-export interface MusicChord {
+export interface SubdivisionChords {
 	id: number;
 	chord: ChordName;
 	romanNumber: ChordFigure;
+}
+
+export interface MusicChord {
+	id: number;
+	subdivisionChords: SubdivisionChords[];
 	splits: number;
 }
 

@@ -94,7 +94,8 @@
 			"time_signature": "Compás",
 			"root_note": "Tónica",
 			"scale_type": "Tipo de escala",
-			"number_of_bars": "Número de compases"
+			"number_of_bars": "Número de compases",
+			"lyrics": "Letra"
 		},
 		"production": {
 			"add_track": "Añadir pista",

@@ -6,7 +6,7 @@
 				v-if="!debounced"
 				v-bind="$attrs"
 				v-model="model"
-				:class="`input input__${variant} focus:${noOutline ? 'outline-none' : 'ring-2'}`"
+				:class="`input input__${variant} ${!noOutline ? 'focus:ring-2' : ''}`"
 				:style="{
 					borderColor: tailwindColor,
 					color: tailwindColor,
@@ -15,7 +15,7 @@
 			<input
 				v-else
 				v-bind="$attrs"
-				:class="`input input__${variant}`"
+				:class="`input input__${variant} ${!noOutline && 'focus:ring-2'}`"
 				:value="model"
 				:style="{
 					borderColor: tailwindColor,
@@ -94,7 +94,7 @@ watch(
 
 <style lang="scss" scoped>
 .input {
-	@apply w-full px-5 py-2 bg-transparent border duration-75 focus:outline-none;
+	@apply w-full px-5 py-2 bg-transparent duration-75 outline-0;
 
 	&__default {
 		@apply text-black dark:text-white bg-white dark:bg-dark;
