@@ -5,7 +5,6 @@ export const debounce = (fn, delay) => {
 			clearTimeout(timeoutID);
 		}
 		timeoutID = setTimeout(() => {
-			console.log('triggered');
 			fn(...args);
 		}, delay);
 	};

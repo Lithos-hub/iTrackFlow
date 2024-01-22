@@ -5,11 +5,11 @@
 		</header>
 
 		<div class="flex flex-1 flex-grow">
-			<AppSideMenu class="max-w-[350px] flex flex-col gap-5">
+			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
 				<strong class="text-primary">Bar #{{ selectedBarIndex + 1 }} options</strong>
 				<BaseDropdown
 					v-model="selectedChord"
-					:label="`Select chord for key signature: ${harmonyData.rootNote} ${harmonyData.scaleType}`"
+					:label="`Select chord for key signature: ${initialHarmonyState.rootNote} ${initialHarmonyState.scaleType}`"
 					:data="chordListByKeySignature"
 					no-cleanable
 					@input="onChangeChord" />
@@ -82,12 +82,12 @@
 					</div>
 
 					<!-- Harmony sheet -->
-					<section class="bg-white p-5 shadow relative flex flex-col gap-5">
+					<section :key="sheetKey" class="bg-white p-5 shadow relative flex flex-col gap-5">
 						<h2 class="text-center text-gray-900 font-bold italic">
 							<div v-if="isEditingTitle">
 								<div class="fixed top-0 left-0 h-full w-full z-0" @click="isEditingTitle = false" />
 								<BaseInput
-									v-model="harmonyData.title"
+									v-model="initialHarmonyState.title"
 									color="primary"
 									variant="underline"
 									no-outline
@@ -95,7 +95,7 @@
 									@keydown.enter="isEditingTitle = false" />
 							</div>
 							<span v-else @click="isEditingTitle = !isEditingTitle">
-								"{{ harmonyData.title }}"
+								"{{ initialHarmonyState.title }}"
 							</span>
 						</h2>
 						<hr />
@@ -109,7 +109,7 @@
 								:key="index"
 								:index="index + 1"
 								v-bind="chord"
-								:key-signature="harmonyData.scaleType" />
+								:key-signature="initialHarmonyState.scaleType" />
 						</div>
 						<!-- Sheet zoom controls -->
 						<div class="bg-dark border border-dark fixed right-5 bottom-5 rounded">
@@ -155,7 +155,7 @@ const getProject = async () => {
 
 const { t } = useI18n();
 // MOCK
-const harmonyData = ref<HarmonyData>({
+const initialHarmonyState = ref<HarmonyData>({
 	id: 1,
 	title: 'Song title',
 	tempo: 120,
@@ -212,24 +212,27 @@ const harmonyData = ref<HarmonyData>({
 const chordListByKeySignature = computed(
 	() =>
 		getAvailableChords({
-			rootNote: harmonyData.value.rootNote,
-			scaleType: harmonyData.value.scaleType,
+			rootNote: initialHarmonyState.value.rootNote,
+			scaleType: initialHarmonyState.value.scaleType,
 		})?.map(({ nomenclature, note, romanNumber }) => ({
 			label: `${note}${nomenclature} - (${romanNumber})`,
 			value: `${note}${nomenclature} - (${romanNumber})`,
 		})) as DropdownItem[],
 );
 
+const sideMenuKey = ref(0);
+const sheetKey = ref(0);
+
 // Pinia
 const { selectedBarIndex, selectedChord, selectedBarSubdivision, selectedBarSplit } =
 	storeToRefs(useHarmonyStore());
 
 // Header
-const tempo = ref(harmonyData.value.tempo);
-const rootNote = ref(harmonyData.value.rootNote);
-const scaleType = ref([harmonyData.value.scaleType]);
-const timeSignature = ref([harmonyData.value.timeSignature]);
-const numberOfBars = ref(20);
+const tempo = ref(initialHarmonyState.value.tempo);
+const rootNote = ref(initialHarmonyState.value.rootNote);
+const scaleType = ref([initialHarmonyState.value.scaleType]);
+const timeSignature = ref([initialHarmonyState.value.timeSignature]);
+const numberOfBars = ref(16);
 
 // Sidemenu
 const selectedOtherChordRoot = ref<string[]>([]);
@@ -247,20 +250,30 @@ const scalesTypesFormatted = computed(() => {
 });
 
 const staffs = computed(() => {
-	return [
-		...harmonyData.value.chords,
-		...new Array(numberOfBars.value - harmonyData.value.chords.length).fill({
-			id: new Date().getTime(),
-			subdivisionChords: [
-				{
+	const currentStaffsWithChordsLength = [...initialHarmonyState.value.chords].length;
+
+	const currentSheetHasMoreBarsThanSelected =
+		currentStaffsWithChordsLength > Number(numberOfBars.value);
+
+	const newStaffs = currentSheetHasMoreBarsThanSelected
+		? [...initialHarmonyState.value.chords.slice(0, Number(numberOfBars.value))]
+		: [
+				...initialHarmonyState.value.chords,
+				...new Array(Number(numberOfBars.value) - currentStaffsWithChordsLength).fill({
 					id: new Date().getTime(),
-					chord: '',
-					romanNumber: '',
-				},
-			],
-			splits: 1,
-		}),
-	];
+					subdivisionChords: [
+						{
+							id: new Date().getTime(),
+							chord: '',
+							romanNumber: '',
+						},
+					],
+					splits: 1,
+				}),
+			];
+	initialHarmonyState.value.chords = newStaffs;
+
+	return newStaffs;
 });
 
 const splitOptions = computed(() => {
@@ -280,7 +293,7 @@ const onChangeChord = () => {
 		romanNumber: selectedChord.value[0].split(' - ')[1].replace('(', '').replace(')', ''),
 	};
 
-	harmonyData.value.chords = newStaffs;
+	initialHarmonyState.value.chords = newStaffs;
 };
 
 const onAddExoticChord = () => {
@@ -303,7 +316,7 @@ const onAddExoticChord = () => {
 			: 'atonal',
 	};
 
-	harmonyData.value.chords = newStaffs;
+	initialHarmonyState.value.chords = newStaffs;
 };
 
 const splitBar = () => {
@@ -334,7 +347,7 @@ const splitBar = () => {
 		splits: selectedBarSplit.value[0],
 	};
 
-	harmonyData.value.chords = newStaffs;
+	initialHarmonyState.value.chords = newStaffs;
 };
 
 const zoomIn = () => {
@@ -349,8 +362,9 @@ const zoomOut = () => {
 
 onMounted(() => {
 	getProject();
-	const firstSubdivisionChordName = harmonyData.value.chords[0].subdivisionChords[0].chord;
-	const firstSubdivisionRomanNumber = harmonyData.value.chords[0].subdivisionChords[0].romanNumber;
+	const firstSubdivisionChordName = initialHarmonyState.value.chords[0].subdivisionChords[0].chord;
+	const firstSubdivisionRomanNumber =
+		initialHarmonyState.value.chords[0].subdivisionChords[0].romanNumber;
 	selectedChord.value = [`${firstSubdivisionChordName} - (${firstSubdivisionRomanNumber})`];
 });
 </script>
