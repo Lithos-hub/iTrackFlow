@@ -95,7 +95,16 @@
 			"root_note": "Root note",
 			"scale_type": "Scale type",
 			"number_of_bars": "Number of bars",
-			"lyrics": "Lyrics"
+			"lyrics": "Lyrics",
+			"sidemenu": {
+				"bar_options": "Bar #{number} - Options",
+				"select_tonal_chord": "Select a tonal chord",
+				"select_atonal_chord": "Select an atonal chord",
+				"root_note": "Root note",
+				"chord_type": "Chord type",
+				"split": "Split",
+				"number_of_splits": "Number of splits"
+			}
 		},
 		"production": {
 			"add_track": "Add track",

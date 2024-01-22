@@ -6,37 +6,47 @@
 
 		<div class="flex flex-1 flex-grow">
 			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
-				<strong class="text-primary">Bar #{{ selectedBarIndex + 1 }} options</strong>
+				<strong class="text-primary">
+					{{
+						$t('app.harmony.sidemenu.bar_options', {
+							number: `${selectedBarIndex}`,
+						})
+					}}
+				</strong>
+				<strong>
+					{{ $t('app.harmony.sidemenu.select_tonal_chord') }}
+				</strong>
 				<BaseDropdown
 					v-model="selectedChord"
-					:label="`Select chord for key signature: ${initialHarmonyState.rootNote} ${initialHarmonyState.scaleType}`"
 					:data="chordListByKeySignature"
 					no-cleanable
 					@input="onChangeChord" />
 				<hr />
-				<strong>Select other chord</strong>
+				<strong>
+					{{ $t('app.harmony.sidemenu.select_atonal_chord') }}
+				</strong>
 				<div class="flex gap-5 items-end">
 					<BaseDropdown
 						v-model="selectedOtherChordRoot"
-						label="Root note"
+						:label="$t('app.harmony.sidemenu.root_note')"
 						:data="NotesList"
 						no-cleanable />
 					<BaseDropdown
 						v-model="selectedOtherChordType"
-						label="Chord type"
+						:label="$t('app.harmony.sidemenu.chord_type')"
 						:data="ChordTypesList"
 						no-cleanable />
 					<BaseButton icon="add" color="success" @click="onAddExoticChord" />
 				</div>
 				<hr />
-				<strong>Split</strong>
-				<div class="flex gap-5 items-end">
-					<BaseDropdown
-						v-model="selectedBarSplit"
-						label="Number of splits"
-						:data="splitOptions"
-						@input="splitBar" />
-				</div>
+				<strong>
+					{{ $t('app.harmony.sidemenu.split') }}
+				</strong>
+				<BaseDropdown
+					v-model="selectedBarSplit"
+					:label="$t('app.harmony.sidemenu.number_of_splits')"
+					:data="splitOptions"
+					@input="splitBar" />
 			</AppSideMenu>
 
 			<section class="h-full w-full">

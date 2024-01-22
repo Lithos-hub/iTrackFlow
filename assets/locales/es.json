@@ -95,7 +95,16 @@
 			"root_note": "Tónica",
 			"scale_type": "Tipo de escala",
 			"number_of_bars": "Número de compases",
-			"lyrics": "Letra"
+			"lyrics": "Letra",
+			"sidemenu": {
+				"bar_options": "Compás #{number} - Opciones",
+				"select_tonal_chord": "Selecciona un acorde tonal",
+				"select_atonal_chord": "Selecciona un acorde atonal",
+				"root_note": "Fundamental",
+				"chord_type": "Tipo",
+				"split": "Subdivisión",
+				"number_of_splits": "Nº de subdivisiones"
+			}
 		},
 		"production": {
 			"add_track": "Añadir pista",
