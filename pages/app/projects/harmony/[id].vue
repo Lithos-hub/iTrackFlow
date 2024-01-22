@@ -5,7 +5,7 @@
 		</header>
 
 		<div class="flex flex-1 flex-grow">
-			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
+			<AppSideMenu class="max-w-[350px] flex flex-col gap-5">
 				<strong class="text-primary">Bar #{{ selectedBarIndex + 1 }} options</strong>
 				<BaseDropdown
 					v-model="selectedChord"
@@ -82,7 +82,7 @@
 					</div>
 
 					<!-- Harmony sheet -->
-					<section :key="sheetKey" class="bg-white p-5 shadow relative flex flex-col gap-5">
+					<section class="bg-white p-5 shadow relative flex flex-col gap-5">
 						<h2 class="text-center text-gray-900 font-bold italic">
 							<div v-if="isEditingTitle">
 								<div class="fixed top-0 left-0 h-full w-full z-0" @click="isEditingTitle = false" />
@@ -220,9 +220,6 @@ const chordListByKeySignature = computed(
 		})) as DropdownItem[],
 );
 
-const sideMenuKey = ref(0);
-const sheetKey = ref(0);
-
 // Pinia
 const { selectedBarIndex, selectedChord, selectedBarSubdivision, selectedBarSplit } =
 	storeToRefs(useHarmonyStore());
@@ -284,7 +281,6 @@ const onChangeChord = () => {
 	};
 
 	harmonyData.value.chords = newStaffs;
-	sideMenuKey.value++;
 };
 
 const onAddExoticChord = () => {
@@ -308,26 +304,37 @@ const onAddExoticChord = () => {
 	};
 
 	harmonyData.value.chords = newStaffs;
-	sideMenuKey.value++;
 };
 
 const splitBar = () => {
 	const newStaffs = [...staffs.value];
+	const { subdivisionChords } = newStaffs[selectedBarIndex.value - 1];
+
+	const currentStaffHasMoreSubdivisionsThanSelected =
+		subdivisionChords.length > selectedBarSplit.value[0];
+
+	const newArrayLength = currentStaffHasMoreSubdivisionsThanSelected
+		? subdivisionChords.length - selectedBarSplit.value[0]
+		: selectedBarSplit.value[0] - subdivisionChords.length;
+
+	const newArrayOfSubdivisions = currentStaffHasMoreSubdivisionsThanSelected
+		? [...subdivisionChords.slice(0, selectedBarSplit.value[0])]
+		: [
+				...subdivisionChords,
+				...new Array(newArrayLength).fill({
+					id: new Date().getTime(),
+					chord: newStaffs[selectedBarIndex.value - 1].subdivisionChords[0].chord,
+					romanNumber: newStaffs[selectedBarIndex.value - 1].subdivisionChords[0].romanNumber,
+				}),
+			];
+
 	newStaffs[selectedBarIndex.value - 1] = {
 		...newStaffs[selectedBarIndex.value - 1],
-		subdivisionChords: [
-			...new Array(selectedBarSubdivision.value).fill({
-				id: new Date().getTime(),
-				chord: newStaffs[selectedBarIndex.value - 1].subdivisionChords[0].chord,
-				romanNumber: newStaffs[selectedBarIndex.value - 1].subdivisionChords[0].romanNumber,
-			}),
-		],
-		splits: selectedBarSubdivision.value,
+		subdivisionChords: newArrayOfSubdivisions,
+		splits: selectedBarSplit.value[0],
 	};
-	harmonyData.value.chords = newStaffs;
 
-	sideMenuKey.value++;
-	sheetKey.value++;
+	harmonyData.value.chords = newStaffs;
 };
 
 const zoomIn = () => {
