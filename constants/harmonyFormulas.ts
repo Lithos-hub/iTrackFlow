@@ -424,7 +424,293 @@ export const MIXOLYDIAN_SCALE_SEMITONES = [0, 2, 4, 5, 7, 9, 10];
 export const AEOLIAN_SCALE_SEMITONES = MINOR_SCALE_SEMITONES;
 export const LOCRIAN_SCALE_SEMITONES = [0, 1, 3, 5, 6, 8, 10];
 
-export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+// Scale formulas:
+/**
+ * Major: 1 2 3 4 5 6 7
+ * Minor: 1 2 b3 4 5 b6 b7
+ * Harmonic Minor: 1 2 b3 4 5 b6 7
+ * Melodic Minor: 1 2 b3 4 5 6 7
+ * Pentatonic Major: 1 2 3 5 6
+ * Pentatonic Minor: 1 b3 4 5 b7
+ * Blues: 1 b3 4 b5 5 b7
+ * Whole Tone: 1 2 3 #4 #5 #6
+ * Diminished: 1 2 b3 4 b5 b6 6 7
+ * Augmented: 1 #2 3 5 #5 7
+ * Chromatic: 1 b2 2 b3 3 4 b5 5 b6 6 b7 7
+ * Ionian: 1 2 3 4 5 6 7
+ * Dorian: 1 2 b3 4 5 6 b7
+ * Phrygian: 1 b2 b3 4 5 b6 b7
+ * Lydian: 1 2 3 #4 5 6 7
+ * Mixolydian: 1 2 3 4 5 6 b7
+ * Aeolian: 1 2 b3 4 5 b6 b7
+ * Locrian: 1 b2 b3 4 b5 b6 b7
+ */
+
+export const MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'I',
+	},
+	2: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'ii',
+	},
+	4: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'iii',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'IV',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'V',
+	},
+	9: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'vi',
+	},
+	11: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'vii',
+	},
+};
+
+export const MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'i',
+	},
+	2: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'ii',
+	},
+	3: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'iv',
+	},
+	7: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'v',
+	},
+	8: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'VI',
+	},
+	10: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'VII',
+	},
+};
+
+export const MELODIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'i',
+	},
+	2: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'ii',
+	},
+	3: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'IV',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'V',
+	},
+	9: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'vi',
+	},
+	11: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'vii',
+	},
+};
+
+export const HARMONIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'i',
+	},
+	2: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'ii',
+	},
+	3: {
+		type: 'aug',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'iv',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'V',
+	},
+	8: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'VI',
+	},
+	11: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'vii',
+	},
+};
+
+export const PENTATONIC_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
 		type: '',
 		formula: {
@@ -449,7 +735,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		},
 		romanNumber: 'iii',
 	},
-	5: {
+	7: {
 		type: '',
 		formula: {
 			3: '3',
@@ -457,7 +743,7 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		},
 		romanNumber: 'IV',
 	},
-	7: {
+	9: {
 		type: '',
 		formula: {
 			3: '3',
@@ -465,25 +751,9 @@ export const TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		},
 		romanNumber: 'V',
 	},
-	9: {
-		type: 'm',
-		formula: {
-			3: 'b3',
-			5: '5',
-		},
-		romanNumber: 'vi',
-	},
-	11: {
-		type: 'dim',
-		formula: {
-			3: 'b3',
-			5: 'b5',
-		},
-		romanNumber: 'vii',
-	},
 };
 
-export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+export const PENTATONIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
 		type: 'm',
 		formula: {
@@ -491,14 +761,6 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 		},
 		romanNumber: 'i',
-	},
-	2: {
-		type: 'dim',
-		formula: {
-			3: 'b3',
-			5: 'b5',
-		},
-		romanNumber: 'ii',
 	},
 	3: {
 		type: '',
@@ -523,14 +785,6 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			5: '5',
 		},
 		romanNumber: 'v',
-	},
-	8: {
-		type: '',
-		formula: {
-			3: '3',
-			5: '5',
-		},
-		romanNumber: 'VI',
 	},
 	10: {
 		type: '',
@@ -542,7 +796,343 @@ export const TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	},
 };
 
-export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+export const BLUES_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+		},
+		romanNumber: 'I',
+	},
+	3: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+		},
+		romanNumber: 'ii',
+	},
+	4: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+		},
+		romanNumber: 'IV',
+	},
+	7: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+		},
+		romanNumber: 'v',
+	},
+	10: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+		},
+		romanNumber: 'VI',
+	},
+};
+
+export const BLUES_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+		},
+		romanNumber: 'i',
+	},
+	3: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+		},
+		romanNumber: 'iv',
+	},
+	6: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+		},
+		romanNumber: 'V',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+		},
+		romanNumber: 'VII',
+	},
+};
+
+export const WHOLE_TONE_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+		},
+		romanNumber: 'I',
+	},
+	2: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+		},
+		romanNumber: 'ii',
+	},
+	4: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+		},
+		romanNumber: 'iii',
+	},
+	6: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+		},
+		romanNumber: 'IV',
+	},
+	8: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+		},
+		romanNumber: 'V',
+	},
+	10: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+		},
+		romanNumber: 'VI',
+	},
+};
+
+export const DIMINISHED_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'i',
+	},
+	2: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'ii',
+	},
+	3: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'iv',
+	},
+	6: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'V',
+	},
+	8: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'VI',
+	},
+	9: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'VII',
+	},
+};
+
+export const AUGMENTED_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'aug',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'i',
+	},
+	3: {
+		type: 'aug',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'ii',
+	},
+	4: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'III',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'iv',
+	},
+	8: {
+		type: 'aug',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'V',
+	},
+	11: {
+		type: 'aug',
+		formula: {
+			3: '3',
+			5: '#5',
+			7: '7',
+		},
+		romanNumber: 'VI',
+	},
+};
+
+export const CHROMATIC_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'I',
+	},
+	1: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'ii',
+	},
+	2: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'iii',
+	},
+	3: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'IV',
+	},
+	4: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'V',
+	},
+	5: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: '7',
+		},
+		romanNumber: 'vi',
+	},
+	6: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'vii',
+	},
+};
+
+export const IONIAN_SCALE_NOMENCLATURES_BY_SEMITONES = MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+
+export const DORIAN_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
 		type: '',
 		formula: {
@@ -561,43 +1151,43 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		},
 		romanNumber: 'ii',
 	},
-	4: {
-		type: 'm',
+	3: {
+		type: '',
 		formula: {
-			3: 'b3',
+			3: '3',
 			5: '5',
 			7: 'b7',
 		},
-		romanNumber: 'iii',
+		romanNumber: 'III',
 	},
 	5: {
 		type: '',
 		formula: {
 			3: '3',
 			5: '5',
-			7: '7',
+			7: 'b7',
 		},
 		romanNumber: 'IV',
 	},
 	7: {
-		type: '',
-		formula: {
-			3: '3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'V',
-	},
-	9: {
 		type: 'm',
 		formula: {
 			3: 'b3',
 			5: '5',
 			7: 'b7',
 		},
-		romanNumber: 'vi',
+		romanNumber: 'v',
 	},
-	11: {
+	9: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'VI',
+	},
+	10: {
 		type: 'dim',
 		formula: {
 			3: 'b3',
@@ -608,7 +1198,7 @@ export const TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	},
 };
 
-export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
+export const PHRYGIAN_SCALE_NOMENCLATURES_BY_SEMITONES = {
 	0: {
 		type: 'm',
 		formula: {
@@ -618,21 +1208,21 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		},
 		romanNumber: 'i',
 	},
-	2: {
-		type: 'dim',
+	1: {
+		type: '',
 		formula: {
-			3: 'b3',
-			5: 'b5',
-			7: 'bb7',
+			3: '3',
+			5: '5',
+			7: 'b7',
 		},
-		romanNumber: 'ii',
+		romanNumber: 'II',
 	},
 	3: {
 		type: '',
 		formula: {
 			3: '3',
 			5: '5',
-			7: '7',
+			7: 'b7',
 		},
 		romanNumber: 'III',
 	},
@@ -646,20 +1236,20 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		romanNumber: 'iv',
 	},
 	7: {
-		type: 'm',
+		type: '',
 		formula: {
-			3: 'b3',
+			3: '3',
 			5: '5',
 			7: 'b7',
 		},
-		romanNumber: 'v',
+		romanNumber: 'V',
 	},
 	8: {
 		type: '',
 		formula: {
 			3: '3',
 			5: '5',
-			7: '7',
+			7: 'b7',
 		},
 		romanNumber: 'VI',
 	},
@@ -668,7 +1258,207 @@ export const TETRAD_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES = {
 		formula: {
 			3: '3',
 			5: '5',
-			7: '7',
+			7: 'b7',
+		},
+		romanNumber: 'VII',
+	},
+};
+
+export const LYDIAN_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'I',
+	},
+	2: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'ii',
+	},
+	4: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'iii',
+	},
+	6: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'IV',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'V',
+	},
+	9: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'VI',
+	},
+	11: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: '#7',
+		},
+		romanNumber: 'VII',
+	},
+};
+
+export const MIXOLYDIAN_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'I',
+	},
+	2: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'ii',
+	},
+	4: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'iii',
+	},
+	5: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'IV',
+	},
+	7: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'V',
+	},
+	9: {
+		type: 'm',
+		formula: {
+			3: 'b3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'vi',
+	},
+	10: {
+		type: '',
+		formula: {
+			3: '3',
+			5: '5',
+			7: 'b7',
+		},
+		romanNumber: 'VII',
+	},
+};
+
+export const AEOLIAN_SCALE_NOMENCLATURES_BY_SEMITONES = MINOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+
+export const LOCRIAN_SCALE_NOMENCLATURES_BY_SEMITONES = {
+	0: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'i',
+	},
+	1: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'II',
+	},
+	3: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'III',
+	},
+	5: {
+		type: 'dim',
+		formula: {
+			3: 'b3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'iv',
+	},
+	6: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'V',
+	},
+	8: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
+		},
+		romanNumber: 'VI',
+	},
+	10: {
+		type: '',
+		formula: {
+			3: '3',
+			5: 'b5',
+			7: 'bb7',
 		},
 		romanNumber: 'VII',
 	},

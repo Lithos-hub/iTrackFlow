@@ -99,7 +99,7 @@
 			"sidemenu": {
 				"bar_options": "Bar #{number} - Options",
 				"select_tonal_chord": "Select a tonal chord",
-				"select_atonal_chord": "Select an atonal chord",
+				"select_custom_chord": "Select a custom chord",
 				"root_note": "Root note",
 				"chord_type": "Chord type",
 				"split": "Split",

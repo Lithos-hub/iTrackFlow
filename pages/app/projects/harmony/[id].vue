@@ -23,16 +23,16 @@
 					@input="onChangeChord" />
 				<hr />
 				<strong>
-					{{ $t('app.harmony.sidemenu.select_atonal_chord') }}
+					{{ $t('app.harmony.sidemenu.select_custom_chord') }}
 				</strong>
 				<div class="flex gap-5 items-end">
 					<BaseDropdown
-						v-model="selectedOtherChordRoot"
+						v-model="selectedAtonalChordRoot"
 						:label="$t('app.harmony.sidemenu.root_note')"
 						:data="NotesList"
 						no-cleanable />
 					<BaseDropdown
-						v-model="selectedOtherChordType"
+						v-model="selectedAtonalChordType"
 						:label="$t('app.harmony.sidemenu.chord_type')"
 						:data="ChordTypesList"
 						no-cleanable />
@@ -76,7 +76,8 @@
 							:label="$t('app.harmony.root_note')"
 							color="primary"
 							no-cleanable
-							:data="NotesList" />
+							:data="NotesList"
+							@input="updateComponents" />
 						<BaseDropdown
 							v-model="scaleType"
 							:label="$t('app.harmony.scale_type')"
@@ -164,6 +165,11 @@ const getProject = async () => {
 };
 
 const { t } = useI18n();
+
+// Pinia
+const { selectedBarIndex, selectedChord, selectedBarSubdivision, selectedBarSplit } =
+	storeToRefs(useHarmonyStore());
+
 // MOCK
 const initialHarmonyState = ref<HarmonyData>({
 	id: 1,
@@ -219,24 +225,8 @@ const initialHarmonyState = ref<HarmonyData>({
 	],
 });
 
-const chordListByKeySignature = computed(
-	() =>
-		getAvailableChords({
-			rootNote: initialHarmonyState.value.rootNote,
-			scaleType: initialHarmonyState.value.scaleType,
-		})?.map(({ nomenclature, note, romanNumber }) => ({
-			label: `${note}${nomenclature} - (${romanNumber})`,
-			value: `${note}${nomenclature} - (${romanNumber})`,
-		})) as DropdownItem[],
-);
-
 const sideMenuKey = ref(0);
 const sheetKey = ref(0);
-
-// Pinia
-const { selectedBarIndex, selectedChord, selectedBarSubdivision, selectedBarSplit } =
-	storeToRefs(useHarmonyStore());
-
 // Header
 const tempo = ref(initialHarmonyState.value.tempo);
 const rootNote = ref(initialHarmonyState.value.rootNote);
@@ -245,8 +235,8 @@ const timeSignature = ref([initialHarmonyState.value.timeSignature]);
 const numberOfBars = ref(16);
 
 // Sidemenu
-const selectedOtherChordRoot = ref<string[]>([]);
-const selectedOtherChordType = ref<string[]>([]);
+const selectedAtonalChordRoot = ref<string[]>([]);
+const selectedAtonalChordType = ref<string[]>([]);
 
 // Sheet
 const zoomLevel = ref(8);
@@ -258,6 +248,17 @@ const scalesTypesFormatted = computed(() => {
 		value,
 	}));
 });
+
+const chordListByKeySignature = computed(
+	() =>
+		getAvailableChords({
+			rootNote: rootNote.value[0],
+			scaleType: scaleType.value[0],
+		})?.map(({ nomenclature, note, romanNumber }) => ({
+			label: `${note}${nomenclature} - (${romanNumber})`,
+			value: `${note}${nomenclature} - (${romanNumber})`,
+		})) || ([] as DropdownItem[]),
+);
 
 const staffs = computed(() => {
 	const currentStaffsWithChordsLength = [...initialHarmonyState.value.chords].length;
@@ -311,13 +312,13 @@ const onAddExoticChord = () => {
 
 	const matchNewChordInAvailableChordList = chordListByKeySignature.value.find(({ value }) =>
 		(value as string).includes(
-			`${selectedOtherChordRoot.value[0]}${selectedOtherChordType.value[0]}`,
+			`${selectedAtonalChordRoot.value[0]}${selectedAtonalChordType.value[0]}`,
 		),
 	);
 
 	newStaffs[selectedBarIndex.value - 1].subdivisionChords[selectedBarSubdivision.value - 1] = {
 		id: new Date().getTime(),
-		chord: `${selectedOtherChordRoot.value[0]}${selectedOtherChordType.value[0]}`,
+		chord: `${selectedAtonalChordRoot.value[0]}${selectedAtonalChordType.value[0]}`,
 		romanNumber: matchNewChordInAvailableChordList
 			? (matchNewChordInAvailableChordList.value as ChordName)
 					.split(' - ')[1]
@@ -368,6 +369,11 @@ const zoomIn = () => {
 const zoomOut = () => {
 	if (zoomLevel.value === 3) return;
 	zoomLevel.value -= 1;
+};
+
+const updateComponents = () => {
+	sideMenuKey.value += 1;
+	sheetKey.value += 1;
 };
 
 onMounted(() => {

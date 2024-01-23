@@ -229,28 +229,28 @@ import {
 	B_LOCRIAN_POSITIONS,
 	MAJOR_SCALE_SEMITONES,
 	MINOR_SCALE_SEMITONES,
-	TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES,
-	TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
-	TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	HARMONIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	MELODIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	PENTATONIC_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	PENTATONIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	BLUES_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	BLUES_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES,
+	WHOLE_TONE_SCALE_NOMENCLATURES_BY_SEMITONES,
+	DIMINISHED_SCALE_NOMENCLATURES_BY_SEMITONES,
+	AUGMENTED_SCALE_NOMENCLATURES_BY_SEMITONES,
+	CHROMATIC_SCALE_NOMENCLATURES_BY_SEMITONES,
+	IONIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
+	DORIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
+	PHRYGIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
+	LYDIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
+	MIXOLYDIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
+	AEOLIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
+	LOCRIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
 } from '@/constants';
 
 import { Note, ScaleType } from '~/components/app/MusicStaff/MusicStaff.interfaces';
-
-// const getDistanceBetweenNotes = (root: string, targetNote: string, scaleType: string) => {
-// 	let targetPosition, rootPosition;
-// 	switch (scaleType) {
-// 		case 'major':
-// 			targetPosition = C_MAJOR_POSITIONS.indexOf(targetNote);
-// 			rootPosition = C_MAJOR_POSITIONS.indexOf(root);
-// 			return MAJOR_SCALE_SEMITONES[targetPosition] - MAJOR_SCALE_SEMITONES[rootPosition];
-// 		case 'minor':
-// 			targetPosition = C_MINOR_POSITIONS.indexOf(targetNote);
-// 			rootPosition = C_MINOR_POSITIONS.indexOf(root);
-// 			return MINOR_SCALE_SEMITONES[targetPosition] - MINOR_SCALE_SEMITONES[rootPosition];
-// 		default:
-// 			return 0;
-// 	}
-// };
 
 const getScaleNotes = ({ rootNote, scaleType }: { rootNote: Note; scaleType: ScaleType }) => {
 	switch (scaleType) {
@@ -526,16 +526,46 @@ const getScaleNotes = ({ rootNote, scaleType }: { rootNote: Note; scaleType: Sca
 	}
 };
 
-const getScaleFormula = (scaleType: string, triads = true) => {
+const getScaleFormula = (scaleType: ScaleType) => {
 	switch (scaleType) {
 		case 'major':
-			return triads
-				? TRIADS_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES
-				: TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+			return MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
 		case 'minor':
-			return triads
-				? TRIADS_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES
-				: TETRAD_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+			return MINOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'harmonic_minor':
+			return HARMONIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'melodic_minor':
+			return MELODIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'pentatonic_major':
+			return PENTATONIC_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'pentatonic_minor':
+			return PENTATONIC_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'blues_major':
+			return BLUES_MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'blues_minor':
+			return BLUES_MINOR_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'whole_tone':
+			return WHOLE_TONE_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'diminished':
+			return DIMINISHED_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'augmented':
+			return AUGMENTED_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'chromatic':
+			return CHROMATIC_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'ionian':
+			return IONIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'dorian':
+			return DORIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'phrygian':
+			return PHRYGIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'lydian':
+			return LYDIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'mixolydian':
+			return MIXOLYDIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'aeolian':
+			return AEOLIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
+		case 'locrian':
+			return LOCRIAN_SCALE_NOMENCLATURES_BY_SEMITONES;
 		default:
 			return [];
 	}

@@ -99,7 +99,7 @@
 			"sidemenu": {
 				"bar_options": "Compás #{number} - Opciones",
 				"select_tonal_chord": "Selecciona un acorde tonal",
-				"select_atonal_chord": "Selecciona un acorde atonal",
+				"select_custom_chord": "Selecciona un acorde personalizado",
 				"root_note": "Fundamental",
 				"chord_type": "Tipo",
 				"split": "Subdivisión",
