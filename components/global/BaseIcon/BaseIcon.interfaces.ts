@@ -21,7 +21,8 @@ export type IconName =
 	| 'sun'
 	| 'uncheck'
 	| 'zoom-in'
-	| 'zoom-out';
+	| 'zoom-out'
+	| 'download';
 
 export interface Icon {
 	icon: IconName;

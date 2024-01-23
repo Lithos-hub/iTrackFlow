@@ -94,21 +94,37 @@
 
 					<!-- Harmony sheet -->
 					<section :key="sheetKey" class="bg-white p-5 shadow relative flex flex-col gap-5">
-						<h2 class="text-center text-gray-900 font-bold italic">
-							<div v-if="isEditingTitle">
-								<div class="fixed top-0 left-0 h-full w-full z-0" @click="isEditingTitle = false" />
-								<BaseInput
-									v-model="initialHarmonyState.title"
-									color="primary"
-									variant="underline"
-									no-outline
-									class="z-50 text-center"
-									@keydown.enter="isEditingTitle = false" />
+						<div class="flex justify-between">
+							<h2 class="text-center text-gray-900 font-bold italic">
+								<div v-if="isEditingTitle">
+									<div
+										class="fixed top-0 left-0 h-full w-full z-0"
+										@click="isEditingTitle = false" />
+									<BaseInput
+										v-model="initialHarmonyState.title"
+										color="primary"
+										variant="underline"
+										no-outline
+										class="z-50 text-center"
+										@keydown.enter="isEditingTitle = false" />
+								</div>
+								<span v-else @click="isEditingTitle = !isEditingTitle">
+									"{{ initialHarmonyState.title }}"
+								</span>
+							</h2>
+							<div class="flex flex-col gap-1 text-black text-right">
+								<small>
+									<strong>{{ $t('app.harmony.tempo') }}:</strong>
+									{{ ' ' }}
+									<span>{{ tempo }} bpm</span>
+								</small>
+								<small>
+									<strong>{{ $t('app.harmony.time_signature') }}:</strong>
+									{{ ' ' }}
+									<span>{{ timeSignature[0] }}</span>
+								</small>
 							</div>
-							<span v-else @click="isEditingTitle = !isEditingTitle">
-								"{{ initialHarmonyState.title }}"
-							</span>
-						</h2>
+						</div>
 						<hr />
 						<div
 							class="border grid"
@@ -123,19 +139,25 @@
 								:key-signature="initialHarmonyState.scaleType" />
 						</div>
 						<!-- Sheet zoom controls -->
-						<div class="bg-dark border border-dark fixed right-5 bottom-5 rounded">
+						<div class="fixed right-5 bottom-5 rounded">
 							<div class="flex flex-col gap-1 p-1">
-								<BaseButton
+								<BaseIcon
+									icon="download"
+									color="white"
+									:size="30"
+									class="bg-danger p-1 rounded hover:bg-opacity-45 cursor-pointer"
+									@click="downloadSheet" />
+								<BaseIcon
 									icon="zoom-in"
 									color="white"
-									variant="stealth"
-									icon-color="white"
+									:size="30"
+									class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
 									@click="zoomIn" />
-								<BaseButton
+								<BaseIcon
 									icon="zoom-out"
 									color="white"
-									variant="stealth"
-									icon-color="white"
+									:size="30"
+									class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
 									@click="zoomOut" />
 							</div>
 						</div>
@@ -229,7 +251,7 @@ const sideMenuKey = ref(0);
 const sheetKey = ref(0);
 // Header
 const tempo = ref(initialHarmonyState.value.tempo);
-const rootNote = ref(initialHarmonyState.value.rootNote);
+const rootNote = ref([initialHarmonyState.value.rootNote]);
 const scaleType = ref([initialHarmonyState.value.scaleType]);
 const timeSignature = ref([initialHarmonyState.value.timeSignature]);
 const numberOfBars = ref(16);
@@ -375,6 +397,8 @@ const updateComponents = () => {
 	sideMenuKey.value += 1;
 	sheetKey.value += 1;
 };
+
+const downloadSheet = () => {};
 
 onMounted(() => {
 	getProject();
