@@ -40,10 +40,6 @@ export default [
 		value: 'augmented',
 	},
 	{
-		label: 'app.harmony.chromatic',
-		value: 'chromatic',
-	},
-	{
 		label: 'app.harmony.ionian',
 		value: 'ionian',
 	},

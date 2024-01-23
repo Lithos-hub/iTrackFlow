@@ -83,7 +83,6 @@ export type ScaleType =
 	| 'pentatonic_minor'
 	| 'blues_major'
 	| 'blues_minor'
-	| 'chromatic'
 	| 'ionian'
 	| 'dorian'
 	| 'phrygian'

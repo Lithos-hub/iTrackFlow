@@ -10,20 +10,6 @@ export const C_MAJOR_BLUES_POSITIONS = ['C', 'D', 'Eb', 'E', 'G', 'A'];
 export const C_WHOLE_TONE_POSITIONS = ['C', 'D', 'E', 'F#', 'G#', 'A#'];
 export const C_DIMINISHED_POSITIONS = ['C', 'D', 'Eb', 'F', 'Gb', 'Ab', 'A', 'B'];
 export const C_AUGMENTED_POSITIONS = ['C', 'D#', 'E', 'G', 'G#', 'B'];
-export const C_CHROMATIC_POSITIONS = [
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-];
 export const C_IONIAN_POSITIONS = C_MAJOR_POSITIONS;
 export const C_DORIAN_POSITIONS = ['C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'];
 export const C_PHRYGIAN_POSITIONS = ['C', 'Db', 'Eb', 'F', 'G', 'Ab', 'Bb'];
@@ -44,19 +30,6 @@ export const C_SHARP_MAJOR_BLUES_POSITIONS = ['C#', 'D#', 'E', 'F', 'G#', 'A#'];
 export const C_SHARP_WHOLE_TONE_POSITIONS = ['C#', 'D#', 'F', 'G', 'A', 'B'];
 export const C_SHARP_DIMINISHED_POSITIONS = ['C#', 'D#', 'E', 'F#', 'G', 'A', 'B', 'C'];
 export const C_SHARP_AUGMENTED_POSITIONS = ['C#', 'D##', 'F#', 'G#', 'A', 'B'];
-export const C_SHARP_CHROMATIC_POSITIONS = [
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-];
 export const C_SHARP_IONIAN_POSITIONS = C_SHARP_MAJOR_POSITIONS;
 export const C_SHARP_DORIAN_POSITIONS = ['C#', 'D#', 'E', 'F#', 'G#', 'A#', 'B'];
 export const C_SHARP_PHRYGIAN_POSITIONS = ['C#', 'D', 'E', 'F#', 'G#', 'A', 'B'];
@@ -77,20 +50,6 @@ export const D_MAJOR_BLUES_POSITIONS = ['D', 'E', 'F', 'F#', 'A', 'B'];
 export const D_WHOLE_TONE_POSITIONS = ['D', 'E', 'F#', 'G#', 'A#', 'C'];
 export const D_DIMINISHED_POSITIONS = ['D', 'E', 'F', 'G', 'Ab', 'A', 'B', 'C#'];
 export const D_AUGMENTED_POSITIONS = ['D', 'E#', 'F#', 'A', 'A#', 'C#'];
-export const D_CHROMATIC_POSITIONS = [
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-];
 export const D_IONIAN_POSITIONS = D_MAJOR_POSITIONS;
 export const D_DORIAN_POSITIONS = ['D', 'E', 'F', 'G', 'A', 'B', 'C'];
 export const D_PHRYGIAN_POSITIONS = ['D', 'Eb', 'F', 'G', 'A', 'Bb', 'C'];
@@ -111,19 +70,6 @@ export const D_SHARP_MAJOR_BLUES_POSITIONS = ['D#', 'F', 'G', 'G#', 'A#', 'C'];
 export const D_SHARP_WHOLE_TONE_POSITIONS = ['D#', 'F', 'G', 'A', 'B', 'C#'];
 export const D_SHARP_DIMINISHED_POSITIONS = ['D#', 'F', 'F#', 'G#', 'A', 'B', 'C', 'D'];
 export const D_SHARP_AUGMENTED_POSITIONS = ['D#', 'F##', 'G#', 'A#', 'B', 'C#'];
-export const D_SHARP_CHROMATIC_POSITIONS = [
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-];
 export const D_SHARP_IONIAN_POSITIONS = D_SHARP_MAJOR_POSITIONS;
 export const D_SHARP_DORIAN_POSITIONS = ['D#', 'F', 'F#', 'G#', 'A#', 'C', 'C#'];
 export const D_SHARP_PHRYGIAN_POSITIONS = ['D#', 'E', 'F#', 'G#', 'A#', 'B', 'C#'];
@@ -144,20 +90,6 @@ export const E_MAJOR_BLUES_POSITIONS = ['E', 'F#', 'G', 'G#', 'B', 'C#'];
 export const E_WHOLE_TONE_POSITIONS = ['E', 'F#', 'G#', 'A#', 'C', 'D'];
 export const E_DIMINISHED_POSITIONS = ['E', 'F#', 'G', 'A', 'Bb', 'B', 'C#', 'D#'];
 export const E_AUGMENTED_POSITIONS = ['E', 'Fx', 'G#', 'B', 'C#', 'D#'];
-export const E_CHROMATIC_POSITIONS = [
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-];
 export const E_IONIAN_POSITIONS = E_MAJOR_POSITIONS;
 export const E_DORIAN_POSITIONS = ['E', 'F#', 'G', 'A', 'B', 'C#', 'D'];
 export const E_PHRYGIAN_POSITIONS = ['E', 'F', 'G', 'A', 'B', 'C', 'D'];
@@ -178,20 +110,6 @@ export const F_MAJOR_BLUES_POSITIONS = ['F', 'G', 'Ab', 'A', 'C', 'D'];
 export const F_WHOLE_TONE_POSITIONS = ['F', 'G', 'A', 'B', 'D', 'E'];
 export const F_DIMINISHED_POSITIONS = ['F', 'G', 'Ab', 'Bb', 'Cb', 'Db', 'D', 'E'];
 export const F_AUGMENTED_POSITIONS = ['F', 'G#', 'A', 'C', 'C#', 'E'];
-export const F_CHROMATIC_POSITIONS = [
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-];
 export const F_IONIAN_POSITIONS = F_MAJOR_POSITIONS;
 export const F_DORIAN_POSITIONS = ['F', 'G', 'Ab', 'Bb', 'C', 'D', 'Eb'];
 export const F_PHRYGIAN_POSITIONS = ['F', 'Gb', 'Ab', 'Bb', 'C', 'Db', 'Eb'];
@@ -212,20 +130,6 @@ export const F_SHARP_MAJOR_BLUES_POSITIONS = ['F#', 'G#', 'A', 'B', 'C#', 'D#'];
 export const F_SHARP_WHOLE_TONE_POSITIONS = ['F#', 'G#', 'A#', 'C', 'D', 'E'];
 export const F_SHARP_DIMINISHED_POSITIONS = ['F#', 'G#', 'A', 'B', 'C', 'D', 'E', 'F'];
 export const F_SHARP_AUGMENTED_POSITIONS = ['F#', 'G##', 'A#', 'C#', 'D', 'E'];
-export const F_SHARP_CHROMATIC_POSITIONS = [
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-];
 export const F_SHARP_IONIAN_POSITIONS = F_SHARP_MAJOR_POSITIONS;
 export const F_SHARP_DORIAN_POSITIONS = ['F#', 'G#', 'A', 'B', 'C#', 'D#', 'E'];
 export const F_SHARP_PHRYGIAN_POSITIONS = ['F#', 'G', 'A', 'B', 'C#', 'D', 'E'];
@@ -246,20 +150,6 @@ export const G_MAJOR_BLUES_POSITIONS = ['G', 'A', 'Bb', 'B', 'D', 'E'];
 export const G_WHOLE_TONE_POSITIONS = ['G', 'A', 'B', 'C#', 'D#', 'F'];
 export const G_DIMINISHED_POSITIONS = ['G', 'A', 'Bb', 'C', 'Db', 'D', 'E', 'F#'];
 export const G_AUGMENTED_POSITIONS = ['G', 'A#', 'B', 'D', 'D#', 'F#'];
-export const G_CHROMATIC_POSITIONS = [
-	'G',
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-];
 export const G_IONIAN_POSITIONS = G_MAJOR_POSITIONS;
 export const G_DORIAN_POSITIONS = ['G', 'A', 'Bb', 'C', 'D', 'E', 'F'];
 export const G_PHRYGIAN_POSITIONS = ['G', 'Ab', 'Bb', 'C', 'D', 'Eb', 'F'];
@@ -280,20 +170,6 @@ export const G_SHARP_MAJOR_BLUES_POSITIONS = ['G#', 'A#', 'B', 'C', 'D#', 'F'];
 export const G_SHARP_WHOLE_TONE_POSITIONS = ['G#', 'A#', 'C', 'D', 'E', 'F#'];
 export const G_SHARP_DIMINISHED_POSITIONS = ['G#', 'A#', 'B', 'C#', 'D', 'E', 'F', 'G'];
 export const G_SHARP_AUGMENTED_POSITIONS = ['G#', 'A##', 'C', 'D#', 'E', 'F#'];
-export const G_SHARP_CHROMATIC_POSITIONS = [
-	'G#',
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-];
 export const G_SHARP_IONIAN_POSITIONS = G_SHARP_MAJOR_POSITIONS;
 export const G_SHARP_DORIAN_POSITIONS = ['G#', 'A#', 'B', 'C#', 'D#', 'F', 'F#'];
 export const G_SHARP_PHRYGIAN_POSITIONS = ['G#', 'A', 'B', 'C#', 'D#', 'E', 'F#'];
@@ -314,20 +190,6 @@ export const A_MAJOR_BLUES_POSITIONS = ['A', 'B', 'C', 'C#', 'E', 'F#'];
 export const A_WHOLE_TONE_POSITIONS = ['A', 'B', 'C#', 'D#', 'F', 'G'];
 export const A_DIMINISHED_POSITIONS = ['A', 'B', 'C', 'D', 'Eb', 'E', 'F#', 'G#'];
 export const A_AUGMENTED_POSITIONS = ['A', 'B#', 'C#', 'E', 'F', 'G#'];
-export const A_CHROMATIC_POSITIONS = [
-	'A',
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-];
 export const A_IONIAN_POSITIONS = A_MAJOR_POSITIONS;
 export const A_DORIAN_POSITIONS = ['A', 'B', 'C', 'D', 'E', 'F#', 'G'];
 export const A_PHRYGIAN_POSITIONS = ['A', 'Bb', 'C', 'D', 'E', 'F', 'G'];
@@ -348,20 +210,6 @@ export const A_SHARP_MAJOR_BLUES_POSITIONS = ['A#', 'C', 'D', 'D#', 'F', 'G'];
 export const A_SHARP_WHOLE_TONE_POSITIONS = ['A#', 'C', 'D', 'E', 'G', 'A'];
 export const A_SHARP_DIMINISHED_POSITIONS = ['A#', 'C', 'C#', 'D#', 'E', 'F#', 'G', 'A'];
 export const A_SHARP_AUGMENTED_POSITIONS = ['A#', 'C##', 'D#', 'F', 'F#', 'G#'];
-export const A_SHARP_CHROMATIC_POSITIONS = [
-	'A#',
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-];
 export const A_SHARP_IONIAN_POSITIONS = A_SHARP_MAJOR_POSITIONS;
 export const A_SHARP_DORIAN_POSITIONS = ['A#', 'C', 'C#', 'D#', 'F', 'G', 'G#'];
 export const A_SHARP_PHRYGIAN_POSITIONS = ['A#', 'B', 'C#', 'D#', 'F', 'F#', 'G#'];
@@ -382,20 +230,6 @@ export const B_MAJOR_BLUES_POSITIONS = ['B', 'C#', 'D', 'D#', 'F#', 'G#'];
 export const B_WHOLE_TONE_POSITIONS = ['B', 'C#', 'D#', 'E#', 'G', 'A'];
 export const B_DIMINISHED_POSITIONS = ['B', 'C#', 'D', 'E', 'F', 'Gb', 'G', 'A#'];
 export const B_AUGMENTED_POSITIONS = ['B', 'C##', 'D#', 'F#', 'G', 'A#'];
-export const B_CHROMATIC_POSITIONS = [
-	'B',
-	'C',
-	'C#',
-	'D',
-	'D#',
-	'E',
-	'F',
-	'F#',
-	'G',
-	'G#',
-	'A',
-	'A#',
-];
 export const B_IONIAN_POSITIONS = B_MAJOR_POSITIONS;
 export const B_DORIAN_POSITIONS = ['B', 'C#', 'D', 'E', 'F#', 'G#', 'A'];
 export const B_PHRYGIAN_POSITIONS = ['B', 'C', 'D', 'E', 'F#', 'G', 'A'];
@@ -410,12 +244,11 @@ export const HARMONIC_MINOR_SCALE_SEMITONES = [0, 2, 3, 5, 7, 8, 11];
 export const MELODIC_MINOR_SCALE_SEMITONES = [0, 2, 3, 5, 7, 9, 11];
 export const PENTATONIC_MAJOR_SCALE_SEMITONES = [0, 2, 4, 7, 9];
 export const PENTATONIC_MINOR_SCALE_SEMITONES = [0, 3, 5, 7, 10];
-export const BLUES_SCALE_SEMITONES = [0, 3, 4, 5, 7, 10];
+export const BLUES_MAJOR_SCALE_SEMITONES = [0, 3, 4, 5, 6, 7, 10];
+export const BLUES_MINOR_SCALE_SEMITONES = [0, 2, 3, 4, 5, 7, 9, 10];
 export const WHOLE_TONE_SCALE_SEMITONES = [0, 2, 4, 6, 8, 10];
 export const DIMINISHED_SCALE_SEMITONES = [0, 2, 3, 5, 6, 8, 9, 11];
 export const AUGMENTED_SCALE_SEMITONES = [0, 3, 4, 7, 8, 11];
-export const CHROMATIC_SCALE_SEMITONES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export const IONIAN_SCALE_SEMITONES = MAJOR_SCALE_SEMITONES;
 export const DORIAN_SCALE_SEMITONES = [0, 2, 3, 5, 7, 9, 10];
 export const PHRYGIAN_SCALE_SEMITONES = [0, 1, 3, 5, 7, 8, 10];
@@ -436,7 +269,6 @@ export const LOCRIAN_SCALE_SEMITONES = [0, 1, 3, 5, 6, 8, 10];
  * Whole Tone: 1 2 3 #4 #5 #6
  * Diminished: 1 2 b3 4 b5 b6 6 7
  * Augmented: 1 #2 3 5 #5 7
- * Chromatic: 1 b2 2 b3 3 4 b5 5 b6 6 b7 7
  * Ionian: 1 2 3 4 5 6 7
  * Dorian: 1 2 b3 4 5 6 b7
  * Phrygian: 1 b2 b3 4 5 b6 b7
@@ -1061,72 +893,6 @@ export const AUGMENTED_SCALE_NOMENCLATURES_BY_SEMITONES = {
 			7: '7',
 		},
 		romanNumber: 'VI',
-	},
-};
-
-export const CHROMATIC_SCALE_NOMENCLATURES_BY_SEMITONES = {
-	0: {
-		type: '',
-		formula: {
-			3: '3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'I',
-	},
-	1: {
-		type: 'm',
-		formula: {
-			3: 'b3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'ii',
-	},
-	2: {
-		type: 'm',
-		formula: {
-			3: 'b3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'iii',
-	},
-	3: {
-		type: '',
-		formula: {
-			3: '3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'IV',
-	},
-	4: {
-		type: '',
-		formula: {
-			3: '3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'V',
-	},
-	5: {
-		type: 'm',
-		formula: {
-			3: 'b3',
-			5: '5',
-			7: '7',
-		},
-		romanNumber: 'vi',
-	},
-	6: {
-		type: 'dim',
-		formula: {
-			3: 'b3',
-			5: 'b5',
-			7: 'bb7',
-		},
-		romanNumber: 'vii',
 	},
 };
 

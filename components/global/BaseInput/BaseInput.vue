@@ -37,7 +37,7 @@ const { lightMode } = storeToRefs(useScreenStore());
 
 const { debounced, color } = withDefaults(defineProps<Input>(), {
 	modelValue: '',
-	variant: 'rounded',
+	variant: 'bordered',
 });
 
 const emit = defineEmits(['update:modelValue', 'input', 'change']);
@@ -105,7 +105,7 @@ watch(
 	}
 
 	&__bordered {
-		@apply text-black dark:text-white border-2;
+		@apply text-black dark:text-white border;
 	}
 
 	&__rounded {
