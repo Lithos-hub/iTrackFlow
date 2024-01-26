@@ -63,7 +63,7 @@
 						</BaseButton>
 					</div>
 
-					<div class="grid grid-cols-5 w-full gap-5">
+					<div class="grid grid-cols-5 w-full gap-5 text-black dark:text-primary">
 						<BaseInput v-model="tempo" :label="$t('app.harmony.tempo')" color="primary" />
 						<BaseDropdown
 							v-model="timeSignature"
@@ -93,75 +93,11 @@
 					</div>
 
 					<!-- Harmony sheet -->
-					<section :key="sheetKey" class="bg-white p-5 shadow relative flex flex-col gap-5">
-						<div class="flex justify-between">
-							<h2 class="text-center text-gray-900 font-bold italic">
-								<div v-if="isEditingTitle">
-									<div
-										class="fixed top-0 left-0 h-full w-full z-0"
-										@click="isEditingTitle = false" />
-									<BaseInput
-										v-model="initialHarmonyState.title"
-										color="primary"
-										variant="underline"
-										no-outline
-										class="z-50 text-center"
-										@keydown.enter="isEditingTitle = false" />
-								</div>
-								<span v-else @click="isEditingTitle = !isEditingTitle">
-									"{{ initialHarmonyState.title }}"
-								</span>
-							</h2>
-							<div class="flex flex-col gap-1 text-black text-right">
-								<small>
-									<strong>{{ $t('app.harmony.tempo') }}:</strong>
-									{{ ' ' }}
-									<span>{{ tempo }} bpm</span>
-								</small>
-								<small>
-									<strong>{{ $t('app.harmony.time_signature') }}:</strong>
-									{{ ' ' }}
-									<span>{{ timeSignature[0] }}</span>
-								</small>
-							</div>
-						</div>
-						<hr />
-						<div
-							class="border grid"
-							:style="{
-								'grid-template-columns': `repeat(${zoomLevel}, 1fr)`,
-							}">
-							<AppMusicStaff
-								v-for="(chord, index) of staffs"
-								:key="index"
-								:index="index + 1"
-								v-bind="chord"
-								:key-signature="initialHarmonyState.scaleType" />
-						</div>
-						<!-- Sheet zoom controls -->
-						<div class="fixed right-5 bottom-5 rounded">
-							<div class="flex flex-col gap-1 p-1">
-								<BaseIcon
-									icon="download"
-									color="white"
-									:size="30"
-									class="bg-danger p-1 rounded hover:bg-opacity-45 cursor-pointer"
-									@click="downloadSheet" />
-								<BaseIcon
-									icon="zoom-in"
-									color="white"
-									:size="30"
-									class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
-									@click="zoomIn" />
-								<BaseIcon
-									icon="zoom-out"
-									color="white"
-									:size="30"
-									class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
-									@click="zoomOut" />
-							</div>
-						</div>
-					</section>
+
+					<AppMusicSheet
+						v-model="initialHarmonyState.title"
+						:data="initialHarmonyState"
+						:staffs="staffs" />
 				</div>
 			</section>
 		</div>
@@ -169,7 +105,12 @@
 </template>
 
 <script setup lang="ts">
-import { HarmonyData, ChordName } from '@/components/app/MusicStaff/MusicStaff.interfaces';
+import {
+	HarmonyData,
+	ChordName,
+	MusicChord,
+	RomanNumber,
+} from '@/components/app/MusicStaff/MusicStaff.interfaces';
 import { DropdownItem } from '@/components/global/BaseDropdown/BaseDropdown.interfaces';
 import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
 import { useHarmonyStore } from '~/store/harmony';
@@ -178,13 +119,6 @@ definePageMeta({
 	layout: 'harmony',
 	middleware: 'auth',
 });
-
-const getProject = async () => {
-	const { data } = await useFetch('/api/projects', {
-		method: 'GET',
-	});
-	console.log(data);
-};
 
 const { t } = useI18n();
 
@@ -260,10 +194,6 @@ const numberOfBars = ref(16);
 const selectedAtonalChordRoot = ref<string[]>([]);
 const selectedAtonalChordType = ref<string[]>([]);
 
-// Sheet
-const zoomLevel = ref(8);
-const isEditingTitle = ref(false);
-
 const scalesTypesFormatted = computed(() => {
 	return ScaleTypesList.map(({ label, value }) => ({
 		label: t(label),
@@ -282,7 +212,7 @@ const chordListByKeySignature = computed(
 		})) || ([] as DropdownItem[]),
 );
 
-const staffs = computed(() => {
+const staffs = computed<MusicChord[]>(() => {
 	const currentStaffsWithChordsLength = [...initialHarmonyState.value.chords].length;
 
 	const currentSheetHasMoreBarsThanSelected =
@@ -322,8 +252,11 @@ const onChangeChord = () => {
 
 	newStaffs[selectedBarIndex.value - 1].subdivisionChords[selectedBarSubdivision.value - 1] = {
 		id: new Date().getTime(),
-		chord: selectedChord.value[0].split(' - ')[0],
-		romanNumber: selectedChord.value[0].split(' - ')[1].replace('(', '').replace(')', ''),
+		chord: selectedChord.value[0].split(' - ')[0] as ChordName,
+		romanNumber: selectedChord.value[0]
+			.split(' - ')[1]
+			.replace('(', '')
+			.replace(')', '') as RomanNumber,
 	};
 
 	initialHarmonyState.value.chords = newStaffs;
@@ -340,12 +273,12 @@ const onAddExoticChord = () => {
 
 	newStaffs[selectedBarIndex.value - 1].subdivisionChords[selectedBarSubdivision.value - 1] = {
 		id: new Date().getTime(),
-		chord: `${selectedAtonalChordRoot.value[0]}${selectedAtonalChordType.value[0]}`,
+		chord: `${selectedAtonalChordRoot.value[0]}${selectedAtonalChordType.value[0]}` as ChordName,
 		romanNumber: matchNewChordInAvailableChordList
-			? (matchNewChordInAvailableChordList.value as ChordName)
+			? ((matchNewChordInAvailableChordList.value as ChordName)
 					.split(' - ')[1]
 					.replace('(', '')
-					.replace(')', '')
+					.replace(')', '') as RomanNumber)
 			: 'atonal',
 	};
 
@@ -383,28 +316,17 @@ const splitBar = () => {
 	initialHarmonyState.value.chords = newStaffs;
 };
 
-const zoomIn = () => {
-	if (zoomLevel.value === 12) return;
-	zoomLevel.value += 1;
-};
-
-const zoomOut = () => {
-	if (zoomLevel.value === 3) return;
-	zoomLevel.value -= 1;
-};
-
 const updateComponents = () => {
 	sideMenuKey.value += 1;
 	sheetKey.value += 1;
 };
 
-const downloadSheet = () => {};
-
 onMounted(() => {
-	getProject();
 	const firstSubdivisionChordName = initialHarmonyState.value.chords[0].subdivisionChords[0].chord;
 	const firstSubdivisionRomanNumber =
 		initialHarmonyState.value.chords[0].subdivisionChords[0].romanNumber;
-	selectedChord.value = [`${firstSubdivisionChordName} - (${firstSubdivisionRomanNumber})`];
+	selectedChord.value = [
+		`${firstSubdivisionChordName as ChordName} - (${firstSubdivisionRomanNumber as RomanNumber})`,
+	];
 });
 </script>

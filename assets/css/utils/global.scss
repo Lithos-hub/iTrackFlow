@@ -4,6 +4,8 @@ body {
 	scroll-behavior: smooth;
 }
 
+// Apply only in elements outside the music-sheet class
+
 p,
 h1,
 h2,
@@ -11,8 +13,13 @@ h3,
 h4,
 h5,
 h6,
+strong,
 label {
-	@apply dark:text-slate-200 text-dark;
+	@apply [&>:not(.music-sheet)]:dark:text-white [&>:not(.music-sheet)]:text-black;
+}
+
+.music-sheet {
+	@apply text-black;
 }
 
 hr {

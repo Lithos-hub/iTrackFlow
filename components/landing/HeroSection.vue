@@ -1,7 +1,7 @@
 <template>
 	<section
 		id="hero"
-		class="h-[calc(100vh-61px)] text-center flex flex-col items-center justify-center">
+		class="h-[calc(100vh-61px)] text-center flex flex-col items-center justify-center text-black dark:text-white">
 		<h1
 			class="xl:text-[250px] lg:text-[180px] md:text-[200px] text-[80px] text-center gradient__text--primary brightness-110">
 			{{ $t('landing.title') }}

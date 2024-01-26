@@ -21,7 +21,7 @@ type ChordRoot =
 	| 'A#'
 	| 'B#';
 
-type ChordFigure =
+export type RomanNumber =
 	| 'I'
 	| 'II'
 	| 'III'
@@ -182,8 +182,10 @@ export type TimeSignature =
 export interface SubdivisionChords {
 	id: number;
 	chord: ChordName;
-	romanNumber: ChordFigure;
+	romanNumber: RomanNumber | 'atonal';
 }
+
+export type SelectedChord = `${ChordName} - (${RomanNumber})`;
 
 export interface MusicChord {
 	id: number;
@@ -208,5 +210,5 @@ export interface MusicStaffProps extends MusicChord {
 export interface ChordTypeData {
 	type: string;
 	formula: Record<number, string>;
-	romanNumber: ChordFigure;
+	romanNumber: RomanNumber;
 }

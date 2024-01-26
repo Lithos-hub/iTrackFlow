@@ -7,8 +7,8 @@
 		<AppMusicStaffSubdivisionLabel :index="index" :subdivision="subdivision" />
 		<div class="flex flex-col justify-between">
 			<div>
-				<h4 class="text-black font-bold">{{ chord }}</h4>
-				<h5 v-if="romanNumber !== 'atonal'" class="text-black">{{ romanNumber }}</h5>
+				<strong class="text-black font-bold">{{ chord }}</strong>
+				<p v-if="romanNumber !== 'atonal'" class="text-black">{{ romanNumber }}</p>
 				<small v-else class="text-red-500">Atonal</small>
 			</div>
 		</div>
@@ -16,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import { ChordName, RomanNumber } from './MusicStaff.interfaces';
 import { MusicStafSubdivisionProps } from './MusicStaffSubdivision.interfaces';
 import { useHarmonyStore } from '~/store/harmony';
 
@@ -33,6 +34,6 @@ const selectSubdivision = (index: number, split: number) => {
 	selectedBarSubdivision.value = split;
 	selectedBarSplit.value[0] = splits;
 
-	selectedChord.value = [`${chord} - (${romanNumber})`];
+	selectedChord.value = [`${chord as ChordName} - (${romanNumber as RomanNumber})`];
 };
 </script>

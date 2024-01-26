@@ -90,6 +90,7 @@
 			"aeolian": "Aeolian",
 			"locrian": "Locrian",
 			"tempo": "Tempo",
+			"sheet_title_placeholder": "Write a title for your song",
 			"time_signature": "Time signature",
 			"root_note": "Root note",
 			"scale_type": "Scale type",

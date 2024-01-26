@@ -1,8 +1,8 @@
 <template>
-	<section id="product" class="h-screen">
+	<section id="product" class="h-screen text-black dark:text-white">
 		<article class="flex gap-10">
 			<div class="w-1/2 p-5">
-				<h3 class="text-[100px]">
+				<h3 class="text-[100px] gradient__text--primary">
 					{{ $t('landing.product.title_1') }}
 				</h3>
 				<p class="text-justify">
@@ -14,7 +14,7 @@
 		<article class="flex gap-10">
 			<img src="/img/product-production.jpg" class="w-1/2 p-5" />
 			<div class="w-1/2 p-5">
-				<h3 class="text-[100px]">
+				<h3 class="text-[100px] gradient__text--primary">
 					{{ $t('landing.product.title_2') }}
 				</h3>
 				<p class="text-justify">
