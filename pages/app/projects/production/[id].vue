@@ -16,7 +16,7 @@
 				</BaseButton>
 			</div>
 			<div class="flex flex-col gap-5">
-				<div class="grid grid-cols-5 w-full gap-5">
+				<div class="grid grid-cols-5 w-full gap-5 text-primary">
 					<BaseInput v-model="projectName" label="Project name" color="primary" />
 					<BaseInput v-model="projectComposer" label="Composer" color="primary" />
 					<BaseInput v-model="projectArranger" label="Arranger" color="primary" />

@@ -1,5 +1,5 @@
 <template>
-	<section class="flex flex-col gap-5 app_margin">
+	<section class="flex flex-col gap-5 app_margin dark:text-white text-black">
 		<h2 class="uppercase font-bold">
 			{{ $t('app.projects.title') }}
 		</h2>

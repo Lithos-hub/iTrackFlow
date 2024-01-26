@@ -1,5 +1,5 @@
 <template>
-	<div class="card__wrapper">
+	<div class="card__wrapper dark:text-white text-black">
 		<!-- Title slot -->
 		<slot name="title"></slot>
 
