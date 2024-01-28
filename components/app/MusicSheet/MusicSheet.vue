@@ -2,7 +2,7 @@
 	<section
 		v-if="data"
 		class="relative music-sheet text-black bg-white p-5 shadow relative flex flex-col gap-5">
-		<div class="grid grid-cols-2 gap-10 bg-white z-50 w-full">
+		<div class="grid grid-cols-2 gap-10 bg-white w-full">
 			<BaseInput
 				v-model.trim="sheetTitle"
 				color="primary"

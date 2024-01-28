@@ -89,7 +89,9 @@
 import { ref, Ref } from 'vue';
 import { BaseDropdown } from './BaseDropdown.interfaces';
 
-const props = defineProps<BaseDropdown>();
+const props = withDefaults(defineProps<BaseDropdown>(), {
+	color: 'primary',
+});
 
 const model = defineModel({
 	type: Array as PropType<unknown[]>,

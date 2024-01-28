@@ -1,7 +1,7 @@
 <template>
 	<Teleport to="body">
 		<div
-			class="fixed z-50 w-[350px] bg-dark rounded border"
+			class="fixed z-50 w-[350px] bg-dark rounded border text-black dark:text-white"
 			:style="{
 				top: `${clientY}px`,
 				left: `${clientX}px`,

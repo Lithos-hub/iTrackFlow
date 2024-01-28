@@ -49,7 +49,6 @@
     "@morev/vue-transitions": "^2.3.6",
     "@pinia/nuxt": "^0.5.1",
     "jspdf": "^2.5.1",
-    "lodash-es": "^4.17.21",
     "pinia": "^2.1.7"
   },
   "eslintConfig": {

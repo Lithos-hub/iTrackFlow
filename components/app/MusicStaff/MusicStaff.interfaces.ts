@@ -191,6 +191,7 @@ export interface MusicChord {
 	id: number;
 	subdivisionChords: SubdivisionChords[];
 	splits: number;
+	lyrics?: string;
 }
 
 export interface HarmonyData {

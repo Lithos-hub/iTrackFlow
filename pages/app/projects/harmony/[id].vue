@@ -5,7 +5,7 @@
 		</header>
 
 		<div class="flex flex-1 flex-grow">
-			<AppSideMenu :key="sideMenuKey" class="max-w-[350px] flex flex-col gap-5">
+			<AppSideMenu class="max-w-[350px] flex flex-col gap-5">
 				<strong class="text-primary">
 					{{
 						$t('app.harmony.sidemenu.bar_options', {
@@ -76,8 +76,7 @@
 							:label="$t('app.harmony.root_note')"
 							color="primary"
 							no-cleanable
-							:data="NotesList"
-							@input="updateComponents" />
+							:data="NotesList" />
 						<BaseDropdown
 							v-model="scaleType"
 							:label="$t('app.harmony.scale_type')"
@@ -145,6 +144,7 @@ const initialHarmonyState = ref<HarmonyData>({
 				},
 			],
 			splits: 1,
+			lyrics: 'Lorem ipsum',
 		},
 		{
 			id: new Date().getTime(),
@@ -166,6 +166,7 @@ const initialHarmonyState = ref<HarmonyData>({
 				},
 			],
 			splits: 3,
+			lyrics: 'Dolor sit amet',
 		},
 		{
 			id: new Date().getTime(),
@@ -181,8 +182,6 @@ const initialHarmonyState = ref<HarmonyData>({
 	],
 });
 
-const sideMenuKey = ref(0);
-const sheetKey = ref(0);
 // Header
 const tempo = ref(initialHarmonyState.value.tempo);
 const rootNote = ref([initialHarmonyState.value.rootNote]);
@@ -314,11 +313,6 @@ const splitBar = () => {
 	};
 
 	initialHarmonyState.value.chords = newStaffs;
-};
-
-const updateComponents = () => {
-	sideMenuKey.value += 1;
-	sheetKey.value += 1;
 };
 
 onMounted(() => {

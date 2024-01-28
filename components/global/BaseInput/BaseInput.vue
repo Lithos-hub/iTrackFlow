@@ -41,7 +41,7 @@ const { debounced, color } = withDefaults(defineProps<Input>(), {
 });
 
 const emit = defineEmits(['update:modelValue', 'input', 'change']);
-const model = defineModel();
+const model = defineModel<string | number>();
 
 const onDebouncedInput = debounce((event: Event) => {
 	emit('update:modelValue', (event.target as HTMLInputElement).value);

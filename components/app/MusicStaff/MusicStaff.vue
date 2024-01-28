@@ -13,20 +13,28 @@
 				:roman-number="romanNumber" />
 		</div>
 		<BaseInput
-			v-model="lyrics"
+			v-model="model"
 			variant="underline"
 			color="primary"
+			debounced
 			:placeholder="$t('app.harmony.lyrics')"
-			no-outline />
+			no-outline
+			@input="updateLyrics" />
 	</div>
 </template>
 
 <script setup lang="ts">
 import { MusicStaffProps } from './MusicStaff.interfaces';
 
-defineProps<MusicStaffProps>();
+const { lyrics } = defineProps<MusicStaffProps>();
 
 defineEmits(['on-select-bar']);
 
-const lyrics = ref('');
+const model = defineModel<MusicStaffProps['lyrics']>();
+
+const updateLyrics = () => console.log('Updating');
+
+onMounted(() => {
+	model.value = lyrics;
+});
 </script>

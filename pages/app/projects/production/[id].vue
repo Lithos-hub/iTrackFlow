@@ -1,5 +1,5 @@
 <template>
-	<section class="h-full w-full">
+	<section class="h-full w-full pb-10">
 		<div class="app_margin">
 			<div class="flex justify-between">
 				<BaseButton
@@ -82,7 +82,7 @@
 									:color="mastering ? 'green' : 'red'" />
 							</td>
 							<td
-								@click="togglePlay(id)"
+								@click="audioPath && togglePlay(id)"
 								@contextmenu="($event) => onCellClick({ column: 'audio', id }, $event)">
 								<BaseIcon
 									v-if="audioPath"
