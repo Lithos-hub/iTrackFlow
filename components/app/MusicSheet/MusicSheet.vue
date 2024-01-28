@@ -61,21 +61,48 @@
 			</div>
 		</div>
 		<!-- Output of PDF downloaded file -->
-		<div class="absolute top-0 left-0 max-w-[595px] -z-50">
-			<div ref="musicSheetTableRef">
-				<div class="flex flex-wrap grow">
+		<div class="absolute top-0 left-0 -z-50">
+			<div ref="musicSheetTableRef" class="p-1 flex flex-col">
+				<div class="flex gap-1">
+					<div class="text-[3px] flex gap-1">
+						<strong class="font-bold">Title:</strong>
+						<span>
+							{{ sheetTitle }}
+						</span>
+					</div>
+					<div class="text-[3px] flex gap-1">
+						<strong class="font-bold">Tempo:</strong>
+						<span>
+							{{ data.tempo }}
+						</span>
+					</div>
+					<div class="text-[3px] flex gap-1">
+						<strong class="font-bold">Time signature:</strong>
+						<span>
+							{{ data.timeSignature }}
+						</span>
+					</div>
+					<div class="text-[3px] flex gap-1">
+						<strong class="font-bold">Key signature:</strong>
+						<span>{{ data.rootNote }} {{ data.scaleType }}</span>
+					</div>
+				</div>
+				<hr class="my-1" />
+				<div class="flex flex-wrap max-w-[300px] mx-auto">
 					<div
 						v-for="(staff, i) of outputChordsForPDF"
 						:key="i"
-						class="relative flex justify-center items-center gap-5 border text-black w-auto h-[25px] text-[5px]">
-						<strong class="absolute top-0 left-1 text-black z-50 text-[3px]">{{ i + 1 }}</strong>
+						class="relative flex flex-col justify-center items-center text-center border text-black w-[40px] h-[35px] text-[5px]">
+						<div>
+							<strong class="text-gray-500 text-[3px]">{{ i + 1 }}</strong>
+						</div>
 						<div class="flex flex-row grow items-center justify-center">
 							<div
 								v-for="{ id, chord, romanNumber } of staff"
 								:key="id"
 								class="flex flex-row grow gap-5">
-								<div class="w-full flex flex-col items-center relative">
-									<div class="flex flex-col justify-between text-center text-[3px] p-[3px]">
+								<div class="w-full min-w-[10px] min-h-[10px] flex flex-col items-center relative">
+									<div class="flex flex-col justify-between text-center text-[4px] p-[3px]">
 										<strong>{{ chord }}</strong>
 										<div>{{ romanNumber }}</div>
 									</div>
@@ -98,6 +125,7 @@ const { data, staffs } = defineProps<MusicSheetProps>();
 const sheetTitle = defineModel<string>();
 
 const zoomLevel = ref(8);
+
 const musicSheetTableRef = ref<HTMLDivElement>(null!);
 
 // TODO
