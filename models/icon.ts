@@ -1,5 +1,3 @@
-import type { ColorName } from '@/interfaces';
-
 export type IconName =
 	| string
 	| 'add'
@@ -22,19 +20,8 @@ export type IconName =
 	| 'uncheck'
 	| 'zoom-in'
 	| 'zoom-out'
-	| 'download';
-
-export interface Icon {
-	icon: IconName;
-	color?: ColorName;
-	viewBox?: string;
-	size?: number;
-}
-
-export type IconsBundle = Record<
-	string,
-	{
-		path: () => string;
-		viewport?: string;
-	}
->;
+	| 'download'
+	| 'warning'
+	| 'error'
+	| 'check'
+	| 'info';

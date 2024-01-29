@@ -1,5 +1,5 @@
-import { IconName } from '@/components/global/BaseIcon/BaseIcon.interfaces';
-import { ColorType } from '~/components/global/BaseButton/BaseButton.interfaces';
+import { IconName } from '@/components/Base/BaseIcon/BaseIcon.interfaces';
+import { ColorType } from '~/components/Base/BaseButton/BaseButton.interfaces';
 
 export interface Actions {
 	icon: IconName;

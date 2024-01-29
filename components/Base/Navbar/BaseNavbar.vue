@@ -26,7 +26,7 @@
 					<BaseIcon v-if="language === 'es'" icon="spain_flag" view-box="0 0 38 38" />
 					<BaseIcon v-else icon="uk_flag" view-box="0 0 38 38" />
 				</div>
-				<ToggleMode />
+				<BaseToggleMode />
 			</div>
 		</div>
 	</nav>

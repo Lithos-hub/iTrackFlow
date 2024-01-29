@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { Actions } from '@/components/app/DataTable/DataTable.interfaces';
+import { Actions } from '@/components/App/DataTable/DataTable.interfaces';
 import { Project } from '@/interfaces/projects';
 
 definePageMeta({
@@ -97,3 +97,4 @@ const headersList = computed(() =>
 		})),
 );
 </script>
+~/models/projects

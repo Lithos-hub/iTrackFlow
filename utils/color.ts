@@ -1,5 +1,5 @@
 import { TAILWIND_COLORS } from '@/constants/colors';
-import { ColorName, TailwindColors, RGB } from '@/interfaces';
+import { ColorName, TailwindColors, RGB } from '~/models';
 
 export const getTailwindColor = (color: ColorName, shade?: string | number): string => {
 	if (color === 'black') {

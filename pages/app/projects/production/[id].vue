@@ -101,7 +101,7 @@
 								</div>
 							</td>
 							<td>
-								<BaseButton icon="trash" color="danger" />
+								<BaseButton icon="trash" color="danger" @click="onRowDelete(id)" />
 							</td>
 						</tr>
 					</tbody>
@@ -112,25 +112,30 @@
 		<AppFloatMenu v-if="isFloatMenuOpened" :client-x="clientX" :client-y="clientY" />
 		<!-- Music player -->
 		<AppMusicPlayer />
+		<!-- Alert modal -->
+		<BaseModalAlert v-if="modal" v-bind="modalProps" @on-action="onModalAction" />
 	</section>
 </template>
 
 <script setup lang="ts">
-import { FloatMenuTarget } from '@/components/app/FloatMenu/FloatMenu.interfaces';
+import { FloatMenuTarget } from '@/components/App/FloatMenu/FloatMenu.interfaces';
 
 import { useScreenStore } from '@/store/screen';
 import { useFloatMenuStore } from '@/store/floatMenu';
 import { useAudioPlayerStore } from '@/store/audioPlayer';
 
-import { Column } from '~/interfaces/production';
+import { Column, ModalType } from '~/models';
+import BaseModalAlert from '@/components/Base/Modal/Alert/BaseModalAlert.vue';
 
-const { lightMode } = storeToRefs(useScreenStore());
-
+// Pinia
 const { isFloatMenuOpened, clientX, clientY } = storeToRefs(useFloatMenuStore());
 const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore();
-
+const { lightMode } = storeToRefs(useScreenStore());
 const { setAudioSrc, play, pause } = useAudioPlayerStore();
 const { isPlaying } = storeToRefs(useAudioPlayerStore());
+
+// Composables
+const { toggleModal, modalProps, modal, continueAction } = useModal();
 
 const projectName = ref("Project's name");
 const projectComposer = ref("Project's composer");
@@ -196,6 +201,19 @@ const onCellClick = ({ column, id }: FloatMenuTarget, event) => {
 	toggleFloatMenu();
 };
 
+const onRowDelete = (id: number) => {
+	modalProps.value = {
+		title: `Delete track #${id}`,
+		message: 'Are you sure you want to delete this track?',
+		type: 'warning',
+	};
+	toggleModal();
+};
+
+const onModalAction = (type: ModalType) => {
+	console.log(type);
+	continueAction(console.log('TRIGGERING ACTION'));
+};
 const addTrack = () => {
 	trackList.value.push({
 		id: trackList.value.length + 1,
@@ -249,3 +267,4 @@ table {
 	}
 }
 </style>
+~/models/production

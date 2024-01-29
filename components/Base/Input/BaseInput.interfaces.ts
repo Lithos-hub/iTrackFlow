@@ -1,5 +1,5 @@
-import { ColorType } from '../BaseButton/BaseButton.interfaces';
-import { ColorName } from '~/interfaces';
+import { ColorType } from '../Button/BaseButton.interfaces';
+import { ColorName } from '~/models';
 
 type Variant = 'default' | 'underline' | 'bordered' | 'rounded' | 'filled';
 

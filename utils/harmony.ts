@@ -253,7 +253,7 @@ import {
 	LOCRIAN_SCALE_NOMENCLATURES_BY_SEMITONES,
 } from '@/constants';
 
-import { Note, ScaleType } from '~/components/app/MusicStaff/MusicStaff.interfaces';
+import { Note, ScaleType } from '~/components/App/MusicStaff/MusicStaff.interfaces';
 
 const getScaleNotes = ({ rootNote, scaleType }: { rootNote: Note; scaleType: ScaleType }) => {
 	switch (scaleType) {

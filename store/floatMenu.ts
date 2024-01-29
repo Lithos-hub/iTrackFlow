@@ -1,4 +1,4 @@
-import { FloatMenuOption, FloatMenuTarget } from '@/components/app/FloatMenu/FloatMenu.interfaces';
+import { FloatMenuOption, FloatMenuTarget } from '@/components/App/FloatMenu/FloatMenu.interfaces';
 
 export const useFloatMenuStore = defineStore('floatMenu', () => {
 	const clientX = ref(0);

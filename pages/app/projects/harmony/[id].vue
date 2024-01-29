@@ -109,8 +109,8 @@ import {
 	ChordName,
 	MusicChord,
 	RomanNumber,
-} from '@/components/app/MusicStaff/MusicStaff.interfaces';
-import { DropdownItem } from '@/components/global/BaseDropdown/BaseDropdown.interfaces';
+} from '@/components/App/MusicStaff/MusicStaff.interfaces';
+import { DropdownItem } from '@/components/Base/Dropdown/BaseDropdown.interfaces';
 import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
 import { useHarmonyStore } from '~/store/harmony';
 

@@ -1,4 +1,4 @@
-import { Project } from '@/components/app/ProjectRow/ProjectRow.interfaces';
+import { Project } from '@/components/App/ProjectRow/ProjectRow.interfaces';
 
 export default [
 	{

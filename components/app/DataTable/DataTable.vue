@@ -96,3 +96,4 @@ table {
 	}
 }
 </style>
+~/models
