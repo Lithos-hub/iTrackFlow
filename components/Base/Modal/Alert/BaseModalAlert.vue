@@ -1,9 +1,13 @@
 <template>
-	<Teleport to="body">
+	<div>
+		<Teleport to="body">
+			<div class="fx__fade fixed top-0 left-0 w-full h-full z-10 backdrop-blur" />
+		</Teleport>
+
 		<div
 			class="modal__alert fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center p-10 w-auto h-auto">
 			<div class="flex w-full justify-end items-center">
-				<BaseIcon icon="close" class="icon__clickable" @click="toggleModal" />
+				<BaseIcon icon="close" class="icon__clickable" @click="$emit('close')" />
 			</div>
 			<BaseIcon :icon="iconAndColor.icon" :color="iconAndColor.color" :size="100" />
 			<h2
@@ -14,20 +18,22 @@
 			</h2>
 			<hr />
 			<p>{{ message }}</p>
-			<BaseButton v-if="type === 'warning'" color="warning" @click="$emit('on-action', type)">
+			<BaseButton v-if="type === 'warning'" color="danger" @click="$emit('on-action')">
 				Yes, continue
 			</BaseButton>
-			<BaseButton v-if="type === 'info'" color="warning">Understood!</BaseButton>
+			<BaseButton v-if="type === 'info'" color="primary" @click="$emit('on-action')">
+				I got it!
+			</BaseButton>
 		</div>
-	</Teleport>
+	</div>
 </template>
 
 <script setup lang="ts">
 import { BaseModalAlertProps, IconAndColor } from './BaseModalAlert.interfaces';
-const { type } = defineProps<BaseModalAlertProps>();
-defineEmits(['close', 'on-action']);
 
-const { toggleModal } = useModal();
+const { type } = defineProps<BaseModalAlertProps>();
+
+defineEmits(['close', 'on-action']);
 
 const iconAndColor = computed<IconAndColor>(() => {
 	return {

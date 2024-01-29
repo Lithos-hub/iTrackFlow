@@ -54,7 +54,7 @@ hr {
 // Transitions
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity 0.2s ease;
+	transition: opacity 0.2s ease-out;
 }
 
 .fade-enter-from,
@@ -67,7 +67,7 @@ hr {
 	@apply hover:bg-slate-400/20 rounded-full duration-100;
 }
 
-// Selections
+// FX and animations
 
 .selected__bordered {
 	background-image: linear-gradient(90deg, silver 50%, transparent 50%),
@@ -121,4 +121,17 @@ hr {
 
 .icon__clickable {
 	@apply hover:opacity-50 hover:scale-105 cursor-pointer duration-200;
+}
+
+.fx__fade {
+	animation: fade 0.5s ease;
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

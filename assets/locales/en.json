@@ -69,7 +69,11 @@
 			"project_team_members": "Project team members",
 			"project_team_members_placeholder": "Enter your project team members",
 			"project_image": "Project image",
-			"project_create_submit": "Create project"
+			"project_create_submit": "Create project",
+			"delete_project": "Atention! You are going to delete this project",
+			"delete_project_message": "Are you sure you want to delete this project?",
+			"delete_project_cancel": "Cancel",
+			"delete_project_confirm": "Yes, continue"
 		},
 		"harmony": {
 			"major": "Major",
@@ -129,7 +133,11 @@
 			"audio": "Listen track",
 			"no_audio": "No audio file",
 			"playing": "Playing",
-			"no_audio_selected": "No audio file selected"
+			"no_audio_selected": "No audio file selected",
+			"delete_track": "Atention! You are going to delete this track",
+			"delete_track_message": "Are you sure you want to delete this track?",
+			"delete_track_cancel": "Cancel",
+			"delete_track_confirm": "Yes, continue"
 		}
 	}
 }

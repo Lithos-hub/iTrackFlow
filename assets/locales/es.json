@@ -69,7 +69,11 @@
 			"project_team_members": "Miembros del equipo",
 			"project_team_members_placeholder": "Introduce los miembros del equipo",
 			"project_image": "Imagen del proyecto",
-			"project_create_submit": "Crear proyecto"
+			"project_create_submit": "Crear proyecto",
+			"delete_project": "¡Atención! Vas a eliminar un proyecto",
+			"delete_project_message": "¿Estás seguro de que quieres eliminar este proyecto?",
+			"delete_project_cancel": "Cancelar",
+			"delete_project_confirm": "Sí, quiero continuar"
 		},
 		"harmony": {
 			"major": "Mayor",
@@ -127,7 +131,11 @@
 			"mastering": "Masterización",
 			"delete": "Eliminar",
 			"audio": "Escuchar pista",
-			"no_audio": "No hay pista de audio"
+			"no_audio": "No hay pista de audio",
+			"delete_track": "¡Atención! Vas a eliminar una pista",
+			"delete_track_message": "¿Estás seguro de que quieres eliminar esta pista?",
+			"delete_track_cancel": "Cancelar",
+			"delete_track_confirm": "Sí, quiero continuar"
 		}
 	}
 }

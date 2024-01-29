@@ -5,3 +5,5 @@ export interface UseModal {
 	message: string;
 	type: ModalType;
 }
+
+export type ModalAction = 'continue' | 'accept';

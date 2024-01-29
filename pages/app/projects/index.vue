@@ -38,12 +38,18 @@
 				</span>
 			</template>
 		</AppDataTable>
+		<!-- Alert modal when deleting project -->
+		<BaseModalAlert
+			v-if="showModal"
+			v-bind="modalProps"
+			@on-action="onConfirmDelete"
+			@close="showModal = false" />
 	</section>
 </template>
 
 <script setup lang="ts">
 import { Actions } from '@/components/App/DataTable/DataTable.interfaces';
-import { Project } from '@/interfaces/projects';
+import { Project } from '@/models';
 
 definePageMeta({
 	layout: 'default',
@@ -52,9 +58,24 @@ definePageMeta({
 
 const { t } = useI18n();
 
+const { showModal, modalProps } = useModal();
+
 const tableKey = ref(0);
+
 const onEdit = (id: number) => alert('Editing ' + id);
-const onDelete = (id: number) => alert('Deleting ' + id);
+const onDelete = (_: number) => {
+	showModal.value = true;
+	modalProps.value = {
+		type: 'warning',
+		title: t('app.projects.delete_project'),
+		message: t('app.projects.delete_project_message'),
+	};
+};
+
+const onConfirmDelete = () => {
+	showModal.value = false;
+	alert('Deleting project');
+};
 
 const projectsList = ref<Project[]>([
 	{
@@ -97,4 +118,3 @@ const headersList = computed(() =>
 		})),
 );
 </script>
-~/models/projects

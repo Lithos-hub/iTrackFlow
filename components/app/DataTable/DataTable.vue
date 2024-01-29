@@ -31,7 +31,7 @@
 
 <script setup lang="ts" generic="T">
 import { Actions } from './DataTable.interfaces';
-import { Project } from '@/interfaces';
+import { Project } from '@/models';
 
 interface Head {
 	label: string;
