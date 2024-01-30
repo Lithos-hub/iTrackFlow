@@ -7,19 +7,28 @@
 			</h2>
 		</template>
 
-		<BaseInput
-			type="email"
-			:placeholder="$t('authentication.email_placeholder')"
-			:label="$t('authentication.email')" />
+		<form class="flex flex-col gap-5 w-full" @submit.prevent="onLogin">
+			<small class="text-primary text-center">
+				{{ $t('authentication.login_disclamer') }}
+			</small>
+			<BaseInput
+				v-model="email"
+				type="email"
+				:placeholder="$t('authentication.email_placeholder')"
+				:label="$t('authentication.email')" />
 
-		<BaseInput
-			type="password"
-			:placeholder="$t('authentication.password_placeholder')"
-			:label="$t('authentication.password')" />
+			<BaseInput
+				v-model="password"
+				type="password"
+				:placeholder="$t('authentication.password_placeholder')"
+				:label="$t('authentication.password')" />
 
-		<BaseButton color="primary">
-			{{ $t('authentication.login') }}
-		</BaseButton>
+			<BaseButton color="primary">
+				{{ $t('authentication.login') }}
+			</BaseButton>
+		</form>
+
+		<small class="text-red-500">{{ errorMessage }}</small>
 
 		<template #actions>
 			<div class="flex gap-2 items-center">
@@ -37,11 +46,22 @@
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/store/user';
 definePageMeta({
 	name: 'LoginPage',
 	layout: 'centered-card',
+	middleware: 'auth',
 });
-// TODO: Check if the user has an active session
-// If so, redirect to /app/projects
-// If not, continue
+
+const { login } = useUserStore();
+
+const email = ref('johndoe@itrackflow.com');
+const password = ref('johndoe1234%');
+
+const errorMessage = ref('');
+
+const onLogin = async () => {
+	const { error } = await login(email.value, password.value);
+	errorMessage.value = error as string;
+};
 </script>

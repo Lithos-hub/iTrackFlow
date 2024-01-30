@@ -1,32 +1,62 @@
 import { defineStore } from 'pinia';
+import { AuthenticationResponse } from './user.interfaces';
 
 export const useUserStore = defineStore('user', () => {
-	const user = ref<'user' | null>(null);
-	const activeSession = ref<boolean>(false);
-
 	const router = useRouter();
 
-	const login = () => {
-		user.value = 'user';
-		localStorage.setItem('token', 'token');
-		activeSession.value = true;
-	};
+	const { auth } = useSupabaseClient();
+	const user = useSupabaseUser();
 
-	const logout = () => {
-		user.value = null;
-		router.push('/');
-		localStorage.clear();
-		activeSession.value = false;
-	};
-
-	const getSession = () => {
-		if (process.client && localStorage.getItem('token')) {
-			user.value = 'user';
-			login();
-		} else {
-			activeSession.value = false;
+	const login = async (email: string, password: string): Promise<AuthenticationResponse> => {
+		try {
+			const { error } = await auth.signInWithPassword({
+				email,
+				password,
+			});
+			if (error) throw error;
+			router.push('/app/projects');
+			return {
+				success: 'Logged in!',
+			};
+		} catch (error: unknown) {
+			return {
+				error: (error as unknown as Error).message,
+			};
 		}
 	};
 
-	return { user, login, logout, getSession, activeSession };
+	const signUp = async (email: string, password: string): Promise<AuthenticationResponse> => {
+		try {
+			const { data, error } = await auth.signUp({
+				email,
+				password,
+			});
+			if (error) throw error;
+			return {
+				success: 'Check your email for confirmation!',
+				data,
+			};
+		} catch (error: unknown) {
+			return {
+				error: (error as unknown as Error).message,
+			};
+		}
+	};
+
+	const logout = async (): Promise<AuthenticationResponse> => {
+		try {
+			const { error } = await auth.signOut();
+			if (error) throw error;
+			router.push('/authentication/login');
+			return {
+				success: 'Logged out!',
+			};
+		} catch (error: unknown) {
+			return {
+				error: (error as unknown as Error).message,
+			};
+		}
+	};
+
+	return { user, login, signUp, logout };
 });

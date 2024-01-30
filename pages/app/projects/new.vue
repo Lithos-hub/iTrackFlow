@@ -38,6 +38,7 @@
 definePageMeta({
 	name: 'NewProjectPage',
 	layout: 'centered-card',
+	middleware: 'auth',
 });
 
 const { t } = useI18n();

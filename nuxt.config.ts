@@ -16,6 +16,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/i18n', // https://i18n.nuxtjs.org
 		'nuxt-svg-icons',
 		'nuxt-mongoose',
+		'@nuxtjs/supabase',
 	],
 	typescript: {
 		tsConfig: {
@@ -60,5 +61,13 @@ export default defineNuxtConfig({
 		uri: process.env.MONGODB_URI,
 		options: {},
 		modelsDir: 'models',
+	},
+	supabase: {
+		redirectOptions: {
+			login: '/authentication/login',
+			callback: '/confirm',
+			exclude: ['/', '/authentication/register'],
+			cookieRedirect: false,
+		},
 	},
 });

@@ -96,4 +96,3 @@ table {
 	}
 }
 </style>
-~/models @/interfaces

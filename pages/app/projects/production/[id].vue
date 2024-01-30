@@ -132,8 +132,12 @@ import { useScreenStore } from '@/store/screen';
 import { useFloatMenuStore } from '@/store/floatMenu';
 import { useAudioPlayerStore } from '@/store/audioPlayer';
 
-import { Column } from '~/models';
+import { Column } from '@/interfaces';
 import BaseModalAlert from '@/components/Base/Modal/Alert/BaseModalAlert.vue';
+
+definePageMeta({
+	middleware: 'auth',
+});
 
 const { t } = useI18n();
 
@@ -277,4 +281,3 @@ table {
 	}
 }
 </style>
-@/interfaces

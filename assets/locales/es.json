@@ -24,7 +24,8 @@
 		"confirm_password": "Confirmar contraseña",
 		"confirm_password_placeholder": "Confirma tu contraseña",
 		"already_have_account": "¿Ya tienes una cuenta?",
-		"dont_have_account": "¿No tienes una cuenta?"
+		"dont_have_account": "¿No tienes una cuenta?",
+		"login_disclamer": "Usa este usuario por defecto si no deseas crear una cuenta"
 	},
 	"app": {
 		"ui": {

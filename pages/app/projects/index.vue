@@ -3,16 +3,7 @@
 		<h2 class="uppercase font-bold">
 			{{ $t('app.projects.title') }}
 		</h2>
-		<div class="flex justify-between">
-			<BaseButton
-				variant="stealth"
-				color="secondary"
-				icon="chevron-rounded-left"
-				icon-left
-				class="my-5"
-				@click="$router.back()">
-				{{ $t('app.ui.go_back') }}
-			</BaseButton>
+		<div class="flex justify-end">
 			<RouterLink to="/app/projects/new">
 				<BaseButton color="success" icon="add" icon-right class="my-5">
 					{{ $t('app.projects.add_project') }}
@@ -49,7 +40,7 @@
 
 <script setup lang="ts">
 import { Actions } from '@/components/App/DataTable/DataTable.interfaces';
-import { Project } from '@/models';
+import { Project } from '@/interfaces';
 
 definePageMeta({
 	layout: 'default',
@@ -118,4 +109,3 @@ const headersList = computed(() =>
 		})),
 );
 </script>
-@/interfaces

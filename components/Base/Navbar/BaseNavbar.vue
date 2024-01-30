@@ -6,18 +6,17 @@
 			</RouterLink>
 
 			<div class="flex gap-5 items-center">
-				<RouterLink
-					v-if="!user && !$route.path.includes('/authentication')"
-					to="/authentication/login">
+				<RouterLink v-if="!user" to="/authentication/login">
 					<BaseButton variant="stealth" color="primary">
 						{{ $t('authentication.login') }}
 					</BaseButton>
 				</RouterLink>
 				<BaseButton
-					v-else-if="user"
+					v-else
 					color="danger"
 					class="flex gap-2"
 					icon="logout"
+					icon-color="white"
 					icon-right
 					@click="logout">
 					Logout

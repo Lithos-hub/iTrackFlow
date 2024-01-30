@@ -1,7 +1,10 @@
-import { useUserStore } from '~/store/user';
+export default defineNuxtRouteMiddleware(({ path }) => {
+	const user = useSupabaseUser();
+	const router = useRouter();
 
-export default defineNuxtRouteMiddleware((_, __) => {
-	const { getSession } = useUserStore();
-
-	getSession();
+	if (!user) {
+		navigateTo('/authentication/login');
+	} else if (path.includes('authentication') || path === '/') {
+		router.push('/app/projects');
+	}
 });
