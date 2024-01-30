@@ -44,10 +44,19 @@ Future features:
 
 ## Setup
 
-Make sure to install the dependencies:
+Make sure to install the dependencies first:
 
 ```bash
 npm install
+```
+
+Copy the .env.example file and rename it to .env.local. Then, fill the environment variables with your own values.
+
+```
+MONGODB_URI=mongodb://localhost:27017/your_db_name
+JWT_SECRET=your_secret_key
+SUPABASE_URL="https://example.supabase.co"
+SUPABASE_KEY="<your_key>"
 ```
 
 ## Development Server
