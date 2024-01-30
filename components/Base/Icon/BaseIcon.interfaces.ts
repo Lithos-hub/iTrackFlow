@@ -1,4 +1,4 @@
-import type { ColorName, IconName } from '~/models';
+import type { ColorName, IconName } from '@/interfaces';
 
 export interface IconProps {
 	icon: IconName;

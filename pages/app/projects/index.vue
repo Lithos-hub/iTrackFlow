@@ -118,3 +118,4 @@ const headersList = computed(() =>
 		})),
 );
 </script>
+@/interfaces

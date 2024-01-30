@@ -1,4 +1,4 @@
-import { TailwindColors } from '~/models';
+import { TailwindColors } from '@/interfaces';
 
 export const TAILWIND_COLORS: TailwindColors = {
 	black: '#000',

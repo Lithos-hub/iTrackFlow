@@ -11,10 +11,11 @@ export default defineNuxtConfig({
 		'@morev/vue-transitions/nuxt', // https://github.com/MorevM/vue-transitions
 		'@nuxt/image', // https://image.nuxt.com
 		'@nuxtjs/color-mode', // https://color-mode.nuxtjs.org
-		'@nuxtjs/eslint-module',
-		'@vueuse/nuxt',
-		'@nuxtjs/i18n',
+		'@nuxtjs/eslint-module', // https://eslint.nuxtjs.org
+		'@vueuse/nuxt', // https://vueuse.org/guide/#nuxt
+		'@nuxtjs/i18n', // https://i18n.nuxtjs.org
 		'nuxt-svg-icons',
+		'nuxt-mongoose',
 	],
 	typescript: {
 		tsConfig: {
@@ -54,5 +55,10 @@ export default defineNuxtConfig({
 		svg4vue: {
 			assetsDirName: 'assets/icons',
 		},
+	},
+	mongoose: {
+		uri: process.env.MONGODB_URI,
+		options: {},
+		modelsDir: 'models',
 	},
 });

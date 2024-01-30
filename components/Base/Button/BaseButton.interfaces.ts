@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'vue';
 
-import { ColorName } from '~/models';
+import { ColorName } from '@/interfaces';
 import { Size, Color, Radius, Variant } from '@/enums';
 
 export type ColorType = `${Color}`;

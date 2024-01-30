@@ -1,4 +1,4 @@
-import { Project } from '~/models';
+import { Project } from '@/interfaces';
 
 export const useProjectStore = defineStore('project', () => {
 	const projects = ref<Project[]>([]);

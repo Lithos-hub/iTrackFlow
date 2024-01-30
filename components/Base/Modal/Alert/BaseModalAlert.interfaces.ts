@@ -1,4 +1,4 @@
-import { ColorName, IconName, ModalType } from '~/models';
+import { ColorName, IconName, ModalType } from '@/interfaces';
 
 export interface BaseModalAlertProps {
 	title: string;

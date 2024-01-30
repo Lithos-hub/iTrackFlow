@@ -1,4 +1,4 @@
-import { ModalType } from '~/models';
+import { ModalType } from '@/interfaces';
 
 export interface UseModal {
 	title: string;
