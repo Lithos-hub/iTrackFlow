@@ -30,7 +30,10 @@
 		"ui": {
 			"go_back": "Go back",
 			"add_comment": "Add a comment",
-			"add_audio": "Add an audio file"
+			"add_audio": "Add an audio file",
+			"modal_cancel": "Cancel",
+			"modal_confirm": "Yes, continue",
+			"modal_understood": "Understood"
 		},
 		"dataTable": {
 			"name": "Project name",
@@ -71,9 +74,7 @@
 			"project_image": "Project image",
 			"project_create_submit": "Create project",
 			"delete_project": "Atention! You are going to delete this project",
-			"delete_project_message": "Are you sure you want to delete this project?",
-			"delete_project_cancel": "Cancel",
-			"delete_project_confirm": "Yes, continue"
+			"delete_project_message": "Are you sure you want to delete this project?"
 		},
 		"harmony": {
 			"major": "Major",
@@ -135,9 +136,7 @@
 			"playing": "Playing",
 			"no_audio_selected": "No audio file selected",
 			"delete_track": "Atention! You are going to delete this track",
-			"delete_track_message": "Are you sure you want to delete this track?",
-			"delete_track_cancel": "Cancel",
-			"delete_track_confirm": "Yes, continue"
+			"delete_track_message": "Are you sure you want to delete this track?"
 		}
 	}
 }

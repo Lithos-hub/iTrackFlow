@@ -30,7 +30,10 @@
 		"ui": {
 			"go_back": "Volver",
 			"add_comment": "Añadir comentario",
-			"add_audio": "Añadir audio"
+			"add_audio": "Añadir audio",
+			"modal_cancel": "Cancelar",
+			"modal_confirm": "Si, quiero continuar",
+			"modal_understood": "Entendido"
 		},
 		"dataTable": {
 			"name": "Nombre del proyecto",
@@ -71,9 +74,7 @@
 			"project_image": "Imagen del proyecto",
 			"project_create_submit": "Crear proyecto",
 			"delete_project": "¡Atención! Vas a eliminar un proyecto",
-			"delete_project_message": "¿Estás seguro de que quieres eliminar este proyecto?",
-			"delete_project_cancel": "Cancelar",
-			"delete_project_confirm": "Sí, quiero continuar"
+			"delete_project_message": "¿Estás seguro de que quieres eliminar este proyecto?"
 		},
 		"harmony": {
 			"major": "Mayor",
@@ -133,9 +134,7 @@
 			"audio": "Escuchar pista",
 			"no_audio": "No hay pista de audio",
 			"delete_track": "¡Atención! Vas a eliminar una pista",
-			"delete_track_message": "¿Estás seguro de que quieres eliminar esta pista?",
-			"delete_track_cancel": "Cancelar",
-			"delete_track_confirm": "Sí, quiero continuar"
+			"delete_track_message": "¿Estás seguro de que quieres eliminar esta pista?"
 		}
 	}
 }
