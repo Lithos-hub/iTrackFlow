@@ -16,11 +16,12 @@ Current features:
 - Harmony page
   - Add, delete and edit chords
   - Smart tonal system
+- Authentication (supabase)
+- Navigation guards
 
 Future features:
 
 - Backend API
-  - Authentication
   - User management
   - Project management
   - Song management
