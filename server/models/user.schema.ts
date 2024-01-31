@@ -21,11 +21,6 @@ export const UserSchema = defineMongooseModel<UserModel>({
 			lowercase: true,
 			trim: true,
 		},
-		password: {
-			required: true,
-			type: String,
-			trim: true,
-		},
 		role: {
 			required: true,
 			type: String,
