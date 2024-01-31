@@ -41,6 +41,7 @@ Future features:
 - ESLint
 - Prettier
 - Pinia
+- Vitest + Testing Library
 
 ## Setup
 
