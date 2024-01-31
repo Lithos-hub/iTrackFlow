@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div data-test-id="DataTable">
 		<table :key="props.tableKey" class="bg-white dark:bg-dark">
 			<thead>
 				<tr>
@@ -31,7 +31,7 @@
 
 <script setup lang="ts" generic="T">
 import { Actions } from './DataTable.interfaces';
-import { Project } from '@/models';
+import { Project } from '@/interfaces';
 
 interface Head {
 	label: string;

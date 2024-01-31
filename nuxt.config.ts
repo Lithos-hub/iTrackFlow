@@ -17,6 +17,7 @@ export default defineNuxtConfig({
 		'nuxt-svg-icons',
 		'nuxt-mongoose',
 		'@nuxtjs/supabase',
+		'@nuxt/test-utils/module',
 	],
 	typescript: {
 		tsConfig: {
