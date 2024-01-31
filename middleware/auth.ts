@@ -1,5 +1,6 @@
 export default defineNuxtRouteMiddleware(({ path }) => {
-	const user = useSupabaseUser();
+	// const user = useSupabaseUser();
+	const user = true;
 	const router = useRouter();
 
 	if (!user) {

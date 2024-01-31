@@ -15,8 +15,7 @@ export default defineNuxtConfig({
 		'@vueuse/nuxt', // https://vueuse.org/guide/#nuxt
 		'@nuxtjs/i18n', // https://i18n.nuxtjs.org
 		'nuxt-svg-icons',
-		'nuxt-mongoose',
-		'@nuxtjs/supabase',
+		// '@nuxtjs/supabase',
 		'@nuxt/test-utils/module',
 	],
 	typescript: {
@@ -31,11 +30,13 @@ export default defineNuxtConfig({
 		routeRules: {
 			// "/_nuxt/**": { headers: { "cache-control": "max-age=31536000" } }, // Set generated files cache to 1 year
 		},
+		plugins: ['~/server/plugins/mongodb.ts'],
 	},
 	runtimeConfig: {
 		public: {
 			baseURL: '',
 		},
+		MONGODB_URI: process.env.MONGODB_URI,
 	},
 	vite: {
 		plugins: [eslintPlugin()],
@@ -58,17 +59,12 @@ export default defineNuxtConfig({
 			assetsDirName: 'assets/icons',
 		},
 	},
-	mongoose: {
-		uri: process.env.MONGODB_URI,
-		options: {},
-		modelsDir: 'models',
-	},
-	supabase: {
-		redirectOptions: {
-			login: '/authentication/login',
-			callback: '/confirm',
-			exclude: ['/', '/authentication/register'],
-			cookieRedirect: false,
-		},
-	},
+	// supabase: {
+	// 	redirectOptions: {
+	// 		login: '/authentication/login',
+	// 		callback: '/confirm',
+	// 		exclude: ['/', '/authentication/register'],
+	// 		cookieRedirect: false,
+	// 	},
+	// },
 });
