@@ -1,9 +1,8 @@
+import mongoose, { Schema, model, Model } from 'mongoose';
 import { UserModel } from './user.interfaces';
-import { defineMongooseModel } from '#nuxt/mongoose';
 
-export const UserSchema = defineMongooseModel<UserModel>({
-	name: 'User',
-	schema: {
+export const userSchema = new Schema<UserModel>(
+	{
 		name: {
 			required: true,
 			type: String,
@@ -21,15 +20,17 @@ export const UserSchema = defineMongooseModel<UserModel>({
 			lowercase: true,
 			trim: true,
 		},
-		password: {
-			required: true,
-			type: String,
-			trim: true,
-		},
 		role: {
 			required: true,
 			type: String,
-			default: 'anon',
+			default: 'guest',
 		},
 	},
-});
+	{
+		timestamps: true,
+	},
+);
+
+const User: Model<UserModel> = mongoose.models.User || model('User', userSchema);
+
+export default User;

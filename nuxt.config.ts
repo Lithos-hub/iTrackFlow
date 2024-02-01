@@ -16,6 +16,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/i18n', // https://i18n.nuxtjs.org
 		'nuxt-svg-icons',
 		'@nuxtjs/supabase',
+		'@nuxt/test-utils/module',
 	],
 	typescript: {
 		tsConfig: {
@@ -29,6 +30,7 @@ export default defineNuxtConfig({
 		routeRules: {
 			// "/_nuxt/**": { headers: { "cache-control": "max-age=31536000" } }, // Set generated files cache to 1 year
 		},
+		plugins: ['~/server/plugins/mongodb.ts'],
 	},
 	runtimeConfig: {
 		public: {

@@ -7,6 +7,7 @@
 		"types": [
 			"@nuxt/types",
 			"@nuxtjs/i18n",
+			"vitest/globals"
 		  ]
 	}
 }

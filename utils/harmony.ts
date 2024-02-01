@@ -606,10 +606,6 @@ export const getAvailableChords = ({ rootNote, scaleType }) => {
 	const scaleNotes = getScaleNotes({ rootNote, scaleType });
 	const scaleSemitones = getScaleSemitones(scaleType);
 
-	console.log('scaleFormula', scaleFormula);
-	console.log('scaleNotes', scaleNotes);
-	console.log('scaleSemitones', scaleSemitones);
-
 	const availableChordTypes = scaleSemitones.map((semitone) => {
 		const { type, romanNumber } = scaleFormula[semitone];
 		return {
