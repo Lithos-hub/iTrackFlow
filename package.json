@@ -50,7 +50,7 @@
     "@morev/vue-transitions": "^2.3.6",
     "@pinia/nuxt": "^0.5.1",
     "jspdf": "^2.5.1",
-    "nuxt-mongoose": "^1.0.4",
+    "mongoose": "^8.1.1",
     "pinia": "^2.1.7"
   },
   "eslintConfig": {

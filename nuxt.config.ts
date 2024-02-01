@@ -15,7 +15,6 @@ export default defineNuxtConfig({
 		'@vueuse/nuxt', // https://vueuse.org/guide/#nuxt
 		'@nuxtjs/i18n', // https://i18n.nuxtjs.org
 		'nuxt-svg-icons',
-		'nuxt-mongoose',
 		'@nuxtjs/supabase',
 	],
 	typescript: {
@@ -35,6 +34,7 @@ export default defineNuxtConfig({
 		public: {
 			baseURL: '',
 		},
+		MONGODB_URI: process.env.MONGODB_URI,
 	},
 	vite: {
 		plugins: [eslintPlugin()],
@@ -56,11 +56,6 @@ export default defineNuxtConfig({
 		svg4vue: {
 			assetsDirName: 'assets/icons',
 		},
-	},
-	mongoose: {
-		uri: process.env.MONGODB_URI,
-		options: {},
-		modelsDir: 'models',
 	},
 	supabase: {
 		redirectOptions: {
