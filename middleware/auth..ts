@@ -4,7 +4,8 @@ export default defineNuxtRouteMiddleware(({ path }) => {
 
 	if (!user) {
 		navigateTo('/authentication/login');
-	} else if (path.includes('authentication') || path === '/') {
+	}
+	if (user && (path.includes('authentication') || path === '/')) {
 		router.push('/app/projects');
 	}
 });
