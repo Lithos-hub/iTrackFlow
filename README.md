@@ -60,7 +60,33 @@ SUPABASE_URL="https://example.supabase.co"
 SUPABASE_KEY="<your_key>"
 ```
 
-## Development Server
+## Setup using Docker
+
+1. Install and run Docker
+2. Install and run Mongo Compass
+
+3. Generate the database
+
+```
+docker-compose up -d
+```
+
+4. Rename .env.example file to .env
+
+5. Install dependencies and run the app
+
+```
+npm i
+npm run dev
+```
+
+## Setup without Docker
+
+1. Install dependencies
+
+```
+npm i
+```
 
 Start the development server on http://localhost:3000
 
