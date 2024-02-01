@@ -6,6 +6,7 @@ on:
       - feature/*
       - fix/*
       - refactor/*
+      - main
   pull_request:
     branches:
       - main
