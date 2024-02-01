@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 		'@vueuse/nuxt', // https://vueuse.org/guide/#nuxt
 		'@nuxtjs/i18n', // https://i18n.nuxtjs.org
 		'nuxt-svg-icons',
-		// '@nuxtjs/supabase',
+		'@nuxtjs/supabase',
 		'@nuxt/test-utils/module',
 	],
 	typescript: {
@@ -59,12 +59,12 @@ export default defineNuxtConfig({
 			assetsDirName: 'assets/icons',
 		},
 	},
-	// supabase: {
-	// 	redirectOptions: {
-	// 		login: '/authentication/login',
-	// 		callback: '/confirm',
-	// 		exclude: ['/', '/authentication/register'],
-	// 		cookieRedirect: false,
-	// 	},
-	// },
+	supabase: {
+		redirectOptions: {
+			login: '/authentication/login',
+			callback: '/confirm',
+			exclude: ['/', '/authentication/register'],
+			cookieRedirect: false,
+		},
+	},
 });

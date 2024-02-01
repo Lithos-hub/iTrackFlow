@@ -4,11 +4,8 @@ import { AuthenticationResponse } from './user.interfaces';
 export const useUserStore = defineStore('user', () => {
 	const router = useRouter();
 
-	// const { auth } = useSupabaseClient();
-	// const user = useSupabaseUser();
-
-	const auth: any = {};
-	const user: any = {};
+	const { auth } = useSupabaseClient();
+	const user = useSupabaseUser();
 
 	const login = async (email: string, password: string): Promise<AuthenticationResponse> => {
 		try {
