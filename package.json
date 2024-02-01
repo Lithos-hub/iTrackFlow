@@ -10,8 +10,8 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"format": "prettier --write .",
-		"lint": "eslint . --ext .ts,.vue",
-		"lint:fix": "eslint . --ext .ts,.vue --fix",
+		"lint": "eslint --ext .js,.ts,.vue",
+		"lint:fix": "eslint --ext .js,.ts,.vue --fix",
 		"test": "vitest",
 		"test:w": "vitest --watch"
 	},
