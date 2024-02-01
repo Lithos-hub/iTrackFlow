@@ -42,6 +42,8 @@ Future features:
 - Prettier
 - Pinia
 - Vitest + Testing Library
+- Docker
+- Github Actions
 
 ## Setup
 
