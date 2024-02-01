@@ -36,7 +36,7 @@
 							@click="removeItem" />
 						<!-- Chevron -->
 						<BaseIcon
-							icon="chevron"
+							icon="chevron-dropdown"
 							color="gray"
 							class="duration-200"
 							:class="{

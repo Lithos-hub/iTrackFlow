@@ -17,6 +17,10 @@
 	"authentication": {
 		"login": "Iniciar sesión",
 		"register": "Registrarse",
+		"name": "Nombre",
+		"name_placeholder": "Introduce tu nombre",
+		"lastname": "Apellidos",
+		"lastname_placeholder": "Introduce tus apellidos",
 		"email": "Email",
 		"email_placeholder": "Introduce tu email",
 		"password": "Contraseña",

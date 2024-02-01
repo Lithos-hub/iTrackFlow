@@ -13,7 +13,6 @@ import { useIntersectionObserver } from '@vueuse/core';
 
 definePageMeta({
 	name: 'HomePage',
-	layout: 'landing',
 	middleware: 'auth',
 });
 

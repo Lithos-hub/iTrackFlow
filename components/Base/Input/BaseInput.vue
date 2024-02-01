@@ -109,11 +109,11 @@ watch(
 	}
 
 	&__rounded {
-		@apply text-black dark:text-white border-2 border-gray-300 dark:border-gray-700 rounded-lg;
+		@apply text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg;
 	}
 
 	&__filled {
-		@apply text-black dark:text-white border-2 border-gray-300 dark:border-gray-700 rounded-lg bg-gray-100 dark:bg-gray-800;
+		@apply text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-100 dark:bg-gray-800;
 	}
 }
 </style>

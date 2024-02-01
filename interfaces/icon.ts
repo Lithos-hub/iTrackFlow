@@ -2,7 +2,7 @@ export type IconName =
 	| string
 	| 'add'
 	| 'check'
-	| 'chevron-rounded-left'
+	| 'chevron-left'
 	| 'chevron'
 	| 'close'
 	| 'eye'

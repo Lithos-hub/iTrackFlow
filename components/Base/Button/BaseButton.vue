@@ -5,13 +5,12 @@
 		data-testid="iui-button"
 		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`"
 		:style="{
-			border:
-				variant === 'outline' ? `1px solid ${tailwindColor}` : variant === 'stealth' ? 'none' : '',
+			border: `1px solid ${tailwindColor}`,
 			background:
 				variant === 'outline' ? 'transparent' : variant === 'stealth' ? `${tailwindColor}30` : '',
 			color: variant === 'outline' ? tailwindColor : variant === 'stealth' ? tailwindColor : '',
 		}">
-		<div class="flex items-center justify-center gap-2.5">
+		<div class="flex items-center justify-center gap-2.5 text-sm">
 			<!-- Left icon -->
 			<div v-if="icon && iconLeft" class="pt-1">
 				<BaseIcon :icon="icon" :size="24" :color="iconColor" />
@@ -89,7 +88,7 @@ const computedColor = computed(() => {
 
 <style lang="scss" scoped>
 .button {
-	@apply text-white hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125;
+	@apply text-white hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125 border;
 
 	&__default {
 		@apply hover:opacity-100;

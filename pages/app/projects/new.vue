@@ -3,7 +3,7 @@
 		<BaseButton
 			variant="stealth"
 			color="secondary"
-			icon="chevron-rounded-left"
+			icon="chevron-left"
 			icon-left
 			class="my-5"
 			@click="$router.back()">

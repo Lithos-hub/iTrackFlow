@@ -28,12 +28,7 @@
 		<div class="bg-2 fixed object-none" />
 		<div class="bg-3 fixed object-none" />
 		<NuxtLayout>
-			<div class="flex flex-col h-screen w-full">
-				<header class="sticky top-0 left-0">
-					<BaseNavbar />
-				</header>
-				<NuxtPage />
-			</div>
+			<NuxtPage />
 		</NuxtLayout>
 	</div>
 </template>

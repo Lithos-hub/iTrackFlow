@@ -17,6 +17,10 @@
 	"authentication": {
 		"login": "Login",
 		"register": "Create an account",
+		"name": "Name",
+		"name_placeholder": "Enter your name",
+		"lastname": "Lastname",
+		"lastname_placeholder": "Enter your lastname",
 		"email": "Email",
 		"email_placeholder": "Enter your email",
 		"password": "Password",
