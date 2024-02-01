@@ -1,0 +1,14 @@
+version: '3'
+services:
+  itrackflow-prod:
+    build:
+      context: .
+    ports:
+      - '3000:3000'
+  itrackflow-prod-db:
+    image: mongo:latest
+    container_name: itrackflow-prod-db
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data/db
