@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="default_margin">
 		<BaseButton
 			variant="stealth"
 			color="secondary"

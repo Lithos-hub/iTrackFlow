@@ -1,6 +1,5 @@
 <template>
-	<BaseCard
-		class="flex flex-col items-center justify-center gap-5 bg-dark p-10 rounded-2xl w-[500px] text-white">
+	<BaseCard class="centered__card">
 		<template #title>
 			<h2 class="text-secondary">
 				{{ $t('authentication.register') }}

@@ -1,5 +1,5 @@
 <template>
-	<NuxtLayout>
+	<div>
 		<Html lang="en" :data-route-path="$route?.path">
 			<Head>
 				<Title>iTrackFlow</Title>
@@ -27,8 +27,15 @@
 		<div class="bg-1 fixed object-none" />
 		<div class="bg-2 fixed object-none" />
 		<div class="bg-3 fixed object-none" />
-		<NuxtPage />
-	</NuxtLayout>
+		<NuxtLayout>
+			<div class="flex flex-col h-screen w-full">
+				<header class="sticky top-0 left-0">
+					<BaseNavbar />
+				</header>
+				<NuxtPage />
+			</div>
+		</NuxtLayout>
+	</div>
 </template>
 
 <script lang="ts" setup>

@@ -1,9 +1,5 @@
 <template>
 	<div class="flex flex-col h-screen w-full">
-		<header class="sticky top-0 left-0 z-50">
-			<BaseNavbar />
-		</header>
-
 		<div class="flex flex-1 flex-grow">
 			<AppSideMenu class="max-w-[350px] flex flex-col gap-5">
 				<strong class="text-primary">

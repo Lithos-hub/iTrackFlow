@@ -1,0 +1,3 @@
+.centered__card {
+	@apply flex flex-col items-center justify-center gap-5 bg-dark p-10 rounded-2xl w-[500px] text-white mx-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}

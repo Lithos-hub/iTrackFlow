@@ -47,7 +47,7 @@ export const useUserStore = defineStore('user', () => {
 		try {
 			const { error } = await auth.signOut();
 			if (error) throw error;
-			router.push('/authentication/login');
+			location.reload();
 			return {
 				success: 'Logged out!',
 			};
