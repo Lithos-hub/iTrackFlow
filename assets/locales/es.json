@@ -15,8 +15,11 @@
 		}
 	},
 	"authentication": {
-		"login": "Iniciar sesión",
-		"register": "Registrarse",
+		"get_started": "Comenzar",
+		"welcome": "Bienvenido de nuevo",
+		"signin": "Iniciar sesión",
+		"login": "Iniciar sesión con tu cuenta",
+		"register": "Crear una cuenta",
 		"name": "Nombre",
 		"name_placeholder": "Introduce tu nombre",
 		"lastname": "Apellidos",

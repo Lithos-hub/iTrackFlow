@@ -4,7 +4,7 @@
 			<h1 class="gradient__text--primary font-bold">iTrackFlow</h1>
 		</div>
 		<article
-			class="relative bg-[#202020] w-1/3 border-l border-gray-500/20 p-10 gap-5 justify-center items-center mx-auto text-black dark:text-white">
+			class="relative bg-softdark w-1/3 border-l border-gray-500/20 p-10 gap-5 justify-center items-center mx-auto text-black dark:text-white">
 			<div class="flex justify-between w-full">
 				<RouterLink to="/">
 					<BaseIcon icon="chevron-left" class="icon__clickable" />
@@ -12,15 +12,23 @@
 				<BaseLanguageSelector />
 			</div>
 
-			<div class="flex flex-col gap-5 w-full h-full justify-center items-center">
-				<h2 class="text-primary">
-					{{ $t('authentication.login') }}
-				</h2>
+			<div class="flex flex-col gap-5 w-full h-full justify-center">
+				<div>
+					<h2 class="font-bold text-primary">
+						{{ $t('authentication.welcome') }}
+					</h2>
+					<h3 class="text-sm">
+						{{ $t('authentication.login') }}
+					</h3>
+				</div>
 
-				<form class="flex flex-col gap-5 w-full" @submit.prevent="onLogin">
-					<small class="text-primary text-center">
-						{{ $t('authentication.login_disclamer') }}
-					</small>
+				<form class="flex flex-col gap-2.5 w-full" @submit.prevent="onLogin">
+					<div class="flex gap-1 items-center">
+						<BaseIcon icon="info" color="cyan" :size="20" />
+						<small class="text-cyan-500 text-center text-xs">
+							{{ $t('authentication.login_disclamer') }}
+						</small>
+					</div>
 					<BaseInput
 						v-model="email"
 						type="email"
@@ -33,19 +41,18 @@
 						:placeholder="$t('authentication.password_placeholder')"
 						:label="$t('authentication.password')" />
 
-					<BaseButton color="primary">
-						{{ $t('authentication.login') }}
+					<BaseButton color="primary" variant="stealth">
+						{{ $t('authentication.signin') }}
 					</BaseButton>
+					<small class="text-red-500 text-center">{{ errorMessage }}</small>
 				</form>
 
-				<small class="text-red-500">{{ errorMessage }}</small>
-
-				<div class="flex gap-2 items-center">
-					<p>
+				<div class="flex gap-2 mt-5 items-center mx-auto">
+					<span class="text-sm">
 						{{ $t('authentication.dont_have_account') }}
-					</p>
+					</span>
 					<RouterLink to="/authentication/register">
-						<BaseButton variant="stealth" color="secondary">
+						<BaseButton variant="link" color="secondary">
 							{{ $t('authentication.register') }}
 						</BaseButton>
 					</RouterLink>

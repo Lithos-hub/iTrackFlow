@@ -4,4 +4,5 @@ export enum Variant {
 	ghost = 'ghost',
 	stealth = 'stealth',
 	default = 'default',
+	link = 'link',
 }

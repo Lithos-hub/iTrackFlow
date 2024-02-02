@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col w-full">
 		<client-only>
-			<label v-if="label" class="m-2 font-medium">{{ label }}</label>
+			<label v-if="label" class="mx-5 my-2 font-medium text-sm">{{ label }}</label>
 			<input
 				v-if="!debounced"
 				v-bind="$attrs"

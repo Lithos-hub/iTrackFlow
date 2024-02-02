@@ -15,7 +15,10 @@
 		}
 	},
 	"authentication": {
-		"login": "Login",
+		"get_started": "Get started",
+		"welcome": "Welcome back",
+		"signin": "Sign in",
+		"login": "Sign in to your account",
 		"register": "Create an account",
 		"name": "Name",
 		"name_placeholder": "Enter your name",

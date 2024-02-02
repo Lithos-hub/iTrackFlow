@@ -5,9 +5,13 @@
 		data-testid="iui-button"
 		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`"
 		:style="{
-			border: `1px solid ${tailwindColor}`,
+			border: variant !== 'link' && `1px solid ${tailwindColor}`,
 			background:
-				variant === 'outline' ? 'transparent' : variant === 'stealth' ? `${tailwindColor}30` : '',
+				variant === 'outline' || variant === 'link'
+					? 'transparent'
+					: variant === 'stealth'
+						? `${tailwindColor}30`
+						: '',
 			color: variant === 'outline' ? tailwindColor : variant === 'stealth' ? tailwindColor : '',
 		}">
 		<div class="flex items-center justify-center gap-2.5 text-sm">
@@ -106,32 +110,8 @@ const computedColor = computed(() => {
 		@apply bg-inherit border-none text-primary hover:text-white hover:brightness-125;
 	}
 
-	&__cyber {
-		@apply relative z-20 border-2 border-transparent hover:brightness-125;
-		background:
-			linear-gradient(#101010, black) padding-box,
-			linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82)
-				border-box;
-		animation: animatedgradient 10s alternate-reverse infinite;
-		background-size: 500% 500%;
-
-		@keyframes animatedgradient {
-			0% {
-				background-position: 0% 100%;
-			}
-			15% {
-				background-position: 10% 20%;
-			}
-			50% {
-				background-position: 100% 50%;
-			}
-			75% {
-				background-position: 80% 0%;
-			}
-			100% {
-				background-position: 0% 50%;
-			}
-		}
+	&__link {
+		@apply bg-none border-none text-primary hover:text-white hover:brightness-125 font-bold underline;
 	}
 
 	&__primary {

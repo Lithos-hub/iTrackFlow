@@ -8,7 +8,7 @@
 			<div class="flex gap-5 items-center">
 				<RouterLink v-if="!user" to="/authentication/login">
 					<BaseButton variant="stealth" color="primary">
-						{{ $t('authentication.login') }}
+						{{ $t('authentication.signin') }}
 					</BaseButton>
 				</RouterLink>
 				<BaseButton
@@ -21,7 +21,7 @@
 					@click="logout">
 					Logout
 				</BaseButton>
-				<LanguageSelector />
+				<BaseLanguageSelector />
 				<BaseToggleMode />
 			</div>
 		</div>
