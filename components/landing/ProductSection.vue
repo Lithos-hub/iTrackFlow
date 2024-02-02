@@ -1,5 +1,5 @@
 <template>
-	<section id="product" class="h-screen text-black dark:text-white">
+	<section id="product" class="h-screen text-black dark:text-white mx-[10vw]">
 		<article class="flex gap-10">
 			<div class="w-1/2 p-5">
 				<h3 class="text-[100px] gradient__text--primary">

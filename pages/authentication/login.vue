@@ -1,10 +1,10 @@
 <template>
-	<section class="flex bg-dark w-full h-screen">
+	<section class="flex bg-white dark:bg-dark w-full h-screen">
 		<div class="relative w-2/3 flex flex-col justify-center items-center h-full">
 			<h1 class="gradient__text--primary font-bold">iTrackFlow</h1>
 		</div>
 		<article
-			class="relative bg-softdark w-1/3 border-l border-gray-500/20 p-10 gap-5 justify-center items-center mx-auto text-black dark:text-white">
+			class="relative bg-softdark w-1/3 border-l border-gray-500/20 p-10 gap-5 justify-center items-center mx-auto">
 			<div class="flex justify-between w-full">
 				<RouterLink to="/">
 					<BaseIcon icon="chevron-left" class="icon__clickable" />
@@ -12,7 +12,7 @@
 				<BaseLanguageSelector />
 			</div>
 
-			<div class="flex flex-col gap-5 w-full h-full justify-center">
+			<div class="flex flex-col gap-5 w-full h-full justify-center text-white">
 				<div>
 					<h2 class="font-bold text-primary">
 						{{ $t('authentication.welcome') }}
