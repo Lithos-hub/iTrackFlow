@@ -1,8 +1,5 @@
 <template>
-	<section class="flex flex-col gap-5 app_margin dark:text-white text-black">
-		<h2 class="uppercase font-bold">
-			{{ $t('app.projects.title') }}
-		</h2>
+	<section class="flex flex-col gap-5 dark:text-white text-black">
 		<div class="flex justify-end">
 			<RouterLink to="/app/dashboard/projects/new">
 				<BaseButton color="success" icon="add" icon-right class="my-5">
@@ -23,10 +20,10 @@
 				</RouterLink>
 			</template>
 			<template #table:category="{ category }">
-				<span v-if="category === 'harmony'" class="projectRow__chip projectRow__harmony-chip">
+				<span v-if="category === 'harmony'" class="projectRow__harmony-chip">
 					{{ $t('app.dataTable.harmony') }}
 				</span>
-				<span v-if="category === 'production'" class="projectRow__chip projectRow__production-chip">
+				<span v-if="category === 'production'" class="projectRow__production-chip">
 					{{ $t('app.dataTable.production') }}
 				</span>
 			</template>

@@ -35,8 +35,16 @@
 			</div>
 		</AppSideMenu>
 
-		<div class="bg-white dark:bg-dark flex-1 grow">
-			<slot />
+		<div class="flex-1 grow bg-dark">
+			<div class="px-7 h-[63.5px] flex flex-col justify-center border-b border-b-white/10">
+				<small class="text-white/50">
+					{{ $t('app.projects.title') }}
+				</small>
+			</div>
+			<div
+				class="p-10 text-black dark:text-white bg-white dark:bg-dark h-[calc(100vh-63.5px)] overflow-y-auto">
+				<slot />
+			</div>
 		</div>
 	</div>
 </template>

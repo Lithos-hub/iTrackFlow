@@ -69,18 +69,14 @@ defineSlots<Slots>();
 
 <style lang="scss" scoped>
 table {
-	width: 100%;
+	@apply w-full text-sm;
 	border-collapse: collapse;
 
 	& thead {
-		@apply dark:border dark:border-primary;
+		@apply dark:border dark:border-white/10;
 
 		& th {
-			@apply text-center p-5 text-black dark:text-white border border-dark/10 dark:border-primary;
-
-			&:first-child {
-				@apply bg-primary dark:bg-primary/50 text-white dark:text-white;
-			}
+			@apply text-center p-5 text-black dark:text-white border border-dark/10 dark:border dark:border-white/10 font-light;
 		}
 	}
 
@@ -90,7 +86,7 @@ table {
 				&:first-child {
 					@apply font-bold text-primary;
 				}
-				@apply p-1 border border-primary/10 text-center [&:not(:first-child)]:hover:bg-dark/10 [&:not(:first-child)]:hover:dark:bg-primary/20 cursor-pointer;
+				@apply p-1 border dark:border-white/10 text-center;
 			}
 		}
 	}

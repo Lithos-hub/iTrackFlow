@@ -1,7 +1,7 @@
 .projectRow__harmony-chip {
-	@apply bg-secondary dark:bg-secondary/20 border border-rose-500 p-2 rounded-tl rounded-br min-w-[100px] text-center;
+	@apply bg-secondary/10 border border-secondary text-secondary px-5 py-1 text-xs rounded-full w-full text-center;
 }
 
 .projectRow__production-chip {
-	@apply bg-primary dark:bg-primary/20 border border-sky-500 p-2 rounded-tl rounded-br min-w-[100px] text-center;
+	@apply bg-primary/10 border border-primary text-primary px-5 py-1 text-xs rounded-full w-full text-center;
 }
