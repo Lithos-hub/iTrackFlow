@@ -19,10 +19,10 @@
 			<hr />
 			<p>{{ message }}</p>
 			<BaseButton v-if="type === 'warning'" color="danger" @click="$emit('on-action')">
-				{{ $t('app.ui.modal_confirm') }}
+				{{ $t('app.ui.modal.confirm') }}
 			</BaseButton>
 			<BaseButton v-if="type === 'info'" color="primary" @click="$emit('on-action')">
-				{{ $t('app.ui.modal_understood') }}
+				{{ $t('app.ui.modal.understood') }}
 			</BaseButton>
 		</div>
 	</div>

@@ -40,9 +40,22 @@
 			"go_back": "Volver",
 			"add_comment": "Añadir comentario",
 			"add_audio": "Añadir audio",
-			"modal_cancel": "Cancelar",
-			"modal_confirm": "Si, quiero continuar",
-			"modal_understood": "Entendido"
+			"modal": {
+				"cancel": "Cancelar",
+				"confirm": "Si, quiero continuar",
+				"understood": "Entendido"
+			},
+			"sidemenu": {
+				"dashboard": "Panel de control",
+				"projects": "Proyectos",
+				"all_projects": "Todos los proyectos",
+				"account": "Cuenta",
+				"preferences": "Preferencias",
+				"security": "Seguridad",
+				"help": "Ayuda",
+				"guide": "Guía",
+				"logout": "Cerrar sesión"
+			}
 		},
 		"dataTable": {
 			"name": "Nombre del proyecto",
@@ -51,8 +64,15 @@
 			"actions": "Acciones",
 			"harmony": "Armonía",
 			"production": "Producción",
+			"trackName": "Nombre de la pista",
 			"year": "Año",
-			"description": "Descripción"
+			"description": "Descripción",
+			"composition": "Composición",
+			"recording": "Grabación",
+			"mixing": "Mezcla",
+			"mastering": "Masterización",
+			"delete": "Eliminar",
+			"audioPath": "Escuchar pista"
 		},
 		"audio_player": {
 			"play": "Reproducir",
@@ -136,12 +156,6 @@
 			"project_genre_placeholder": "Introduce el género musical",
 			"project_year": "Año",
 			"project_year_placeholder": "Introduce el año de composición",
-			"composition": "Composición",
-			"recording": "Grabación",
-			"mixing": "Mezcla",
-			"mastering": "Masterización",
-			"delete": "Eliminar",
-			"audio": "Escuchar pista",
 			"no_audio": "No hay pista de audio",
 			"delete_track": "¡Atención! Vas a eliminar una pista",
 			"delete_track_message": "¿Estás seguro de que quieres eliminar esta pista?"

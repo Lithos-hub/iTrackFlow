@@ -22,4 +22,3 @@ const updateKey = ref(Math.random());
 
 watch(lightMode, () => (updateKey.value = Math.random()));
 </script>
-~/store/colorMode

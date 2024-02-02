@@ -28,30 +28,27 @@
 					<label>{{ $t('app.projects.project_image') }}</label>
 					<div
 						v-if="selectedProjectImagePreview"
-						class="mx-auto h-[200px] w-[200px] mx-auto border border-white/10">
+						class="mx-auto h-[200px] w-[200px] mx-auto border border-white/10 rounded-2xl">
 						<img
 							:src="selectedProjectImagePreview"
 							alt="Project picture"
-							class="max-h-[200px] aspect-square object-cover" />
+							class="max-h-[200px] aspect-square object-cover rounded-2xl" />
 					</div>
 					<!-- Drag and drop div to drop image -->
 					<div
 						v-else
 						ref="dropZoneRef"
-						class="relative w-full h-[200px] rounded-2xl gap-5 items-center z-50 cursor-pointer"
+						class="relative h-[200px] w-[200px] rounded-2xl gap-5 items-center cursor-pointer flex flex-col justify-center items-center"
 						:class="{
 							'bg-success/10 selected__border-success': isOverDropZone,
 							'bg-none border-2 border-dashed border-gray-500 dark:border-white/10':
 								!isOverDropZone,
 						}"
 						@click="fileInputRef?.click()">
-						<div
-							class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-5 items-center z-0">
-							<ClientOnly>
-								<BaseIcon icon="upload" :color="lightMode ? 'black' : 'white'" :size="30" />
-							</ClientOnly>
-							{{ $t('app.projects.project_image_placeholder') }}
+						<div :key="updateKey">
+							<BaseIcon icon="upload" :color="lightMode ? 'black' : 'white'" :size="30" />
 						</div>
+						<small>{{ $t('app.projects.project_image_placeholder') }}</small>
 					</div>
 				</div>
 				<input
@@ -61,11 +58,10 @@
 					accept="image/*"
 					@change="onSelectFile" />
 			</form>
-			<template #actions>
-				<BaseButton color="primary" @click="submit">
-					{{ $t('app.projects.project_create_submit') }}
-				</BaseButton>
-			</template>
+
+			<BaseButton color="primary" variant="stealth" class="self-end" @click="submit">
+				{{ $t('app.projects.project_create_submit') }}
+			</BaseButton>
 		</BaseCard>
 	</section>
 </template>
@@ -82,7 +78,7 @@ definePageMeta({
 
 const { t } = useI18n();
 
-const { lightMode } = useScreenStore();
+const { lightMode } = storeToRefs(useScreenStore());
 
 const dropZoneRef = ref<HTMLDivElement>();
 const { isOverDropZone } = useDropZone(dropZoneRef, {
@@ -93,6 +89,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
 const formRef = ref<HTMLFormElement | null>(null);
 const fileInputRef = ref<HTMLInputElement | null>(null);
 
+const updateKey = ref(Math.random());
 const selectedTeamMembers = ref<unknown[]>([]);
 const selectedCategory = ref<unknown[]>([]);
 const selectedProjectImage = ref<File | null>(null);
@@ -160,5 +157,6 @@ function onDrop(files: File[] | null) {
 	selectedProjectImage.value = files[0];
 	selectedProjectImagePreview.value = URL.createObjectURL(files[0]);
 }
+
+watch(lightMode, () => (updateKey.value = Math.random()));
 </script>
-~/store/colorMode

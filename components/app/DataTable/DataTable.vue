@@ -11,16 +11,7 @@
 			<tbody>
 				<tr v-for="(data, i) of dataListMap" :key="i">
 					<td v-for="{ key } of headersList" :key="key">
-						<img v-if="key === 'image'" :src="data[key]" class="mx-auto h-[100px]" />
-						<div v-else-if="key === 'actions'" class="flex gap-5 justify-center">
-							<BaseButton
-								v-for="{ icon, color, onClick } of data[key]"
-								:key="icon"
-								:icon="icon"
-								:color="color"
-								@click="onClick(data.id)" />
-						</div>
-						<slot v-else-if="$slots[`table:${key}`]" :name="`table:${key}`" v-bind="data" />
+						<slot v-if="$slots[`table:${key}`]" :name="`table:${key}`" v-bind="data" />
 						<span v-else>{{ data[key] }}</span>
 					</td>
 				</tr>
@@ -31,7 +22,6 @@
 
 <script setup lang="ts" generic="T">
 import { Actions } from './DataTable.interfaces';
-import { Project } from '@/interfaces';
 
 interface Head {
 	label: string;
@@ -41,7 +31,7 @@ interface Head {
 interface Props {
 	tableKey: number;
 	headers: Head[];
-	dataList: Project[];
+	dataList: Record<string, unknown>[];
 	actionsList?: Actions[];
 }
 
@@ -51,16 +41,18 @@ interface Slots {
 
 const props = defineProps<Props>();
 
+const { t } = useI18n();
+
 const dataListMap = computed(() =>
-	props.dataList.map((project) => ({
-		...project,
+	props.dataList.map((data) => ({
+		...data,
 		actions: props.actionsList,
 	})),
 );
 
 const headersList = computed(() => {
 	return props.actionsList
-		? [...props.headers, { label: 'Actions', key: 'actions' }]
+		? [...props.headers, { label: t('app.dataTable.actions'), key: 'actions' }]
 		: props.headers;
 });
 

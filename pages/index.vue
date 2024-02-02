@@ -14,6 +14,7 @@ import { useIntersectionObserver } from '@vueuse/core';
 definePageMeta({
 	name: 'HomePage',
 	middleware: 'auth',
+	layout: 'landing',
 });
 
 const { locale } = useI18n();

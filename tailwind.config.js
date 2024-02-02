@@ -22,24 +22,15 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				// $primary: #5b9be6;
-				// $secondary: #ec4d94;
-				// $tertiary: #e98e87;
-				// $dark: #242423;
-				// $softdark: #333533;
-				// $success: #90be6d;
-				// $info: #b5e2fa;
-				// $warning: #f7a072;
-				// $danger: #e07a5f;
 				primary: '#5b9be6',
 				secondary: '#ec4d94',
 				tertiary: '#e98e87',
 				dark: '#202020',
 				softdark: '#272829',
-				success: '#8cb369',
-				info: '#b5e2fa',
-				warning: '#f7a072',
-				danger: '#e5383b',
+				success: '#429867',
+				info: '#6f95ff',
+				warning: '#fab243',
+				danger: '#fc5956',
 			},
 			flex: {
 				2: '2 2 0%',

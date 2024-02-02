@@ -11,4 +11,3 @@ import { useScreenStore } from '@/store/colorMode';
 const { toggleDarkMode } = useScreenStore();
 const { lightMode } = storeToRefs(useScreenStore());
 </script>
-~/store/colorMode

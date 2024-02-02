@@ -3,27 +3,27 @@
 		v-bind="$attrs"
 		:disabled="disabled"
 		data-testid="iui-button"
-		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`"
+		:class="`button button__${flat ? 'flat' : computedColor} button__${size} button__radius--${radius} button__${variant}`"
 		:style="{
 			border: (variant === 'stealth' || variant === 'outline') && `1px solid ${tailwindColor}`,
-			background: computedBackground,
+			background: !flat && computedBackground,
 			color: variant === 'outline' || variant === 'stealth' ? tailwindColor : '',
 		}">
 		<div class="flex items-center justify-center gap-2.5 text-sm">
 			<!-- Left icon -->
 			<div v-if="icon && iconLeft" class="pt-1">
-				<BaseIcon :icon="icon" :size="20" :color="iconColor" />
+				<BaseIcon :icon="icon" :size="20" :color="computedIconColor" />
 			</div>
-			<!-- Center icon (no text) -->
+			<!-- Centered icon (no text) -->
 			<div v-else-if="icon && !text && !iconLeft && !iconRight" class="pt-1">
-				<BaseIcon :icon="icon" :size="20" :color="iconColor" />
+				<BaseIcon :icon="icon" :size="20" :color="computedIconColor" />
 			</div>
 			<!-- Text or slot with whatever -->
 			<slot v-if="!text" class="button__slot"></slot>
 			<span v-else>{{ text }}</span>
 			<!-- Right icon -->
 			<div v-if="icon && iconRight" class="pt-1">
-				<BaseIcon :icon="icon" :size="20" :color="iconColor" />
+				<BaseIcon :icon="icon" :size="20" :color="computedIconColor" />
 			</div>
 		</div>
 	</button>
@@ -33,8 +33,9 @@
 import { computed } from 'vue';
 
 import { Button } from './BaseButton.interfaces';
+import { ColorName } from '@/interfaces';
 
-const { color, disabled, variant } = withDefaults(defineProps<Button>(), {
+const { iconColor, color, disabled, variant } = withDefaults(defineProps<Button>(), {
 	color: 'primary',
 	disabled: false,
 	size: 'md',
@@ -79,6 +80,8 @@ const tailwindColor = computed(() => {
 	return getTailwindColor(colorReference);
 });
 
+const computedIconColor = computed<ColorName | 'white'>(() => (iconColor as ColorName) || 'white');
+
 const computedColor = computed(() => {
 	if (disabled) return 'disabled';
 	return color || 'white';
@@ -106,6 +109,10 @@ const computedBackground = computed(() => {
 
 	&__solid {
 		@apply bg-inherit;
+	}
+
+	&__flat {
+		@apply bg-none;
 	}
 
 	&__outline {

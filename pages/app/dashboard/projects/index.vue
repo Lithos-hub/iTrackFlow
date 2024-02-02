@@ -1,12 +1,11 @@
 <template>
 	<section class="flex flex-col gap-5 dark:text-white text-black">
-		<div class="flex justify-end">
-			<RouterLink to="/app/dashboard/projects/new">
-				<BaseButton color="success" icon="add" icon-right class="my-5">
-					{{ $t('app.projects.add_project') }}
-				</BaseButton>
-			</RouterLink>
-		</div>
+		<RouterLink to="/app/dashboard/projects/new" class="self-end">
+			<BaseButton color="success" icon="add" icon-right>
+				{{ $t('app.projects.add_project') }}
+			</BaseButton>
+		</RouterLink>
+
 		<AppDataTable
 			:table-key="tableKey"
 			:data-list="projectsList"
@@ -19,6 +18,9 @@
 					{{ name }}
 				</RouterLink>
 			</template>
+			<template #table:image="{ image }">
+				<img :src="image" class="mx-auto h-[100px]" />
+			</template>
 			<template #table:category="{ category }">
 				<span v-if="category === 'harmony'" class="projectRow__harmony-chip">
 					{{ $t('app.dataTable.harmony') }}
@@ -26,6 +28,16 @@
 				<span v-if="category === 'production'" class="projectRow__production-chip">
 					{{ $t('app.dataTable.production') }}
 				</span>
+			</template>
+			<template #table:actions="{ actions }">
+				<div class="flex gap-5 justify-center">
+					<BaseButton
+						v-for="{ icon, color, onClick } of actions"
+						:key="icon"
+						:icon="icon"
+						:color="color"
+						@click="onClick" />
+				</div>
 			</template>
 		</AppDataTable>
 		<!-- Alert modal when deleting project -->

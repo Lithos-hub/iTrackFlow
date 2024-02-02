@@ -19,4 +19,5 @@ export interface Button extends /* @vue-ignore */ ButtonHTMLAttributes {
 	iconLeft?: boolean;
 	iconRight?: boolean;
 	iconColor?: ColorName;
+	flat?: boolean;
 }

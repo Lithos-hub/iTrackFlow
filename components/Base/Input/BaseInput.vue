@@ -119,4 +119,3 @@ watch(
 	}
 }
 </style>
-~/store/colorMode

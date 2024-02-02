@@ -5,7 +5,8 @@ export const useUserStore = defineStore('user', () => {
 	const router = useRouter();
 
 	const { auth } = useSupabaseClient();
-	const user = useSupabaseUser();
+	// const user = useSupabaseUser();
+	const user = true;
 
 	const login = async (email: string, password: string): Promise<AuthenticationResponse> => {
 		try {

@@ -1,13 +1,10 @@
 <template>
-	<div
-		:key="refreshPlayerKey"
-		class="fixed bottom-0 left-0 bg-softDark w-full flex gap-5 text-white">
+	<div :key="refreshPlayerKey" class="fixed bottom-0 left-0 bg-black w-full flex gap-5 text-white">
 		<div class="flex gap-5 items-center">
 			<BaseButton
 				v-if="!isPlaying && !isPaused"
-				color="primary"
+				:color="!audioSrc ? 'gray' : 'primary'"
 				icon="play"
-				icon-right
 				:disabled="!audioSrc"
 				@click="play" />
 			<div class="flex gap-5">
@@ -15,7 +12,6 @@
 					v-if="isPlaying || isPaused"
 					color="primary"
 					:icon="isPlaying ? 'pause' : 'play'"
-					icon-right
 					@click="pause" />
 				<BaseButton v-if="isPlaying" color="secondary" icon="stop" icon-right @click="stop" />
 			</div>
