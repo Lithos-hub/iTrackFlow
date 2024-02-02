@@ -15,7 +15,7 @@
 					v-else
 					color="danger"
 					class="flex gap-2"
-					icon="logout"
+					icon="logout-user"
 					icon-color="white"
 					icon-right
 					@click="logout">

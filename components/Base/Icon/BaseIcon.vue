@@ -1,9 +1,12 @@
 <template>
-	<NuxtSvgIcon :font-size="size" :name="icon" :fill="iconColor" />
+	<div :key="updateKey">
+		<NuxtSvgIcon :font-size="size" :name="icon" :fill="iconColor" />
+	</div>
 </template>
 
 <script setup lang="ts">
 import { IconProps } from './BaseIcon.interfaces';
+import { useScreenStore } from '~/store/colorMode';
 
 const { icon, color } = withDefaults(defineProps<IconProps>(), {
 	color: 'white',
@@ -12,4 +15,11 @@ const { icon, color } = withDefaults(defineProps<IconProps>(), {
 });
 
 const iconColor = computed(() => getTailwindColor(color));
+
+const { lightMode } = storeToRefs(useScreenStore());
+
+const updateKey = ref(Math.random());
+
+watch(lightMode, () => (updateKey.value = Math.random()));
 </script>
+~/store/colorMode

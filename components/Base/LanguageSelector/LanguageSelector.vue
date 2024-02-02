@@ -1,7 +1,7 @@
 <template>
 	<div class="cursor-pointer duration-200 hover:scale-110" @click="toggleLanguage">
-		<BaseIcon v-if="language === 'es'" icon="spain_flag" view-box="0 0 38 38" />
-		<BaseIcon v-else icon="uk_flag" view-box="0 0 38 38" />
+		<BaseIcon v-if="language === 'es'" icon="spain_flag" :size="19" />
+		<BaseIcon v-else icon="uk_flag" :size="19" />
 	</div>
 </template>
 

@@ -24,12 +24,13 @@
 					<RouterLink to="/app/dashboard/help/guide" class="menu__link">Guide</RouterLink>
 				</div>
 				<hr class="my-3 border-white/10" />
-				<div class="flex flex-col gap-5 px-7 py-3 text-sm">
-					<div class="menu__link" @click="logout">Logout</div>
+				<div class="flex gap-2.5 px-7 py-3 text-sm">
+					<BaseIcon icon="logout-arrow" :size="20" color="gray" />
+					<div class="menu__link cursor-pointer" @click="logout">Logout</div>
 				</div>
 				<hr class="my-3 border-white/10" />
 			</div>
-			<div class="flex px-7 py-3 gap-10">
+			<div class="flex px-7 py-3 gap-5">
 				<BaseLanguageSelector />
 				<BaseToggleMode />
 			</div>

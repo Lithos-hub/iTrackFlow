@@ -5,14 +5,9 @@
 		data-testid="iui-button"
 		:class="`button button__${computedColor} button__${size} button__radius--${radius} button__${variant}`"
 		:style="{
-			border: variant !== 'link' && `1px solid ${tailwindColor}`,
-			background:
-				variant === 'outline' || variant === 'link'
-					? 'transparent'
-					: variant === 'stealth'
-						? `${tailwindColor}30`
-						: '',
-			color: variant === 'outline' ? tailwindColor : variant === 'stealth' ? tailwindColor : '',
+			border: (variant === 'stealth' || variant === 'outline') && `1px solid ${tailwindColor}`,
+			background: computedBackground,
+			color: variant === 'outline' || variant === 'stealth' ? tailwindColor : '',
 		}">
 		<div class="flex items-center justify-center gap-2.5 text-sm">
 			<!-- Left icon -->
@@ -88,11 +83,22 @@ const computedColor = computed(() => {
 	if (disabled) return 'disabled';
 	return color || 'white';
 });
+
+const computedBackground = computed(() => {
+	if (variant === 'outline' || variant === 'link') return 'transparent';
+	if (variant === 'stealth') return `${tailwindColor.value}30`;
+	if (
+		['primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'danger'].includes(color)
+	) {
+		return color;
+	}
+	return tailwindColor.value;
+});
 </script>
 
 <style lang="scss" scoped>
 .button {
-	@apply text-white hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125 border;
+	@apply text-white hover:opacity-50 transition-all duration-200 ease-in-out active:scale-90 active:brightness-125 text-xs;
 
 	&__default {
 		@apply hover:opacity-100;

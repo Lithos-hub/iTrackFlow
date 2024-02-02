@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { Input } from './BaseInput.interfaces';
-import { useScreenStore } from '~/store/screen';
+import { useScreenStore } from '~/store/colorMode';
 
 const { lightMode } = storeToRefs(useScreenStore());
 
@@ -119,3 +119,4 @@ watch(
 	}
 }
 </style>
+~/store/colorMode

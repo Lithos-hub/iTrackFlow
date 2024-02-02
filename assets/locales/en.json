@@ -19,7 +19,7 @@
 		"welcome": "Welcome back",
 		"signin": "Sign in",
 		"login": "Sign in to your account",
-		"loogotu": "Log out",
+		"logout": "Log out",
 		"register": "Create an account",
 		"name": "Name",
 		"name_placeholder": "Enter your name",
@@ -80,7 +80,8 @@
 			"project_category_placeholder": "Enter your project category",
 			"project_team_members": "Project team members",
 			"project_team_members_placeholder": "Enter your project team members",
-			"project_image": "Project image",
+			"project_image": "Project picture",
+			"project_image_placeholder": "Upload image",
 			"project_create_submit": "Create project",
 			"delete_project": "Atention! You are going to delete this project",
 			"delete_project_message": "Are you sure you want to delete this project?"

@@ -9,7 +9,7 @@
 		</Teleport>
 		<!-- Dropdown -->
 		<div ref="dropdown" class="flex flex-col w-full">
-			<label v-if="label" class="m-2 font-medium">{{ label }}</label>
+			<label v-if="label" class="mx-5 my-2 font-medium text-sm">{{ label }}</label>
 			<div class="relative cursor-pointer">
 				<!-- Dropdown selected options chips -->
 				<p v-if="!multiselect" class="absolute top-1/2 left-5 -translate-y-1/2">
@@ -47,13 +47,20 @@
 
 				<!-- Chips -->
 				<ul v-if="multiselect" class="flex flex-wrap w-auto gap-1 my-2 text-center">
-					<li
+					<!-- <li
 						v-for="({ label, value }, i) of selectedItems"
 						:key="i"
 						class="m-1 px-2 py-1 bg-primary text-white rounded-full text-[12px]"
 						@click="onItemClick(value)">
 						{{ label }}
-					</li>
+					</li> -->
+					<BaseChip
+						v-for="({ label, value }, i) of selectedItems"
+						:key="i"
+						variant="primary"
+						:content="label"
+						closable
+						@close="addOrRemoveItem(value)" />
 				</ul>
 
 				<!-- Dropdown list -->

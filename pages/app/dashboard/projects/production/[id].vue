@@ -128,7 +128,7 @@
 <script setup lang="ts">
 import { FloatMenuTarget } from '@/components/App/FloatMenu/FloatMenu.interfaces';
 
-import { useScreenStore } from '@/store/screen';
+import { useScreenStore } from '@/store/colorMode';
 import { useFloatMenuStore } from '@/store/floatMenu';
 import { useAudioPlayerStore } from '@/store/audioPlayer';
 
@@ -281,3 +281,4 @@ table {
 	}
 }
 </style>
+~/store/colorMode

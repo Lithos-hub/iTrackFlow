@@ -64,17 +64,36 @@ label {
 
 // FX and animations
 
-.selected__bordered {
+.selected__border-success {
+	background-image: linear-gradient(90deg, $success 50%, transparent 50%),
+		linear-gradient(90deg, $success 50%, transparent 50%),
+		linear-gradient(0deg, $success 50%, transparent 50%),
+		linear-gradient(0deg, $success 50%, transparent 50%);
+	background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+	background-size:
+		12px 2px,
+		12px 2px,
+		2px 12px,
+		2px 12px;
+	background-position:
+		left top,
+		right bottom,
+		left bottom,
+		right top;
+	animation: border-dance 0.6s infinite linear;
+}
+
+.selected__bordered--neutral {
 	background-image: linear-gradient(90deg, silver 50%, transparent 50%),
 		linear-gradient(90deg, silver 50%, transparent 50%),
 		linear-gradient(0deg, silver 50%, transparent 50%),
 		linear-gradient(0deg, silver 50%, transparent 50%);
 	background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
 	background-size:
-		15px 2px,
-		15px 2px,
-		2px 15px,
-		2px 15px;
+		12px 2px,
+		12px 2px,
+		2px 12px,
+		2px 12px;
 	background-position:
 		left top,
 		right bottom,
@@ -92,10 +111,10 @@ label {
 	}
 	100% {
 		background-position:
-			left 15px top,
-			right 15px bottom,
-			left bottom 15px,
-			right top 15px;
+			left 12px top,
+			right 12px bottom,
+			left bottom 12px,
+			right top 12px;
 	}
 }
 
