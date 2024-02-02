@@ -4,7 +4,7 @@
 			{{ $t('app.projects.title') }}
 		</h2>
 		<div class="flex justify-end">
-			<RouterLink to="/app/projects/new">
+			<RouterLink to="/app/dashboard/projects/new">
 				<BaseButton color="success" icon="add" icon-right class="my-5">
 					{{ $t('app.projects.add_project') }}
 				</BaseButton>
@@ -16,7 +16,9 @@
 			:actions-list="actionsList"
 			:headers="headersList">
 			<template #table:name="{ name, category, id }">
-				<RouterLink :to="`/app/projects/${category}/${id}`" class="underline text-cyan-500">
+				<RouterLink
+					:to="`/app/dashboard/projects/${category}/${id}`"
+					class="underline text-cyan-500">
 					{{ name }}
 				</RouterLink>
 			</template>
@@ -43,7 +45,7 @@ import { Actions } from '@/components/App/DataTable/DataTable.interfaces';
 import { Project } from '@/interfaces';
 
 definePageMeta({
-	layout: 'default',
+	layout: 'dashboard',
 	middleware: 'auth',
 });
 

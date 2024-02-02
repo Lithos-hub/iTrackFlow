@@ -3,7 +3,9 @@
 		<header class="sticky top-0 left-0">
 			<BaseNavbar />
 		</header>
-		<slot />
+		<div class="bg-white dark:bg-dark h-full flex-1">
+			<slot />
+		</div>
 	</div>
 </template>
 

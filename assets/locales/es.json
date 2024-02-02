@@ -19,6 +19,7 @@
 		"welcome": "Bienvenido de nuevo",
 		"signin": "Iniciar sesión",
 		"login": "Iniciar sesión con tu cuenta",
+		"logout": "Cerrar sesión",
 		"register": "Crear una cuenta",
 		"name": "Nombre",
 		"name_placeholder": "Introduce tu nombre",

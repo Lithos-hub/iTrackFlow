@@ -21,10 +21,6 @@ label {
 	@apply text-black;
 }
 
-hr {
-	@apply border-primary/20;
-}
-
 // Scrollbar
 ::-webkit-scrollbar {
 	width: 0.25rem;

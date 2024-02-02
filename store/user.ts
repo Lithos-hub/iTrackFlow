@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
 				password,
 			});
 			if (error) throw error;
-			router.push('/app/projects');
+			router.push('/app/dashboard/projects');
 			return {
 				success: 'Logged in!',
 			};

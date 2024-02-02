@@ -19,7 +19,7 @@
 					icon-color="white"
 					icon-right
 					@click="logout">
-					Logout
+					{{ $t('authentication.logout') }}
 				</BaseButton>
 				<BaseLanguageSelector />
 				<BaseToggleMode />

@@ -22,7 +22,7 @@
 			</h3>
 		</div>
 
-		<RouterLink to="/app/projects">
+		<RouterLink to="/app/dashboard/projects">
 			<BaseButton class="w-[150px] mx-auto">
 				{{ $t('landing.get_started') }}
 			</BaseButton>
