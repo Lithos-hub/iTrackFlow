@@ -28,11 +28,11 @@
 					<label>{{ $t('app.projects.project_image') }}</label>
 					<div
 						v-if="selectedProjectImagePreview"
-						class="mx-auto h-[200px] w-[200px] mx-auto border border-white/10 rounded-2xl">
+						class="mx-auto h-[200px] w-[200px] mx-auto default_border rounded-2xl">
 						<img
 							:src="selectedProjectImagePreview"
 							alt="Project picture"
-							class="max-h-[200px] aspect-square object-cover rounded-2xl" />
+							class="max-h-[200px] aspect-square object-contain rounded-2xl" />
 					</div>
 					<!-- Drag and drop div to drop image -->
 					<div

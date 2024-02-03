@@ -21,25 +21,13 @@
 </template>
 
 <script setup lang="ts" generic="T">
-import { Actions } from './DataTable.interfaces';
-
-interface Head {
-	label: string;
-	key: string;
-}
-
-interface Props {
-	tableKey: number;
-	headers: Head[];
-	dataList: Record<string, unknown>[];
-	actionsList?: Actions[];
-}
+import { DataTableProps } from './DataTable.interfaces';
 
 interface Slots {
 	[K in `table:${string}`]: { value: T[keyof T] };
 }
 
-const props = defineProps<Props>();
+const props = defineProps<DataTableProps>();
 
 const { t } = useI18n();
 
@@ -68,7 +56,7 @@ table {
 		@apply dark:border dark:border-white/10;
 
 		& th {
-			@apply text-center p-5 text-black dark:text-white border border-dark/10 dark:border dark:border-white/10 font-light;
+			@apply text-center p-5 text-black dark:text-white default_border font-light;
 		}
 	}
 
@@ -78,7 +66,7 @@ table {
 				&:first-child {
 					@apply font-bold text-primary;
 				}
-				@apply p-1 border dark:border-white/10 text-center;
+				@apply p-1 default_border text-center;
 			}
 		}
 	}

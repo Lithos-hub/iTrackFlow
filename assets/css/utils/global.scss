@@ -155,3 +155,7 @@ label {
 		opacity: 1;
 	}
 }
+
+.default_border {
+	@apply border border-black/10 dark:border-white/10;
+}

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.default_border {
+		@apply border border-black/10 dark:border-white/10;
+	}
+}

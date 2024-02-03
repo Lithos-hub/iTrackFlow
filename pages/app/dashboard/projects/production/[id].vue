@@ -6,97 +6,14 @@
 			</BaseButton>
 
 			<div class="flex flex-col gap-5">
-				<div class="grid grid-cols-5 w-full gap-5 text-primary">
-					<BaseInput v-model="projectName" label="Project name" color="primary" />
-					<BaseInput v-model="projectComposer" label="Composer" color="primary" />
-					<BaseInput v-model="projectArranger" label="Arranger" color="primary" />
-					<BaseInput v-model="projectGenre" label="Genre" color="primary" />
-					<BaseInput v-model="projectYear" label="Year" color="primary" />
+				<div class="grid grid-cols-5 w-full gap-5 p-2 dark:bg-softdark default_border">
+					<BaseInput v-model="projectName" label="Project name" color="white" />
+					<BaseInput v-model="projectComposer" label="Composer" color="white" />
+					<BaseInput v-model="projectArranger" label="Arranger" color="white" />
+					<BaseInput v-model="projectGenre" label="Genre" color="white" />
+					<BaseInput v-model="projectYear" label="Year" color="white" />
 				</div>
-
-				<!-- <table :key="tableKey" class="bg-white dark:bg-dark">
-					<thead>
-						<tr>
-							<th>{{ $t('app.production.track_name') }}</th>
-							<th>{{ $t('app.production.composition') }}</th>
-							<th>{{ $t('app.production.recording') }}</th>
-							<th>{{ $t('app.production.mixing') }}</th>
-							<th>{{ $t('app.production.mastering') }}</th>
-							<th>{{ $t('app.production.audio') }}</th>
-							<th>{{ $t('app.production.delete') }}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr
-							v-for="({ id, composition, recording, mixing, mastering, audioPath }, i) of trackList"
-							:key="i">
-							<td>
-								<BaseInput
-									v-model="trackList[i].trackName"
-									:placeholder="
-										trackList[i].trackName ? '' : $t('app.production.track_name_placeholder')
-									"
-									variant="underline"
-									color="primary" />
-							</td>
-							<td
-								@click="toggleCheck(i, 'composition')"
-								@contextmenu="($event) => onCellClick({ column: 'composition', id }, $event)">
-								<BaseIcon
-									class="mx-auto"
-									:icon="composition ? 'check' : 'uncheck'"
-									:color="composition ? 'green' : 'red'" />
-							</td>
-							<td
-								@click="toggleCheck(i, 'recording')"
-								@contextmenu="($event) => onCellClick({ column: 'recording', id }, $event)">
-								<BaseIcon
-									class="mx-auto"
-									:icon="recording ? 'check' : 'uncheck'"
-									:color="recording ? 'green' : 'red'" />
-							</td>
-							<td
-								@click="toggleCheck(i, 'mixing')"
-								@contextmenu="($event) => onCellClick({ column: 'mixing', id }, $event)">
-								<BaseIcon
-									class="mx-auto"
-									:icon="mixing ? 'check' : 'uncheck'"
-									:color="mixing ? 'green' : 'red'" />
-							</td>
-							<td
-								@click="toggleCheck(i, 'mastering')"
-								@contextmenu="($event) => onCellClick({ column: 'mastering', id }, $event)">
-								<BaseIcon
-									class="mx-auto"
-									:icon="mastering ? 'check' : 'uncheck'"
-									:color="mastering ? 'green' : 'red'" />
-							</td>
-							<td
-								@click="audioPath && togglePlay(id)"
-								@contextmenu="($event) => onCellClick({ column: 'audio', id }, $event)">
-								<BaseIcon
-									v-if="audioPath"
-									:key="currentTrackPlaying"
-									class="mx-auto"
-									:icon="
-										currentTrackPlaying === id && !isPlaying
-											? 'pause'
-											: currentTrackPlaying === id && isPlaying
-												? 'play'
-												: 'play'
-									"
-									:color="lightMode ? 'black' : 'white'" />
-								<div v-else class="text-red-400 font-bold">
-									{{ $t('app.production.no_audio') }}
-								</div>
-							</td>
-							<td>
-								<BaseButton icon="trash" color="danger" @click="onRowDelete(id)" />
-							</td>
-						</tr>
-					</tbody>
-				</table> -->
-				<AppDataTable :table-key="tableKey" :data-list="trackList" :headers="headersList">
+				<AppDataTable :key="tableKey" :data-list="trackList" :headers="headersList">
 					<template #table:trackName="{ id }">
 						<BaseInput
 							v-model="trackList[id - 1].trackName"
@@ -108,7 +25,7 @@
 					</template>
 					<template #table:composition="{ composition, id }">
 						<BaseIcon
-							class="mx-auto"
+							class="mx-auto cursor-pointer"
 							:icon="composition ? 'check' : 'uncheck'"
 							:color="composition ? 'green' : 'red'"
 							@click="toggleCheck(id - 1, 'composition')"
@@ -116,7 +33,7 @@
 					</template>
 					<template #table:recording="{ recording, id }">
 						<BaseIcon
-							class="mx-auto"
+							class="mx-auto cursor-pointer"
 							:icon="recording ? 'check' : 'uncheck'"
 							:color="recording ? 'green' : 'red'"
 							@click="toggleCheck(id - 1, 'recording')"
@@ -124,7 +41,7 @@
 					</template>
 					<template #table:mixing="{ mixing, id }">
 						<BaseIcon
-							class="mx-auto"
+							class="mx-auto cursor-pointer"
 							:icon="mixing ? 'check' : 'uncheck'"
 							:color="mixing ? 'green' : 'red'"
 							@click="toggleCheck(id - 1, 'mixing')"
@@ -132,7 +49,7 @@
 					</template>
 					<template #table:mastering="{ mastering, id }">
 						<BaseIcon
-							class="mx-auto"
+							class="mx-auto cursor-pointer"
 							:icon="mastering ? 'check' : 'uncheck'"
 							:color="mastering ? 'green' : 'red'"
 							@click="toggleCheck(id - 1, 'mastering')"
@@ -143,7 +60,7 @@
 							<BaseIcon
 								v-if="audioPath"
 								:key="currentTrackPlaying"
-								class="mx-auto"
+								class="mx-auto cursor-pointer"
 								:icon="
 									currentTrackPlaying === id && !isPlaying
 										? 'pause'

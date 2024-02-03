@@ -1,5 +1,7 @@
 <template>
-	<div :key="refreshPlayerKey" class="fixed bottom-0 left-0 bg-black w-full flex gap-5 text-white">
+	<div
+		:key="refreshPlayerKey"
+		class="absolute bottom-0 left-0 bg-black w-full flex gap-5 text-white">
 		<div class="flex gap-5 items-center">
 			<BaseButton
 				v-if="!isPlaying && !isPaused"

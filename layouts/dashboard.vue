@@ -52,7 +52,7 @@
 			</div>
 		</AppSideMenu>
 
-		<div class="flex-1 grow bg-dark">
+		<div class="flex-1 grow bg-dark relative">
 			<div class="px-7 h-[63.5px] flex flex-col justify-center border-b border-b-white/10">
 				<small class="text-white/50">
 					{{ $t('app.projects.title') }}
