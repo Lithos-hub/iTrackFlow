@@ -28,11 +28,14 @@
 					<label>{{ $t('app.projects.project_image') }}</label>
 					<div
 						v-if="selectedProjectImagePreview"
-						class="mx-auto h-[200px] w-[200px] mx-auto default_border rounded-2xl">
-						<img
-							:src="selectedProjectImagePreview"
-							alt="Project picture"
-							class="max-h-[200px] aspect-square object-contain rounded-2xl" />
+						class="flex flex-col justify-center items-center gap-5">
+						<div class="mx-auto h-[200px] w-[200px] mx-auto default_border rounded-2xl">
+							<img
+								:src="selectedProjectImagePreview"
+								alt="Project picture"
+								class="max-h-[200px] aspect-square object-cover rounded-2xl" />
+						</div>
+						<BaseButton type="button" icon="trash" flat @click="removeImage" />
 					</div>
 					<!-- Drag and drop div to drop image -->
 					<div
@@ -140,6 +143,11 @@ const onSelectFile = (event: Event) => {
 
 	selectedProjectImage.value = file;
 	selectedProjectImagePreview.value = URL.createObjectURL(file);
+};
+
+const removeImage = () => {
+	selectedProjectImage.value = null;
+	selectedProjectImagePreview.value = null;
 };
 
 function onDrop(files: File[] | null) {
