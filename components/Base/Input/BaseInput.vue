@@ -100,14 +100,14 @@ watch(
 
 <style lang="scss" scoped>
 .input {
-	@apply w-full px-5 py-2 bg-transparent duration-75 outline-0;
+	@apply w-full px-5 py-2 bg-transparent transition-all duration-75 outline-0 text-sm font-light;
 
 	&__default {
 		@apply text-black dark:text-white bg-white dark:bg-dark;
 	}
 
 	&__underline {
-		@apply text-black dark:text-white border-0 border-b focus:border-b-2;
+		@apply text-black dark:text-white border-0 border-b focus:border-none;
 	}
 
 	&__bordered {

@@ -56,7 +56,7 @@ table {
 		@apply dark:border dark:border-white/10;
 
 		& th {
-			@apply text-center p-5 text-black dark:text-white default_border font-light;
+			@apply text-center p-5 text-black dark:text-white default_border font-light bg-black/5 dark:bg-white/5;
 		}
 	}
 
