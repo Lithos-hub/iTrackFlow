@@ -24,7 +24,8 @@
 				v-if="closable"
 				data-testid="base-chip__close"
 				icon="cross"
-				class="h-5 w-5 p-1 cursor-pointer rounded-full hover:bg-white/10 transition-all"
+				:size="16"
+				class="h-5 w-5 cursor-pointer rounded-full hover:bg-white/10 transition-all ml-2"
 				@click="$emit('close')" />
 		</div>
 	</div>

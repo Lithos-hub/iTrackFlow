@@ -1,11 +1,7 @@
 <template>
 	<section
 		id="hero"
-		class="h-[calc(100vh-61px)] text-center flex flex-col items-center justify-center text-black dark:text-white mx-[10vw]">
-		<!-- <h1
-			class="xl:text-[200px] lg:text-[180px] md:text-[200px] text-[80px] text-center gradient__text--primary brightness-110">
-			{{ $t('landing.title') }}
-		</h1> -->
+		class="h-screen text-center flex flex-col items-center justify-center text-black dark:text-white">
 		<div class="text-center">
 			<h1
 				class="xl:text-[100px] lg:text-[80px] md:text-[60px] text-[40px] gradient__text--primary font-bold">
@@ -29,3 +25,11 @@
 		</RouterLink>
 	</section>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+	title: 'Landing Page',
+	description: 'Landing page for the application',
+	layout: 'landing',
+});
+</script>

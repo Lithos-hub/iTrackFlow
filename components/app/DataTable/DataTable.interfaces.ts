@@ -1,8 +1,7 @@
-import { IconName } from '@/interfaces';
-import { ColorType } from '@/components/Base/Button/BaseButton.interfaces';
+import { ColorName, IconName } from '@/interfaces';
 
 export interface Actions {
 	icon: IconName;
-	color: ColorType;
+	color: ColorName;
 	onClick: (id: number | string) => void;
 }

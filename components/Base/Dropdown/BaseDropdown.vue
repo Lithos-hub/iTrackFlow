@@ -68,20 +68,25 @@
 					<div
 						v-if="isSelecting"
 						class="z-50 absolute top-[50px] w-full rounded bg-white dark:bg-dark duration-200 shadow-xl">
-						<ul class="max-h-[200px] overflow-auto rounded border border-dark/50">
+						<ul
+							class="max-h-[200px] overflow-auto rounded border border-dark/10 dark:border-white/10">
 							<li
 								v-for="({ label, value }, i) of props.data"
 								:key="i"
-								class="p-2 bg-white dark:bg-dark hover:bg-primary/10 cursor-pointer border-b border-white/50 last:border-b-0 first:rounded-t last:rounded-b"
+								class="p-2 bg-white dark:bg-dark hover:bg-black/10 dark:hover:bg-white/10 cursor-pointer border-b border-black/10 dark:border-white/10 last:border-b-0 first:rounded-t last:rounded-b cursor-pointer transition-all duration-200 ease-in-out"
 								@click="onItemClick(value)">
-								<div class="flex items-center pl-3">
+								<div class="flex items-center ps-3">
 									<input
 										v-if="multiselect"
 										v-model="model"
 										type="checkbox"
 										:value="value"
-										class="mr-5 w-4 h-4 cursor-pointer" />
-									<div>{{ label }}</div>
+										class="w-4 h-4 text-blue-600 bg-dark border-dark rounded dark:ring-offset-gray-700 dark:bg-softdark dark:border-softdark" />
+
+									<label
+										class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+										{{ label }}
+									</label>
 								</div>
 							</li>
 						</ul>

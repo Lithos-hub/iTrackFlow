@@ -35,7 +35,8 @@
 						v-for="{ icon, color, onClick } of actions"
 						:key="icon"
 						:icon="icon"
-						:color="color"
+						flat
+						:icon-color="color"
 						@click="onClick" />
 				</div>
 			</template>
@@ -101,12 +102,12 @@ const projectsList = ref<Project[]>([
 const actionsList: Actions[] = [
 	{
 		icon: 'pencil',
-		color: 'primary',
+		color: 'blue',
 		onClick: (id) => onEdit(id as number),
 	},
 	{
 		icon: 'trash',
-		color: 'danger',
+		color: 'red',
 		onClick: (id) => onDelete(id as number),
 	},
 ];

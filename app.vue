@@ -24,9 +24,6 @@
 				<Link rel="apple-touch-startup-image" href="/favicon.png" />
 			</Head>
 		</Html>
-		<div class="bg-1 fixed object-none" />
-		<div class="bg-2 fixed object-none" />
-		<div class="bg-3 fixed object-none" />
 		<NuxtLayout>
 			<NuxtPage />
 		</NuxtLayout>

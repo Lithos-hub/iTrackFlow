@@ -78,8 +78,12 @@ const tailwindColor = computed(() => {
 			colorReference = 'transparent';
 			break;
 		default:
-			colorReference = lightMode.value ? 'black' : 'white';
+			colorReference = lightMode.value ? '#00000050' : '#ffffff50';
 			break;
+	}
+
+	if (colorReference.charAt(0) === '#') {
+		return colorReference;
 	}
 
 	return getTailwindColor(colorReference);

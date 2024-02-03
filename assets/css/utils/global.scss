@@ -1,7 +1,13 @@
 // Pure HTML
+
 body {
 	-webkit-font-smoothing: antialiased;
 	scroll-behavior: smooth;
+}
+
+html,
+body {
+	@apply w-screen h-screen overflow-x-hidden;
 }
 
 // Apply only in elements outside the music-sheet class
