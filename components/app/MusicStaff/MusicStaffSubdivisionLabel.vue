@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<small class="absolute top-0 left-1 text-black">{{ label }}</small>
+		<small class="absolute top-0 left-1 text-black/50 dark:text-white/50">{{ label }}</small>
 	</div>
 </template>
 

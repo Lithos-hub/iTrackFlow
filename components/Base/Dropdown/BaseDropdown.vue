@@ -47,13 +47,6 @@
 
 				<!-- Chips -->
 				<ul v-if="multiselect" class="flex flex-wrap w-auto gap-1 my-2 text-center">
-					<!-- <li
-						v-for="({ label, value }, i) of selectedItems"
-						:key="i"
-						class="m-1 px-2 py-1 bg-primary text-white rounded-full text-[12px]"
-						@click="onItemClick(value)">
-						{{ label }}
-					</li> -->
 					<BaseChip
 						v-for="({ label, value }, i) of selectedItems"
 						:key="i"
@@ -101,9 +94,7 @@
 import { ref, Ref } from 'vue';
 import { BaseDropdown } from './BaseDropdown.interfaces';
 
-const props = withDefaults(defineProps<BaseDropdown>(), {
-	color: 'primary',
-});
+const props = withDefaults(defineProps<BaseDropdown>(), {});
 
 const model = defineModel({
 	type: Array as PropType<unknown[]>,

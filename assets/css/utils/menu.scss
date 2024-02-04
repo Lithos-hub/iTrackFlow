@@ -1,3 +1,23 @@
-.menu__link {
-	@apply text-white/50 hover:text-white duration-200;
+.sidemenu {
+	@apply font-light min-w-[300px] flex flex-col justify-between;
+
+	&__block {
+		@apply flex flex-col gap-5 px-7 py-3 text-sm;
+	}
+
+	&__label {
+		@apply text-white/30 text-sm font-semibold;
+	}
+
+	&__separator {
+		@apply my-3 border-white/10;
+	}
+
+	&__pseudobutton {
+		@apply flex gap-2.5 px-7 py-3 text-sm;
+	}
+
+	&__link {
+		@apply text-white/50 hover:text-white duration-200 cursor-pointer;
+	}
 }

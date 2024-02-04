@@ -24,7 +24,7 @@ label {
 }
 
 .music-sheet {
-	@apply text-black;
+	@apply text-black dark:text-white default_border;
 }
 
 // Scrollbar

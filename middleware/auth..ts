@@ -1,10 +1,9 @@
 export default defineNuxtRouteMiddleware(({ path }) => {
-	// const user = useSupabaseUser();
-	const user = ref(true);
-
+	const user = useSupabaseUser();
+	// const user = ref(false);
 	if (!user.value) {
-		return navigateTo('/authentication/login');
+		navigateTo('/authentication/login');
 	} else if (path.includes('authentication')) {
-		return navigateTo('/app/dashboard/projects');
+		navigateTo('/app/dashboard/projects');
 	}
 });

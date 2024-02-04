@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="relative border border-dark/10 text-center p-5 hover:bg-black/10 cursor-pointer duration-100 flex flex-col gap-2.5">
-		<small class="absolute top-0 left-1 text-black">{{ index }}</small>
+		class="relative default_border text-center p-5 hover:bg-black/10 cursor-pointer duration-100 flex flex-col gap-2.5">
+		<small class="absolute top-0 left-1">{{ index }}</small>
 		<div class="flex flex-row grow items-center justify-center">
 			<AppMusicStaffSubdivision
 				v-for="({ chord, romanNumber }, i) of subdivisionChords"
@@ -15,10 +15,9 @@
 		<BaseInput
 			v-model="model"
 			variant="underline"
-			color="primary"
 			debounced
+			color="black"
 			:placeholder="$t('app.harmony.lyrics')"
-			no-outline
 			@input="updateLyrics" />
 	</div>
 </template>

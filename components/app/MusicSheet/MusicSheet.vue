@@ -1,17 +1,15 @@
 <template>
 	<section
 		v-if="data"
-		class="relative music-sheet text-black bg-white p-5 shadow relative flex flex-col gap-5">
-		<div class="grid grid-cols-2 gap-10 bg-white w-full">
+		class="music-sheet relative bg-white dark:bg-softdark p-5 shadow-xl relative flex flex-col gap-5">
+		<div class="grid grid-cols-2 gap-10 w-full">
 			<BaseInput
 				v-model.trim="sheetTitle"
-				color="primary"
 				variant="underline"
 				:placeholder="$t('app.harmony.sheet_title_placeholder')"
-				no-outline
 				class="w-1/2" />
 
-			<div class="flex flex-col gap-1 text-black text-right">
+			<div class="flex flex-col gap-1 text-right">
 				<small>
 					<strong>{{ $t('app.harmony.tempo') }}:</strong>
 					{{ ' ' }}
@@ -26,7 +24,7 @@
 		</div>
 		<hr />
 		<div
-			class="border grid"
+			class="grid"
 			:style="{
 				'grid-template-columns': `repeat(${zoomLevel}, 1fr)`,
 			}">
@@ -38,24 +36,24 @@
 				:key-signature="data.scaleType" />
 		</div>
 		<!-- Sheet zoom controls -->
-		<div class="fixed right-5 bottom-5 rounded">
+		<div class="fixed right-10 bottom-5 rounded bg-softdark border">
 			<div class="flex flex-col gap-1 p-1">
 				<BaseIcon
 					icon="download"
 					color="white"
-					:size="30"
+					:size="25"
 					class="bg-danger p-1 rounded hover:bg-opacity-45 cursor-pointer"
 					@click="downloadSheet" />
 				<BaseIcon
 					icon="zoom-in"
 					color="white"
-					:size="30"
+					:size="25"
 					class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
 					@click="zoomIn" />
 				<BaseIcon
 					icon="zoom-out"
 					color="white"
-					:size="30"
+					:size="25"
 					class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
 					@click="zoomOut" />
 			</div>
@@ -92,7 +90,7 @@
 					<div
 						v-for="(staff, i) of outputChordsForPDF"
 						:key="i"
-						class="relative flex flex-col justify-center items-center text-center border text-black w-[40px] h-[35px] text-[5px]">
+						class="relative flex flex-col justify-center items-center text-center border w-[40px] h-[35px] text-[5px]">
 						<div>
 							<strong class="text-gray-500 text-[3px]">{{ i + 1 }}</strong>
 						</div>

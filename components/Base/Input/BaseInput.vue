@@ -1,33 +1,31 @@
 <template>
 	<div class="flex flex-col w-full">
-		<client-only>
-			<label v-if="label" class="mx-5 my-2 font-medium text-sm">
-				{{ label }}
-			</label>
-			<input
-				v-if="!debounced"
-				v-bind="$attrs"
-				v-model="model"
-				:class="`input input__${variant} ${!noOutline ? 'focus:ring-2' : ''}`"
-				:style="{
-					borderColor: tailwindColor,
-					color: tailwindColor,
-					outlineColor: tailwindColor,
-				}" />
-			<input
-				v-else
-				v-bind="$attrs"
-				:class="`input input__${variant} ${!noOutline && 'focus:ring-2'}`"
-				:value="model"
-				:style="{
-					borderColor: tailwindColor,
-					color: tailwindColor,
-					outlineColor: tailwindColor,
-				}"
-				@input="onDebouncedInput" />
+		<label v-if="label" class="mx-5 my-2 font-medium text-sm">
+			{{ label }}
+		</label>
+		<input
+			v-if="!debounced"
+			v-bind="$attrs"
+			v-model="model"
+			:class="`input input__${variant} ${!noOutline ? 'focus:ring-2' : ''}`"
+			:style="{
+				borderColor: tailwindColor,
+				color: textColor,
+				outlineColor: tailwindColor,
+			}" />
+		<input
+			v-else
+			v-bind="$attrs"
+			:class="`input input__${variant} ${!noOutline && 'focus:ring-2'}`"
+			:value="model"
+			:style="{
+				borderColor: tailwindColor,
+				color: textColor,
+				outlineColor: tailwindColor,
+			}"
+			@input="onDebouncedInput" />
 
-			<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
-		</client-only>
+		<small v-if="!valid && errorMessage" class="text-red-500 ml-3">{{ errorMessage }}</small>
 	</div>
 </template>
 
@@ -49,7 +47,17 @@ const onDebouncedInput = debounce((event: Event) => {
 	emit('update:modelValue', (event.target as HTMLInputElement).value);
 }, 1000);
 
-const tailwindColor = computed(() => {
+const textColor = computed(() => {
+	if (!color) {
+		return lightMode.value ? '#000000' : '#ffffff';
+	} else if (color === 'dark') {
+		return lightMode.value ? '#00000090' : '#ffffff90';
+	}
+
+	return lightMode.value ? '#000000' : '#ffffff';
+});
+
+const tailwindColor = computed<string>(() => {
 	let colorReference;
 
 	switch (color) {
@@ -76,6 +84,12 @@ const tailwindColor = computed(() => {
 			break;
 		case 'none':
 			colorReference = 'transparent';
+			break;
+		case 'dark':
+			colorReference = '#00000050';
+			break;
+		case 'light':
+			colorReference = '#ffffff50';
 			break;
 		default:
 			colorReference = lightMode.value ? '#00000050' : '#ffffff50';

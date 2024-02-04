@@ -1,53 +1,9 @@
 <template>
 	<div class="flex flex-col h-screen w-full">
 		<div class="flex flex-1 flex-grow">
-			<AppSideMenu class="max-w-[350px] flex flex-col gap-5">
-				<strong class="text-primary">
-					{{
-						$t('app.harmony.sidemenu.bar_options', {
-							number: `${selectedBarIndex}`,
-						})
-					}}
-				</strong>
-				<strong>
-					{{ $t('app.harmony.sidemenu.select_tonal_chord') }}
-				</strong>
-				<BaseDropdown
-					v-model="selectedChord"
-					:data="chordListByKeySignature"
-					no-cleanable
-					@input="onChangeChord" />
-				<hr />
-				<strong>
-					{{ $t('app.harmony.sidemenu.select_custom_chord') }}
-				</strong>
-				<div class="flex gap-5 items-end">
-					<BaseDropdown
-						v-model="selectedAtonalChordRoot"
-						:label="$t('app.harmony.sidemenu.root_note')"
-						:data="NotesList"
-						no-cleanable />
-					<BaseDropdown
-						v-model="selectedAtonalChordType"
-						:label="$t('app.harmony.sidemenu.chord_type')"
-						:data="ChordTypesList"
-						no-cleanable />
-					<BaseButton icon="add" color="success" @click="onAddExoticChord" />
-				</div>
-				<hr />
-				<strong>
-					{{ $t('app.harmony.sidemenu.split') }}
-				</strong>
-				<BaseDropdown
-					v-model="selectedBarSplit"
-					:label="$t('app.harmony.sidemenu.number_of_splits')"
-					:data="splitOptions"
-					@input="splitBar" />
-			</AppSideMenu>
-
-			<section class="h-full w-full">
-				<div class="mx-10 flex flex-col gap-5">
-					<div class="flex justify-between">
+			<AppSideMenu class="sidemenu">
+				<section>
+					<div class="px-7">
 						<BaseButton
 							variant="stealth"
 							color="secondary"
@@ -57,38 +13,91 @@
 							@click="$router.back()">
 							{{ $t('app.ui.go_back') }}
 						</BaseButton>
+						<h6 class="my-5">
+							{{
+								$t('app.harmony.sidemenu.bar_options', {
+									number: `${selectedBarIndex}`,
+								})
+							}}
+						</h6>
 					</div>
+					<hr class="sidemenu__separator" />
+					<div class="sidemenu__block">
+						<label class="text-white/30 text-sm font-semibold">
+							{{ $t('app.harmony.sidemenu.select_tonal_chord') }}
+						</label>
+						<BaseDropdown
+							v-model="selectedChord"
+							:data="chordListByKeySignature"
+							no-cleanable
+							color="light"
+							@input="onChangeChord" />
+					</div>
+					<hr class="sidemenu__separator" />
+					<div class="sidemenu__block">
+						<label class="sidemenu__label">
+							{{ $t('app.harmony.sidemenu.select_custom_chord') }}
+						</label>
+						<div class="flex gap-5 items-end">
+							<BaseDropdown
+								v-model="selectedAtonalChordRoot"
+								:label="$t('app.harmony.sidemenu.root_note')"
+								:data="NotesList"
+								color="light"
+								no-cleanable />
+							<BaseDropdown
+								v-model="selectedAtonalChordType"
+								:label="$t('app.harmony.sidemenu.chord_type')"
+								:data="ChordTypesList"
+								color="light"
+								no-cleanable />
+							<BaseButton icon="add" color="success" @click="onAddExoticChord" />
+						</div>
+					</div>
+					<hr class="sidemenu__separator" />
+					<div class="sidemenu__block">
+						<label class="sidemenu__label">
+							{{ $t('app.harmony.sidemenu.split') }}
+						</label>
+						<BaseDropdown
+							v-model="selectedBarSplit"
+							:label="$t('app.harmony.sidemenu.number_of_splits')"
+							:data="splitOptions"
+							color="light"
+							@input="splitBar" />
+					</div>
+				</section>
+				<AppSideMenuSidemenuBottomOptions />
+			</AppSideMenu>
 
-					<div class="grid grid-cols-5 w-full gap-5 text-black dark:text-primary">
-						<BaseInput v-model="tempo" :label="$t('app.harmony.tempo')" color="primary" />
+			<section class="h-full w-full bg-white dark:bg-dark p-10">
+				<div class="flex flex-col gap-5">
+					<div
+						class="grid grid-cols-5 w-full gap-5 p-2 dark:bg-softdark default_border dark:text-white">
+						<BaseInput v-model="tempo" :label="$t('app.harmony.tempo')" />
 						<BaseDropdown
 							v-model="timeSignature"
 							:label="$t('app.harmony.time_signature')"
-							color="primary"
 							no-cleanable
 							:data="TimeSignaturesList" />
 						<BaseDropdown
 							v-model="rootNote"
 							:label="$t('app.harmony.root_note')"
-							color="primary"
 							no-cleanable
 							:data="NotesList" />
 						<BaseDropdown
 							v-model="scaleType"
 							:label="$t('app.harmony.scale_type')"
-							color="primary"
 							no-cleanable
 							:data="scalesTypesFormatted" />
 						<BaseInput
 							v-model="numberOfBars"
 							debounced
 							type="number"
-							:label="$t('app.harmony.number_of_bars')"
-							color="primary" />
+							:label="$t('app.harmony.number_of_bars')" />
 					</div>
 
 					<!-- Harmony sheet -->
-
 					<AppMusicSheet
 						v-model="initialHarmonyState.title"
 						:data="initialHarmonyState"
