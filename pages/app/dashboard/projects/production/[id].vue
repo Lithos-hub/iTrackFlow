@@ -21,7 +21,6 @@
 								trackList[id - 1].trackName ? '' : $t('app.production.track_name_placeholder')
 							"
 							variant="underline"
-							color="primary"
 							class="px-5" />
 					</template>
 					<template #table:composition="{ composition, id }">

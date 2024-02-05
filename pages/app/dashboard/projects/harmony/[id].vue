@@ -55,8 +55,8 @@
 								icon="add"
 								flat
 								variant="outline"
-								color="green"
-								icon-color="green"
+								color="primary"
+								icon-color="blue"
 								@click="onAddExoticChord" />
 						</div>
 						<P v-if="atonalError" class="text-red-500">
@@ -104,14 +104,15 @@
 							v-model="numberOfBars"
 							debounced
 							type="number"
-							:label="$t('app.harmony.number_of_bars')" />
+							:label="$t('app.harmony.number_of_bars')"
+							@input="generateMusicSheetStaffs" />
 					</header>
 
 					<!-- Harmony sheet -->
 					<AppMusicSheet
 						v-model="initialHarmonyState.title"
 						:data="initialHarmonyState"
-						:staffs="staffs" />
+						:staffs="initialHarmonyState.chords" />
 				</div>
 			</section>
 		</div>
@@ -122,8 +123,9 @@
 import {
 	HarmonyData,
 	ChordName,
-	MusicChord,
 	RomanNumber,
+	SubdivisionChord,
+	MusicChord,
 } from '@/components/App/MusicStaff/MusicStaff.interfaces';
 import { DropdownItem } from '@/components/Base/Dropdown/BaseDropdown.interfaces';
 import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
@@ -143,7 +145,7 @@ const { selectedBarIndex, selectedChord, selectedBarSubdivision, selectedBarSpli
 
 // MOCK
 const initialHarmonyState = ref<HarmonyData>({
-	id: 1,
+	id: getRandomNumberId(),
 	title: 'Song title',
 	tempo: 120,
 	timeSignature: '4/4',
@@ -151,10 +153,10 @@ const initialHarmonyState = ref<HarmonyData>({
 	scaleType: 'minor',
 	chords: [
 		{
-			id: new Date().getTime(),
+			id: getRandomNumberId(),
 			subdivisionChords: [
 				{
-					id: new Date().getTime(),
+					id: getRandomNumberId(),
 					chord: 'Cm',
 					romanNumber: 'i',
 				},
@@ -163,20 +165,20 @@ const initialHarmonyState = ref<HarmonyData>({
 			lyrics: 'Lorem ipsum',
 		},
 		{
-			id: new Date().getTime(),
+			id: getRandomNumberId(),
 			subdivisionChords: [
 				{
-					id: new Date().getTime(),
+					id: getRandomNumberId(),
 					chord: 'Gm',
 					romanNumber: 'v',
 				},
 				{
-					id: new Date().getTime(),
+					id: getRandomNumberId(),
 					chord: 'Cm',
 					romanNumber: 'i',
 				},
 				{
-					id: new Date().getTime(),
+					id: getRandomNumberId(),
 					chord: 'Fm',
 					romanNumber: 'iv',
 				},
@@ -185,10 +187,10 @@ const initialHarmonyState = ref<HarmonyData>({
 			lyrics: 'Dolor sit amet',
 		},
 		{
-			id: new Date().getTime(),
+			id: getRandomNumberId(),
 			subdivisionChords: [
 				{
-					id: new Date().getTime(),
+					id: getRandomNumberId(),
 					chord: 'Eb',
 					romanNumber: 'III',
 				},
@@ -210,12 +212,12 @@ const selectedAtonalChordRoot = ref<string[]>([]);
 const selectedAtonalChordType = ref<string[]>([]);
 const atonalError = ref(false);
 
-const scalesTypesFormatted = computed(() => {
-	return ScaleTypesList.map(({ label, value }) => ({
+const scalesTypesFormatted = computed(() =>
+	ScaleTypesList.map(({ label, value }) => ({
 		label: t(label),
 		value,
-	}));
-});
+	})),
+);
 
 const chordListByKeySignature = computed(
 	() =>
@@ -228,30 +230,6 @@ const chordListByKeySignature = computed(
 		})) || ([] as DropdownItem[]),
 );
 
-const staffs = computed<MusicChord[]>(() => {
-	const currentStaffsWithChordsLength = [...initialHarmonyState.value.chords].length;
-
-	const currentSheetHasMoreBarsThanSelected =
-		currentStaffsWithChordsLength > Number(numberOfBars.value);
-
-	return currentSheetHasMoreBarsThanSelected
-		? [...initialHarmonyState.value.chords.slice(0, Number(numberOfBars.value))]
-		: [
-				...initialHarmonyState.value.chords,
-				...new Array(Number(numberOfBars.value) - currentStaffsWithChordsLength).fill({
-					id: new Date().getTime(),
-					subdivisionChords: [
-						{
-							id: new Date().getTime(),
-							chord: '',
-							romanNumber: '',
-						},
-					],
-					splits: 1,
-				}),
-			];
-});
-
 const splitOptions = computed(() => {
 	const numberOfSplits = timeSignature.value.at(0)?.charAt(0);
 	return new Array(Number(numberOfSplits)).fill(0).map((_, index) => ({
@@ -260,18 +238,47 @@ const splitOptions = computed(() => {
 	}));
 });
 
+const generateMusicSheetStaffs = () => {
+	const currentStaffsWithChordsLength = initialHarmonyState.value.chords.length;
+
+	const currentSheetHasMoreBarsThanSelected =
+		currentStaffsWithChordsLength > Number(numberOfBars.value);
+
+	const emptyStaffs: MusicChord[] = Array.from(new Array(Number(numberOfBars.value))).map(() => {
+		return {
+			id: getRandomNumberId(),
+			subdivisionChords: [
+				{
+					id: getRandomNumberId(),
+					chord: '',
+					romanNumber: '',
+				},
+			],
+			splits: 1,
+			lyrics: '',
+		};
+	});
+
+	initialHarmonyState.value.chords = currentSheetHasMoreBarsThanSelected
+		? initialHarmonyState.value.chords.slice(0, Number(numberOfBars.value))
+		: initialHarmonyState.value.chords.concat(emptyStaffs.slice(currentStaffsWithChordsLength));
+};
+
+const insertChord = (chord: SubdivisionChord) => {
+	const barIndex = selectedBarIndex.value - 1;
+	const subdivisionIndex = selectedBarSubdivision.value - 1;
+
+	initialHarmonyState.value.chords[barIndex].subdivisionChords[subdivisionIndex] = chord;
+};
+
 const onChangeChord = (newChord: string[]) => {
-	const newStaffs = [...staffs.value];
-
-	console.log('newChord', newChord);
-
-	newStaffs[selectedBarIndex.value - 1].subdivisionChords[selectedBarSubdivision.value - 1] = {
-		id: new Date().getTime(),
+	const chordToAdd = {
+		id: getRandomNumberId(),
 		chord: newChord[0].split(' - ')[0] as ChordName,
 		romanNumber: newChord[0].split(' - ')[1].replace('(', '').replace(')', '') as RomanNumber,
 	};
 
-	initialHarmonyState.value.chords = newStaffs;
+	insertChord(chordToAdd);
 };
 
 const onAddExoticChord = () => {
@@ -280,33 +287,30 @@ const onAddExoticChord = () => {
 		return;
 	}
 
-	const newStaffs = [...staffs.value];
-
-	const matchNewChordInAvailableChordList = chordListByKeySignature.value.find(({ value }) =>
+	const isSelectedChordTonal = chordListByKeySignature.value.find(({ value }) =>
 		(value as string).includes(
 			`${selectedAtonalChordRoot.value[0]}${selectedAtonalChordType.value[0]}`,
 		),
 	);
 
-	newStaffs[selectedBarIndex.value - 1].subdivisionChords[selectedBarSubdivision.value - 1] = {
-		id: new Date().getTime(),
+	const chordToAdd = {
+		id: getRandomNumberId(),
 		chord: `${selectedAtonalChordRoot.value[0]}${selectedAtonalChordType.value[0]}` as ChordName,
-		romanNumber: matchNewChordInAvailableChordList
-			? ((matchNewChordInAvailableChordList.value as ChordName)
+		romanNumber: isSelectedChordTonal
+			? ((isSelectedChordTonal.value as ChordName)
 					.split(' - ')[1]
 					.replace('(', '')
 					.replace(')', '') as RomanNumber)
-			: 'atonal',
+			: ('atonal' as const),
 	};
 
-	initialHarmonyState.value.chords = newStaffs;
+	insertChord(chordToAdd);
 
 	atonalError.value = false;
 };
 
 const splitBar = () => {
-	const newStaffs = [...staffs.value];
-	const { subdivisionChords } = newStaffs[selectedBarIndex.value - 1];
+	const { subdivisionChords } = initialHarmonyState.value.chords[selectedBarIndex.value - 1];
 
 	const currentStaffHasMoreSubdivisionsThanSelected =
 		subdivisionChords.length > Number(selectedBarSplit.value[0]);
@@ -315,32 +319,32 @@ const splitBar = () => {
 		? subdivisionChords.length - Number(selectedBarSplit.value[0])
 		: Number(selectedBarSplit.value[0]) - subdivisionChords.length;
 
-	const newArrayOfSubdivisions = currentStaffHasMoreSubdivisionsThanSelected
-		? [...subdivisionChords.slice(0, Number(selectedBarSplit.value[0]))]
-		: [
-				...subdivisionChords,
-				...new Array(newArrayLength).fill({
-					id: new Date().getTime(),
-					chord: newStaffs[selectedBarIndex.value - 1].subdivisionChords[0].chord,
-					romanNumber: newStaffs[selectedBarIndex.value - 1].subdivisionChords[0].romanNumber,
-				}),
-			];
+	const selectedSubdivisionChord = {
+		id: getRandomNumberId(),
+		chord: subdivisionChords[0].chord,
+		romanNumber: subdivisionChords[0].romanNumber,
+	};
 
-	newStaffs[selectedBarIndex.value - 1] = {
-		...newStaffs[selectedBarIndex.value - 1],
+	const newArrayOfSubdivisions = currentStaffHasMoreSubdivisionsThanSelected
+		? subdivisionChords.slice(0, Number(selectedBarSplit.value[0]))
+		: subdivisionChords.concat(new Array(newArrayLength).fill(selectedSubdivisionChord));
+
+	initialHarmonyState.value.chords[selectedBarIndex.value - 1] = {
+		...initialHarmonyState.value.chords[selectedBarIndex.value - 1],
 		subdivisionChords: newArrayOfSubdivisions,
 		splits: Number(selectedBarSplit.value[0]),
 	};
-
-	initialHarmonyState.value.chords = newStaffs;
 };
 
 onMounted(() => {
 	const firstSubdivisionChordName = initialHarmonyState.value.chords[0].subdivisionChords[0].chord;
 	const firstSubdivisionRomanNumber =
 		initialHarmonyState.value.chords[0].subdivisionChords[0].romanNumber;
+
 	selectedChord.value = [
 		`${firstSubdivisionChordName as ChordName} - (${firstSubdivisionRomanNumber as RomanNumber})`,
 	];
+
+	generateMusicSheetStaffs();
 });
 </script>

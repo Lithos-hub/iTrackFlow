@@ -89,7 +89,7 @@
 					<div
 						v-for="(staff, i) of outputChordsForPDF"
 						:key="i"
-						class="relative flex flex-col justify-center items-center text-center default_border w-[40px] h-[35px] text-[5px]">
+						class="relative flex flex-col justify-center items-center text-center border w-[40px] h-[35px] text-[5px]">
 						<div>
 							<strong class="text-gray-500 text-[3px]">{{ i + 1 }}</strong>
 						</div>

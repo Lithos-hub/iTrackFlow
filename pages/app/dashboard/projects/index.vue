@@ -1,7 +1,7 @@
 <template>
 	<section class="flex flex-col gap-5 dark:text-white text-black">
 		<RouterLink to="/app/dashboard/projects/new" class="self-end">
-			<BaseButton color="success" icon="add" icon-right>
+			<BaseButton color="primary" variant="stealth" icon="add" icon-right>
 				{{ $t('app.projects.add_project') }}
 			</BaseButton>
 		</RouterLink>

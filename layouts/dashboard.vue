@@ -7,36 +7,12 @@
 						{{ $t('app.ui.sidemenu.dashboard') }}
 					</h6>
 				</div>
-				<hr class="sidemenu__separator" />
-				<div class="sidemenu__block">
-					<label class="sidemenu__label">
-						{{ $t('app.ui.sidemenu.projects') }}
-					</label>
-					<RouterLink to="/app/dashboard/projects" class="sidemenu__link">
-						{{ $t('app.ui.sidemenu.all_projects') }}
-					</RouterLink>
-				</div>
-				<hr class="sidemenu__separator" />
-				<div class="sidemenu__block">
-					<label class="sidemenu__label">
-						{{ $t('app.ui.sidemenu.account') }}
-					</label>
-					<RouterLink to="/app/dashboard/account/preferences" class="sidemenu__link">
-						{{ $t('app.ui.sidemenu.preferences') }}
-					</RouterLink>
-					<RouterLink to="/app/dashboard/account/security" class="sidemenu__link">
-						{{ $t('app.ui.sidemenu.security') }}
-					</RouterLink>
-				</div>
-				<hr class="sidemenu__separator" />
-				<div class="sidemenu__block">
-					<label class="sidemenu__label">
-						{{ $t('app.ui.sidemenu.help') }}
-					</label>
-					<RouterLink to="/app/dashboard/help/guide" class="sidemenu__link">
-						{{ $t('app.ui.sidemenu.guide') }}
-					</RouterLink>
-				</div>
+				<AppSideMenuLinksSection
+					v-for="{ label, links, submenus } of menuItems"
+					:key="label"
+					:label="label"
+					:links="links"
+					:submenus="submenus" />
 				<hr class="sidemenu__separator" />
 				<div class="sidemenu__pseudobutton">
 					<BaseIcon icon="logout-arrow" :size="20" color="gray" />
@@ -67,4 +43,63 @@
 import { useUserStore } from '~/store/user';
 
 const { logout } = useUserStore();
+const { t } = useI18n();
+
+const menuItems = computed(() => [
+	{
+		label: t('app.ui.sidemenu.projects'),
+		links: [
+			{
+				label: t('app.ui.sidemenu.all_projects'),
+				to: '/app/dashboard/projects',
+			},
+		],
+	},
+	{
+		label: t('app.ui.sidemenu.account'),
+		links: [
+			{
+				label: t('app.ui.sidemenu.preferences'),
+				to: '/app/dashboard/account/preferences',
+			},
+			{
+				label: t('app.ui.sidemenu.security'),
+				to: '/app/dashboard/account/security',
+			},
+		],
+	},
+	{
+		label: t('app.ui.sidemenu.audio'),
+		links: [
+			{
+				label: t('app.ui.sidemenu.meta'),
+				to: '/app/dashboard/audio/meta',
+			},
+		],
+		submenus: [
+			{
+				label: t('app.ui.sidemenu.pool'),
+				links: [
+					{
+						label: t('app.ui.sidemenu.references'),
+						to: '/app/dashboard/audio/pool/references',
+					},
+					{
+						label: t('app.ui.sidemenu.demos'),
+						to: '/app/dashboard/audio/pool/demos',
+					},
+				],
+			},
+		],
+	},
+	{
+		label: t('app.ui.sidemenu.help'),
+		links: [
+			{
+				label: t('app.ui.sidemenu.guide'),
+				to: '/app/dashboard/help/guide',
+			},
+		],
+	},
+]);
 </script>

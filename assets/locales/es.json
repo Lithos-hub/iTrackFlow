@@ -54,6 +54,11 @@
 				"security": "Seguridad",
 				"help": "Ayuda",
 				"guide": "Guía",
+				"audio": "Audio",
+				"meta": "Metadatos",
+				"pool": "Piscina de audios",
+				"references": "Referencias",
+				"demos": "Demos",
 				"logout": "Cerrar sesión"
 			}
 		},

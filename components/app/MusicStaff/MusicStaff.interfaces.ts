@@ -179,23 +179,23 @@ export type TimeSignature =
 	| '16/32'
 	| '16/64';
 
-export interface SubdivisionChords {
-	id: number;
-	chord: ChordName;
-	romanNumber: RomanNumber | 'atonal';
+export interface SubdivisionChord {
+	id: string;
+	chord: ChordName | '';
+	romanNumber: RomanNumber | 'atonal' | '';
 }
 
 export type SelectedChord = `${ChordName} - (${RomanNumber})`;
 
 export interface MusicChord {
-	id: number;
-	subdivisionChords: SubdivisionChords[];
+	id: string;
+	subdivisionChords: SubdivisionChord[];
 	splits: number;
 	lyrics?: string;
 }
 
 export interface HarmonyData {
-	id: number;
+	id: string;
 	tempo: number;
 	title: string;
 	rootNote: Note;

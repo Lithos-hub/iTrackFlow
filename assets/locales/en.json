@@ -54,6 +54,11 @@
 				"security": "Security",
 				"help": "Help",
 				"guide": "Guide",
+				"audio": "Audio",
+				"meta": "Metadata",
+				"pool": "Pool",
+				"references": "References",
+				"demos": "Demos",
 				"logout": "Log out"
 			}
 		},
