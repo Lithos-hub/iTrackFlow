@@ -134,6 +134,8 @@ const onItemClick = (itemValue: string) => {
 		model.value[0] = itemValue;
 		toggleSelecting();
 	}
+	emit('input', model.value);
+	emit('change', model.value);
 	inputValue.value = '';
 };
 
@@ -144,14 +146,6 @@ const toggleSelecting = () => {
 const removeItem = () => {
 	model.value = [];
 };
-
-watch(
-	() => model.value,
-	(value) => {
-		emit('input', value);
-		emit('change', value);
-	},
-);
 </script>
 
 <style lang="scss" scoped>

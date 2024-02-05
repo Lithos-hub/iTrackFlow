@@ -130,6 +130,7 @@ import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@
 import { useHarmonyStore } from '~/store/harmony';
 
 definePageMeta({
+	name: 'HarmonyPage',
 	layout: 'harmony',
 	middleware: 'auth',
 });
@@ -233,7 +234,7 @@ const staffs = computed<MusicChord[]>(() => {
 	const currentSheetHasMoreBarsThanSelected =
 		currentStaffsWithChordsLength > Number(numberOfBars.value);
 
-	const newStaffs = currentSheetHasMoreBarsThanSelected
+	return currentSheetHasMoreBarsThanSelected
 		? [...initialHarmonyState.value.chords.slice(0, Number(numberOfBars.value))]
 		: [
 				...initialHarmonyState.value.chords,
@@ -249,9 +250,6 @@ const staffs = computed<MusicChord[]>(() => {
 					splits: 1,
 				}),
 			];
-	initialHarmonyState.value.chords = newStaffs;
-
-	return newStaffs;
 });
 
 const splitOptions = computed(() => {
@@ -262,16 +260,15 @@ const splitOptions = computed(() => {
 	}));
 });
 
-const onChangeChord = () => {
+const onChangeChord = (newChord: string[]) => {
 	const newStaffs = [...staffs.value];
+
+	console.log('newChord', newChord);
 
 	newStaffs[selectedBarIndex.value - 1].subdivisionChords[selectedBarSubdivision.value - 1] = {
 		id: new Date().getTime(),
-		chord: selectedChord.value[0].split(' - ')[0] as ChordName,
-		romanNumber: selectedChord.value[0]
-			.split(' - ')[1]
-			.replace('(', '')
-			.replace(')', '') as RomanNumber,
+		chord: newChord[0].split(' - ')[0] as ChordName,
+		romanNumber: newChord[0].split(' - ')[1].replace('(', '').replace(')', '') as RomanNumber,
 	};
 
 	initialHarmonyState.value.chords = newStaffs;

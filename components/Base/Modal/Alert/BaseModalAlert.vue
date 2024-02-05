@@ -17,7 +17,7 @@
 				{{ title }}
 			</h2>
 			<hr />
-			<p>{{ message }}</p>
+			<small>{{ message }}</small>
 			<BaseButton v-if="type === 'warning'" color="danger" @click="$emit('on-action')">
 				{{ $t('app.ui.modal.confirm') }}
 			</BaseButton>
