@@ -81,7 +81,8 @@
 
 			<section class="h-full w-full bg-white dark:bg-dark p-10">
 				<div class="flex flex-col gap-5">
-					<div
+					<!-- MusicSheet header options -->
+					<header
 						class="grid grid-cols-5 w-full gap-5 p-2 dark:bg-softdark default_border dark:text-white">
 						<BaseInput v-model="tempo" :label="$t('app.harmony.tempo')" />
 						<BaseDropdown
@@ -104,7 +105,7 @@
 							debounced
 							type="number"
 							:label="$t('app.harmony.number_of_bars')" />
-					</div>
+					</header>
 
 					<!-- Harmony sheet -->
 					<AppMusicSheet
@@ -257,7 +258,7 @@ const splitOptions = computed(() => {
 	const numberOfSplits = timeSignature.value.at(0)?.charAt(0);
 	return new Array(Number(numberOfSplits)).fill(0).map((_, index) => ({
 		label: `${index + 1}`,
-		value: index + 1,
+		value: String(index + 1),
 	}));
 });
 
@@ -311,14 +312,14 @@ const splitBar = () => {
 	const { subdivisionChords } = newStaffs[selectedBarIndex.value - 1];
 
 	const currentStaffHasMoreSubdivisionsThanSelected =
-		subdivisionChords.length > selectedBarSplit.value[0];
+		subdivisionChords.length > Number(selectedBarSplit.value[0]);
 
 	const newArrayLength = currentStaffHasMoreSubdivisionsThanSelected
-		? subdivisionChords.length - selectedBarSplit.value[0]
-		: selectedBarSplit.value[0] - subdivisionChords.length;
+		? subdivisionChords.length - Number(selectedBarSplit.value[0])
+		: Number(selectedBarSplit.value[0]) - subdivisionChords.length;
 
 	const newArrayOfSubdivisions = currentStaffHasMoreSubdivisionsThanSelected
-		? [...subdivisionChords.slice(0, selectedBarSplit.value[0])]
+		? [...subdivisionChords.slice(0, Number(selectedBarSplit.value[0]))]
 		: [
 				...subdivisionChords,
 				...new Array(newArrayLength).fill({
@@ -331,7 +332,7 @@ const splitBar = () => {
 	newStaffs[selectedBarIndex.value - 1] = {
 		...newStaffs[selectedBarIndex.value - 1],
 		subdivisionChords: newArrayOfSubdivisions,
-		splits: selectedBarSplit.value[0],
+		splits: Number(selectedBarSplit.value[0]),
 	};
 
 	initialHarmonyState.value.chords = newStaffs;

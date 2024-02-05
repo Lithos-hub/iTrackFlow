@@ -1,6 +1,5 @@
 <template>
 	<section
-		v-if="data"
 		class="music-sheet relative bg-white dark:bg-softdark p-5 shadow-xl relative flex flex-col gap-5">
 		<div class="grid grid-cols-2 gap-10 w-full">
 			<BaseInput

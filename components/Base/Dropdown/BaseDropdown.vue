@@ -12,24 +12,25 @@
 			<label v-if="label" class="mx-5 my-2 font-medium text-sm">{{ label }}</label>
 			<div class="relative cursor-pointer">
 				<!-- Dropdown selected options chips -->
-				<p v-if="!multiselect" class="absolute top-1/2 left-5 -translate-y-1/2">
+				<p v-if="!multiselect && !inputValue" class="absolute top-1/2 left-5 -translate-y-1/2">
 					{{ selectedItem?.label }}
 				</p>
 				<div class="relative">
 					<!-- Dropdown input -->
 					<BaseInput
+						v-model="inputValue"
 						:class="{
 							dropdown__bordered: bordered,
 							dropdown: !bordered,
 						}"
-						:placeholder="!modelValue.length || multiselect ? placeholder : ''"
+						:placeholder="!modelValue?.length || multiselect ? placeholder : ''"
 						class="cursor-pointer"
 						:color="color"
 						@click="isSelecting = true" />
 					<div class="flex gap-1 absolute right-0 px-2 top-1/2 -translate-y-1/2">
 						<!-- Remove -->
 						<BaseIcon
-							v-if="modelValue.length && !multiselect && !noCleanable"
+							v-if="modelValue?.length && !multiselect && !noCleanable"
 							icon="close"
 							color="gray"
 							class="icon"
@@ -64,7 +65,7 @@
 						<ul
 							class="max-h-[200px] overflow-auto rounded border border-dark/10 dark:border-white/10">
 							<li
-								v-for="({ label, value }, i) of props.data"
+								v-for="({ label, value }, i) of dropdownData"
 								:key="i"
 								class="p-2 bg-white dark:bg-dark hover:bg-black/10 dark:hover:bg-white/10 cursor-pointer border-b border-black/10 dark:border-white/10 last:border-b-0 first:rounded-t last:rounded-b cursor-pointer transition-all duration-200 ease-in-out"
 								@click="onItemClick(value)">
@@ -97,13 +98,21 @@ import { BaseDropdown } from './BaseDropdown.interfaces';
 const props = withDefaults(defineProps<BaseDropdown>(), {});
 
 const model = defineModel({
-	type: Array as PropType<unknown[]>,
+	type: Array as PropType<string[]>,
+	default: [],
 });
 
 const emit = defineEmits(['input', 'change']);
 const dropdown = ref();
 
 const isSelecting: Ref<boolean> = ref(false);
+const inputValue = ref<string>('');
+
+const dropdownData = computed(() => {
+	return props.data.filter(({ label }) =>
+		label.toLowerCase().includes(inputValue.value.toLowerCase()),
+	);
+});
 
 const selectedItems = computed(() =>
 	props.data.filter(({ value }) => model.value?.includes(value)),
@@ -112,19 +121,20 @@ const selectedItem = computed(() =>
 	props.data.find(({ value }) => model.value && model.value[0] === value),
 );
 
-const addOrRemoveItem = (itemValue: unknown) => {
+const addOrRemoveItem = (itemValue: string) => {
 	model.value = model.value?.includes(itemValue)
 		? model.value?.filter((value) => value !== itemValue)
-		: [...(model.value as unknown[]), itemValue];
+		: [...(model.value as string[]), itemValue];
 };
 
-const onItemClick = (itemValue: unknown) => {
-	addOrRemoveItem(itemValue);
-
-	if (!props.multiselect) {
+const onItemClick = (itemValue: string) => {
+	if (props.multiselect) {
+		addOrRemoveItem(itemValue);
+	} else {
+		model.value[0] = itemValue;
 		toggleSelecting();
-		model.value = model.value?.includes(itemValue) ? [] : [itemValue];
 	}
+	inputValue.value = '';
 };
 
 const toggleSelecting = () => {

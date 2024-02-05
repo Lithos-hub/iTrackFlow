@@ -3,13 +3,12 @@ import { ColorName } from '@/interfaces';
 
 export interface DropdownItem {
 	label: string;
-	value: unknown;
+	value: string;
 }
 
 export interface BaseDropdown {
 	label?: string;
 	placeholder?: string;
-	modelValue: string[];
 	bordered?: boolean;
 	data: DropdownItem[];
 	multiselect?: boolean;

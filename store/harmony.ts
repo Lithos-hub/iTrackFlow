@@ -8,7 +8,7 @@ export const useHarmonyStore = defineStore('harmony', () => {
 
 	// Dropdown selections
 	const selectedChord = ref<SelectedChord[]>([]);
-	const selectedBarSplit = ref<number[]>([1]);
+	const selectedBarSplit = ref<string[]>(['1']);
 
 	const selectedBarLabel = computed(
 		() => `${selectedBarIndex.value}${labels[selectedBarSubdivision.value - 1]}`,

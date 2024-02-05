@@ -17,8 +17,7 @@
 			variant="underline"
 			debounced
 			color="black"
-			:placeholder="$t('app.harmony.lyrics')"
-			@input="updateLyrics" />
+			:placeholder="$t('app.harmony.lyrics')" />
 	</div>
 </template>
 
@@ -31,9 +30,5 @@ defineEmits(['on-select-bar']);
 
 const model = defineModel<MusicStaffProps['lyrics']>();
 
-const updateLyrics = () => console.log('Updating');
-
-onMounted(() => {
-	model.value = lyrics;
-});
+model.value = lyrics;
 </script>
