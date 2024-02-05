@@ -26,11 +26,3 @@
 		</article>
 	</section>
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-	title: 'Landing Page',
-	description: 'Landing page for the application',
-	layout: 'landing',
-});
-</script>

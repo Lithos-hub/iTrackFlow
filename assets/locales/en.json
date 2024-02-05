@@ -138,7 +138,8 @@
 				"root_note": "Root note",
 				"chord_type": "Chord type",
 				"split": "Split",
-				"number_of_splits": "Number of splits"
+				"number_of_splits": "Number of splits",
+				"atonal_error": "Select a root note and a chord type"
 			}
 		},
 		"production": {

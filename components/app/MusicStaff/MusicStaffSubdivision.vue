@@ -1,12 +1,12 @@
 <template>
 	<div
-		:class="`row-span-${splits} border w-full h-full min-h-[120px] flex flex-col items-center p-5 relative ${
+		:class="`row-span-${splits} default_border w-full h-full min-h-[120px] flex flex-col items-center p-5 relative ${
 			isActive ? 'selected__pulse' : 'dark:bg-black/10 bg-white/10'
 		} `"
 		@click="selectSubdivision(index, subdivision)">
 		<AppMusicStaffSubdivisionLabel :index="index" :subdivision="subdivision" />
 		<div class="flex flex-col justify-between">
-			<div>
+			<div class="flex flex-col">
 				<strong class="font-bold">{{ chord }}</strong>
 				<p v-if="romanNumber !== 'atonal'">{{ romanNumber }}</p>
 				<small v-else class="text-red-500">Atonal</small>

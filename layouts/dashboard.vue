@@ -46,7 +46,7 @@
 				</div>
 				<hr class="sidemenu__separator" />
 			</section>
-			<AppSideMenuSidemenuBottomOptions />
+			<BaseSelectorsWrapper />
 		</AppSideMenu>
 
 		<div class="flex-1 grow bg-dark relative">

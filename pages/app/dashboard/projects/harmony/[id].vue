@@ -51,8 +51,17 @@
 								:data="ChordTypesList"
 								color="light"
 								no-cleanable />
-							<BaseButton icon="add" color="success" @click="onAddExoticChord" />
+							<BaseButton
+								icon="add"
+								flat
+								variant="outline"
+								color="green"
+								icon-color="green"
+								@click="onAddExoticChord" />
 						</div>
+						<P v-if="atonalError" class="text-red-500">
+							{{ $t('app.harmony.sidemenu.atonal_error') }}
+						</P>
 					</div>
 					<hr class="sidemenu__separator" />
 					<div class="sidemenu__block">
@@ -67,7 +76,7 @@
 							@input="splitBar" />
 					</div>
 				</section>
-				<AppSideMenuSidemenuBottomOptions />
+				<BaseSelectorsWrapper />
 			</AppSideMenu>
 
 			<section class="h-full w-full bg-white dark:bg-dark p-10">
@@ -197,6 +206,7 @@ const numberOfBars = ref(16);
 // Sidemenu
 const selectedAtonalChordRoot = ref<string[]>([]);
 const selectedAtonalChordType = ref<string[]>([]);
+const atonalError = ref(false);
 
 const scalesTypesFormatted = computed(() => {
 	return ScaleTypesList.map(({ label, value }) => ({
@@ -267,6 +277,11 @@ const onChangeChord = () => {
 };
 
 const onAddExoticChord = () => {
+	if (!selectedAtonalChordRoot.value.length || !selectedAtonalChordType.value.length) {
+		atonalError.value = true;
+		return;
+	}
+
 	const newStaffs = [...staffs.value];
 
 	const matchNewChordInAvailableChordList = chordListByKeySignature.value.find(({ value }) =>
@@ -287,6 +302,8 @@ const onAddExoticChord = () => {
 	};
 
 	initialHarmonyState.value.chords = newStaffs;
+
+	atonalError.value = false;
 };
 
 const splitBar = () => {

@@ -22,7 +22,7 @@
 				</small>
 			</div>
 		</div>
-		<hr />
+
 		<div
 			class="grid"
 			:style="{
@@ -36,7 +36,7 @@
 				:key-signature="data.scaleType" />
 		</div>
 		<!-- Sheet zoom controls -->
-		<div class="fixed right-10 bottom-5 rounded bg-softdark border">
+		<div class="fixed right-10 bottom-5 rounded bg-softdark default_border">
 			<div class="flex flex-col gap-1 p-1">
 				<BaseIcon
 					icon="download"
@@ -90,7 +90,7 @@
 					<div
 						v-for="(staff, i) of outputChordsForPDF"
 						:key="i"
-						class="relative flex flex-col justify-center items-center text-center border w-[40px] h-[35px] text-[5px]">
+						class="relative flex flex-col justify-center items-center text-center default_border w-[40px] h-[35px] text-[5px]">
 						<div>
 							<strong class="text-gray-500 text-[3px]">{{ i + 1 }}</strong>
 						</div>

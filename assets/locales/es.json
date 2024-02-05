@@ -138,7 +138,8 @@
 				"root_note": "Fundamental",
 				"chord_type": "Tipo",
 				"split": "Subdivisión",
-				"number_of_splits": "Nº de subdivisiones"
+				"number_of_splits": "Nº de subdivisiones",
+				"atonal_error": "Selecciona una fundamental y el tipo de acorde"
 			}
 		},
 		"production": {
