@@ -167,6 +167,18 @@
 			"no_audio_selected": "No audio file selected",
 			"delete_track": "Atention! You are going to delete this track",
 			"delete_track_message": "Are you sure you want to delete this track?"
+		},
+		"audio": {
+			"pool": {
+				"demos": {
+					"category": "Category",
+					"instrument": "Instrument",
+					"duration": "Duration",
+					"creator": "Creator",
+					"tempo": "Tempo",
+					"search": "Search"
+				}
+			}
 		}
 	}
 }

@@ -35,7 +35,7 @@
 				<div class="flex flex-col gap-5">
 					<!-- MusicSheet header options -->
 					<header
-						class="grid grid-cols-5 w-full gap-5 p-2 dark:bg-softdark default_border dark:text-white">
+						class="grid grid-cols-5 w-full gap-5 p-5 dark:bg-softdark default_border dark:text-white">
 						<BaseInput v-model="tempo" :label="$t('app.harmony.tempo')" />
 						<BaseDropdown
 							v-model="timeSignature"

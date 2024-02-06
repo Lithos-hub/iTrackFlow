@@ -165,6 +165,18 @@
 			"no_audio": "No hay pista de audio",
 			"delete_track": "¡Atención! Vas a eliminar una pista",
 			"delete_track_message": "¿Estás seguro de que quieres eliminar esta pista?"
+		},
+		"audio": {
+			"pool": {
+				"demos": {
+					"category": "Categoría",
+					"instrument": "Instrumento",
+					"duration": "Duración",
+					"creator": "Creador",
+					"tempo": "Tempo",
+					"search": "Buscar"
+				}
+			}
 		}
 	}
 }
