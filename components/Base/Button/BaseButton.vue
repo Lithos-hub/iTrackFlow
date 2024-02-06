@@ -32,10 +32,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { Button } from './BaseButton.interfaces';
+import { BaseButtonProps } from './BaseButton.interfaces';
 import { ColorName } from '@/interfaces';
 
-const { iconColor, color, disabled, variant } = withDefaults(defineProps<Button>(), {
+const { iconColor, color, disabled, variant } = withDefaults(defineProps<BaseButtonProps>(), {
 	color: 'primary',
 	disabled: false,
 	size: 'md',

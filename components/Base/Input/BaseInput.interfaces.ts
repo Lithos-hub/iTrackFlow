@@ -3,7 +3,7 @@ import { ColorName } from '@/interfaces';
 
 type Variant = 'default' | 'underline' | 'bordered' | 'rounded' | 'filled';
 
-export interface Input {
+export interface BaseInputProps {
 	label?: string;
 	icon?: string;
 	iconLeft?: boolean;

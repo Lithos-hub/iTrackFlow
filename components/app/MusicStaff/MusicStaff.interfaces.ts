@@ -190,7 +190,7 @@ export type SelectedChord = `${ChordName} - (${RomanNumber})`;
 export interface MusicChord {
 	id: string;
 	subdivisionChords: SubdivisionChord[];
-	splits: number;
+	splits: string;
 	lyrics?: string;
 }
 

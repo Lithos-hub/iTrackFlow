@@ -2,81 +2,33 @@
 	<div class="flex flex-col h-screen w-full">
 		<div class="flex flex-1 flex-grow">
 			<AppSideMenu class="sidemenu">
-				<section>
-					<div class="px-7">
-						<BaseButton
-							variant="stealth"
-							color="secondary"
-							icon="chevron-left"
-							icon-left
-							class="my-5"
-							@click="$router.back()">
-							{{ $t('app.ui.go_back') }}
-						</BaseButton>
-						<h6 class="my-5">
-							{{
-								$t('app.harmony.sidemenu.bar_options', {
-									number: `${selectedBarIndex}`,
-								})
-							}}
-						</h6>
-					</div>
-					<hr class="sidemenu__separator" />
-					<div class="sidemenu__block">
-						<label class="text-white/30 text-sm font-semibold">
-							{{ $t('app.harmony.sidemenu.select_tonal_chord') }}
-						</label>
-						<BaseDropdown
-							v-model="selectedChord"
-							:data="chordListByKeySignature"
-							no-cleanable
-							color="light"
-							@input="onChangeChord" />
-					</div>
-					<hr class="sidemenu__separator" />
-					<div class="sidemenu__block">
-						<label class="sidemenu__label">
-							{{ $t('app.harmony.sidemenu.select_custom_chord') }}
-						</label>
-						<div class="flex gap-5 items-end">
-							<BaseDropdown
-								v-model="selectedAtonalChordRoot"
-								:label="$t('app.harmony.sidemenu.root_note')"
-								:data="NotesList"
-								color="light"
-								no-cleanable />
-							<BaseDropdown
-								v-model="selectedAtonalChordType"
-								:label="$t('app.harmony.sidemenu.chord_type')"
-								:data="ChordTypesList"
-								color="light"
-								no-cleanable />
+				<section class="flex flex-col justify-between h-full">
+					<div>
+						<div class="px-7 flex justify-between items-center">
+							<h6 class="my-5">
+								{{
+									$t('app.harmony.sidemenu.bar_options', {
+										number: `${selectedBarIndex}`,
+									})
+								}}
+							</h6>
 							<BaseButton
-								icon="add"
-								flat
-								variant="outline"
-								color="primary"
-								icon-color="blue"
-								@click="onAddExoticChord" />
+								variant="stealth"
+								color="secondary"
+								icon="chevron-left"
+								icon-left
+								class="my-5"
+								@click="$router.back()">
+								{{ $t('app.ui.go_back') }}
+							</BaseButton>
 						</div>
-						<P v-if="atonalError" class="text-red-500">
-							{{ $t('app.harmony.sidemenu.atonal_error') }}
-						</P>
+						<SideMenuFormSection
+							:key="sideMenuUpdateKey"
+							:elements="sidemenuItems"
+							@update:model-value="updateModel" />
 					</div>
-					<hr class="sidemenu__separator" />
-					<div class="sidemenu__block">
-						<label class="sidemenu__label">
-							{{ $t('app.harmony.sidemenu.split') }}
-						</label>
-						<BaseDropdown
-							v-model="selectedBarSplit"
-							:label="$t('app.harmony.sidemenu.number_of_splits')"
-							:data="splitOptions"
-							color="light"
-							@input="splitBar" />
-					</div>
+					<BaseSelectorsWrapper />
 				</section>
-				<BaseSelectorsWrapper />
 			</AppSideMenu>
 
 			<section class="h-full w-full bg-white dark:bg-dark p-10">
@@ -130,6 +82,12 @@ import {
 import { DropdownItem } from '@/components/Base/Dropdown/BaseDropdown.interfaces';
 import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
 import { useHarmonyStore } from '~/store/harmony';
+import SideMenuFormSection from '~/components/App/SideMenu/SideMenuFormSection.vue';
+
+import BaseDropdown from '@/components/Base/Dropdown/BaseDropdown.vue';
+import BaseButton from '@/components/Base/Button/BaseButton.vue';
+import BaseFeedback from '@/components/Base/Feedback/BaseFeedback.vue';
+import { SideMenuFormSectionItems } from '~/components/App/SideMenu/SideMenuFormSection.interfaces';
 
 definePageMeta({
 	name: 'HarmonyPage',
@@ -161,7 +119,7 @@ const initialHarmonyState = ref<HarmonyData>({
 					romanNumber: 'i',
 				},
 			],
-			splits: 1,
+			splits: '1',
 			lyrics: 'Lorem ipsum',
 		},
 		{
@@ -183,7 +141,7 @@ const initialHarmonyState = ref<HarmonyData>({
 					romanNumber: 'iv',
 				},
 			],
-			splits: 3,
+			splits: '3',
 			lyrics: 'Dolor sit amet',
 		},
 		{
@@ -195,7 +153,7 @@ const initialHarmonyState = ref<HarmonyData>({
 					romanNumber: 'III',
 				},
 			],
-			splits: 1,
+			splits: '1',
 		},
 	],
 });
@@ -210,7 +168,104 @@ const numberOfBars = ref(16);
 // Sidemenu
 const selectedAtonalChordRoot = ref<string[]>([]);
 const selectedAtonalChordType = ref<string[]>([]);
+
+const sidemenuModel = ref({
+	selectedChord: selectedChord.value,
+	selectedBarSplit: selectedBarSplit.value,
+	selectedAtonalChordRoot: selectedAtonalChordRoot.value,
+	selectedAtonalChordType: selectedAtonalChordType.value,
+});
+
+const sideMenuUpdateKey = ref(0);
+
+watch(selectedBarIndex, () => sideMenuUpdateKey.value++);
+watch(selectedChord, () => sideMenuUpdateKey.value++);
+watch(selectedBarSubdivision, () => sideMenuUpdateKey.value++);
+watch(selectedBarSplit, () => sideMenuUpdateKey.value++);
+
 const atonalError = ref(false);
+
+const sidemenuItems = computed((): SideMenuFormSectionItems[] => [
+	{
+		label: t('app.harmony.sidemenu.select_tonal_chord'),
+		styles: '',
+		components: [
+			{
+				component: BaseDropdown,
+				value: selectedChord.value,
+				vModel: 'selectedChord',
+				data: chordListByKeySignature.value,
+				noCleanable: true,
+				color: 'light',
+				actionType: 'input',
+				onAction: onChangeChord,
+			},
+		],
+	},
+	{
+		label: t('app.harmony.sidemenu.select_custom_chord'),
+		styles: 'flex gap-5 items-end',
+		components: [
+			{
+				component: BaseDropdown,
+				value: selectedAtonalChordRoot.value,
+				vModel: 'selectedAtonalChordRoot',
+				label: t('app.harmony.sidemenu.root_note'),
+				data: NotesList,
+				color: 'light',
+				noCleanable: true,
+			},
+			{
+				component: BaseDropdown,
+				value: selectedAtonalChordType.value,
+				vModel: 'selectedAtonalChordType',
+				label: t('app.harmony.sidemenu.chord_type'),
+				data: ChordTypesList,
+				color: 'light',
+				noCleanable: true,
+			},
+			{
+				component: BaseButton,
+				icon: 'add',
+				flat: true,
+				variant: 'outline',
+				color: 'primary',
+				iconColor: 'blue',
+				actionType: 'click',
+				onAction: () => onAddAtonalChord(),
+			},
+		],
+	},
+	{
+		label: '',
+		components: [
+			{
+				component: BaseFeedback,
+				message: t('app.harmony.sidemenu.atonal_error'),
+				type: 'error',
+				vModel: 'atonalError',
+				value: atonalError.value,
+			},
+		],
+	},
+	{
+		label: t('app.harmony.sidemenu.split'),
+		styles: '',
+		components: [
+			{
+				component: BaseDropdown,
+				value: selectedBarSplit.value,
+				vModel: 'selectedBarSplit',
+				label: t('app.harmony.sidemenu.number_of_splits'),
+				data: splitOptions.value,
+				noCleanable: true,
+				color: 'light',
+				actionType: 'input',
+				onAction: onSplitBar,
+			},
+		],
+	},
+]);
 
 const scalesTypesFormatted = computed(() =>
 	ScaleTypesList.map(({ label, value }) => ({
@@ -254,7 +309,7 @@ const generateMusicSheetStaffs = () => {
 					romanNumber: '',
 				},
 			],
-			splits: 1,
+			splits: '1',
 			lyrics: '',
 		};
 	});
@@ -271,17 +326,28 @@ const insertChord = (chord: SubdivisionChord) => {
 	initialHarmonyState.value.chords[barIndex].subdivisionChords[subdivisionIndex] = chord;
 };
 
-const onChangeChord = (newChord: string[]) => {
+const updateModel = (model: Record<string, any>) => {
+	Object.keys(model).forEach((key) => {
+		sidemenuModel.value[key] = model[key];
+	});
+	console.log('Updating model', model);
+};
+
+const onChangeChord = () => {
 	const chordToAdd = {
 		id: getRandomNumberId(),
-		chord: newChord[0].split(' - ')[0] as ChordName,
-		romanNumber: newChord[0].split(' - ')[1].replace('(', '').replace(')', '') as RomanNumber,
+		chord: selectedChord.value[0].split(' - ')[0] as ChordName,
+		romanNumber: selectedChord.value[0]
+			.split(' - ')[1]
+			.replace('(', '')
+			.replace(')', '') as RomanNumber,
 	};
 
 	insertChord(chordToAdd);
 };
 
-const onAddExoticChord = () => {
+const onAddAtonalChord = () => {
+	sideMenuUpdateKey.value++;
 	if (!selectedAtonalChordRoot.value.length || !selectedAtonalChordType.value.length) {
 		atonalError.value = true;
 		return;
@@ -309,7 +375,7 @@ const onAddExoticChord = () => {
 	atonalError.value = false;
 };
 
-const splitBar = () => {
+const onSplitBar = () => {
 	const { subdivisionChords } = initialHarmonyState.value.chords[selectedBarIndex.value - 1];
 
 	const currentStaffHasMoreSubdivisionsThanSelected =
@@ -332,7 +398,7 @@ const splitBar = () => {
 	initialHarmonyState.value.chords[selectedBarIndex.value - 1] = {
 		...initialHarmonyState.value.chords[selectedBarIndex.value - 1],
 		subdivisionChords: newArrayOfSubdivisions,
-		splits: Number(selectedBarSplit.value[0]),
+		splits: selectedBarSplit.value[0],
 	};
 };
 

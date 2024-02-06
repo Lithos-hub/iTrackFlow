@@ -30,12 +30,12 @@
 </template>
 
 <script setup lang="ts">
-import { Input } from './BaseInput.interfaces';
+import { BaseInputProps } from './BaseInput.interfaces';
 import { useScreenStore } from '~/store/colorMode';
 
 const { lightMode } = storeToRefs(useScreenStore());
 
-const { debounced, color } = withDefaults(defineProps<Input>(), {
+const { debounced, color } = withDefaults(defineProps<BaseInputProps>(), {
 	modelValue: '',
 	variant: 'bordered',
 });
