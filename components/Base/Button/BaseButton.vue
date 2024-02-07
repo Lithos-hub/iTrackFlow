@@ -2,7 +2,7 @@
 	<button
 		v-bind="$attrs"
 		:disabled="disabled"
-		data-testid="iui-button"
+		data-testid="base-button"
 		:class="`button button__${flat ? 'flat' : computedColor} button__${size} button__radius--${radius} button__${variant}`"
 		:style="{
 			border: (variant === 'stealth' || variant === 'outline') && `1px solid ${tailwindColor}`,
@@ -12,18 +12,30 @@
 		<div class="flex items-center justify-center gap-2.5 text-sm">
 			<!-- Left icon -->
 			<div v-if="icon && iconLeft" class="pt-1">
-				<BaseIcon :icon="icon" :size="20" :color="computedIconColor" />
+				<BaseIcon
+					data-test-id="base-button--left-icon"
+					:icon="icon"
+					:size="20"
+					:color="computedIconColor" />
 			</div>
 			<!-- Centered icon (no text) -->
 			<div v-else-if="icon && !text && !iconLeft && !iconRight" class="pt-1">
-				<BaseIcon :icon="icon" :size="20" :color="computedIconColor" />
+				<BaseIcon
+					data-test-id="base-button--center-icon"
+					:icon="icon"
+					:size="20"
+					:color="computedIconColor" />
 			</div>
 			<!-- Text or slot with whatever -->
 			<slot v-if="!text" class="button__slot"></slot>
 			<span v-else>{{ text }}</span>
 			<!-- Right icon -->
 			<div v-if="icon && iconRight" class="pt-1">
-				<BaseIcon :icon="icon" :size="20" :color="computedIconColor" />
+				<BaseIcon
+					data-test-id="base-button--right-icon"
+					:icon="icon"
+					:size="20"
+					:color="computedIconColor" />
 			</div>
 		</div>
 	</button>
