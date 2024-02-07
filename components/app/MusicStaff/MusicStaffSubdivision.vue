@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { ChordName, RomanNumber } from './MusicStaff.interfaces';
 import { MusicStafSubdivisionProps } from './MusicStaffSubdivision.interfaces';
-import { useHarmonyStore } from '~/store/harmony';
+import { useHarmonyStore } from '@/store/harmony';
 
 const { subdivision, index, splits, romanNumber, chord } = defineProps<MusicStafSubdivisionProps>();
 

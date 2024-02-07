@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue';
 import { setActivePinia, createPinia } from 'pinia';
 import BaseButton from './BaseButton.vue';
 import { UnitTestButtons } from './BaseButton.const';
-import { piniaMock } from '~/__mocks__/store/pinia';
+import { piniaMock } from '@/__mocks__/store/pinia';
 
 vi.mock('@/store/colorMode', () => ({ useScreenStore: () => piniaMock.screenStore }));
 

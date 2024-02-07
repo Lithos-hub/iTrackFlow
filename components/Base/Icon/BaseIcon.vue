@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { IconProps } from './BaseIcon.interfaces';
-import { useScreenStore } from '~/store/colorMode';
+import { useScreenStore } from '@/store/colorMode';
 
 const { icon, color } = withDefaults(defineProps<IconProps>(), {
 	color: 'white',

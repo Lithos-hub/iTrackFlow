@@ -81,13 +81,14 @@ import {
 } from '@/components/App/MusicStaff/MusicStaff.interfaces';
 import { DropdownItem } from '@/components/Base/Dropdown/BaseDropdown.interfaces';
 import { NotesList, TimeSignaturesList, ScaleTypesList, ChordTypesList } from '@/assets/data';
-import { useHarmonyStore } from '~/store/harmony';
-import SideMenuFormSection from '~/components/App/SideMenu/SideMenuFormSection.vue';
+import { useHarmonyStore } from '@/store/harmony';
 
+import { SideMenuFormSectionItems } from '@/components/App/SideMenu/SideMenuFormSection.interfaces';
+
+import SideMenuFormSection from '@/components/App/SideMenu/SideMenuFormSection.vue';
 import BaseDropdown from '@/components/Base/Dropdown/BaseDropdown.vue';
 import BaseButton from '@/components/Base/Button/BaseButton.vue';
 import BaseFeedback from '@/components/Base/Feedback/BaseFeedback.vue';
-import { SideMenuFormSectionItems } from '~/components/App/SideMenu/SideMenuFormSection.interfaces';
 
 definePageMeta({
 	name: 'HarmonyPage',

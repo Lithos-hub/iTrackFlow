@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import { useDropZone } from '@vueuse/core';
-import { DropdownItem } from '~/components/Base/Dropdown/BaseDropdown.interfaces';
+import { DropdownItem } from '@/components/Base/Dropdown/BaseDropdown.interfaces';
 
 definePageMeta({
 	layout: 'dashboard',

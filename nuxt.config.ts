@@ -31,7 +31,7 @@ export default defineNuxtConfig({
 		routeRules: {
 			// "/_nuxt/**": { headers: { "cache-control": "max-age=31536000" } }, // Set generated files cache to 1 year
 		},
-		plugins: ['~/server/plugins/mongodb.ts'],
+		plugins: ['@/server/plugins/mongodb.ts'],
 	},
 	runtimeConfig: {
 		public: {

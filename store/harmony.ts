@@ -1,4 +1,4 @@
-import { SelectedChord } from '~/components/App/MusicStaff/MusicStaff.interfaces';
+import { SelectedChord } from '@/components/App/MusicStaff/MusicStaff.interfaces';
 
 export const useHarmonyStore = defineStore('harmony', () => {
 	const labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'];
