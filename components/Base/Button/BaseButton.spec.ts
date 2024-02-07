@@ -50,5 +50,53 @@ describe('Given a BaseButton component', () => {
 				},
 			);
 		});
+		describe('And the button is disabled', () => {
+			test('Then should render the button with the disabled class', () => {
+				const { getByTestId } = renderWrapper({ props: { disabled: true } });
+
+				const button = getByTestId('base-button');
+
+				const buttonClasses = button.className.split(' ');
+
+				expect(button).toBeTruthy();
+				expect(buttonClasses).toContain('button__disabled');
+			});
+		});
+
+		describe('And an icon is passed', () => {
+			test('Then should render the button with the icon', () => {
+				const { getByTestId } = renderWrapper({ props: { icon: 'icon' } });
+
+				const button = getByTestId('base-button');
+				const icon = getByTestId('base-button--center-icon');
+
+				expect(button).toBeTruthy();
+				expect(icon).toBeTruthy();
+			});
+		});
+
+		describe('And the icon is on the left', () => {
+			test('Then should render the button with the icon on the left', () => {
+				const { getByTestId } = renderWrapper({ props: { icon: 'icon', iconLeft: true } });
+
+				const button = getByTestId('base-button');
+				const icon = getByTestId('base-button--left-icon');
+
+				expect(button).toBeTruthy();
+				expect(icon).toBeTruthy();
+			});
+		});
+
+		describe('And the icon is on the right', () => {
+			test('Then should render the button with the icon on the right', () => {
+				const { getByTestId } = renderWrapper({ props: { icon: 'icon', iconRight: true } });
+
+				const button = getByTestId('base-button');
+				const icon = getByTestId('base-button--right-icon');
+
+				expect(button).toBeTruthy();
+				expect(icon).toBeTruthy();
+			});
+		});
 	});
 });
