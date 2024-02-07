@@ -85,7 +85,6 @@ import { useHarmonyStore } from '@/store/harmony';
 
 import { SideMenuFormSectionItems } from '@/components/App/SideMenu/SideMenuFormSection.interfaces';
 
-import SideMenuFormSection from '@/components/App/SideMenu/SideMenuFormSection.vue';
 import BaseDropdown from '@/components/Base/Dropdown/BaseDropdown.vue';
 import BaseButton from '@/components/Base/Button/BaseButton.vue';
 import BaseFeedback from '@/components/Base/Feedback/BaseFeedback.vue';
