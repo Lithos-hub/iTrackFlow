@@ -11,7 +11,7 @@ type ChipVariant =
 	| 'light'
 	| 'dark';
 
-export interface Chip {
+export interface ChipProps {
 	prependIcon?: IconName | undefined;
 	appendIcon?: IconName | undefined;
 	content?: string;

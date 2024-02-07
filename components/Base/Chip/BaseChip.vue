@@ -1,43 +1,41 @@
 <template>
-	<div>
-		<div
-			data-testid="base-chip"
-			:class="`Chip Chip__${variant} ${closable && 'active:scale-110'}`"
-			:style="{
-				borderColor: tailwindColor,
-			}">
-			<BaseIcon
-				v-if="prependIcon"
-				:icon="prependIcon"
-				:color="computedVariantColor"
-				class="h-6 w-6" />
-			<small>
-				<slot v-if="!content" />
-				<span v-else>{{ content }}</span>
-			</small>
-			<BaseIcon
-				v-if="appendIcon && !closable"
-				:icon="appendIcon"
-				:color="computedVariantColor"
-				class="h-6 w-6" />
-			<BaseIcon
-				v-if="closable"
-				data-testid="base-chip__close"
-				icon="cross"
-				:size="16"
-				class="h-5 w-5 cursor-pointer rounded-full hover:bg-white/10 transition-all ml-2"
-				@click="$emit('close')" />
-		</div>
+	<div
+		data-testid="base-chip"
+		:class="`chip chip__${variant} ${closable && 'active:scale-110'}`"
+		:style="{
+			borderColor: tailwindColor,
+		}">
+		<BaseIcon
+			v-if="prependIcon"
+			:icon="prependIcon"
+			:color="computedVariantColor"
+			class="h-6 w-6" />
+		<small>
+			<slot v-if="!content" />
+			<span v-else>{{ content }}</span>
+		</small>
+		<BaseIcon
+			v-if="appendIcon && !closable"
+			:icon="appendIcon"
+			:color="computedVariantColor"
+			class="h-6 w-6" />
+		<BaseIcon
+			v-if="closable"
+			data-testid="base-chip__close"
+			icon="cross"
+			:size="16"
+			class="h-5 w-5 cursor-pointer rounded-full hover:bg-white/10 transition-all ml-2"
+			@click="$emit('close')" />
 	</div>
 </template>
 
 <script script setup lang="ts">
 import { computed, ComputedRef } from 'vue';
 
-import { Chip } from './BaseChip.interfaces';
+import { ChipProps } from './BaseChip.interfaces';
 import { ColorName } from '@/interfaces';
 
-const { variant } = withDefaults(defineProps<Chip>(), {
+const { variant } = withDefaults(defineProps<ChipProps>(), {
 	variant: 'default',
 	closable: false,
 	prependIcon: undefined,
@@ -76,7 +74,7 @@ const tailwindColor = computed(() => getTailwindColor(computedVariantColor.value
 </script>
 
 <style scoped lang="scss">
-.Chip {
+.chip {
 	@apply rounded-full px-3 min-w-[70px] border py-1 flex justify-center items-center gap-1 brightness-125 transition-all;
 
 	&__default {
