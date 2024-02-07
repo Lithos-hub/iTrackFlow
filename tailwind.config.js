@@ -26,6 +26,7 @@ module.exports = {
 				secondary: '#ec4d94',
 				tertiary: '#e98e87',
 				dark: '#202020',
+				darker: '#101010',
 				softdark: '#272829',
 				success: '#429867',
 				info: '#6f95ff',

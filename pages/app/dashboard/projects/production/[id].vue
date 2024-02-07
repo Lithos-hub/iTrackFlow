@@ -84,7 +84,7 @@
 			<!-- Floating menu -->
 			<AppFloatMenu v-if="isFloatMenuOpened" :client-x="clientX" :client-y="clientY" />
 			<!-- Music player -->
-			<AppMusicPlayer />
+			<AppMusicPlayer class="absolute bottom-0 left-0 z-50" />
 			<!-- Alert modal -->
 			<BaseModalAlert
 				v-if="showModal"

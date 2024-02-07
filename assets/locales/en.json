@@ -107,6 +107,7 @@
 			"project_team_members_placeholder": "Enter your project team members",
 			"project_image": "Project picture",
 			"project_image_placeholder": "Upload image",
+			"project_image_error": "The image must be an image file",
 			"project_create_submit": "Create project",
 			"delete_project": "Atention! You are going to delete this project",
 			"delete_project_message": "Are you sure you want to delete this project?"
@@ -171,12 +172,21 @@
 		"audio": {
 			"pool": {
 				"demos": {
-					"category": "Category",
-					"instrument": "Instrument",
-					"duration": "Duration",
-					"creator": "Creator",
-					"tempo": "Tempo",
-					"search": "Search"
+					"category": "Filter by category",
+					"category_placeholder": "Category",
+					"instrument": "Filter by instrument",
+					"instrument_placeholder": "Instrument",
+					"duration": "Filter by duration",
+					"duration_placeholder": "Duration",
+					"creator": "Filter by creator",
+					"creator_placeholder": "Creator",
+					"tempo": "Filter by tempo",
+					"tempo_placeholder": "Tempo",
+					"search": "Search audio",
+					"search_placeholder": "Search audio",
+					"upload": "Upload audio",
+					"upload_placeholder": "Click here or drop files",
+					"audio_error": "The file must be an audio file"
 				}
 			}
 		}

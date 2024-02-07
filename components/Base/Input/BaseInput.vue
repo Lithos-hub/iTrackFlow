@@ -51,7 +51,9 @@ const textColor = computed(() => {
 	if (!color) {
 		return lightMode.value ? '#000000' : '#ffffff';
 	} else if (color === 'dark') {
-		return lightMode.value ? '#00000090' : '#ffffff90';
+		return '#00000090';
+	} else if (color === 'light') {
+		return '#ffffff90';
 	}
 
 	return lightMode.value ? '#000000' : '#ffffff';

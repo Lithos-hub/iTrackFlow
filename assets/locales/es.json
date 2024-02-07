@@ -107,6 +107,7 @@
 			"project_team_members_placeholder": "Introduce los miembros del equipo",
 			"project_image": "Imagen del proyecto",
 			"project_image_placeholder": "Subir imagen",
+			"project_image_error": "El formato del fichero no es una imagen",
 			"project_create_submit": "Crear proyecto",
 			"delete_project": "¡Atención! Vas a eliminar un proyecto",
 			"delete_project_message": "¿Estás seguro de que quieres eliminar este proyecto?"
@@ -169,12 +170,21 @@
 		"audio": {
 			"pool": {
 				"demos": {
-					"category": "Categoría",
-					"instrument": "Instrumento",
-					"duration": "Duración",
-					"creator": "Creador",
-					"tempo": "Tempo",
-					"search": "Buscar"
+					"category": "Filtrar por categoría",
+					"category_placeholder": "Categoría musical",
+					"instrument": "Filtrar por instrumento",
+					"instrument_placeholder": "Instrumento musical",
+					"duration": "Filtrar por duración",
+					"duration_placeholder": "Duración",
+					"creator": "Filtrar por creador",
+					"creator_placeholder": "Creador",
+					"tempo": "Filtrar por tempo",
+					"tempo_placeholder": "Tempo",
+					"search": "Buscar audio",
+					"search_placeholder": "Parámetro de búsqueda",
+					"upload": "Subir audio",
+					"upload_placeholder": "Pulsa o arrastra audios aquí",
+					"audio_error": "El formato del fichero no es un audio"
 				}
 			}
 		}

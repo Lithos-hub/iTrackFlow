@@ -1,67 +1,106 @@
 <template>
-	<section class="flex flex-col gap-5">
-		<section class="default_border bg-softdark p-5">
-			<div class="flex flex-wrap gap-5">
-				<BaseDropdown
-					v-model="selectedStyle"
-					:data="stylesList"
-					:label="$t('app.audio.pool.demos.category')" />
-				<BaseDropdown
-					v-model="selectedInstrument"
-					:data="instrumentsList"
-					multiselect
-					:label="$t('app.audio.pool.demos.instrument')" />
-				<BaseDropdown
-					v-model="selectedDuration"
-					:data="durationsList"
-					:label="$t('app.audio.pool.demos.duration')" />
-				<BaseDropdown
-					v-model="selectedCreator"
-					:data="creatorsList"
-					:label="$t('app.audio.pool.demos.creator')" />
-				<BaseDropdown
-					v-model="selectedTempo"
-					:data="temposList"
-					:label="$t('app.audio.pool.demos.tempo')" />
-				<BaseInput
-					v-model="searchQuery"
-					variant="underline"
-					:placeholder="$t('app.audio.pool.demos.search')" />
-			</div>
+	<div class="flex grow gap-5 h-[calc(100%-40px)]">
+		<section class="flex flex-col gap-5">
+			<section class="default_border bg-softdark p-5 text-white">
+				<div class="grid grid-cols-6 justify-between items-end gap-5">
+					<BaseInput
+						v-model="searchQuery"
+						variant="bordered"
+						color="light"
+						:label="$t('app.audio.pool.demos.search')"
+						:placeholder="$t('app.audio.pool.demos.search_placeholder')" />
+					<BaseDropdown
+						v-model="selectedStyle"
+						:data="stylesList"
+						color="light"
+						:label="$t('app.audio.pool.demos.category')"
+						:placeholder="$t('app.audio.pool.demos.category_placeholder')" />
+					<BaseDropdown
+						v-model="selectedInstrument"
+						:data="instrumentsList"
+						color="light"
+						:label="$t('app.audio.pool.demos.instrument')"
+						:placeholder="$t('app.audio.pool.demos.instrument_placeholder')" />
+					<BaseDropdown
+						v-model="selectedDuration"
+						:data="durationsList"
+						color="light"
+						:label="$t('app.audio.pool.demos.duration')"
+						:placeholder="$t('app.audio.pool.demos.duration_placeholder')" />
+					<BaseDropdown
+						v-model="selectedCreator"
+						:data="creatorsList"
+						color="light"
+						:label="$t('app.audio.pool.demos.creator')"
+						:placeholder="$t('app.audio.pool.demos.creator_placeholder')" />
+					<BaseDropdown
+						v-model="selectedTempo"
+						:data="temposList"
+						color="light"
+						:label="$t('app.audio.pool.demos.tempo')"
+						:placeholder="$t('app.audio.pool.demos.tempo_placeholder')" />
+				</div>
+			</section>
+			<section class="default_border bg-softdark h-full">
+				<div class="p-5 flex flex-col gap-5">
+					<strong>Mis audios</strong>
+					<div class="grid grid-cols-8 gap-5">
+						<article
+							v-for="({ title }, i) of audioData"
+							:key="i"
+							class="default_border rounded-2xl flex flex-col justify-evenly p-5 items-center aspect-square shadow bg-dark duration-200 relative">
+							<BaseButton flat icon="trash" icon-color="red" class="absolute top-0 right-0" />
+							<BaseButton flat icon="pencil" icon-color="blue" class="absolute top-0 left-0" />
+							<BaseIcon icon="sound" :size="30" />
+							<small>{{ title }}</small>
+						</article>
+					</div>
+				</div>
+			</section>
 		</section>
-		<section class="default_border bg-softdark">
-			<div class="grid grid-cols-8 gap-10 p-5">
-				<article
-					v-for="({ title, description }, i) of audioData"
-					:key="i"
-					class="default_border rounded-2xl flex flex-col justify-center items-center aspect-square shadow bg-dark duration-200 relative">
-					<BaseButton flat icon="trash" icon-color="red" class="absolute top-0 right-0" />
-					<BaseButton flat icon="pencil" icon-color="blue" class="absolute top-0 left-0" />
-					<BaseIcon icon="sound" :size="40" />
-					<p>{{ title }}</p>
-					<small class="text-gray-200">
-						{{ description }}
-					</small>
-				</article>
-			</div>
+		<section class="w-[250px]">
+			<aside class="bg-softdark p-5 default_border flex flex-col gap-5 h-full">
+				<strong>Subida de audio</strong>
+				<!-- Dropzone -->
+				<BaseDropzone
+					ref="dropZoneRef"
+					:input-ref="fileInputRef"
+					:is-over-drop-zone="isOverDropZone"
+					:placeholder="$t('app.audio.pool.demos.upload_placeholder')" />
+				<input
+					ref="fileInputRef"
+					type="file"
+					class="hidden"
+					accept="audio/*"
+					@change="onSelectFile" />
+				<small v-if="fileTypeError" class="text-red-500 text-center">
+					{{ $t('app.audio.pool.demos.audio_error') }}
+				</small>
+			</aside>
 		</section>
-	</section>
+		<AppMusicPlayer class="absolute bottom-0 left-0 z-50" />
+	</div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-	title: 'Audio Demos',
+	title: 'Audio D.mp3emos',
 	description: 'Audio Demos description',
 	layout: 'dashboard',
 });
 
-const searchQuery = ref('');
+const dropZoneRef = ref<HTMLDivElement>();
+const fileInputRef = ref<HTMLInputElement | null>(null);
 
+const searchQuery = ref('');
 const selectedStyle = ref([]);
 const selectedInstrument = ref([]);
 const selectedDuration = ref([]);
 const selectedTempo = ref('');
 const selectedCreator = ref('');
+const selectedAudioFiles = ref<File[] | File | null>(null);
+
+const fileTypeError = ref(false);
 
 const stylesList = ref([
 	{
@@ -140,44 +179,74 @@ const temposList = ref([
 
 const audioData = ref([
 	{
-		title: 'Audio 1',
+		title: 'Audio 1.mp3',
 		description: 'Audio 1 description',
 	},
 	{
-		title: 'Audio 2',
+		title: 'Audio 2.mp3',
 		description: 'Audio 2 description',
 	},
 	{
-		title: 'Audio 3',
+		title: 'Audio 3.flac',
 		description: 'Audio 3 description',
 	},
 	{
-		title: 'Audio 4',
+		title: 'Audio 4.mp3',
 		description: 'Audio 4 description',
 	},
 	{
-		title: 'Audio 5',
+		title: 'Audio 5.flac',
 		description: 'Audio 5 description',
 	},
 	{
-		title: 'Audio 6',
+		title: 'Audio 6.flac',
 		description: 'Audio 6 description',
 	},
 	{
-		title: 'Audio 7',
+		title: 'Audio 7.mp3',
 		description: 'Audio 7 description',
 	},
 	{
-		title: 'Audio 8',
+		title: 'Audio 8.mp3',
 		description: 'Audio 8 description',
 	},
 	{
-		title: 'Audio 9',
+		title: 'Audio 9.flac',
 		description: 'Audio 9 description',
 	},
 	{
-		title: 'Audio 10',
+		title: 'Audio 1.mp3',
 		description: 'Audio 10 description',
 	},
 ]);
+
+const { isOverDropZone } = useDropZone(dropZoneRef, {
+	onDrop,
+	dataTypes: ['audio/mp3', 'audio/flac', 'audio/wav'],
+});
+
+const onSelectFile = (event: Event) => {
+	const target = event.target as HTMLInputElement;
+	const file = target.files?.[0];
+
+	if (!file || !checkFileType(file, 'audio')) {
+		fileTypeError.value = true;
+		return;
+	}
+
+	selectedAudioFiles.value = file;
+};
+
+function onDrop(files: File[] | null) {
+	if (!files) return;
+
+	const file = files[0];
+
+	if (!file || !checkFileType(file, 'audio')) {
+		fileTypeError.value = true;
+		return;
+	}
+
+	selectedAudioFiles.value = files;
+}
 </script>
