@@ -5,12 +5,12 @@ import { piniaMock } from '~/__mocks__/store/pinia';
 
 vi.mock('@/store/colorMode', () => ({ useScreenStore: () => piniaMock.screenStore }));
 
-vi.mock('@/components/Base/Button/BaseButton.vue');
-vi.mock('@/components/Base/Input/BaseInput.vue');
-
 const renderWrapper = ({ props = {} }) =>
 	render(BaseDropdown, {
 		props,
+		global: {
+			stubs: ['BaseButton', 'BaseInput'],
+		},
 	});
 
 describe('Given a BaseDropdown component', () => {

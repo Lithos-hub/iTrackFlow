@@ -5,25 +5,34 @@
 		</Teleport>
 
 		<div
+			data-testid="base-modal-alert"
 			class="modal__alert fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center p-10 w-auto h-auto">
 			<div class="flex w-full justify-end items-center">
 				<BaseIcon icon="close" class="icon__clickable" @click="$emit('close')" />
 			</div>
-			<BaseIcon :icon="iconAndColor.icon" :color="iconAndColor.color" :size="100" />
+			<BaseIcon
+				data-testid="base-modal-alert__icon"
+				:icon="getIconAndColor.icon"
+				:color="getIconAndColor.color"
+				:size="100" />
 			<h2
 				:style="{
-					color: getTailwindColor(iconAndColor.color),
+					color: getTailwindColor(getIconAndColor.color),
 				}">
 				{{ title }}
 			</h2>
 			<hr />
 			<small>{{ message }}</small>
-			<BaseButton v-if="type === 'warning'" color="danger" @click="$emit('on-action')">
-				{{ $t('app.ui.modal.confirm') }}
-			</BaseButton>
-			<BaseButton v-if="type === 'info'" color="primary" @click="$emit('on-action')">
-				{{ $t('app.ui.modal.understood') }}
-			</BaseButton>
+			<div v-if="type === 'warning'" data-testid="base-modal-alert__confirm-button">
+				<BaseButton color="danger" @click="$emit('on-action')">
+					{{ $t('app.ui.modal.confirm') }}
+				</BaseButton>
+			</div>
+			<div v-if="type === 'info'" data-testid="base-modal-alert__understood-button">
+				<BaseButton v-if="type === 'info'" color="primary" @click="$emit('on-action')">
+					{{ $t('app.ui.modal.understood') }}
+				</BaseButton>
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,11 +40,13 @@
 <script setup lang="ts">
 import { BaseModalAlertProps, IconAndColor } from './BaseModalAlert.interfaces';
 
-const { type } = defineProps<BaseModalAlertProps>();
+const { type } = withDefaults(defineProps<BaseModalAlertProps>(), {
+	type: 'info',
+});
 
 defineEmits(['close', 'on-action']);
 
-const iconAndColor = computed<IconAndColor>(() => {
+const getIconAndColor = computed<IconAndColor>(() => {
 	return {
 		warning: {
 			icon: 'warning',
