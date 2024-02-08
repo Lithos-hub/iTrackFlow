@@ -43,9 +43,9 @@
 						<BaseDropzone
 							v-else
 							ref="dropZoneRef"
-							:input-ref="fileInputRef"
 							:is-over-drop-zone="isOverDropZone"
-							:placeholder="$t('app.projects.project_image_placeholder')" />
+							:placeholder="$t('app.projects.project_image_placeholder')"
+							@click="fileInputRef?.click()" />
 						<input
 							ref="fileInputRef"
 							type="file"

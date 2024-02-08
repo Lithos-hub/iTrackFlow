@@ -4,7 +4,7 @@ import BaseCard from './BaseCard.vue';
 describe('Given a BaseCard component', () => {
 	describe('When it is rendered', () => {
 		describe('And a text is provided', () => {
-			it('Then should render the card with default slot', () => {
+			test('Then should render the card with default slot', () => {
 				const { getByTestId } = render(BaseCard, {
 					slots: {
 						default: 'Card content',
@@ -16,7 +16,7 @@ describe('Given a BaseCard component', () => {
 			});
 		});
 		describe('And a title slot is provided', () => {
-			it('Then should render the card with title slot', () => {
+			test('Then should render the card with title slot', () => {
 				const { getByTestId } = render(BaseCard, {
 					slots: {
 						title: 'Card title',
@@ -28,7 +28,7 @@ describe('Given a BaseCard component', () => {
 			});
 		});
 		describe('And an actions slot is provided', () => {
-			it('Then should render the card with actions slot', () => {
+			test('Then should render the card with actions slot', () => {
 				const { getByTestId } = render(BaseCard, {
 					slots: {
 						actions: 'Card actions',

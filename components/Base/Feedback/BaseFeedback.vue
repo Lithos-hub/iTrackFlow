@@ -1,5 +1,6 @@
 <template>
 	<small
+		data-testid="base-feedback"
 		:class="{
 			'text-green-500': type === 'success',
 			'text-red-500': type === 'error',
@@ -13,5 +14,8 @@
 
 <script setup lang="ts">
 import { BaseFeedbackProps } from './BaseFeedback.interfaces';
-defineProps<BaseFeedbackProps>();
+withDefaults(defineProps<BaseFeedbackProps>(), {
+	type: 'info',
+	message: '',
+});
 </script>

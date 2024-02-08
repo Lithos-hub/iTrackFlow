@@ -21,7 +21,7 @@ describe('Given a BaseChip component', () => {
 
 	describe('When it is rendered', () => {
 		describe('And no prop is provided', () => {
-			it('Then should render the chip with default slot', () => {
+			test('Then should render the chip with default slot', () => {
 				const { getByTestId } = renderWrapper({
 					slots: {
 						default: 'Chip content',
@@ -34,7 +34,7 @@ describe('Given a BaseChip component', () => {
 		});
 
 		describe('And closable prop is passed', () => {
-			it('Then should render the chip with close button', () => {
+			test('Then should render the chip with close button', () => {
 				const { getByTestId } = renderWrapper({
 					props: {
 						closable: true,

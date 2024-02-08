@@ -64,9 +64,9 @@
 				<!-- Dropzone -->
 				<BaseDropzone
 					ref="dropZoneRef"
-					:input-ref="fileInputRef"
 					:is-over-drop-zone="isOverDropZone"
-					:placeholder="$t('app.audio.pool.demos.upload_placeholder')" />
+					:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
+					@click="fileInputRef?.click()" />
 				<input
 					ref="fileInputRef"
 					type="file"

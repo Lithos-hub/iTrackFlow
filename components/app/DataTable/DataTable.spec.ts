@@ -24,7 +24,7 @@ const dataList = [
 
 test('Given DataTable component', () => {
 	describe('When mounted', () => {
-		it('Then it should render correctly', () => {
+		test('Then it should render correctly', () => {
 			const { getByTestId } = createWrapper({
 				props: {
 					tableKey: 1,

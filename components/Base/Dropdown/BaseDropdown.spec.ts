@@ -21,7 +21,7 @@ describe('Given a BaseDropdown component', () => {
 	describe('When it is rendered', () => {
 		describe('And data prop is passed', () => {
 			describe('And the user clicks on the dropdown', () => {
-				it('Then it should the dropdown list', async () => {
+				test('Then it should the dropdown list', async () => {
 					const { queryAllByTestId, getByTestId } = renderWrapper({
 						props: {
 							data: [
@@ -49,7 +49,7 @@ describe('Given a BaseDropdown component', () => {
 				});
 			});
 			describe('And modelValue is passes and noCleanable and multiselect props are false', () => {
-				it('Then it should render the close button', () => {
+				test('Then it should render the close button', () => {
 					const { getByTestId } = renderWrapper({
 						props: {
 							data: [
@@ -75,7 +75,7 @@ describe('Given a BaseDropdown component', () => {
 			});
 
 			describe('And multiselect is prop true and there are selectedItems', () => {
-				it('Then it should render the selected items', () => {
+				test('Then it should render the selected items', () => {
 					const { queryAllByTestId } = renderWrapper({
 						props: {
 							data: [
