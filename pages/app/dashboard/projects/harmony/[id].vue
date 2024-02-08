@@ -22,7 +22,7 @@
 								{{ $t('app.ui.go_back') }}
 							</BaseButton>
 						</div>
-						<SideMenuFormSection
+						<AppSideMenuFormSection
 							:key="sideMenuUpdateKey"
 							:elements="sidemenuItems"
 							@update:model-value="updateModel" />

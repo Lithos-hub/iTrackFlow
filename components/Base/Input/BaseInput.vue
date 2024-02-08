@@ -7,6 +7,7 @@
 			v-if="!debounced"
 			v-bind="$attrs"
 			v-model="model"
+			data-testid="base-input__default"
 			:class="`input input__${variant} ${!noOutline ? 'focus:ring-2' : ''}`"
 			:style="{
 				borderColor: tailwindColor,
@@ -16,6 +17,7 @@
 		<input
 			v-else
 			v-bind="$attrs"
+			data-testid="base-input__debounced"
 			:class="`input input__${variant} ${!noOutline && 'focus:ring-2'}`"
 			:value="model"
 			:style="{
@@ -49,14 +51,14 @@ const onDebouncedInput = debounce((event: Event) => {
 
 const textColor = computed(() => {
 	if (!color) {
-		return lightMode.value ? '#000000' : '#ffffff';
+		return lightMode?.value ? '#000000' : '#ffffff';
 	} else if (color === 'dark') {
 		return '#00000090';
 	} else if (color === 'light') {
 		return '#ffffff90';
 	}
 
-	return lightMode.value ? '#000000' : '#ffffff';
+	return lightMode?.value ? '#000000' : '#ffffff';
 });
 
 const tailwindColor = computed<string>(() => {
@@ -94,7 +96,7 @@ const tailwindColor = computed<string>(() => {
 			colorReference = '#ffffff50';
 			break;
 		default:
-			colorReference = lightMode.value ? '#00000050' : '#ffffff50';
+			colorReference = lightMode?.value ? '#00000050' : '#ffffff50';
 			break;
 	}
 

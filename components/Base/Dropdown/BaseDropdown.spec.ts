@@ -62,7 +62,7 @@ describe('Given a BaseDropdown component', () => {
 									value: 'option-2',
 								},
 							],
-							modelValue: 'option-1',
+							modelValue: ['option-1'],
 							noCleanable: false,
 							multiselect: false,
 						},
