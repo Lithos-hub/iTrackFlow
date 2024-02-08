@@ -8,7 +8,7 @@
 				@click="isSelecting = false" />
 		</Teleport>
 		<!-- Dropdown -->
-		<div ref="dropdown" class="flex flex-col w-full">
+		<div ref="dropdown" data-testid="base-dropdown" class="flex flex-col w-full">
 			<label v-if="label" class="mx-5 my-2 font-medium text-sm">{{ label }}</label>
 			<div class="relative cursor-pointer">
 				<!-- Dropdown selected options chips -->
@@ -17,24 +17,25 @@
 				</p>
 				<div class="relative">
 					<!-- Dropdown input -->
-					<BaseInput
-						v-model="inputValue"
-						:class="{
-							dropdown__bordered: bordered,
-							dropdown: !bordered,
-						}"
-						:placeholder="!modelValue?.length || multiselect ? placeholder : ''"
-						class="cursor-pointer"
-						:color="color"
-						@click="isSelecting = true" />
+					<div data-testid="base-dropdown__input" @click="isSelecting = true">
+						<BaseInput
+							v-model="inputValue"
+							:class="{
+								dropdown__bordered: bordered,
+								dropdown: !bordered,
+							}"
+							:placeholder="!modelValue?.length || multiselect ? placeholder : ''"
+							class="cursor-pointer"
+							:color="color" />
+					</div>
 					<div class="flex gap-1 absolute right-0 px-2 top-1/2 -translate-y-1/2">
 						<!-- Remove -->
-						<BaseIcon
+						<div
 							v-if="modelValue?.length && !multiselect && !noCleanable"
-							icon="close"
-							color="gray"
-							class="icon"
-							@click="removeItem" />
+							data-testid="base-dropdown__close"
+							@click="removeItem">
+							<BaseIcon icon="close" color="gray" class="icon" />
+						</div>
 						<!-- Chevron -->
 						<BaseIcon
 							icon="chevron-dropdown"
@@ -48,25 +49,27 @@
 
 				<!-- Chips -->
 				<ul v-if="multiselect" class="flex flex-wrap w-auto gap-1 my-2 text-center">
-					<BaseChip
+					<li
 						v-for="({ label, value }, i) of selectedItems"
 						:key="i"
-						variant="primary"
-						:content="label"
-						closable
-						@close="addOrRemoveItem(value)" />
+						data-testid="base-dropdown__chip"
+						@close="addOrRemoveItem(value)">
+						<BaseChip variant="primary" :content="label" closable />
+					</li>
 				</ul>
 
 				<!-- Dropdown list -->
 				<Transition name="fade">
 					<div
 						v-if="isSelecting"
+						data-testid="base-dropdown__list"
 						class="z-50 absolute top-[50px] w-full rounded bg-white dark:bg-dark duration-200 shadow-xl">
 						<ul
 							class="max-h-[200px] overflow-auto rounded border border-dark/10 dark:border-white/10">
 							<li
 								v-for="({ label, value }, i) of dropdownData"
 								:key="i"
+								data-testid="base-dropdown__list-item"
 								class="p-2 bg-white dark:bg-dark hover:bg-black/10 dark:hover:bg-white/10 cursor-pointer border-b border-black/10 dark:border-white/10 last:border-b-0 first:rounded-t last:rounded-b cursor-pointer transition-all duration-200 ease-in-out"
 								@click="onItemClick(value)">
 								<div class="flex items-center ps-3">
