@@ -13,7 +13,9 @@
 		"lint": "eslint --ext .js,.ts,.vue",
 		"lint:fix": "eslint --ext .js,.ts,.vue --fix",
 		"test": "vitest",
-		"test:w": "vitest --watch"
+		"test:w": "vitest --watch",
+		"test:ui": "vitest --ui",
+		"coverage": "vitest run --coverage.enabled=true"
 	},
 	"engines": {
 		"node": "20.x"
@@ -34,6 +36,8 @@
 		"@testing-library/vue": "^8.0.1",
 		"@typescript-eslint/eslint-plugin": "^6.20.0",
 		"@typescript-eslint/parser": "^6.20.0",
+		"@vitest/coverage-v8": "^1.2.2",
+		"@vitest/ui": "^1.2.2",
 		"@vue/test-utils": "^2.4.4",
 		"@vueuse/core": "^10.7.2",
 		"@vueuse/nuxt": "^10.7.2",
