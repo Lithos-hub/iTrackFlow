@@ -6,7 +6,7 @@ export default defineVitestConfig({
 		globals: true,
 		coverage: {
 			provider: 'v8',
-			reporter: ['default', 'text', 'json', 'html'],
+			reporter: ['text', 'json', 'html'],
 		},
 	},
 });
