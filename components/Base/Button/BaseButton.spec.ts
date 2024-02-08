@@ -25,7 +25,7 @@ describe('Given a BaseButton component', () => {
 
 				const button = getByTestId('base-button');
 
-				const buttonClasses = button.className.spltest(' ');
+				const buttonClasses = button.className.split(' ');
 
 				expect(button).toBeTruthy();
 				expect(buttonClasses).toContain('button__primary');
@@ -41,7 +41,7 @@ describe('Given a BaseButton component', () => {
 
 					const button = getByTestId('base-button');
 
-					const buttonClasses = button.className.spltest(' ');
+					const buttonClasses = button.className.split(' ');
 
 					expect(button).toBeTruthy();
 					expect(buttonClasses).toContain(`button__${props.color}`);
@@ -56,7 +56,7 @@ describe('Given a BaseButton component', () => {
 
 				const button = getByTestId('base-button');
 
-				const buttonClasses = button.className.spltest(' ');
+				const buttonClasses = button.className.split(' ');
 
 				expect(button).toBeTruthy();
 				expect(buttonClasses).toContain('button__disabled');

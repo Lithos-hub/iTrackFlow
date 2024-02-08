@@ -1,5 +1,5 @@
 <template>
-	<div :key="updateKey">
+	<div :key="updateKey" data-testid="base-icon">
 		<NuxtSvgIcon :font-size="size" :name="icon" :fill="iconColor" />
 	</div>
 </template>
