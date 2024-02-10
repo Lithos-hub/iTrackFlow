@@ -1,6 +1,6 @@
 # iTrackFlow
 
-![iTrackFlow](https://private-user-images.githubusercontent.com/57297760/303095024-9bfd0bbe-de71-421f-b519-9d523a151dd3.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDczOTEzODAsIm5iZiI6MTcwNzM5MTA4MCwicGF0aCI6Ii81NzI5Nzc2MC8zMDMwOTUwMjQtOWJmZDBiYmUtZGU3MS00MjFmLWI1MTktOWQ1MjNhMTUxZGQzLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjA4VDExMTgwMFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWNkNzk0MDg4OTg3OGYxYjYzMGQ1Zjg2ZDM1OWVmNmRkNjliZDBiMjI3NWM2YjFhYjAzYTdhYzY4NmYxODM3YTMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.vUZhDH9H3C9HJjDL12TBzRbgphXetd5kQ79kX7YVC9Y)
+![iTrackFlow](https://github.com/Lithos-hub/iTrackFlow/blob/main/public/img/iTrackFlow-banner.jpg?raw=true)
 
 iTrackFlow is a collaborative web tool for musicians, music bands and composers. It allows to manage the production process of a project, from the composition of the songs to the final master. Also, the user is able to create the harmony schema of a song or theme.
 
