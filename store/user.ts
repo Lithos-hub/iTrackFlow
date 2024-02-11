@@ -4,12 +4,12 @@ import { AuthenticationResponse } from './user.interfaces';
 export const useUserStore = defineStore('user', () => {
 	const router = useRouter();
 
-	const { auth } = useSupabaseClient();
-	const user = useSupabaseUser();
+	const supabaseClient = useSupabaseClient();
+	const supabaseUser = useSupabaseUser();
 
 	const login = async (email: string, password: string): Promise<AuthenticationResponse> => {
 		try {
-			const { error } = await auth.signInWithPassword({
+			const { error } = await supabaseClient.auth.signInWithPassword({
 				email,
 				password,
 			});
@@ -27,7 +27,7 @@ export const useUserStore = defineStore('user', () => {
 
 	const signUp = async (email: string, password: string): Promise<AuthenticationResponse> => {
 		try {
-			const { data, error } = await auth.signUp({
+			const { data, error } = await supabaseClient.auth.signUp({
 				email,
 				password,
 			});
@@ -45,7 +45,7 @@ export const useUserStore = defineStore('user', () => {
 
 	const logout = async (): Promise<AuthenticationResponse> => {
 		try {
-			const { error } = await auth.signOut();
+			const { error } = await supabaseClient.auth.signOut();
 			if (error) throw error;
 			location.reload();
 			return {
@@ -58,5 +58,5 @@ export const useUserStore = defineStore('user', () => {
 		}
 	};
 
-	return { user, login, signUp, logout };
+	return { supabaseUser, login, signUp, logout };
 });

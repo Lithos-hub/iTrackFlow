@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { useScreenStore } from '@/store/colorMode';
+import { useScreenStore } from '@/store/screen';
 
 const { toggleDarkMode } = useScreenStore();
 const { lightMode } = storeToRefs(useScreenStore());

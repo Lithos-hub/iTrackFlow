@@ -5,7 +5,7 @@ import BaseInput from './BaseInput.vue';
 import { UnitTestInput } from './BaseInput.const';
 import { piniaMock } from '~/__mocks__/store/pinia';
 
-vi.mock('@/store/colorMode', () => ({ useScreenStore: () => piniaMock.screenStore }));
+vi.mock('@/store/screen', () => ({ useScreenStore: () => piniaMock.screenStore }));
 
 const renderWrapper = ({ props = {} }) =>
 	render(BaseInput, {

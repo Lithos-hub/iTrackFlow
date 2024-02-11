@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { BaseInputProps } from './BaseInput.interfaces';
-import { useScreenStore } from '@/store/colorMode';
+import { useScreenStore } from '@/store/screen';
 
 const { lightMode } = storeToRefs(useScreenStore());
 

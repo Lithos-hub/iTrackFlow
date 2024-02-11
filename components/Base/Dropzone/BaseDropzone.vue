@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { BaseDropzoneProps } from './BaseDropzone.interfaces';
-import { useScreenStore } from '@/store/colorMode';
+import { useScreenStore } from '@/store/screen';
 
 defineProps<BaseDropzoneProps>();
 

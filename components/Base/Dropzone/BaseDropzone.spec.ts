@@ -4,7 +4,7 @@ import BaseDropzone from './BaseDropzone.vue';
 import { UnitTestDropzone } from './BaseDropzone.const';
 import { piniaMock } from '~/__mocks__/store/pinia';
 
-vi.mock('@/store/colorMode', () => ({ useScreenStore: () => piniaMock.screenStore }));
+vi.mock('@/store/screen', () => ({ useScreenStore: () => piniaMock.screenStore }));
 
 describe('Given a BaseDropzone component', () => {
 	beforeEach(() => {

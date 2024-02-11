@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue';
 import BaseIcon from './BaseIcon.vue';
 import { piniaMock } from '~/__mocks__/store/pinia';
 
-vi.mock('@/store/colorMode', () => ({ useScreenStore: () => piniaMock.screenStore }));
+vi.mock('@/store/screen', () => ({ useScreenStore: () => piniaMock.screenStore }));
 
 const renderWrapper = ({ props = {} }) =>
 	render(BaseIcon, {
