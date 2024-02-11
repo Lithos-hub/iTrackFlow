@@ -6,7 +6,6 @@ import BaseNavbar from './BaseNavbar.vue';
 import { piniaMock } from '~/__mocks__/store/pinia';
 
 vi.mock('@/store/screen', () => ({ useScreenStore: () => piniaMock.initialState.screen }));
-// vi.mock('@/store/user', () => ({ useUserStore: () => piniaMock.initialState.user }));
 
 const renderWrapper = ({ props = {}, pinia = piniaMock }) =>
 	render(BaseNavbar, {
@@ -45,6 +44,7 @@ describe('Given a BaseNavbar component', () => {
 			it('Then should render the logout button', async () => {
 				const { getByTestId } = renderWrapper({
 					pinia: {
+						createSpy: vi.fn(),
 						initialState: {
 							...piniaMock.initialState,
 							user: {

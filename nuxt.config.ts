@@ -61,6 +61,7 @@ export default defineNuxtConfig({
 		},
 	},
 	supabase: {
+		url: process.env.SUPABASE_URL,
 		redirectOptions: {
 			login: '/authentication/login',
 			callback: '/confirm',

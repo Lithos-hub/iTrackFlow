@@ -25,7 +25,7 @@
 					</BaseButton>
 				</div>
 				<BaseLanguageSelector />
-				<BaseToggleMode />
+				<BaseSelectorsMode />
 			</div>
 		</div>
 	</nav>

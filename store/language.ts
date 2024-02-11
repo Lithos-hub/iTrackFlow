@@ -1,22 +1,22 @@
 import { defineStore } from 'pinia';
 
 export const useLanguageStore = defineStore('language', () => {
-	const language = ref('es');
+	const lang = ref('es');
 	const { locale } = useI18n();
 
 	const toggleLanguage = () => {
-		language.value = language.value === 'en' ? 'es' : 'en';
-		localStorage.setItem('language', language.value);
-		locale.value = language.value;
+		lang.value = lang.value === 'en' ? 'es' : 'en';
+		localStorage.setItem('language', lang.value);
+		locale.value = lang.value;
 	};
 
 	onMounted(() => {
-		language.value = localStorage.getItem('language') as string | 'es';
-		locale.value = language.value;
+		lang.value = localStorage.getItem('language') as string | 'es';
+		locale.value = lang.value;
 	});
 
 	return {
-		language,
+		lang,
 		toggleLanguage,
 	};
 });
