@@ -255,7 +255,15 @@ import {
 
 import { Note, ScaleType } from '@/components/App/MusicStaff/MusicStaff.interfaces';
 
-const getScaleNotes = ({ rootNote, scaleType }: { rootNote: Note; scaleType: ScaleType }) => {
+// METHODS
+
+export const getScaleNotes = ({
+	rootNote,
+	scaleType,
+}: {
+	rootNote: Note;
+	scaleType: ScaleType;
+}) => {
 	switch (scaleType) {
 		case 'major':
 			if (rootNote === 'C') return C_MAJOR_POSITIONS;
@@ -515,7 +523,7 @@ const getScaleNotes = ({ rootNote, scaleType }: { rootNote: Note; scaleType: Sca
 	}
 };
 
-const getScaleFormula = (scaleType: ScaleType) => {
+export const getScaleFormula = (scaleType: ScaleType) => {
 	switch (scaleType) {
 		case 'major':
 			return MAJOR_SCALE_NOMENCLATURES_BY_SEMITONES;
@@ -558,7 +566,7 @@ const getScaleFormula = (scaleType: ScaleType) => {
 	}
 };
 
-const getScaleSemitones = (scaleType: ScaleType) => {
+export const getScaleSemitones = (scaleType: ScaleType) => {
 	switch (scaleType) {
 		case 'major':
 			return MAJOR_SCALE_SEMITONES;
