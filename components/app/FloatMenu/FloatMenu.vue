@@ -1,13 +1,18 @@
 <template>
 	<Teleport to="body">
 		<div
+			data-testid="float-menu"
 			class="fixed z-50 w-[350px] bg-dark rounded border text-black dark:text-white"
 			:style="{
 				top: `${clientY}px`,
 				left: `${clientX}px`,
 			}">
-			<ul v-if="floatMenuOptions.length" class="rounded overflow-hidden">
-				<li v-for="({ label, action }, index) in floatMenuOptions" :key="index" @click="action">
+			<ul v-if="floatMenuOptions?.length" class="rounded overflow-hidden">
+				<li
+					v-for="({ label, action }, index) in floatMenuOptions"
+					:key="index"
+					data-testid="float-menu__item"
+					@click="action">
 					<small>{{ label }}</small>
 				</li>
 			</ul>
@@ -17,13 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { FloatMenu } from './FloatMenu.interfaces';
 import { useFloatMenuStore } from '@/store/floatMenu';
 
-defineProps<FloatMenu>();
-
-const { floatMenuOptions } = storeToRefs(useFloatMenuStore());
+const { floatMenuOptions, clientX, clientY } = storeToRefs(useFloatMenuStore());
 const { toggleFloatMenu } = useFloatMenuStore();
+
+onMounted(() => {
+	console.log(floatMenuOptions.value);
+});
 </script>
 
 <style lang="scss" scoped>

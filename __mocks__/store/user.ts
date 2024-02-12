@@ -1,6 +1,6 @@
 import type { User } from '@supabase/supabase-js';
 
-export const userStore = {
+export default {
 	supabaseClient: {
 		auth: {
 			signInWithPassword: vi.fn(),

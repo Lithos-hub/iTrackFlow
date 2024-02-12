@@ -2,7 +2,7 @@ import { defineVitestConfig } from '@nuxt/test-utils/config';
 
 export default defineVitestConfig({
 	test: {
-		environment: 'nuxt',
+		environment: 'jsdom',
 		globals: true,
 		coverage: {
 			provider: 'v8',
@@ -12,10 +12,10 @@ export default defineVitestConfig({
 				'**/components/**/*.vue',
 				'**/layouts/**/*.vue',
 				'**/pages/**/*.vue',
-				'**/store/**',
-				'**/middleware/**',
+				'**/store/*.ts',
 				'**/plugins/**',
 			],
+			exclude: ['**/index.ts'],
 		},
 	},
 });

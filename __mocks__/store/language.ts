@@ -1,4 +1,4 @@
-export const languageStore = {
+export default {
 	lang: 'es',
 	toggleLanguage: vi.fn(),
 };

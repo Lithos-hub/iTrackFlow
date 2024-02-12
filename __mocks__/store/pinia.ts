@@ -1,6 +1,7 @@
-import { screenStore } from './colorMode';
-import { userStore } from './user';
-import { languageStore } from './language';
+import screenStore from './colorMode';
+import userStore from './user';
+import languageStore from './language';
+import floatMenuStore from './floatMenu';
 
 export const piniaMock = {
 	createSpy: vi.fn(),
@@ -8,5 +9,7 @@ export const piniaMock = {
 		screen: screenStore,
 		user: userStore,
 		language: languageStore,
+		floatMenu: floatMenuStore,
 	},
+	stubActions: false,
 };

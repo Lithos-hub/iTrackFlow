@@ -16,14 +16,14 @@ const renderWrapper = ({ props = {} }) =>
 describe('Given a BaseModalAlert component', () => {
 	describe('When it is rendered', () => {
 		describe('And a title prop is passed', () => {
-			it('Then should render the title', () => {
+			test('Then should render the title', () => {
 				const title = 'Title';
 				const { getByText } = renderWrapper({ props: { title } });
 				expect(getByText(title)).toBeTruthy();
 			});
 		});
 		describe.each(unitTestModalAlert)('And the type is %s', (props) => {
-			it('Then should render the correct icon with the correct color and the correct buttons', async () => {
+			test('Then should render the correct icon with the correct color and the correct buttons', async () => {
 				const { getByTestId } = renderWrapper({ props });
 				const icon = getByTestId('base-modal-alert__icon');
 				expect(icon).toBeTruthy();
