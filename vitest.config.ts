@@ -7,6 +7,15 @@ export default defineVitestConfig({
 		coverage: {
 			provider: 'v8',
 			reporter: ['text', 'json', 'html'],
+			include: [
+				'**/utils/**',
+				'**/components/**/*.vue',
+				'**/layouts/**/*.vue',
+				'**/pages/**/*.vue',
+				'**/store/**',
+				'**/middleware/**',
+				'**/plugins/**',
+			],
 		},
 	},
 });
