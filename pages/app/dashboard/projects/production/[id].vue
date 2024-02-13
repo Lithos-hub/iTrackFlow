@@ -100,7 +100,7 @@ import { FloatMenuTarget } from '@/components/App/FloatMenu/FloatMenu.interfaces
 
 import { useScreenStore } from '@/store/screen';
 import { useFloatMenuStore } from '@/store/floatMenu';
-import { useAudioPlayerStore } from '@/store/audioPlayer';
+import { useAudioStore } from '@/store/audio';
 
 import { Column } from '@/interfaces';
 import BaseModalAlert from '@/components/Base/Modal/Alert/BaseModalAlert.vue';
@@ -116,8 +116,8 @@ const { t } = useI18n();
 const { isFloatMenuOpened, clientX, clientY } = storeToRefs(useFloatMenuStore());
 const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore();
 const { lightMode } = storeToRefs(useScreenStore());
-const { setAudioSrc, play, pause } = useAudioPlayerStore();
-const { isPlaying } = storeToRefs(useAudioPlayerStore());
+const { setAudioSrc, play, pause } = useAudioStore();
+const { isPlaying } = storeToRefs(useAudioStore());
 
 // Composables
 const { showModal, modalProps } = useModal();
@@ -264,3 +264,4 @@ table {
 	}
 }
 </style>
+~/store/audio

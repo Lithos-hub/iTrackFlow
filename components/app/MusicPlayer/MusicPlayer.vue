@@ -3,6 +3,7 @@
 		<div class="flex gap-5 items-center">
 			<BaseButton
 				v-if="!isPlaying && !isPaused"
+				data-testid="music-player__play-button"
 				:color="!audioSrc ? 'gray' : 'primary'"
 				icon="play"
 				:disabled="!audioSrc"
@@ -10,6 +11,7 @@
 			<div class="flex gap-5">
 				<BaseButton
 					v-if="isPlaying || isPaused"
+					data-testid="music-player__pause-button"
 					color="primary"
 					:icon="isPlaying ? 'pause' : 'play'"
 					@click="pause" />
@@ -24,25 +26,28 @@
 				{{ $t('app.audio_player.no_audio_selected') }}
 			</span>
 
-			<div v-if="isPlaying" class="audio__timeline relative flex">
+			<div
+				v-if="isPlaying"
+				data-testid="music-player__audio-timeline"
+				class="audio__timeline relative flex">
 				<div
 					class="absolute top-0 left-0 bg-primary h-full"
 					:style="{
 						width: `${(audioCurrentTime / audioDuration) * 100}%`,
 					}" />
 			</div>
-			<div>{{ audioTime }}</div>
+			<div data-testid="music-player__audio-time">{{ audioTime }}</div>
 		</div>
 		<audio ref="audioRef" :src="audioSrc" class="hidden" controls></audio>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { useAudioPlayerStore } from '@/store/audioPlayer';
+import { useAudioStore } from '@/store/audio';
 
-const { setAudioElement, play, pause, stop } = useAudioPlayerStore();
+const { setAudioElement, play, pause, stop } = useAudioStore();
 const { refreshPlayerKey, audioSrc, isPlaying, isPaused, audioDuration, audioCurrentTime } =
-	storeToRefs(useAudioPlayerStore());
+	storeToRefs(useAudioStore());
 
 const audioRef = ref<HTMLAudioElement>();
 
@@ -85,3 +90,4 @@ onMounted(() => setAudioElement(audioRef.value as HTMLAudioElement));
 	background-color: #fff;
 }
 </style>
+~/store/audio

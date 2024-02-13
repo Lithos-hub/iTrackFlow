@@ -1,4 +1,4 @@
-export const useAudioPlayerStore = defineStore('audio-player', () => {
+export const useAudioStore = defineStore('audio', () => {
 	const refreshPlayerKey = ref(0);
 
 	const audioSrc = ref<string>('');
