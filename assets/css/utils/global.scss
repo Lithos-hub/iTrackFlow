@@ -159,3 +159,7 @@ label {
 .default_border {
 	@apply border border-black/10 dark:border-white/10;
 }
+
+.default_mode {
+	@apply bg-white text-dark dark:bg-softdark dark:text-white;
+}

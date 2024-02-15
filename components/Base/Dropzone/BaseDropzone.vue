@@ -7,9 +7,11 @@
 			'bg-success/10 selected__border-success': isOverDropZone,
 			'bg-none border-2 border-dashed border-gray-500 dark:border-white/10': !isOverDropZone,
 		}">
-		<div :key="updateKey">
-			<BaseIcon icon="upload" :color="lightMode ? 'black' : 'white'" :size="30" />
-		</div>
+		<BaseIcon
+			:key="renderScreenKey"
+			icon="upload"
+			:color="lightMode ? 'black' : 'white'"
+			:size="30" />
 		<small>{{ placeholder }}</small>
 	</div>
 </template>
@@ -20,9 +22,5 @@ import { useScreenStore } from '@/store/screen';
 
 defineProps<BaseDropzoneProps>();
 
-const { lightMode } = storeToRefs(useScreenStore());
-
-const updateKey = ref(Math.random());
-
-watch(lightMode, () => (updateKey.value = Math.random()));
+const { lightMode, renderScreenKey } = storeToRefs(useScreenStore());
 </script>

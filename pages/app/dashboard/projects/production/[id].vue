@@ -6,14 +6,14 @@
 			</BaseButton>
 
 			<div class="flex flex-col gap-5">
-				<div class="grid grid-cols-5 w-full gap-5 p-2 dark:bg-softdark default_border">
+				<div class="grid grid-cols-5 w-full gap-5 p-2 default_mode default_border">
 					<BaseInput v-model="projectName" label="Project name" color="white" />
 					<BaseInput v-model="projectComposer" label="Composer" color="white" />
 					<BaseInput v-model="projectArranger" label="Arranger" color="white" />
 					<BaseInput v-model="projectGenre" label="Genre" color="white" />
 					<BaseInput v-model="projectYear" label="Year" color="white" />
 				</div>
-				<AppDataTable :key="tableKey" :data-list="trackList" :headers="headersList">
+				<AppDataTable :data-list="trackList" :headers="headersList">
 					<template #table:trackName="{ id }">
 						<BaseInput
 							v-model="trackList[id - 1].trackName"
@@ -56,24 +56,22 @@
 							@contextmenu="($event) => onCellClick({ column: 'mastering', id }, $event)" />
 					</template>
 					<template #table:audioPath="{ audioPath, id }">
-						<div>
-							<BaseIcon
-								v-if="audioPath"
-								:key="currentTrackPlaying"
-								class="mx-auto cursor-pointer"
-								:icon="
-									currentTrackPlaying === id && !isPlaying
-										? 'pause'
-										: currentTrackPlaying === id && isPlaying
-											? 'play'
-											: 'play'
-								"
-								:color="lightMode ? 'black' : 'white'"
-								@click="audioPath && togglePlay(id)"
-								@contextmenu="($event) => onCellClick({ column: 'audio', id }, $event)" />
-							<div v-else class="text-red-400 font-bold">
-								{{ $t('app.production.no_audio') }}
-							</div>
+						<BaseIcon
+							v-if="audioPath"
+							:key="renderScreenKey"
+							class="mx-auto cursor-pointer"
+							:icon="
+								currentTrackPlaying === id && !isPlaying
+									? 'pause'
+									: currentTrackPlaying === id && isPlaying
+										? 'play'
+										: 'play'
+							"
+							:color="lightMode ? 'black' : 'white'"
+							@click="audioPath && togglePlay(id)"
+							@contextmenu="($event) => onCellClick({ column: 'audio', id }, $event)" />
+						<div v-else class="text-red-400 font-bold">
+							{{ $t('app.production.no_audio') }}
 						</div>
 					</template>
 					<template #table:delete="{ id }">
@@ -115,9 +113,9 @@ const { t } = useI18n();
 // Pinia
 const { isFloatMenuOpened, clientX, clientY } = storeToRefs(useFloatMenuStore());
 const { setFloatMenuTarget, toggleFloatMenu, setPosition } = useFloatMenuStore();
-const { lightMode } = storeToRefs(useScreenStore());
-const { setAudioSrc, play, pause } = useAudioStore();
-const { isPlaying } = storeToRefs(useAudioStore());
+const { lightMode, renderScreenKey } = storeToRefs(useScreenStore());
+const { play, pause } = useAudioStore();
+const { audioSrc, isPlaying } = storeToRefs(useAudioStore());
 
 // Composables
 const { showModal, modalProps } = useModal();
@@ -181,8 +179,11 @@ const toggleCheck = (index: number, column: Column) => {
 
 const togglePlay = (trackId: number) => {
 	const index = trackList.value.findIndex((track) => track.id === trackId);
-	setAudioSrc(trackList.value[index].audioPath as string);
+
+	audioSrc.value = trackList.value[index].audioPath as string;
+
 	currentTrackPlaying.value = trackId;
+
 	if (isPlaying) {
 		setTimeout(() => pause(), 500);
 	} else {
@@ -222,8 +223,6 @@ const addTrack = () => {
 		audioPath: null,
 	});
 };
-
-watch(lightMode, () => tableKey.value++);
 
 const getProject = async () => {
 	const { data } = await useFetch('/api/projects', {

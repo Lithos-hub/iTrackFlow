@@ -1,4 +1,21 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"testing.automaticallyOpenPeekView": "never"
+	"testing.automaticallyOpenPeekView": "never",
+	"tailwindCSS.includeLanguages": {
+		"plaintext": "html",
+		"html": "html",
+		"css": "css"
+	},
+	"files.associations": {
+		"*.ts": "typescript",
+		"*.css": "tailwindcss"
+	},
+	"tailwindCSS.emmetCompletions": true,
+	"tailwindCSS.files.exclude": ["**/node_modules/**", "**/dist/**", "**/.nuxt/**"],
+	"tailwindCSS.classAttributes": ["class", "className", "ngClass"],
+	"tailwindCSS.colorDecorators": true,
+	"tailwindCSS.showPixelEquivalents": true,
+	"tailwindCSS.validate": true,
+	"tailwindCSS.experimental.configFile": ".nuxt/tailwind.config/viewer-config.cjs",
+	"editor.quickSuggestions": { "strings": "on" }
 }

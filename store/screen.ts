@@ -3,6 +3,9 @@ import { defineStore } from 'pinia';
 export const useScreenStore = defineStore('screen', () => {
 	const colorMode = useColorMode();
 
+	// To force some component to re-render when the color mode changes
+	const renderScreenKey = ref(0);
+
 	const toggleDarkMode = () => {
 		const lightMode = colorMode.preference === 'light';
 		colorMode.preference = lightMode ? 'dark' : 'light';
@@ -10,5 +13,7 @@ export const useScreenStore = defineStore('screen', () => {
 
 	const lightMode = computed(() => colorMode.preference === 'light');
 
-	return { lightMode, toggleDarkMode };
+	watch(colorMode, () => renderScreenKey.value++);
+
+	return { lightMode, toggleDarkMode, renderScreenKey };
 });

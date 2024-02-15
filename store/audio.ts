@@ -1,6 +1,7 @@
 export const useAudioStore = defineStore('audio', () => {
-	const refreshPlayerKey = ref(0);
+	const renderAudioKey = ref(0);
 
+	const audioPlayingId = ref<number | null>(null);
 	const audioSrc = ref<string>('');
 	const audioElement = ref<HTMLAudioElement | null>(null);
 	const isPlaying = ref(false);
@@ -9,27 +10,26 @@ export const useAudioStore = defineStore('audio', () => {
 	const audioDuration = ref(0);
 	const audioCurrentTime = ref(0);
 
-	const setAudioSrc = (src: string) => {
-		audioSrc.value = src;
-	};
-	const setAudioElement = (element: HTMLAudioElement) => {
-		audioElement.value = element;
-	};
+	const play = (audioPath?: string) => {
+		if (isPlaying.value || !audioElement.value) return;
 
-	const setAudioCurrentTime = (duration: number) => {
-		audioCurrentTime.value = duration;
-	};
+		if (audioPath) audioSrc.value = audioPath;
 
-	const play = () => {
-		if (audioElement.value) {
+		isPlaying.value = true;
+		isPaused.value = false;
+
+		audioElement.value.src = audioSrc.value;
+
+		setTimeout(() => {
+			if (!audioElement.value) return;
 			audioDuration.value = audioElement.value.duration;
-			isPlaying.value = true;
-			isPaused.value = false;
+		}, 500);
 
-			setTimeout(() => audioElement.value?.play(), 500);
+		setTimeout(() => {
+			audioElement.value?.play();
+		}, 500);
 
-			setInterval(() => setAudioCurrentTime(audioElement.value?.currentTime as number), 1000);
-		}
+		setInterval(() => (audioCurrentTime.value = audioElement.value?.currentTime as number), 1000);
 	};
 
 	const pause = () => {
@@ -41,7 +41,7 @@ export const useAudioStore = defineStore('audio', () => {
 		} else {
 			play();
 		}
-		refreshPlayerKey.value++;
+		renderAudioKey.value++;
 	};
 
 	const stop = () => {
@@ -50,16 +50,16 @@ export const useAudioStore = defineStore('audio', () => {
 			audioElement.value.currentTime = 0;
 			isPlaying.value = false;
 			isPaused.value = false;
-			refreshPlayerKey.value++;
+			renderAudioKey.value++;
+			audioSrc.value = '';
 		}
 	};
 
 	return {
-		refreshPlayerKey,
+		audioPlayingId,
+		renderAudioKey,
 		audioSrc,
 		audioElement,
-		setAudioSrc,
-		setAudioElement,
 		isPlaying,
 		isPaused,
 		play,

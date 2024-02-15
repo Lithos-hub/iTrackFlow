@@ -1,65 +1,61 @@
 <template>
 	<div class="flex grow gap-5 h-[calc(100%-40px)]">
 		<section class="flex flex-col gap-5">
-			<section class="default_border bg-softdark p-5 text-white">
+			<section class="default_border default_mode p-5">
 				<div class="grid grid-cols-6 justify-between items-end gap-5">
 					<BaseInput
 						v-model="searchQuery"
 						variant="bordered"
-						color="light"
+						color="white"
 						:label="$t('app.audio.pool.demos.search')"
 						:placeholder="$t('app.audio.pool.demos.search_placeholder')" />
 					<BaseDropdown
 						v-model="selectedStyle"
 						:data="stylesList"
-						color="light"
+						color="white"
 						:label="$t('app.audio.pool.demos.category')"
 						:placeholder="$t('app.audio.pool.demos.category_placeholder')" />
 					<BaseDropdown
 						v-model="selectedInstrument"
 						:data="instrumentsList"
-						color="light"
+						color="white"
 						:label="$t('app.audio.pool.demos.instrument')"
 						:placeholder="$t('app.audio.pool.demos.instrument_placeholder')" />
 					<BaseDropdown
 						v-model="selectedDuration"
 						:data="durationsList"
-						color="light"
+						color="white"
 						:label="$t('app.audio.pool.demos.duration')"
 						:placeholder="$t('app.audio.pool.demos.duration_placeholder')" />
 					<BaseDropdown
 						v-model="selectedCreator"
 						:data="creatorsList"
-						color="light"
+						color="white"
 						:label="$t('app.audio.pool.demos.creator')"
 						:placeholder="$t('app.audio.pool.demos.creator_placeholder')" />
 					<BaseDropdown
 						v-model="selectedTempo"
 						:data="temposList"
-						color="light"
+						color="white"
 						:label="$t('app.audio.pool.demos.tempo')"
 						:placeholder="$t('app.audio.pool.demos.tempo_placeholder')" />
 				</div>
 			</section>
-			<section class="default_border bg-softdark h-full">
+			<section class="default_border default_mode h-full">
 				<div class="p-5 flex flex-col gap-5">
 					<strong>Mis audios</strong>
-					<div class="grid grid-cols-8 gap-5">
-						<article
-							v-for="({ title }, i) of audioData"
-							:key="i"
-							class="default_border rounded-2xl flex flex-col justify-evenly p-5 items-center aspect-square shadow bg-dark duration-200 relative">
-							<BaseButton flat icon="trash" icon-color="red" class="absolute top-0 right-0" />
-							<BaseButton flat icon="pencil" icon-color="blue" class="absolute top-0 left-0" />
-							<BaseIcon icon="sound" :size="30" />
-							<small>{{ title }}</small>
-						</article>
+					<div class="flex flex-wrap gap-5 text-white">
+						<AppAudioDemoCard
+							v-for="data of audioData"
+							:key="data.id"
+							v-bind="data"
+							@click="play(data.audioPath)" />
 					</div>
 				</div>
 			</section>
 		</section>
 		<section class="w-[250px]">
-			<aside class="bg-softdark p-5 default_border flex flex-col gap-5 h-full">
+			<aside class="default_border default_mode p-5 flex flex-col gap-5 h-full">
 				<strong>Subida de audio</strong>
 				<!-- Dropzone -->
 				<BaseDropzone
@@ -83,11 +79,15 @@
 </template>
 
 <script setup lang="ts">
+import { useAudioStore } from '~/store/audio';
+
 definePageMeta({
-	title: 'Audio D.mp3emos',
+	title: 'Audio Demos',
 	description: 'Audio Demos description',
 	layout: 'dashboard',
 });
+
+const { play } = useAudioStore();
 
 const dropZoneRef = ref<HTMLDivElement>();
 const fileInputRef = ref<HTMLInputElement | null>(null);
@@ -179,44 +179,22 @@ const temposList = ref([
 
 const audioData = ref([
 	{
-		title: 'Audio 1.mp3',
+		id: 1,
+		trackName: 'Audio 1.mp3',
 		description: 'Audio 1 description',
+		audioPath: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
 	},
 	{
-		title: 'Audio 2.mp3',
+		id: 2,
+		trackName: 'Audio 2.mp3',
 		description: 'Audio 2 description',
+		audioPath: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
 	},
 	{
-		title: 'Audio 3.flac',
+		id: 3,
+		trackName: 'Audio 3.mp3',
 		description: 'Audio 3 description',
-	},
-	{
-		title: 'Audio 4.mp3',
-		description: 'Audio 4 description',
-	},
-	{
-		title: 'Audio 5.flac',
-		description: 'Audio 5 description',
-	},
-	{
-		title: 'Audio 6.flac',
-		description: 'Audio 6 description',
-	},
-	{
-		title: 'Audio 7.mp3',
-		description: 'Audio 7 description',
-	},
-	{
-		title: 'Audio 8.mp3',
-		description: 'Audio 8 description',
-	},
-	{
-		title: 'Audio 9.flac',
-		description: 'Audio 9 description',
-	},
-	{
-		title: 'Audio 1.mp3',
-		description: 'Audio 10 description',
+		audioPath: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
 	},
 ]);
 

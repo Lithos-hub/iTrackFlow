@@ -124,7 +124,7 @@ const computedBackground = computed(() => {
 	}
 
 	&__flat {
-		@apply bg-none hover:bg-white/10 rounded-full aspect-square hover:opacity-100;
+		@apply bg-transparent hover:bg-white/10 rounded-full aspect-square hover:opacity-100;
 	}
 
 	&__outline {
