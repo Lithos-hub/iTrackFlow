@@ -43,24 +43,25 @@
 			</section>
 			<section class="default_border default_mode h-full">
 				<div class="p-5 flex flex-col gap-5">
-					<strong>Mis audios</strong>
+					<strong>
+						{{ $t('app.audio.pool.demos.my_audios') }}
+					</strong>
 					<div class="flex flex-wrap gap-5 text-white">
-						<AppAudioDemoCard
-							v-for="data of audioData"
-							:key="data.id"
-							v-bind="data"
-							@click="play(data.audioPath)" />
+						<AppAudioDemoCard v-for="data of audioData" :key="data.id" v-bind="data" />
 					</div>
 				</div>
 			</section>
 		</section>
-		<section class="w-[250px]">
-			<aside class="default_border default_mode p-5 flex flex-col gap-5 h-full">
-				<strong>Subida de audio</strong>
+		<section class="w-[450px]">
+			<aside class="default_border default_mode p-5 flex flex-col gap-5 h-full w-full">
+				<strong>
+					{{ $t('app.audio.pool.demos.upload') }}
+				</strong>
 				<!-- Dropzone -->
 				<BaseDropzone
 					ref="dropZoneRef"
 					:is-over-drop-zone="isOverDropZone"
+					class="w-full"
 					:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
 					@click="fileInputRef?.click()" />
 				<input
@@ -68,10 +69,34 @@
 					type="file"
 					class="hidden"
 					accept="audio/*"
-					@change="onSelectFile" />
+					multiple
+					@change="onSelectFiles" />
 				<small v-if="fileTypeError" class="text-red-500 text-center">
 					{{ $t('app.audio.pool.demos.audio_error') }}
 				</small>
+				<div v-if="selectedAudioFiles.length" class="h-full flex flex-col justify-between">
+					<small class="text-info text-center">
+						{{ $t('app.audio.pool.demos.upload_list_info') }}
+					</small>
+					<ul class="overflow-y-auto flex-grow max-h-[400px]">
+						<li
+							v-for="file of selectedAudioFiles"
+							:key="file.name"
+							class="border-b border-white/10 p-1">
+							<small class="text-success">{{ file.name }}</small>
+						</li>
+					</ul>
+					<BaseButton
+						:disabled="!selectedAudioFiles"
+						:loading="false"
+						:loading-text="$t('app.audio.pool.demos.uploading')"
+						class="w-full"
+						variant="stealth"
+						color="success"
+						@click="() => {}">
+						{{ $t('app.audio.pool.demos.confirm_upload') }}
+					</BaseButton>
+				</div>
 			</aside>
 		</section>
 		<AppMusicPlayer class="absolute bottom-0 left-0 z-50" />
@@ -79,15 +104,11 @@
 </template>
 
 <script setup lang="ts">
-import { useAudioStore } from '~/store/audio';
-
 definePageMeta({
 	title: 'Audio Demos',
 	description: 'Audio Demos description',
 	layout: 'dashboard',
 });
-
-const { play } = useAudioStore();
 
 const dropZoneRef = ref<HTMLDivElement>();
 const fileInputRef = ref<HTMLInputElement | null>(null);
@@ -98,7 +119,7 @@ const selectedInstrument = ref([]);
 const selectedDuration = ref([]);
 const selectedTempo = ref('');
 const selectedCreator = ref('');
-const selectedAudioFiles = ref<File[] | File | null>(null);
+const selectedAudioFiles = ref<FileList | File[] | []>([]);
 
 const fileTypeError = ref(false);
 
@@ -203,19 +224,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
 	dataTypes: ['audio/mp3', 'audio/flac', 'audio/wav'],
 });
 
-const onSelectFile = (event: Event) => {
-	const target = event.target as HTMLInputElement;
-	const file = target.files?.[0];
-
-	if (!file || !checkFileType(file, 'audio')) {
-		fileTypeError.value = true;
-		return;
-	}
-
-	selectedAudioFiles.value = file;
-};
-
-function onDrop(files: File[] | null) {
+const checkAndSetFiles = (files: FileList | File[] | null) => {
 	if (!files) return;
 
 	const file = files[0];
@@ -226,5 +235,18 @@ function onDrop(files: File[] | null) {
 	}
 
 	selectedAudioFiles.value = files;
+};
+
+const onSelectFiles = (event: Event) => {
+	const target = event.target as HTMLInputElement;
+	const files = target.files;
+
+	checkAndSetFiles(files);
+};
+
+function onDrop(files: File[] | null) {
+	if (!files) return;
+
+	checkAndSetFiles(files);
 }
 </script>

@@ -30,6 +30,8 @@ export const useAudioStore = defineStore('audio', () => {
 		}, 500);
 
 		setInterval(() => (audioCurrentTime.value = audioElement.value?.currentTime as number), 1000);
+
+		renderAudioKey.value++;
 	};
 
 	const pause = () => {

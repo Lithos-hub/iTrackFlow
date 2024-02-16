@@ -182,7 +182,10 @@
 					"tempo_placeholder": "Tempo",
 					"search": "Buscar audio",
 					"search_placeholder": "Parámetro de búsqueda",
+					"my_audios": "Mis audios",
 					"upload": "Subir audio",
+					"confirm_upload": "Confirmar subida",
+					"upload_list_info": "La siguiente lista de audios se va a subir",
 					"upload_placeholder": "Pulsa o arrastra audios aquí",
 					"audio_error": "El formato del fichero no es un audio"
 				}

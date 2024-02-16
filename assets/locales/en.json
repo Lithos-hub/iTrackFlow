@@ -184,7 +184,10 @@
 					"tempo_placeholder": "Tempo",
 					"search": "Search audio",
 					"search_placeholder": "Search audio",
+					"my_audios": "My audios",
 					"upload": "Upload audio",
+					"confirm_upload": "Confirm upload",
+					"upload_list_info": "The following files will be uploaded",
 					"upload_placeholder": "Click here or drop files",
 					"audio_error": "The file must be an audio file"
 				}
