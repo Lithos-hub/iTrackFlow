@@ -18,10 +18,10 @@
 				<BaseButton v-if="isPlaying" color="secondary" icon="stop" icon-right @click="stop" />
 			</div>
 
-			<span v-if="audioSrc">
+			<small v-if="audioSrc">
 				{{ $t('app.audio_player.playing') }}
-				<strong>{{ audioTitle }}</strong>
-			</span>
+				<span class="font-bold mx-2 text-primary">{{ audioSrc.split('/').pop() }}</span>
+			</small>
 			<span v-else>
 				{{ $t('app.audio_player.no_audio_selected') }}
 			</span>
@@ -55,9 +55,7 @@ const {
 	audioDuration,
 } = storeToRefs(useAudioStore());
 
-const audioRef = ref<HTMLAudioElement>();
-
-const audioTitle = computed(() => audioRef.value && audioSrc.value.split('/').pop());
+const audioRef = ref<HTMLAudioElement | null>(null);
 
 const audioTime = computed(() => {
 	if (audioDuration) {
@@ -91,7 +89,11 @@ const setNewCurrentTime = (event: Event) => {
 	audioElement.value!.currentTime = parseFloat(target.value);
 };
 
-onMounted(() => (audioElement.value = audioRef.value as HTMLAudioElement));
+watch(audioRef, (newValue) => {
+	if (!audioElement) return;
+
+	audioElement.value = newValue;
+});
 </script>
 
 <style scoped lang="scss">
