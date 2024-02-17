@@ -7,11 +7,17 @@
 		"subtitle_2": "with ",
 		"subtitle_3": "iTrackFlow",
 		"get_started": "Get started",
-		"product": {
-			"title_1": "Harmony",
-			"description_1": "Spend time on the essence of your music. The harmony section allows you to detail harmonic progressions progressions with ease, giving you a clear view of the musical structure you are building. structure you are building.",
-			"title_2": "Production",
-			"description_2": "Drive your project to success with the production section. Use the checkerboard to track every stage of the process, from recording to mastering. Never lose track of progress and reach your production goals efficiently."
+		"harmony": {
+			"title": "Harmony",
+			"description": "Thanks to our powerful tool, you can easily create harmonic progressions for your songs. Choose the tempo, the time signature, the key and the scale type, and add the lyrics of your song. All in one place!"
+		},
+		"production": {
+			"title": "Production",
+			"description": "Drive your project to success with the production section. Use the checkerboard to track every stage of the process, from recording to mastering. Never lose track of progress and reach your production goals efficiently."
+		},
+		"audio": {
+			"title": "Audio",
+			"description": "Explore our audio pool and find the perfect audio for your project. Filter by category, instrument, duration, tempo and creator. You can also upload your own audios and share them with the community."
 		}
 	},
 	"authentication": {

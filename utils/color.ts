@@ -18,10 +18,6 @@ export const getTailwindColor = (color: ColorName, shade?: string | number): str
 export const hexToRgb = (hex: string): RGB | null => {
 	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	return result
-		? {
-				r: parseInt(result[1], 16),
-				g: parseInt(result[2], 16),
-				b: parseInt(result[3], 16),
-			}
+		? (([, r, g, b]) => ({ r: parseInt(r, 16), g: parseInt(g, 16), b: parseInt(b, 16) }))(result)
 		: null;
 };
