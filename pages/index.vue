@@ -4,9 +4,30 @@
 			<title>{{ title }}</title>
 		</Head>
 		<LandingHeroSection ref="heroRef" />
-		<LandingHarmonySection ref="harmonyRef" />
+		<!-- <LandingHarmonySection ref="harmonyRef" />
 		<LandingProductionSection ref="productionRef" />
-		<LandingAudioSection ref="audioRef" />
+		<LandingAudioSection ref="audioRef" /> -->
+		<LandingMiddleSection
+			id="harmony"
+			color="primary"
+			image="/img/harmony-capture.jpg"
+			:title="$t('landing.harmony.title')"
+			:description="$t('landing.harmony.description')"
+			class="bg-gradient-to-b from-transparent to-white dark:to-black" />
+		<LandingMiddleSection
+			id="production"
+			color="secondary"
+			image="/img/production-capture.jpg"
+			:title="$t('landing.production.title')"
+			:description="$t('landing.production.description')"
+			class="bg-gradient-to-b from-white dark:from-black to-white/50 dark:to-primary/10" />
+		<LandingMiddleSection
+			id="audio"
+			color="primary"
+			image="/img/audio-capture.jpg"
+			:title="$t('landing.audio.title')"
+			:description="$t('landing.audio.description')"
+			class="bg-gradient-to-b from-white/50 dark:from-primary/10 to-white dark:to-secondary/40" />
 	</div>
 </template>
 

@@ -4,7 +4,7 @@
 		class="h-screen text-center flex flex-col items-center justify-center text-black dark:text-white">
 		<div class="text-center">
 			<h1
-				class="xl:text-[100px] lg:text-[80px] md:text-[60px] text-[40px] gradient__text--primary font-bold">
+				class="xl:text-[100px] lg:text-[80px] md:text-[60px] text-[50px] gradient__text--primary font-bold">
 				{{ $t('landing.secondary_title') }}
 			</h1>
 			<h3 class="xl:text-[25px] lg:text-[20px] md:text-[15px] text-[14px] my-10">
