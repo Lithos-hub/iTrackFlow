@@ -1,7 +1,7 @@
 <template>
 	<section
 		id="audio"
-		class="relative h-screen text-black dark:text-white bg-gradient-to-b from-white dark:from-black to-white/50 dark:to-softdark px-[10vw] flex items-center">
+		class="relative h-screen text-black dark:text-white bg-gradient-to-b from-white/50 dark:from-softdark to-slate-200 dark:to-secondary/10 px-[10vw] flex items-center">
 		<article class="w-[40vw]">
 			<div>
 				<h2 class="text-[125px] font-bold gradient__text--primary">
@@ -14,10 +14,10 @@
 				</div>
 			</div>
 			<div
-				class="w-full h-[80vh] absolute top-1/2 left-1/2 -translate-y-1/2 shadow-xl shadow-primary/10 rounded-2xl overflow-hidden">
+				class="w-full h-[80vh] absolute top-1/2 left-1/2 -translate-y-1/2 shadow-xl shadow-secondary/10 rounded-2xl overflow-hidden">
 				<div class="relative">
 					<div
-						class="bg-gradient-to-bl from-primary to-transparent opacity-20 backdrop-blur w-full h-[80vh] absolute top-0 left-0" />
+						class="bg-gradient-to-bl from-secondary to-transparent opacity-20 backdrop-blur w-full h-[80vh] absolute top-0 left-0" />
 					<img src="/img/audio-capture.jpg" class="w-auto h-[80vh] opacity-100" />
 				</div>
 			</div>

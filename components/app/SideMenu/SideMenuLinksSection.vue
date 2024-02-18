@@ -9,7 +9,7 @@
 				v-for="{ label: linkLabel, to } of links"
 				:key="linkLabel"
 				:to="to"
-				class="sidemenu__link">
+				active-class="text-primary font-bold">
 				{{ linkLabel }}
 			</RouterLink>
 			<div v-for="{ label: submenuLabel, links: submenuLinks } of submenus" :key="submenuLabel">
@@ -21,7 +21,7 @@
 						v-for="{ label: linkLabel, to: submenuTo } of submenuLinks"
 						:key="linkLabel"
 						:to="submenuTo"
-						class="sidemenu__link">
+						active-class="text-primary font-bold">
 						{{ linkLabel }}
 					</RouterLink>
 				</div>
