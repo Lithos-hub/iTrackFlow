@@ -5,6 +5,7 @@ export interface IconProps {
 	color?: ColorName;
 	viewBox?: string;
 	size?: number;
+	clickable?: boolean;
 }
 
 export type IconsBundle = Record<

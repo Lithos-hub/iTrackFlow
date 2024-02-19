@@ -176,6 +176,19 @@
 			"delete_track_message": "Are you sure you want to delete this track?"
 		},
 		"audio": {
+			"metadata": {
+				"upload": "Select or drop audio files",
+				"info": "Upload MP3 audio files to visualize and edit their metadata",
+				"select_a_file": "Select an audio file to visualize and edit its metadata",
+				"audio_error": "The file must be a MP3 file",
+				"cover": "Cover",
+				"title": "Title",
+				"artist": "Artist",
+				"album": "Album",
+				"year": "Year",
+				"genre": "Genre",
+				"track": "Track"
+			},
 			"pool": {
 				"demos": {
 					"category": "Filter by category",
@@ -191,7 +204,7 @@
 					"search": "Search audio",
 					"search_placeholder": "Search audio",
 					"my_audios": "My audios",
-					"upload": "Upload audio",
+					"upload": "Select or drop audio files",
 					"confirm_upload": "Confirm upload",
 					"upload_list_info": "The following files will be uploaded",
 					"upload_placeholder": "Click here or drop files",

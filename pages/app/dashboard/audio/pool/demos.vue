@@ -54,14 +54,12 @@
 		</section>
 		<section class="w-[450px]">
 			<aside class="default_border default_mode p-5 flex flex-col gap-5 h-full w-full">
-				<strong>
-					{{ $t('app.audio.pool.demos.upload') }}
-				</strong>
 				<!-- Dropzone -->
 				<BaseDropzone
 					ref="dropZoneRef"
 					:is-over-drop-zone="isOverDropZone"
 					class="w-full"
+					:label="$t('app.audio.pool.demos.upload')"
 					:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
 					@click="fileInputRef?.click()" />
 				<input
@@ -78,7 +76,7 @@
 					<small class="text-info text-center">
 						{{ $t('app.audio.pool.demos.upload_list_info') }}
 					</small>
-					<ul class="overflow-y-auto flex-grow max-h-[400px]">
+					<ul class="overflow-y-auto flex-grow max-h-[350px]">
 						<li
 							v-for="file of selectedAudioFiles"
 							:key="file.name"
@@ -224,29 +222,22 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
 	dataTypes: ['audio/mp3', 'audio/flac', 'audio/wav'],
 });
 
-const checkAndSetFiles = (files: FileList | File[] | null) => {
-	if (!files) return;
-
-	const file = files[0];
-
-	if (!file || !checkFileType(file, 'audio')) {
-		fileTypeError.value = true;
-		return;
-	}
-
-	selectedAudioFiles.value = files;
-};
-
 const onSelectFiles = (event: Event) => {
 	const target = event.target as HTMLInputElement;
 	const files = target.files;
 
-	checkAndSetFiles(files);
+	try {
+		selectedAudioFiles.value = checkAndSetFiles(files) as File[];
+	} catch (error) {
+		fileTypeError.value = true;
+	}
 };
 
 function onDrop(files: File[] | null) {
-	if (!files) return;
-
-	checkAndSetFiles(files);
+	try {
+		selectedAudioFiles.value = checkAndSetFiles(files) as FileList | File[];
+	} catch (error) {
+		fileTypeError.value = true;
+	}
 }
 </script>

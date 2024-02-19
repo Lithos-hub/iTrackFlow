@@ -1,5 +1,10 @@
 <template>
-	<div :key="updateKey" data-testid="base-icon">
+	<div
+		:key="updateKey"
+		data-testid="base-icon"
+		:class="{
+			'cursor-pointer hover:scale-105': clickable,
+		}">
 		<NuxtSvgIcon :font-size="size" :name="icon" :fill="iconColor" />
 	</div>
 </template>
