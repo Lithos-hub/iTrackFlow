@@ -29,7 +29,7 @@ module.exports = {
 				darker: '#101010',
 				softdark: '#272829',
 				success: '#429867',
-				info: '#6f95ff',
+				info: '#70e7ff',
 				warning: '#fab243',
 				danger: '#fc5956',
 			},

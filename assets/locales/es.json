@@ -185,7 +185,8 @@
 				"album": "Álbum",
 				"year": "Año",
 				"genre": "Género",
-				"track": "Pista"
+				"track": "Pista",
+				"save": "Guardar"
 			},
 			"pool": {
 				"demos": {

@@ -13,7 +13,12 @@
 					'border border-transparent hover:bg-white/10': value !== selectedItem,
 				}">
 				<div class="flex gap-2.5">
-					<BaseIcon v-if="prependIcon" :icon="prependIcon" :size="20" color="white" />
+					<BaseIcon
+						v-if="prependIcon"
+						:key="renderScreenKey"
+						:icon="prependIcon"
+						:size="20"
+						:color="lightMode ? 'black' : 'white'" />
 					<small>
 						{{ text }}
 					</small>
@@ -33,9 +38,12 @@
 
 <script setup lang="ts">
 import { BaseListProps } from './BaseList.interfaces';
+import { useScreenStore } from '~/store/screen';
 
 defineProps<BaseListProps>();
 defineEmits(['on-remove-item', 'on-select-item']);
+
+const { lightMode, renderScreenKey } = storeToRefs(useScreenStore());
 </script>
 
 <style scoped>

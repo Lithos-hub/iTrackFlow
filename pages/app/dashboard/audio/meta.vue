@@ -1,12 +1,12 @@
 <template>
-	<div class="flex grow gap-5 h-full">
-		<section class="flex w-full gap-5">
-			<div class="flex flex-col w-1/2 gap-5 flex-grow">
+	<div class="flex grow gap-5 h-[calc(100%-7.5vh)]">
+		<div class="flex w-full h-full gap-5">
+			<section class="flex flex-col w-1/2 gap-5">
+				<h3 class="text-primary font-bold">Upload audio</h3>
 				<BaseDropzone
 					ref="dropZoneRef"
 					:is-over-drop-zone="isOverDropZone"
 					class="w-full"
-					:label="$t('app.audio.metadata.upload')"
 					:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
 					@click="fileInputRef?.click()" />
 				<input
@@ -24,7 +24,7 @@
 				</div>
 				<article v-if="selectedAudioFiles.length" class="default_border p-5 overflow-y-auto h-full">
 					<BaseList
-						:items="[...audioItems]"
+						:items="audioItems"
 						:selected-item="selectedListItem"
 						@on-select-item="onSelectListItem"
 						@on-remove-item="removeListItem" />
@@ -32,61 +32,48 @@
 						{{ $t('app.audio.metadata.audio_error') }}
 					</small>
 				</article>
-			</div>
-			<aside class="default_border w-1/2 p-5 h-full relative">
-				<strong
+			</section>
+			<section class="flex flex-col w-1/2 gap-5 relative">
+				<h3 class="text-primary font-bold">Visualize or edit the metadata</h3>
+				<small
 					v-if="!selectedListItem"
 					class="text-info absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
 					{{ $t('app.audio.metadata.select_a_file') }}
-				</strong>
-				<div v-if="processedFileMetadataInfo" class="flex flex-col gap-5">
-					<label>
-						{{ $t('app.audio.metadata.cover') }}
-					</label>
-					<img
-						v-if="processedFileMetadataInfo?.cover"
-						:src="'data:image/jpeg;base64,' + processedFileMetadataInfo?.cover"
-						:alt="processedFileMetadataInfo?.title"
-						class="w-[200px] h-[200px] mx-auto aspect-square border default_border" />
+				</small>
+				<div v-if="processedFileMetadataInfo" class="flex flex-col justify-between gap-5 h-full">
+					<div class="overflow-y-auto default_border p-5 max-h-[63vh] grow">
+						<div class="flex justify-between w-full items-center">
+							<label class="default_label">
+								{{ $t('app.audio.metadata.cover') }}
+							</label>
+							<img
+								v-if="processedFileMetadataInfo?.cover"
+								:src="'data:image/jpeg;base64,' + processedFileMetadataInfo?.cover"
+								:alt="processedFileMetadataInfo?.title"
+								class="w-[200px] h-[200px] aspect-square border default_border" />
+						</div>
 
-					<BaseInput
-						v-if="processedFileMetadataInfo?.title"
-						v-model="processedFileMetadataInfo.title"
-						:label="$t('app.audio.metadata.title')"
-						class="w-full" />
+						<div
+							v-for="field in ['title', 'artist', 'album', 'year', 'genre', 'track']"
+							:key="field">
+							<BaseInput
+								v-model="processedFileMetadataInfo[field]"
+								:label="$t(`app.audio.metadata.${field}`)"
+								class="w-full" />
+						</div>
+					</div>
 
-					<BaseInput
-						v-if="processedFileMetadataInfo?.artist"
-						v-model="processedFileMetadataInfo.artist"
-						:label="$t('app.audio.metadata.artist')"
-						class="w-full" />
-
-					<BaseInput
-						v-if="processedFileMetadataInfo?.album"
-						v-model="processedFileMetadataInfo.album"
-						:label="$t('app.audio.metadata.album')"
-						class="w-full" />
-
-					<BaseInput
-						v-if="processedFileMetadataInfo?.year"
-						v-model="processedFileMetadataInfo.year"
-						:label="$t('app.audio.metadata.year')"
-						class="w-full" />
-
-					<BaseInput
-						v-if="processedFileMetadataInfo?.genre"
-						v-model="processedFileMetadataInfo.genre"
-						:label="$t('app.audio.metadata.genre')"
-						class="w-full" />
-
-					<BaseInput
-						v-if="processedFileMetadataInfo?.track"
-						v-model="processedFileMetadataInfo.track"
-						:label="$t('app.audio.metadata.track')"
-						class="w-full" />
+					<BaseButton
+						v-if="processedFileMetadataInfo"
+						color="success"
+						variant="stealth"
+						class="w-full"
+						@click="onSave">
+						{{ $t('app.audio.metadata.save') }}
+					</BaseButton>
 				</div>
-			</aside>
-		</section>
+			</section>
+		</div>
 	</div>
 </template>
 
@@ -113,6 +100,7 @@ const fileTypeError = ref(false);
 const selectedListItem = ref<string>('');
 const selectedFile = ref<File | null>(null);
 const filesMetadata = ref<Record<string, unknown>>({});
+const mp3Tag = ref<Mp3Tag | null>(null);
 
 const audioItems = computed(() => {
 	return Array.from(selectedAudioFiles.value).map((file: File) => {
@@ -177,6 +165,7 @@ const onSelectFiles = (event: Event) => {
 		reader.onload = (event) => {
 			const result = event.target?.result;
 			const mp3 = new Mp3Tag(result as ArrayBuffer);
+			mp3Tag.value = mp3;
 			const tags = mp3.read();
 			filesMetadata.value[i] = tags;
 		};
@@ -208,5 +197,32 @@ const removeListItem = (value: string) => {
 	selectedAudioFiles.value = (selectedAudioFiles.value as File[]).filter(
 		(_, i) => i !== fileToRemoveIndex,
 	);
+};
+
+const onSave = () => {
+	if (!mp3Tag.value || !processedFileMetadataInfo.value) return;
+
+	mp3Tag.value.read();
+
+	mp3Tag.value.tags.title = processedFileMetadataInfo.value.title;
+	mp3Tag.value.tags.artist = processedFileMetadataInfo.value.artist;
+	mp3Tag.value.tags.album = processedFileMetadataInfo.value.album;
+	mp3Tag.value.tags.year = processedFileMetadataInfo.value.year;
+	mp3Tag.value.tags.genre = processedFileMetadataInfo.value.genre;
+	mp3Tag.value.tags.track = processedFileMetadataInfo.value.track;
+
+	mp3Tag.value.save();
+
+	// Get the mp3 file with the new tags with selectedFile.value
+	if (!selectedFile.value) return;
+	const blob = new Blob([mp3Tag.value.buffer], { type: 'audio/mp3' });
+
+	const url = URL.createObjectURL(blob);
+
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = processedFileMetadataInfo.value.title;
+	a.click();
+	URL.revokeObjectURL(url);
 };
 </script>

@@ -187,7 +187,8 @@
 				"album": "Album",
 				"year": "Year",
 				"genre": "Genre",
-				"track": "Track"
+				"track": "Track",
+				"save": "Save"
 			},
 			"pool": {
 				"demos": {

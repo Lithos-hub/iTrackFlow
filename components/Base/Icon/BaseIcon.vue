@@ -1,6 +1,6 @@
 <template>
 	<div
-		:key="updateKey"
+		:key="renderScreenKey"
 		data-testid="base-icon"
 		:class="{
 			'cursor-pointer hover:scale-105': clickable,
@@ -21,9 +21,5 @@ const { icon, color } = withDefaults(defineProps<IconProps>(), {
 
 const iconColor = computed(() => getTailwindColor(color));
 
-const { lightMode } = storeToRefs(useScreenStore());
-
-const updateKey = ref(Math.random());
-
-watch(lightMode, () => (updateKey.value = Math.random()));
+const { renderScreenKey } = storeToRefs(useScreenStore());
 </script>

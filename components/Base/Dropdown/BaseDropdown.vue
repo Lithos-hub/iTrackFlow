@@ -70,7 +70,7 @@
 								v-for="({ label, value }, i) of dropdownData"
 								:key="i"
 								data-testid="base-dropdown__list-item"
-								class="p-2 bg-white dark:bg-dark hover:bg-black/10 dark:hover:bg-white/10 cursor-pointer border-b border-black/10 dark:border-white/10 last:border-b-0 first:rounded-t last:rounded-b cursor-pointer transition-all duration-200 ease-in-out"
+								class="p-2 bg-white dark:bg-dark hover:bg-black/10 dark:hover:bg-white/10 border-b border-black/10 dark:border-white/10 last:border-b-0 first:rounded-t last:rounded-b cursor-pointer transition-all duration-200 ease-in-out"
 								@click="onItemClick(value)">
 								<div class="flex items-center ps-3">
 									<input
