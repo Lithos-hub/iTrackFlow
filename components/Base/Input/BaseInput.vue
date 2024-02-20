@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col w-full">
-		<label v-if="label" class="mx-5 my-2 font-medium text-sm">
+		<label v-if="label" class="default_label">
 			{{ label }}
 		</label>
 		<input

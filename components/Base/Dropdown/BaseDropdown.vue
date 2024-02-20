@@ -9,7 +9,7 @@
 		</Teleport>
 		<!-- Dropdown -->
 		<div ref="dropdown" data-testid="base-dropdown" class="flex flex-col w-full">
-			<label v-if="label" class="mx-5 my-2 font-medium text-sm">{{ label }}</label>
+			<label v-if="label" class="default_label">{{ label }}</label>
 			<div class="relative cursor-pointer">
 				<!-- Dropdown selected options chips -->
 				<p v-if="!multiselect && !inputValue" class="absolute top-1/2 left-5 -translate-y-1/2">

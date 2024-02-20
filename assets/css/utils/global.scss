@@ -163,3 +163,7 @@ label {
 .default_mode {
 	@apply bg-white text-dark dark:bg-softdark dark:text-white;
 }
+
+.default_label {
+	@apply mx-5 my-2 font-medium text-sm;
+}

@@ -1,91 +1,93 @@
 <template>
-	<section class="grid grid-cols-2 gap-5 h-full">
-		<div class="flex flex-col gap-5 h-[calc(100vh-142px)]">
-			<BaseDropzone
-				ref="dropZoneRef"
-				:is-over-drop-zone="isOverDropZone"
-				class="w-full"
-				:label="$t('app.audio.metadata.upload')"
-				:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
-				@click="fileInputRef?.click()" />
-			<input
-				ref="fileInputRef"
-				type="file"
-				class="hidden"
-				accept="audio/mp3"
-				multiple
-				@change="onSelectFiles" />
-			<div class="flex gap-2.5">
-				<BaseIcon icon="info" :size="20" color="blue" />
-				<small>
-					{{ $t('app.audio.metadata.info') }}
-				</small>
+	<div class="flex grow gap-5 h-full">
+		<section class="flex w-full gap-5">
+			<div class="flex flex-col w-1/2 gap-5 flex-grow">
+				<BaseDropzone
+					ref="dropZoneRef"
+					:is-over-drop-zone="isOverDropZone"
+					class="w-full"
+					:label="$t('app.audio.metadata.upload')"
+					:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
+					@click="fileInputRef?.click()" />
+				<input
+					ref="fileInputRef"
+					type="file"
+					class="hidden"
+					accept="audio/mp3"
+					multiple
+					@change="onSelectFiles" />
+				<div class="flex gap-2.5">
+					<BaseIcon icon="info" :size="20" color="blue" />
+					<small>
+						{{ $t('app.audio.metadata.info') }}
+					</small>
+				</div>
+				<article v-if="selectedAudioFiles.length" class="default_border p-5 overflow-y-auto h-full">
+					<BaseList
+						:items="[...audioItems]"
+						:selected-item="selectedListItem"
+						@on-select-item="onSelectListItem"
+						@on-remove-item="removeListItem" />
+					<small v-if="fileTypeError" class="text-red-500 text-center">
+						{{ $t('app.audio.metadata.audio_error') }}
+					</small>
+				</article>
 			</div>
-			<article v-if="selectedAudioFiles.length" class="default_border p-5 overflow-y-auto h-full">
-				<BaseList
-					:items="audioItems"
-					:selected-item="selectedListItem"
-					@on-select-item="onSelectListItem"
-					@on-remove-item="removeListItem" />
-				<small v-if="fileTypeError" class="text-red-500 text-center">
-					{{ $t('app.audio.metadata.audio_error') }}
-				</small>
-			</article>
-		</div>
-		<aside class="default_border p-5 h-full relative">
-			<strong
-				v-if="!selectedListItem"
-				class="text-info absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-				{{ $t('app.audio.metadata.select_a_file') }}
-			</strong>
-			<div v-if="processedFileMetadataInfo" class="flex flex-col gap-5">
-				<label>
-					{{ $t('app.audio.metadata.cover') }}
-				</label>
-				<img
-					v-if="processedFileMetadataInfo?.cover"
-					:src="'data:image/jpeg;base64,' + processedFileMetadataInfo?.cover"
-					:alt="processedFileMetadataInfo?.title"
-					class="w-[200px] h-[200px] mx-auto aspect-square border default_border" />
+			<aside class="default_border w-1/2 p-5 h-full relative">
+				<strong
+					v-if="!selectedListItem"
+					class="text-info absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+					{{ $t('app.audio.metadata.select_a_file') }}
+				</strong>
+				<div v-if="processedFileMetadataInfo" class="flex flex-col gap-5">
+					<label>
+						{{ $t('app.audio.metadata.cover') }}
+					</label>
+					<img
+						v-if="processedFileMetadataInfo?.cover"
+						:src="'data:image/jpeg;base64,' + processedFileMetadataInfo?.cover"
+						:alt="processedFileMetadataInfo?.title"
+						class="w-[200px] h-[200px] mx-auto aspect-square border default_border" />
 
-				<BaseInput
-					v-if="processedFileMetadataInfo?.title"
-					v-model="processedFileMetadataInfo.title"
-					:label="$t('app.audio.metadata.title')"
-					class="w-full" />
+					<BaseInput
+						v-if="processedFileMetadataInfo?.title"
+						v-model="processedFileMetadataInfo.title"
+						:label="$t('app.audio.metadata.title')"
+						class="w-full" />
 
-				<BaseInput
-					v-if="processedFileMetadataInfo?.artist"
-					v-model="processedFileMetadataInfo.artist"
-					:label="$t('app.audio.metadata.artist')"
-					class="w-full" />
+					<BaseInput
+						v-if="processedFileMetadataInfo?.artist"
+						v-model="processedFileMetadataInfo.artist"
+						:label="$t('app.audio.metadata.artist')"
+						class="w-full" />
 
-				<BaseInput
-					v-if="processedFileMetadataInfo?.album"
-					v-model="processedFileMetadataInfo.album"
-					:label="$t('app.audio.metadata.album')"
-					class="w-full" />
+					<BaseInput
+						v-if="processedFileMetadataInfo?.album"
+						v-model="processedFileMetadataInfo.album"
+						:label="$t('app.audio.metadata.album')"
+						class="w-full" />
 
-				<BaseInput
-					v-if="processedFileMetadataInfo?.year"
-					v-model="processedFileMetadataInfo.year"
-					:label="$t('app.audio.metadata.year')"
-					class="w-full" />
+					<BaseInput
+						v-if="processedFileMetadataInfo?.year"
+						v-model="processedFileMetadataInfo.year"
+						:label="$t('app.audio.metadata.year')"
+						class="w-full" />
 
-				<BaseInput
-					v-if="processedFileMetadataInfo?.genre"
-					v-model="processedFileMetadataInfo.genre"
-					:label="$t('app.audio.metadata.genre')"
-					class="w-full" />
+					<BaseInput
+						v-if="processedFileMetadataInfo?.genre"
+						v-model="processedFileMetadataInfo.genre"
+						:label="$t('app.audio.metadata.genre')"
+						class="w-full" />
 
-				<BaseInput
-					v-if="processedFileMetadataInfo?.track"
-					v-model="processedFileMetadataInfo.track"
-					:label="$t('app.audio.metadata.track')"
-					class="w-full" />
-			</div>
-		</aside>
-	</section>
+					<BaseInput
+						v-if="processedFileMetadataInfo?.track"
+						v-model="processedFileMetadataInfo.track"
+						:label="$t('app.audio.metadata.track')"
+						class="w-full" />
+				</div>
+			</aside>
+		</section>
+	</div>
 </template>
 
 <script setup lang="ts">

@@ -41,7 +41,7 @@
 						:placeholder="$t('app.audio.pool.demos.tempo_placeholder')" />
 				</div>
 			</section>
-			<section class="default_border default_mode h-full">
+			<section class="default_border default_mode h-auto overflow-y-auto">
 				<div class="p-5 flex flex-col gap-5">
 					<strong>
 						{{ $t('app.audio.pool.demos.my_audios') }}

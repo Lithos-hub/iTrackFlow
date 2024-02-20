@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col gap-5">
-		<label v-if="label">{{ label }}</label>
+		<label v-if="label" class="default_label">{{ label }}</label>
 		<div
 			ref="dropZoneRef"
 			data-testid="base-dropzone"

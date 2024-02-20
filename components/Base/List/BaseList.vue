@@ -14,9 +14,9 @@
 				}">
 				<div class="flex gap-2.5">
 					<BaseIcon v-if="prependIcon" :icon="prependIcon" :size="20" color="white" />
-					<span>
+					<small>
 						{{ text }}
-					</span>
+					</small>
 				</div>
 			</div>
 			<BaseIcon
@@ -24,6 +24,7 @@
 				flat
 				clickable
 				icon="trash"
+				:size="20"
 				color="red"
 				@click="$emit('on-remove-item', value)" />
 		</li>
@@ -31,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { BaseListProps } from './BaseList.interfaces.ts';
+import { BaseListProps } from './BaseList.interfaces';
 
 defineProps<BaseListProps>();
 defineEmits(['on-remove-item', 'on-select-item']);
