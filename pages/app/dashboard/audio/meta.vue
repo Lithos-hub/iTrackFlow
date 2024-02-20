@@ -122,37 +122,36 @@ const processedFileMetadataInfo = computed(() => {
 
 	const { v1, v1Details, v2, v2Details } = filesMetadata.value[selectedFileIndex] as MetadataTag;
 
-	// ID3v1 tags
-	const { album, artist, comment, genre, title, track, year } = v1;
-	// ID3v1 details
-	const { size, version } = v1Details;
 	// ID3v2 tags
-	const { APIC } = v2;
-	const imageBuffer = APIC[0].data;
+	const imageBuffer = v2 ? v2.APIC[0].data : [0];
 	const base64String = btoa(
 		new Uint8Array(imageBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
 	);
-	// ID3v2 details
-	const { flags, size: v2Size, version: v2Version } = v2Details;
-
 	return {
-		album,
-		artist,
-		comment,
-		genre,
-		title,
-		track,
-		year,
-		size,
-		version,
-		cover: base64String,
-		flags,
-		v2Size,
-		v2Version,
+		album: v1?.album || '',
+		artist: v1?.artist || '',
+		comment: v1?.comment || '',
+		genre: v1?.genre || '',
+		title: v1?.title || '',
+		track: v1?.track || '',
+		year: v1?.year || '',
+		size: v1Details?.size || 0,
+		version: v1Details?.version || 0,
+		cover: base64String || '',
+		// ID3v2 details
+		flags: v2Details?.flags || {},
+		v2Size: v2Details?.size || 0,
+		v2Version: v2Details?.version || 0,
 	};
 });
 
 const onSelectFiles = (event: Event) => {
+	selectedListItem.value = '';
+	fileTypeError.value = false;
+	filesMetadata.value = {};
+	selectedAudioFiles.value = [];
+	selectedFile.value = null;
+
 	const target = event.target as HTMLInputElement;
 	const files = target.files;
 
@@ -194,6 +193,7 @@ const onSelectListItem = (value: string) => {
 
 const removeListItem = (value: string) => {
 	const fileToRemoveIndex = audioItems.value.findIndex((item) => item.value === value);
+
 	selectedAudioFiles.value = (selectedAudioFiles.value as File[]).filter(
 		(_, i) => i !== fileToRemoveIndex,
 	);
