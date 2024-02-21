@@ -10,6 +10,7 @@
 					:placeholder="$t('app.audio.pool.demos.upload_placeholder')"
 					@click="fileInputRef?.click()" />
 				<input
+					:key="inputKey"
 					ref="fileInputRef"
 					type="file"
 					class="hidden"
@@ -92,7 +93,7 @@ const fileInputRef = ref<HTMLInputElement | null>(null);
 
 const { isOverDropZone } = useDropZone(dropZoneRef, {
 	onDrop,
-	dataTypes: ['audio/mp3'],
+	dataTypes: ['audio/mp3', 'audio/mpeg'],
 });
 
 const selectedAudioFiles = ref<File[] | []>([]);
@@ -101,6 +102,8 @@ const selectedListItem = ref<string>('');
 const selectedFile = ref<File | null>(null);
 const filesMetadata = ref<Record<string, unknown>>({});
 const mp3Tag = ref<Mp3Tag | null>(null);
+
+const inputKey = ref(0);
 
 const audioItems = computed(() => {
 	return Array.from(selectedAudioFiles.value).map((file: File) => {
@@ -114,7 +117,7 @@ const audioItems = computed(() => {
 });
 
 const processedFileMetadataInfo = computed(() => {
-	if (!selectedFile.value) return;
+	if (!selectedFile.value || !selectedAudioFiles.value.length) return null;
 
 	const selectedFileIndex = selectedAudioFiles.value.findIndex(
 		(file) => file.name === selectedFile.value?.name,
@@ -145,12 +148,21 @@ const processedFileMetadataInfo = computed(() => {
 	};
 });
 
-const onSelectFiles = (event: Event) => {
-	selectedListItem.value = '';
-	fileTypeError.value = false;
-	filesMetadata.value = {};
+const resetInitialState = () => {
+	// Reset to initial state
 	selectedAudioFiles.value = [];
+	fileTypeError.value = false;
+	selectedListItem.value = '';
 	selectedFile.value = null;
+	filesMetadata.value = {};
+	mp3Tag.value = null;
+
+	// Re-render the input file to allow the user to upload the same file again
+	inputKey.value++;
+};
+
+const onSelectFiles = (event: Event) => {
+	resetInitialState();
 
 	const target = event.target as HTMLInputElement;
 	const files = target.files;
@@ -179,6 +191,7 @@ const onSelectFiles = (event: Event) => {
 };
 
 function onDrop(files: File[] | null) {
+	resetInitialState();
 	try {
 		selectedAudioFiles.value = checkAndSetFiles(files, ['audio/mpeg', 'audio/mp3']) as File[];
 	} catch (error) {

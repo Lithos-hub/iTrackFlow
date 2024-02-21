@@ -1,17 +1,14 @@
 <template>
 	<ul class="flex flex-col gap-5">
-		<li
-			v-for="{ text, value, prependIcon, removable } of items"
-			:key="value"
-			class="base-list"
-			@click="$emit('on-select-item', value)">
+		<li v-for="{ text, value, prependIcon, removable } of items" :key="value" class="base-list">
 			<div
 				class="base-list__item"
 				:class="{
 					'bg-dark/50 text-white dark:bg-primary/10 border border-black dark:border-primary':
 						value === selectedItem,
 					'border border-transparent hover:bg-white/10': value !== selectedItem,
-				}">
+				}"
+				@click="$emit('on-select-item', value)">
 				<div class="flex gap-2.5">
 					<BaseIcon
 						v-if="prependIcon"
