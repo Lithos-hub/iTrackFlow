@@ -66,7 +66,11 @@
 				"references": "Referencias",
 				"demos": "Demos",
 				"logout": "Cerrar sesión"
-			}
+			},
+			"loading": "Cargando",
+			"no_data": "No hay datos",
+			"no_comments": "No hay comentarios",
+			"uploading": "Subiendo"
 		},
 		"dataTable": {
 			"name": "Nombre del proyecto",
@@ -204,6 +208,7 @@
 					"search_placeholder": "Parámetro de búsqueda",
 					"my_audios": "Mis audios",
 					"upload": "Seleccionar o subir archivos de audio",
+					"upload_success": "¡Subida realizada con éxito!",
 					"confirm_upload": "Confirmar subida",
 					"upload_list_info": "La siguiente lista de audios se va a subir",
 					"upload_placeholder": "Pulsa o arrastra audios aquí",

@@ -9,7 +9,7 @@
 			background: !flat && computedBackground,
 			color: variant === 'outline' || variant === 'stealth' ? tailwindColor : '',
 		}">
-		<div class="flex items-center justify-center gap-2.5 text-sm">
+		<div v-if="!loading && !success" class="flex items-center justify-center gap-2.5 text-sm">
 			<!-- Left icon -->
 			<div v-if="icon && iconLeft" class="pt-1">
 				<BaseIcon
@@ -37,6 +37,16 @@
 					:size="20"
 					:color="computedIconColor" />
 			</div>
+		</div>
+		<div v-else-if="loading && !success">
+			<BaseSpinner
+				data-testid="base-button--spinner"
+				class="w-7 h-7 mx-auto"
+				:color="computedIconColor" />
+		</div>
+		<div v-else-if="!loading && success" class="flex gap-2.5 justify-center">
+			<small>{{ successText }}</small>
+			<BaseIcon data-testid="base-button--success-icon" icon="check" :size="20" color="green" />
 		</div>
 	</button>
 </template>

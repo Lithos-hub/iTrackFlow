@@ -20,4 +20,7 @@ export interface BaseButtonProps extends /* @vue-ignore */ ButtonHTMLAttributes 
 	iconRight?: boolean;
 	iconColor?: ColorName;
 	flat?: boolean;
+	loading?: boolean;
+	success?: boolean;
+	successText?: string;
 }

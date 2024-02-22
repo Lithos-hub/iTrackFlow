@@ -1,8 +1,8 @@
 <template>
 	<div class="flex grow gap-5 h-[calc(100%-40px)]">
-		<section class="flex flex-col gap-5">
+		<section class="flex flex-col gap-5 w-full">
 			<section class="default_border default_mode p-5">
-				<div class="grid grid-cols-6 justify-between items-end gap-5">
+				<div class="grid grid-cols-3 justify-between items-end gap-5">
 					<BaseInput
 						v-model="searchQuery"
 						variant="bordered"
@@ -72,26 +72,24 @@
 				<small v-if="fileTypeError" class="text-red-500 text-center">
 					{{ $t('app.audio.pool.demos.audio_error') }}
 				</small>
-				<div v-if="selectedAudioFiles.length" class="h-full flex flex-col justify-between">
+				<div v-if="selectedAudioFiles.length" class="h-full flex flex-col gap-5 justify-between">
 					<small class="text-info text-center">
 						{{ $t('app.audio.pool.demos.upload_list_info') }}
 					</small>
-					<ul class="overflow-y-auto flex-grow max-h-[350px]">
-						<li
-							v-for="file of selectedAudioFiles"
-							:key="file.name"
-							class="border-b border-white/10 p-1">
-							<small class="text-success">{{ file.name }}</small>
-						</li>
-					</ul>
+					<div class="default_border p-5 overflow-y-auto flex-grow max-h-[300px]">
+						<BaseList :items="audioItems" @on-remove-item="removeListItem" />
+					</div>
+
 					<BaseButton
 						:disabled="!selectedAudioFiles"
-						:loading="false"
+						:loading="isUploadingAudio"
+						:success="!isUploadingAudio && successOnUpload"
 						:loading-text="$t('app.audio.pool.demos.uploading')"
+						:success-text="$t('app.audio.pool.demos.upload_success')"
 						class="w-full"
 						variant="stealth"
 						color="success"
-						@click="() => {}">
+						@click="onUploadAudioFiles">
 						{{ $t('app.audio.pool.demos.confirm_upload') }}
 					</BaseButton>
 				</div>
@@ -115,10 +113,12 @@ const searchQuery = ref('');
 const selectedStyle = ref([]);
 const selectedInstrument = ref([]);
 const selectedDuration = ref([]);
-const selectedTempo = ref('');
-const selectedCreator = ref('');
-const selectedAudioFiles = ref<FileList | File[] | []>([]);
+const selectedTempo = ref([]);
+const selectedCreator = ref([]);
+const selectedAudioFiles = ref<File[] | []>([]);
 
+const isUploadingAudio = ref(false);
+const successOnUpload = ref(false);
 const fileTypeError = ref(false);
 
 const stylesList = ref([
@@ -217,17 +217,38 @@ const audioData = ref([
 	},
 ]);
 
+const audioItems = computed(() => {
+	return Array.from(selectedAudioFiles.value).map((file: File) => {
+		return {
+			text: file.name,
+			value: file.name,
+			prependIcon: 'music',
+			removable: true,
+		};
+	});
+});
+
+const removeListItem = (value: string) => {
+	const fileToRemoveIndex = audioItems.value.findIndex((item) => item.value === value);
+
+	selectedAudioFiles.value = selectedAudioFiles.value.filter((_, i) => i !== fileToRemoveIndex);
+};
+
 const { isOverDropZone } = useDropZone(dropZoneRef, {
 	onDrop,
-	dataTypes: ['audio/mp3', 'audio/flac', 'audio/wav'],
+	dataTypes: ['audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/aac'],
 });
 
 const onSelectFiles = (event: Event) => {
 	const target = event.target as HTMLInputElement;
 	const files = target.files;
 
+	if (!files) return;
+
+	const filesArray = [...files] as File[];
+
 	try {
-		selectedAudioFiles.value = checkAndSetFiles(files) as File[];
+		selectedAudioFiles.value = checkAndSetFiles(filesArray) as File[];
 	} catch (error) {
 		fileTypeError.value = true;
 	}
@@ -235,9 +256,28 @@ const onSelectFiles = (event: Event) => {
 
 function onDrop(files: File[] | null) {
 	try {
-		selectedAudioFiles.value = checkAndSetFiles(files) as FileList | File[];
+		selectedAudioFiles.value = checkAndSetFiles(files) as File[];
 	} catch (error) {
 		fileTypeError.value = true;
 	}
 }
+
+const onUploadAudioFiles = () => {
+	isUploadingAudio.value = true;
+	const formData = new FormData();
+
+	Array.from(selectedAudioFiles.value).forEach((file) => {
+		formData.append('audio', file);
+	});
+
+	// Simulate upload
+	setTimeout(() => {
+		isUploadingAudio.value = false;
+		selectedAudioFiles.value = [];
+		successOnUpload.value = true;
+		setTimeout(() => {
+			successOnUpload.value = false;
+		}, 5000);
+	}, 2000);
+};
 </script>

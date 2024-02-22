@@ -2,7 +2,7 @@
 	<div class="flex grow gap-5 h-[calc(100%-7.5vh)]">
 		<div class="flex w-full h-full gap-5">
 			<section class="flex flex-col w-1/2 gap-5">
-				<h3 class="text-primary font-bold">Upload audio</h3>
+				<h5 class="font-bold">Upload audio</h5>
 				<BaseDropzone
 					ref="dropZoneRef"
 					:is-over-drop-zone="isOverDropZone"
@@ -35,7 +35,7 @@
 				</article>
 			</section>
 			<section class="flex flex-col w-1/2 gap-5 relative">
-				<h3 class="text-primary font-bold">Visualize or edit the metadata</h3>
+				<h5 class="font-bold">Visualize or edit the metadata</h5>
 				<small
 					v-if="!selectedListItem"
 					class="text-info absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
@@ -184,7 +184,7 @@ const onSelectFiles = (event: Event) => {
 	});
 
 	try {
-		selectedAudioFiles.value = checkAndSetFiles(filesArray, ['audio/mpeg', 'audio/mp3']) as File[];
+		selectedAudioFiles.value = checkAndSetFiles(filesArray, ['audio/mpeg']) as File[];
 	} catch (error) {
 		fileTypeError.value = true;
 	}
@@ -193,7 +193,7 @@ const onSelectFiles = (event: Event) => {
 function onDrop(files: File[] | null) {
 	resetInitialState();
 	try {
-		selectedAudioFiles.value = checkAndSetFiles(files, ['audio/mpeg', 'audio/mp3']) as File[];
+		selectedAudioFiles.value = checkAndSetFiles(files, ['audio/mpeg']) as File[];
 	} catch (error) {
 		fileTypeError.value = true;
 	}
@@ -207,9 +207,7 @@ const onSelectListItem = (value: string) => {
 const removeListItem = (value: string) => {
 	const fileToRemoveIndex = audioItems.value.findIndex((item) => item.value === value);
 
-	selectedAudioFiles.value = (selectedAudioFiles.value as File[]).filter(
-		(_, i) => i !== fileToRemoveIndex,
-	);
+	selectedAudioFiles.value = selectedAudioFiles.value.filter((_, i) => i !== fileToRemoveIndex);
 };
 
 const onSave = () => {
@@ -228,7 +226,7 @@ const onSave = () => {
 
 	// Get the mp3 file with the new tags with selectedFile.value
 	if (!selectedFile.value) return;
-	const blob = new Blob([mp3Tag.value.buffer], { type: 'audio/mp3' });
+	const blob = new Blob([mp3Tag.value.buffer], { type: 'audio/mpeg' });
 
 	const url = URL.createObjectURL(blob);
 

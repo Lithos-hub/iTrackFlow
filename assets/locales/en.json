@@ -66,7 +66,11 @@
 				"references": "References",
 				"demos": "Demos",
 				"logout": "Log out"
-			}
+			},
+			"loading": "Loading",
+			"no_data": "No data",
+			"no_comments": "No comments",
+			"uploading": "Uploading"
 		},
 		"dataTable": {
 			"name": "Project name",
@@ -206,6 +210,7 @@
 					"search_placeholder": "Search audio",
 					"my_audios": "My audios",
 					"upload": "Select or drop audio files",
+					"upload_success": "Files correctly uploaded!",
 					"confirm_upload": "Confirm upload",
 					"upload_list_info": "The following files will be uploaded",
 					"upload_placeholder": "Click here or drop files",

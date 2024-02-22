@@ -51,6 +51,18 @@ module.exports = {
 				pattern: /grid-(cols|rows)-\d+/,
 			},
 			{
+				pattern: /w-\[\d+px\]/,
+			},
+			{
+				pattern: /h-\[\d+px\]/,
+			},
+			{
+				pattern: /after:w-\[\d+px\]/,
+			},
+			{
+				pattern: /after:h-\[\d+px\]/,
+			},
+			{
 				pattern:
 					/^(bg|text|border|ring)-(slate|gray|zinc|neutral|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(-)?(100|200|300|400|500|600|700|800|900)?$/,
 			},
