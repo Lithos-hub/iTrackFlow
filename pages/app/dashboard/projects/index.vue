@@ -82,7 +82,7 @@ const onConfirmDelete = () => {
 
 const projectsList = ref<Project[]>([
 	{
-		id: 1,
+		id: 'sdf34r4efdc',
 		name: 'Project 1',
 		category: 'harmony',
 		image: 'https://picsum.photos/200',
@@ -90,7 +90,7 @@ const projectsList = ref<Project[]>([
 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
 	},
 	{
-		id: 2,
+		id: '324ewdsdsdf',
 		name: 'Project 2',
 		category: 'production',
 		image: 'https://picsum.photos/201',

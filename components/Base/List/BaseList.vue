@@ -1,36 +1,43 @@
 <template>
-	<ul class="flex flex-col gap-5">
-		<li v-for="{ text, value, prependIcon, removable } of items" :key="value" class="base-list">
-			<div
-				class="base-list__item"
-				:class="{
-					'bg-dark/50 text-white dark:bg-primary/10 border border-black dark:border-primary':
-						value === selectedItem,
-					'border border-transparent hover:bg-white/10': value !== selectedItem,
-				}"
-				@click="$emit('on-select-item', value)">
-				<div class="flex gap-2.5">
-					<BaseIcon
-						v-if="prependIcon"
-						:key="renderScreenKey"
-						:icon="prependIcon"
-						:size="20"
-						:color="lightMode ? 'black' : 'white'" />
-					<small>
-						{{ text }}
-					</small>
+	<div>
+		<ul v-if="items.length" class="flex flex-col gap-5">
+			<li v-for="{ text, value, prependIcon, removable } of items" :key="value" class="base-list">
+				<div
+					class="base-list__item"
+					:class="{
+						'bg-dark/50 text-white dark:bg-primary/10 border border-black dark:border-primary':
+							value === selectedItem,
+						'border border-transparent hover:bg-white/10': value !== selectedItem,
+					}"
+					@click="$emit('on-select-item', value)">
+					<div class="flex gap-2.5">
+						<BaseIcon
+							v-if="prependIcon"
+							:key="renderScreenKey"
+							:icon="prependIcon"
+							:size="20"
+							:color="lightMode ? 'black' : 'white'" />
+						<small>
+							{{ text }}
+						</small>
+					</div>
 				</div>
-			</div>
-			<BaseIcon
-				v-if="removable"
-				flat
-				clickable
-				icon="trash"
-				:size="20"
-				color="red"
-				@click="$emit('on-remove-item', value)" />
-		</li>
-	</ul>
+				<BaseIcon
+					v-if="removable"
+					flat
+					clickable
+					icon="trash"
+					:size="20"
+					color="red"
+					@click="$emit('on-remove-item', value)" />
+			</li>
+		</ul>
+		<div v-else class="flex justify-center items-center h-20">
+			<small class="text-red-500">
+				{{ emptyMessage }}
+			</small>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">

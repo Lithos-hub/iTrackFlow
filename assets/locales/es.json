@@ -213,6 +213,20 @@
 					"upload_list_info": "La siguiente lista de audios se va a subir",
 					"upload_placeholder": "Pulsa o arrastra audios aquí",
 					"audio_error": "El formato del fichero no es un audio"
+				},
+				"references": {
+					"search_in_references": "Buscar en mis referencias",
+					"search_in_references_placeholder": "Parámetro de búsqueda",
+					"my_references": "Mis referencias",
+					"no_references_found": "No se han encontrado referencias",
+					"search_in_spotify": "Buscar en Spotify",
+					"search_in_spotify_placeholder": "Parámetro de búsqueda",
+					"spotify_results": "Resultados de Spotify",
+					"title": "Título",
+					"artist": "Artista",
+					"album": "Álbum",
+					"name": "Nombre",
+					"duration": "Duración"
 				}
 			}
 		}

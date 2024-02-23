@@ -215,6 +215,20 @@
 					"upload_list_info": "The following files will be uploaded",
 					"upload_placeholder": "Click here or drop files",
 					"audio_error": "The file must be an audio file"
+				},
+				"references": {
+					"search_in_references": "Search in references",
+					"search_in_references_placeholder": "Query parameter",
+					"my_references": "My references",
+					"no_references_found": "No references found",
+					"search_in_spotify": "Search in Spotify",
+					"search_in_spotify_placeholder": "Query parameter",
+					"spotify_results": "Spotify results",
+					"title": "Title",
+					"artist": "Artist",
+					"album": "Album",
+					"name": "Name",
+					"duration": "Duration"
 				}
 			}
 		}

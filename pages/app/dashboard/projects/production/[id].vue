@@ -25,6 +25,7 @@
 					</template>
 					<template #table:composition="{ composition, id }">
 						<BaseIcon
+							:key="tableKey"
 							class="mx-auto cursor-pointer"
 							:icon="composition ? 'check' : 'uncheck'"
 							:color="composition ? 'green' : 'red'"
@@ -33,6 +34,7 @@
 					</template>
 					<template #table:recording="{ recording, id }">
 						<BaseIcon
+							:key="tableKey"
 							class="mx-auto cursor-pointer"
 							:icon="recording ? 'check' : 'uncheck'"
 							:color="recording ? 'green' : 'red'"
@@ -41,6 +43,7 @@
 					</template>
 					<template #table:mixing="{ mixing, id }">
 						<BaseIcon
+							:key="tableKey"
 							class="mx-auto cursor-pointer"
 							:icon="mixing ? 'check' : 'uncheck'"
 							:color="mixing ? 'green' : 'red'"
@@ -49,6 +52,7 @@
 					</template>
 					<template #table:mastering="{ mastering, id }">
 						<BaseIcon
+							:key="tableKey"
 							class="mx-auto cursor-pointer"
 							:icon="mastering ? 'check' : 'uncheck'"
 							:color="mastering ? 'green' : 'red'"
@@ -58,7 +62,7 @@
 					<template #table:audioPath="{ audioPath, id }">
 						<BaseIcon
 							v-if="audioPath"
-							:key="renderScreenKey"
+							:key="renderScreenKey + tableKey"
 							class="mx-auto cursor-pointer"
 							:icon="
 								currentTrackPlaying === id && !isPlaying
@@ -196,6 +200,7 @@ const onCellClick = ({ column, id }: FloatMenuTarget, event) => {
 	event.preventDefault();
 	setFloatMenuTarget({ column, id });
 	setPosition(event.clientX, event.clientY);
+	console.log('onCellClick', column, id);
 	toggleFloatMenu();
 };
 

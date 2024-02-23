@@ -31,7 +31,7 @@
 						<div
 							v-if="selectedProjectImagePreview"
 							class="flex flex-col justify-center items-center gap-5">
-							<div class="mx-auto h-[200px] w-[200px] mx-auto default_border rounded-2xl">
+							<div class="mx-auto h-[200px] w-[200px] default_border rounded-2xl">
 								<img
 									:src="selectedProjectImagePreview"
 									alt="Project picture"
@@ -45,6 +45,7 @@
 							ref="dropZoneRef"
 							:is-over-drop-zone="isOverDropZone"
 							:placeholder="$t('app.projects.project_image_placeholder')"
+							class="w-full"
 							@click="fileInputRef?.click()" />
 						<input
 							ref="fileInputRef"

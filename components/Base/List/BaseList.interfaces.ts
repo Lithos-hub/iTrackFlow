@@ -12,4 +12,5 @@ export interface BaseListProps {
 	items: ListItem[];
 	selectedItem?: string | number;
 	onItemClick?: (item: ListItem) => void;
+	emptyMessage?: string;
 }
