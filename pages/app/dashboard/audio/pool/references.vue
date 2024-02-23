@@ -65,7 +65,10 @@
 						<AppSpotifyResultsHeader
 							:headers="resultsHeaders"
 							class="sticky top-0 left-0 bg-[#101010] py-2" />
-						<AppSpotifyResultsList :data="resultsData" />
+						<AppSpotifyResultsList
+							:albums-data="spotifyResults.albums.items"
+							:artists-data="spotifyResults.artists.items"
+							:tracks-data="spotifyResults.tracks.items" />
 					</div>
 				</div>
 			</section>
@@ -94,51 +97,19 @@ const resultsHeaders = computed(() => {
 	switch (selectedTab.value) {
 		case 'albums':
 			return [
-				{ label: 'Album', width: 200 },
-				{ label: 'Artists', width: 200 },
-				{ label: 'Release Date', width: 100 },
+				{ label: 'Image', styles: 'w-[50px]' },
+				{ label: 'Name and Artists', styles: 'w-full' },
+				{ label: 'Release Date', styles: 'ml-auto w-[100px]' },
 			];
 		case 'artists':
-			return [{ label: 'Name', width: 200 }];
+			return [{ label: 'Name' }];
 		case 'tracks':
-			return [
-				{ label: 'Title', width: 400 },
-				{ label: 'Album', width: 200 },
-				{ label: 'Duration', width: 50 },
-			];
+			return [{ label: 'Title' }, { label: 'Album' }, { label: 'Duration' }];
 		default:
 			return [];
 	}
 });
 
-const resultsData = computed(() => {
-	const { items: albumItems } = spotifyResults.value.albums;
-	const { items: artistItems } = spotifyResults.value.artists;
-	const { items: tracksItems } = spotifyResults.value.tracks;
-	switch (selectedTab.value) {
-		case 'albums':
-			return albumItems.map((album) => ({
-				id: album.id,
-				name: album.name,
-				artists: album.artists.map((artist) => artist.name).join(', '),
-				releaseDate: album.release_date,
-			}));
-		case 'artists':
-			return artistItems.map((artist) => ({
-				id: artist.id,
-				name: artist.name,
-			}));
-		case 'tracks':
-			return tracksItems.map((track) => ({
-				id: track.id,
-				name: track.name,
-				album: track.album.name,
-				duration: track.duration_ms,
-			}));
-		default:
-			return [];
-	}
-});
 const spotifyResponseOptions = computed(() =>
 	Object.keys(spotifyResults.value).map((key) => ({ label: key, value: key })),
 );

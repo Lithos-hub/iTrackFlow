@@ -1,12 +1,7 @@
 <template>
-	<div class="flex">
-		<small class="w-[40px]">#</small>
-		<small
-			v-for="{ label, width } of headers"
-			:key="label"
-			:style="{
-				width: `${width}px`,
-			}">
+	<div class="p-2 flex items-center gap-5 text-gray-500">
+		<small>#</small>
+		<small v-for="{ label, styles } of headers" :key="label" :class="styles">
 			{{ label }}
 		</small>
 	</div>
@@ -15,7 +10,7 @@
 <script setup lang="ts">
 interface Headers {
 	label: string;
-	width: number;
+	styles?: string;
 }
 
 interface Props {
