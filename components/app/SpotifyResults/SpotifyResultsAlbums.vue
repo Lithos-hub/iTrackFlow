@@ -1,34 +1,34 @@
 <template>
 	<div class="flex gap-5 text-white">
-		<ul v-if="albumsData" class="flex flex-col gap-5">
+		<ul v-if="data" class="flex flex-col gap-5">
 			<li
-				v-for="({ id, images, name, artists, release_date }, i) of albumsData"
+				v-for="({ id, images, name, artists, release_date }, i) of data"
 				:key="id"
 				class="result-list__item">
 				<!-- INDEX -->
 				<small class="text-gray-500">{{ i + 1 }}</small>
 				<!-- IMAGE -->
-				<img :src="images[0].url" alt="Album cover" class="h-[50px]" />
+				<img v-if="images" :src="images[0].url" alt="Album cover" class="h-[50px]" />
 				<!-- NAME -->
 				<div class="flex flex-col w-full">
 					<small>{{ name }}</small>
 					<!-- ARTISTS -->
-					<small class="text-xs text-gray-500">{{ artists[0].name }}</small>
+					<small class="text-xs text-gray-500 w-full">{{ artists[0].name }}</small>
 				</div>
 				<!-- RELEASE DATE -->
-				<small class="text-gray-500 ml-auto w-[100px]">{{ release_date }}</small>
+				<small class="text-gray-500 ml-auto w-[200px] text-right">
+					{{ release_date }}
+				</small>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { AlbumElement, ArtistsItem, TracksItem } from '@/interfaces';
+import { AlbumElement } from '@/interfaces';
 
 interface Props {
-	albumsData: AlbumElement[];
-	artistsData: ArtistsItem[];
-	tracksData: TracksItem[];
+	data: AlbumElement[];
 }
 
 defineProps<Props>();

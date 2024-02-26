@@ -61,14 +61,20 @@
 
 					<div
 						v-if="Object.values(spotifyResults).length && selectedTab"
+						ref="spotifyResultsRef"
 						class="overflow-y-auto max-h-[450px]">
 						<AppSpotifyResultsHeader
 							:headers="resultsHeaders"
 							class="sticky top-0 left-0 bg-[#101010] py-2" />
-						<AppSpotifyResultsList
-							:albums-data="spotifyResults.albums.items"
-							:artists-data="spotifyResults.artists.items"
-							:tracks-data="spotifyResults.tracks.items" />
+						<AppSpotifyResultsAlbums
+							v-if="selectedTab === 'albums'"
+							:data="spotifyResults.albums.items" />
+						<AppSpotifyResultsArtists
+							v-else-if="selectedTab === 'artists'"
+							:data="spotifyResults.artists.items" />
+						<AppSpotifyResultsTracks
+							v-else-if="selectedTab === 'tracks'"
+							:data="spotifyResults.tracks.items" />
 					</div>
 				</div>
 			</section>
@@ -92,6 +98,8 @@ const searchQuery = ref('');
 const selectedTab = ref('');
 const referencesList = ref([]);
 const spotifyResults = ref<SpotifyGetByQueryResponse>({} as SpotifyGetByQueryResponse);
+const spotifyResultsRef = ref<HTMLElement | null>(null);
+const offset = ref(0);
 
 const resultsHeaders = computed(() => {
 	switch (selectedTab.value) {
@@ -99,12 +107,19 @@ const resultsHeaders = computed(() => {
 			return [
 				{ label: 'Image', styles: 'w-[50px]' },
 				{ label: 'Name and Artists', styles: 'w-full' },
-				{ label: 'Release Date', styles: 'ml-auto w-[100px]' },
+				{ label: 'Release Date', styles: 'ml-auto w-[100px] text-right' },
 			];
 		case 'artists':
-			return [{ label: 'Name' }];
+			return [
+				{ label: 'Image', styles: 'w-[50px]' },
+				{ label: 'Name', styles: 'w-full' },
+			];
 		case 'tracks':
-			return [{ label: 'Title' }, { label: 'Album' }, { label: 'Duration' }];
+			return [
+				{ label: 'Name and Artists', styles: 'w-[200px]' },
+				{ label: 'Album', styles: 'w-[300px]' },
+				{ label: 'Duration', styles: 'ml-auto w-[100px] text-right' },
+			];
 		default:
 			return [];
 	}
@@ -116,7 +131,8 @@ const spotifyResponseOptions = computed(() =>
 const onSearchSpotifySongs = async () => {
 	isSearching.value = true;
 	try {
-		spotifyResults.value = await getSpotifyByQuery(searchQuery.value);
+		const response = await getSpotifyByQuery(searchQuery.value, offset.value);
+		spotifyResults.value = response;
 		selectedTab.value = spotifyResponseOptions.value[0].value;
 	} catch (error) {
 		console.log('SPOTIFY_GET_BY_QUERY_ERROR', error);
@@ -125,7 +141,21 @@ const onSearchSpotifySongs = async () => {
 	}
 };
 
-const onSelectTab = (value: string) => (selectedTab.value = value);
+const onSelectTab = (value: string) => {
+	selectedTab.value = value;
+};
+
+watch(spotifyResultsRef, () => {
+	spotifyResultsRef.value?.addEventListener('scroll', () => {
+		if (
+			spotifyResultsRef.value!.scrollTop + spotifyResultsRef.value!.clientHeight >=
+			spotifyResultsRef.value!.scrollHeight
+		) {
+			offset.value += 20;
+			onSearchSpotifySongs();
+		}
+	});
+});
 
 onMounted(async () => {
 	await getSpotifySession();

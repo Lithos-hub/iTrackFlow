@@ -25,11 +25,11 @@ export const getSpotifySession = async () => {
 	}
 };
 
-export const getSpotifyByQuery = async (query: string) => {
+export const getSpotifyByQuery = async (query: string, offset: number = 0) => {
 	try {
 		const { data } = await API.get(
 			`
-        https://api.spotify.com/v1/search?q=${query}&type=track,album,artist`,
+        https://api.spotify.com/v1/search?q=${query}&type=track,album,artist&offset=${offset}&limit=50`,
 			{
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem('spotifyToken')}`,
