@@ -8,15 +8,19 @@
 </template>
 
 <script setup lang="ts">
+import { ColorName } from '~/interfaces';
+
 interface SpinnerProps {
 	size: number;
-	color: string;
+	color: ColorName;
 }
 
-withDefaults(defineProps<SpinnerProps>(), {
-	color: 'primary',
+const { color } = withDefaults(defineProps<SpinnerProps>(), {
+	color: 'white',
 	size: 20,
 });
+
+const computedColor = computed(() => getTailwindColor(color));
 </script>
 
 <style lang="scss" scoped>
@@ -35,7 +39,7 @@ withDefaults(defineProps<SpinnerProps>(), {
 	position: absolute;
 	inset: 0px;
 	border-radius: 50%;
-	border: 1px solid #fff;
+	border: 2px solid v-bind(computedColor);
 	animation: prixClipFix 1.25s linear infinite alternate-reverse;
 }
 

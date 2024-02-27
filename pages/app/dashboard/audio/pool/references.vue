@@ -57,11 +57,13 @@
 						:selected-tab="selectedTab"
 						@on-select="onSelectTab" />
 
-					<BaseSpinner v-if="isSearching" class="mx-auto" />
+					<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+						<BaseSpinner v-if="isSearching" class="mx-auto" :size="50" color="green" />
+					</div>
 
 					<div
 						v-if="Object.values(spotifyResults).length && selectedTab"
-						ref="spotifyResultsRef"
+						ref="spotifyListRef"
 						class="overflow-y-auto max-h-[450px]">
 						<AppSpotifyResultsHeader
 							:headers="resultsHeaders"
@@ -95,30 +97,33 @@ definePageMeta({
 
 const isSearching = ref(false);
 const searchQuery = ref('');
-const selectedTab = ref('');
+const selectedTab = ref('albums');
 const referencesList = ref([]);
 const spotifyResults = ref<SpotifyGetByQueryResponse>({} as SpotifyGetByQueryResponse);
-const spotifyResultsRef = ref<HTMLElement | null>(null);
+const spotifyListRef = ref<HTMLElement | null>(null);
 const offset = ref(0);
 
 const resultsHeaders = computed(() => {
 	switch (selectedTab.value) {
 		case 'albums':
 			return [
-				{ label: 'Image', styles: 'w-[50px]' },
-				{ label: 'Name and Artists', styles: 'w-full' },
-				{ label: 'Release Date', styles: 'ml-auto w-[100px] text-right' },
+				{ label: 'Image', styles: 'col-span-1' },
+				{ label: 'Name and Artists', styles: 'col-span-6' },
+				{ label: 'Release Date', styles: 'col-span-2' },
+				{ label: 'Action', styles: 'col-span-2 text-center' },
 			];
 		case 'artists':
 			return [
-				{ label: 'Image', styles: 'w-[50px]' },
-				{ label: 'Name', styles: 'w-full' },
+				{ label: 'Image', styles: 'col-span-1' },
+				{ label: 'Name', styles: 'col-span-8' },
+				{ label: 'Action', styles: 'col-span-2 text-center' },
 			];
 		case 'tracks':
 			return [
-				{ label: 'Name and Artists', styles: 'w-[200px]' },
-				{ label: 'Album', styles: 'w-[300px]' },
-				{ label: 'Duration', styles: 'ml-auto w-[100px] text-right' },
+				{ label: 'Name and Artists', styles: 'col-span-4' },
+				{ label: 'Album', styles: 'col-span-4' },
+				{ label: 'Duration', styles: 'col-span-1' },
+				{ label: 'Action', styles: 'col-span-2 text-center' },
 			];
 		default:
 			return [];
@@ -132,8 +137,21 @@ const onSearchSpotifySongs = async () => {
 	isSearching.value = true;
 	try {
 		const response = await getSpotifyByQuery(searchQuery.value, offset.value);
-		spotifyResults.value = response;
-		selectedTab.value = spotifyResponseOptions.value[0].value;
+
+		if (offset.value === 0) {
+			spotifyResults.value = response;
+		} else {
+			spotifyResults.value = {
+				...spotifyResults.value,
+				[selectedTab.value]: {
+					...spotifyResults.value[selectedTab.value],
+					items: [
+						...spotifyResults.value[selectedTab.value].items,
+						...response[selectedTab.value].items,
+					],
+				},
+			};
+		}
 	} catch (error) {
 		console.log('SPOTIFY_GET_BY_QUERY_ERROR', error);
 	} finally {
@@ -145,14 +163,17 @@ const onSelectTab = (value: string) => {
 	selectedTab.value = value;
 };
 
-watch(spotifyResultsRef, () => {
-	spotifyResultsRef.value?.addEventListener('scroll', () => {
-		if (
-			spotifyResultsRef.value!.scrollTop + spotifyResultsRef.value!.clientHeight >=
-			spotifyResultsRef.value!.scrollHeight
-		) {
+watch(spotifyListRef, (newValue) => {
+	if (!newValue) return;
+
+	newValue.addEventListener('scroll', async () => {
+		if (newValue.scrollTop + newValue.clientHeight >= newValue.scrollHeight && !isSearching.value) {
 			offset.value += 20;
-			onSearchSpotifySongs();
+			await onSearchSpotifySongs();
+			// Scroll to the middle of the list
+			setTimeout(() => {
+				newValue.scrollTop = newValue.scrollHeight / 2;
+			}, 500);
 		}
 	});
 });

@@ -1,5 +1,5 @@
 <template>
-	<div class="p-2 flex items-center gap-5 text-gray-500">
+	<div class="p-2 grid grid-cols-12 gap-5 text-white/50">
 		<small>#</small>
 		<small v-for="{ label, styles } of headers" :key="label" :class="styles">
 			{{ label }}
