@@ -1,9 +1,10 @@
 <template>
-	<div class="p-2 grid grid-cols-12 gap-5 text-white/50">
+	<div class="grid grid-cols-12 text-white/50">
 		<small>#</small>
-		<small v-for="{ label, styles } of headers" :key="label" :class="styles">
+		<small v-for="{ label, styles } of headers" :key="label" class="px-2.5" :class="styles">
 			{{ label }}
 		</small>
+		<small class="col-span-2 px-2.5 text-center">Actions</small>
 	</div>
 </template>
 

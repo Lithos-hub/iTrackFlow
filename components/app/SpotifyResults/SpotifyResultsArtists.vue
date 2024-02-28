@@ -1,29 +1,23 @@
 <template>
-	<ul v-if="data" class="flex flex-col">
-		<li
-			v-for="(item, i) of data"
-			:key="item.id"
-			class="result-list__item"
-			@click="goTo(item.external_urls.spotify)">
+	<AppSpotifyResultsLayout :data="data">
+		<template #default="{ item, i }">
 			<!-- INDEX -->
 			<small class="text-gray-500 col-span-1">{{ i + 1 }}</small>
 			<!-- IMAGE -->
 			<img
-				v-if="item.images"
-				:src="item.images.length ? item.images[0]?.url : 'https://via.placeholder.com/50'"
+				:src="
+					(item as ArtistsItem).images.length
+						? (item as ArtistsItem).images[0]?.url
+						: 'https://via.placeholder.com/50'
+				"
 				alt="Album cover"
-				class="col-span-1" />
+				class="col-span-2" />
 			<!-- NAME -->
-			<div class="flex flex-col col-span-8">
+			<div class="flex flex-col col-span-7">
 				<small>{{ item.name }}</small>
 			</div>
-			<!-- ACTIONS -->
-			<div class="flex items-center col-span-2">
-				<BaseButton flat icon="add" icon-color="green" @click="$emit('on-add', item)" />
-				<BaseButton flat icon="trash" icon-color="red" @click="$emit('on-remove', item)" />
-			</div>
-		</li>
-	</ul>
+		</template>
+	</AppSpotifyResultsLayout>
 </template>
 
 <script setup lang="ts">
@@ -34,7 +28,4 @@ interface Props {
 }
 
 defineProps<Props>();
-defineEmits(['on-add', 'on-remove']);
-
-const goTo = (href: string) => window.open(href, '_blank');
 </script>

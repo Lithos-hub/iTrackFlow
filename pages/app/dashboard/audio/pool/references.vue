@@ -10,7 +10,7 @@
 						:label="$t('app.audio.pool.references.search_in_references')"
 						:placeholder="$t('app.audio.pool.references.search_in_references_placeholder')"
 						debounced
-						@input="onSearchSpotifySongs" />
+						@input="getResultsByQuery" />
 				</section>
 			</section>
 			<section class="flex flex-col gap-5 w-full">
@@ -22,7 +22,7 @@
 						:label="$t('app.audio.pool.references.search_in_spotify')"
 						:placeholder="$t('app.audio.pool.references.search_in_spotify_placeholder')"
 						debounced
-						@input="onSearchSpotifySongs" />
+						@input="getResultsByQuery" />
 				</section>
 			</section>
 		</div>
@@ -33,10 +33,11 @@
 						{{ $t('app.audio.pool.references.my_references') }}
 					</strong>
 					<div class="flex flex-wrap gap-5 text-white">
-						<BaseList
-							:items="referencesList"
-							:is-loading="false"
-							:empty-message="$t('app.audio.pool.references.no_references_found')" />
+						<ul>
+							<li v-for="item in referencesList.albums" :key="item.id">
+								{{ item.name }}
+							</li>
+						</ul>
 					</div>
 				</div>
 			</section>
@@ -99,8 +100,9 @@
 </template>
 
 <script setup lang="ts">
-import { getSpotifyByQuery, getSpotifySession } from '@/services/spotify.service';
-import { AlbumsItem, ArtistsItem, SpotifyGetByQueryResponse, TracksItem } from '@/interfaces';
+import { AlbumsItem, ArtistsItem, TracksItem } from '@/interfaces';
+import { useSpotifyStore } from '@/store/spotify';
+import { getSpotifySession } from '~/services/spotify.service';
 
 definePageMeta({
 	title: 'Audio References',
@@ -108,84 +110,40 @@ definePageMeta({
 	layout: 'dashboard',
 });
 
-const isSearching = ref(false);
-const searchQuery = ref('');
-const selectedTab = ref('albums');
-const referencesList = ref([]);
-const spotifyResults = ref<SpotifyGetByQueryResponse>({} as SpotifyGetByQueryResponse);
+const { getResultsByQuery, onSelectTab, addItem } = useSpotifyStore();
+const {
+	searchQuery,
+	referencesList,
+	spotifyResponseOptions,
+	spotifyResults,
+	isSearching,
+	selectedTab,
+	offset,
+} = storeToRefs(useSpotifyStore());
+
 const spotifyListRef = ref<HTMLElement | null>(null);
-const offset = ref(0);
 
 const resultsHeaders = computed(() => {
 	switch (selectedTab.value) {
 		case 'albums':
 			return [
-				{ label: 'Image', styles: 'col-span-1' },
-				{ label: 'Name and Artists', styles: 'col-span-6' },
+				{ label: 'Image', styles: 'col-span-2' },
+				{ label: 'Name/Artists', styles: 'col-span-5' },
 				{ label: 'Release Date', styles: 'col-span-2' },
-				{ label: 'Action', styles: 'col-span-2 text-center' },
 			];
 		case 'artists':
 			return [
-				{ label: 'Image', styles: 'col-span-1' },
-				{ label: 'Name', styles: 'col-span-8' },
-				{ label: 'Action', styles: 'col-span-2 text-center' },
+				{ label: 'Image', styles: 'col-span-2' },
+				{ label: 'Name', styles: 'col-span-7' },
 			];
 		case 'tracks':
 			return [
-				{ label: 'Name and Artists', styles: 'col-span-4' },
-				{ label: 'Album', styles: 'col-span-4' },
+				{ label: 'Name/Artists', styles: 'col-span-2' },
+				{ label: 'Album', styles: 'col-span-6' },
 				{ label: 'Duration', styles: 'col-span-1' },
-				{ label: 'Action', styles: 'col-span-2 text-center' },
 			];
 		default:
 			return [];
-	}
-});
-
-const spotifyResponseOptions = computed(() =>
-	Object.keys(spotifyResults.value).map((key) => ({ label: key, value: key })),
-);
-const onSearchSpotifySongs = async () => {
-	isSearching.value = true;
-	try {
-		const response = await getSpotifyByQuery(searchQuery.value, offset.value);
-
-		if (offset.value === 0) {
-			spotifyResults.value = response;
-		} else {
-			spotifyResults.value = {
-				...spotifyResults.value,
-				[selectedTab.value]: {
-					...spotifyResults.value[selectedTab.value],
-					items: [
-						...spotifyResults.value[selectedTab.value].items,
-						...response[selectedTab.value].items,
-					],
-				},
-			};
-		}
-	} catch (error) {
-		console.log('SPOTIFY_GET_BY_QUERY_ERROR', error);
-	} finally {
-		isSearching.value = false;
-	}
-};
-
-const onSelectTab = (value: string) => {
-	selectedTab.value = value;
-};
-
-const addItem = (
-	type: 'albums' | 'artists' | 'tracks',
-	item: AlbumsItem | ArtistsItem | TracksItem,
-) => {
-	console.log('ADD_ITEM', type, item);
-};
-
-watch(searchQuery, (newVal, oldVal) => {
-	if (newVal !== oldVal) {
-		offset.value = 0;
 	}
 });
 
@@ -195,7 +153,7 @@ watch(spotifyListRef, (newValue) => {
 	newValue.addEventListener('scroll', async () => {
 		if (newValue.scrollTop + newValue.clientHeight >= newValue.scrollHeight && !isSearching.value) {
 			offset.value += 20;
-			await onSearchSpotifySongs();
+			await getResultsByQuery();
 			// Scroll to the middle of the list
 			setTimeout(() => {
 				newValue.scrollTop = newValue.scrollHeight / 2;
