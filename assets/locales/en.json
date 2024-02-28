@@ -218,17 +218,18 @@
 				},
 				"references": {
 					"search_in_references": "Search in references",
-					"search_in_references_placeholder": "Query parameter",
+					"search_in_references_placeholder": "Search in your saved references",
 					"my_references": "My references",
 					"no_references_found": "No references found",
 					"search_in_spotify": "Search in Spotify",
-					"search_in_spotify_placeholder": "Query parameter",
+					"search_in_spotify_placeholder": "Search by title, artist, album name, etc",
 					"spotify_results": "Spotify results",
 					"title": "Title",
 					"artist": "Artist",
 					"album": "Album",
 					"name": "Name",
-					"duration": "Duration"
+					"duration": "Duration",
+					"no_results_found": "No results found"
 				}
 			}
 		}

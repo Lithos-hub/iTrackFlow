@@ -70,13 +70,26 @@
 							class="sticky top-0 left-0 bg-[#101010] py-2" />
 						<AppSpotifyResultsAlbums
 							v-if="selectedTab === 'albums'"
-							:data="spotifyResults.albums.items" />
+							:data="spotifyResults.albums.items"
+							@on-add="(item: AlbumsItem) => addItem('albums', item)" />
 						<AppSpotifyResultsArtists
 							v-else-if="selectedTab === 'artists'"
-							:data="spotifyResults.artists.items" />
+							:data="spotifyResults.artists.items"
+							@on-add="(item: ArtistsItem) => addItem('artists', item)" />
 						<AppSpotifyResultsTracks
 							v-else-if="selectedTab === 'tracks'"
-							:data="spotifyResults.tracks.items" />
+							:data="spotifyResults.tracks.items"
+							@on-add="(item: TracksItem) => addItem('tracks', item)" />
+						<div
+							v-if="
+								!spotifyResults.albums.items.length &&
+								!spotifyResults.artists.items.length &&
+								!spotifyResults.tracks.items.length
+							">
+							<small class="text-center text-red-500">
+								{{ $t('app.audio.pool.references.no_results_found') }}
+							</small>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -87,7 +100,7 @@
 
 <script setup lang="ts">
 import { getSpotifyByQuery, getSpotifySession } from '@/services/spotify.service';
-import { SpotifyGetByQueryResponse } from '@/interfaces';
+import { AlbumsItem, ArtistsItem, SpotifyGetByQueryResponse, TracksItem } from '@/interfaces';
 
 definePageMeta({
 	title: 'Audio References',
@@ -162,6 +175,19 @@ const onSearchSpotifySongs = async () => {
 const onSelectTab = (value: string) => {
 	selectedTab.value = value;
 };
+
+const addItem = (
+	type: 'albums' | 'artists' | 'tracks',
+	item: AlbumsItem | ArtistsItem | TracksItem,
+) => {
+	console.log('ADD_ITEM', type, item);
+};
+
+watch(searchQuery, (newVal, oldVal) => {
+	if (newVal !== oldVal) {
+		offset.value = 0;
+	}
+});
 
 watch(spotifyListRef, (newValue) => {
 	if (!newValue) return;

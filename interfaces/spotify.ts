@@ -45,7 +45,7 @@ export enum ReleaseDatePrecision {
 	Year = 'year',
 }
 
-export interface AlbumElement {
+export interface AlbumsItem {
 	album_type: AlbumTypeEnum;
 	artists: Artist[];
 	available_markets: string[];
@@ -75,7 +75,7 @@ export interface ArtistsItem {
 }
 
 export interface TracksItem {
-	album: AlbumElement;
+	album: AlbumsItem;
 	artists: Artist[];
 	available_markets: string[];
 	disc_number: number;
@@ -96,7 +96,7 @@ export interface TracksItem {
 
 export interface Albums {
 	href: string;
-	items: AlbumElement[];
+	items: AlbumsItem[];
 	limit: number;
 	next: string;
 	offset: number;
