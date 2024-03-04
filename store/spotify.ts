@@ -4,7 +4,7 @@ import { AlbumsItem, ArtistsItem, SpotifyGetByQueryResponse, TracksItem } from '
 import { ReferenceType } from '@/constants';
 
 export const useSpotifyStore = defineStore('spotify', () => {
-	const searchQuery = ref('');
+	const spotifyQuery = ref('');
 	const isSearching = ref(false);
 	const offset = ref(0);
 	const selectedTab = ref('albums');
@@ -22,7 +22,7 @@ export const useSpotifyStore = defineStore('spotify', () => {
 	const getResultsByQuery = async () => {
 		isSearching.value = true;
 		try {
-			const response = await getSpotifyByQuery(searchQuery.value, offset.value);
+			const response = await getSpotifyByQuery(spotifyQuery.value, offset.value);
 
 			if (offset.value === 0) {
 				spotifyResults.value = response;
@@ -55,7 +55,7 @@ export const useSpotifyStore = defineStore('spotify', () => {
 		referencesList.value[type] = [...referencesList.value[type], item];
 	};
 
-	watch(searchQuery, (newVal, oldVal) => {
+	watch(spotifyQuery, (newVal, oldVal) => {
 		if (newVal !== oldVal) {
 			offset.value = 0;
 		}
@@ -65,7 +65,7 @@ export const useSpotifyStore = defineStore('spotify', () => {
 		referencesList,
 		spotifyResults,
 		spotifyResponseOptions,
-		searchQuery,
+		spotifyQuery,
 		isSearching,
 		selectedTab,
 		offset,

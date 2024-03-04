@@ -1,10 +1,10 @@
 <template>
 	<section class="flex flex-col gap-5 grow h-[calc(100%-40px)]">
 		<div class="flex gap-5">
-			<section class="flex flex-col gap-5 w-full">
+			<section class="flex flex-col gap-5 w-full h-full">
 				<section class="default_border default_mode p-5">
 					<BaseInput
-						v-model="searchQuery"
+						v-model="referenceQuery"
 						variant="bordered"
 						color="white"
 						:label="$t('app.audio.pool.references.search_in_references')"
@@ -16,7 +16,7 @@
 			<section class="flex flex-col gap-5 w-full">
 				<section class="default_border default_mode p-5">
 					<BaseInput
-						v-model="searchQuery"
+						v-model="spotifyQuery"
 						variant="bordered"
 						color="white"
 						:label="$t('app.audio.pool.references.search_in_spotify')"
@@ -26,18 +26,52 @@
 				</section>
 			</section>
 		</div>
-		<div class="flex gap-5 w-full">
-			<section class="default_border default_mode h-auto overflow-y-auto w-1/2">
+		<div class="flex gap-5 w-full h-full">
+			<section class="default_border default_mode h-auto w-1/2">
 				<div class="p-5 flex flex-col gap-5">
 					<strong>
 						{{ $t('app.audio.pool.references.my_references') }}
 					</strong>
-					<div class="flex flex-wrap gap-5 text-white">
-						<ul>
-							<li v-for="item in referencesList.albums" :key="item.id">
-								{{ item.name }}
+					<div v-if="Object.keys(referencesList).length" class="flex flex-wrap gap-5 text-white">
+						<ul class="flex flex-col max-h-[500px] overflow-y-auto">
+							<li
+								v-for="category in Object.keys(referencesList)"
+								:key="category"
+								class="flex flex-col">
+								<div
+									v-for="data of referencesList[category]"
+									:key="data.id"
+									class="flex justify-between items-center gap-20">
+									<div class="flex gap-5 items-center">
+										<small
+											:class="{
+												'text-green-500 bg-green-500/10 flex flex-col justify-center items-center px-5 uppercase py-1 text-xs rounded-full border border-green-500/50':
+													data.type === 'album',
+												'text-blue-500 bg-blue-500/10 flex flex-col justify-center items-center px-5 uppercase py-1 text-xs rounded-full border border-blue-500/50':
+													data.type === 'artist',
+												'text-yellow-500 bg-yellow-500/10 flex flex-col justify-center items-center px-5 uppercase py-1 text-xs rounded-full border border-yellow-500/50':
+													data.type === 'track',
+											}">
+											{{ data.type }}
+										</small>
+										<div class="text-sm flex flex-col min-w-[475px]">
+											<strong>{{ data.name }}</strong>
+											<small v-if="data.artists">{{ data.artists[0].name }}</small>
+										</div>
+									</div>
+									<BaseButton
+										icon="trash"
+										flat
+										icon-color="red"
+										@click="removeReference(category, data.id)" />
+								</div>
 							</li>
 						</ul>
+					</div>
+					<div v-else>
+						<small class="text-red-500">
+							{{ $t('app.audio.pool.references.no_references_found') }}
+						</small>
 					</div>
 				</div>
 			</section>
@@ -112,7 +146,7 @@ definePageMeta({
 
 const { getResultsByQuery, onSelectTab, addItem } = useSpotifyStore();
 const {
-	searchQuery,
+	spotifyQuery,
 	referencesList,
 	spotifyResponseOptions,
 	spotifyResults,
@@ -122,6 +156,8 @@ const {
 } = storeToRefs(useSpotifyStore());
 
 const spotifyListRef = ref<HTMLElement | null>(null);
+
+const referenceQuery = ref('');
 
 const resultsHeaders = computed(() => {
 	switch (selectedTab.value) {
@@ -146,6 +182,11 @@ const resultsHeaders = computed(() => {
 			return [];
 	}
 });
+
+const removeReference = (category: string, id: string) => {
+	const index = referencesList.value[category].findIndex((item) => item.id === id);
+	referencesList.value[category].splice(index, 1);
+};
 
 watch(spotifyListRef, (newValue) => {
 	if (!newValue) return;
