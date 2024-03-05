@@ -8,9 +8,9 @@
 				v-if="(item as AlbumsItem).images"
 				:src="(item as AlbumsItem).images[0].url"
 				alt="Album cover"
-				class="col-span-2" />
+				class="col-span-1" />
 			<!-- NAME -->
-			<div class="flex flex-col col-span-5">
+			<div class="flex flex-col col-span-6">
 				<small>{{ item.name }}</small>
 				<!-- ARTISTS -->
 				<small class="text-xs text-gray-500">{{ (item as AlbumsItem).artists[0].name }}</small>

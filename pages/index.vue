@@ -4,9 +4,6 @@
 			<title>{{ title }}</title>
 		</Head>
 		<LandingHeroSection ref="heroRef" />
-		<!-- <LandingHarmonySection ref="harmonyRef" />
-		<LandingProductionSection ref="productionRef" />
-		<LandingAudioSection ref="audioRef" /> -->
 		<LandingMiddleSection
 			id="harmony"
 			color="primary"

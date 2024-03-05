@@ -10,7 +10,7 @@
 						:label="$t('app.audio.pool.references.search_in_references')"
 						:placeholder="$t('app.audio.pool.references.search_in_references_placeholder')"
 						debounced
-						@input="getResultsByQuery" />
+						@input="filterReferences" />
 				</section>
 			</section>
 			<section class="flex flex-col gap-5 w-full">
@@ -32,46 +32,12 @@
 					<strong>
 						{{ $t('app.audio.pool.references.my_references') }}
 					</strong>
-					<div v-if="Object.keys(referencesList).length" class="flex flex-wrap gap-5 text-white">
-						<ul class="flex flex-col max-h-[500px] overflow-y-auto">
-							<li
-								v-for="category in Object.keys(referencesList)"
-								:key="category"
-								class="flex flex-col">
-								<div
-									v-for="data of referencesList[category]"
-									:key="data.id"
-									class="flex justify-between items-center gap-20">
-									<div class="flex gap-5 items-center">
-										<small
-											:class="{
-												'text-green-500 bg-green-500/10 flex flex-col justify-center items-center px-5 uppercase py-1 text-xs rounded-full border border-green-500/50':
-													data.type === 'album',
-												'text-blue-500 bg-blue-500/10 flex flex-col justify-center items-center px-5 uppercase py-1 text-xs rounded-full border border-blue-500/50':
-													data.type === 'artist',
-												'text-yellow-500 bg-yellow-500/10 flex flex-col justify-center items-center px-5 uppercase py-1 text-xs rounded-full border border-yellow-500/50':
-													data.type === 'track',
-											}">
-											{{ data.type }}
-										</small>
-										<div class="text-sm flex flex-col min-w-[475px]">
-											<strong>{{ data.name }}</strong>
-											<small v-if="data.artists">{{ data.artists[0].name }}</small>
-										</div>
-									</div>
-									<BaseButton
-										icon="trash"
-										flat
-										icon-color="red"
-										@click="removeReference(category, data.id)" />
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div v-else>
-						<small class="text-red-500">
-							{{ $t('app.audio.pool.references.no_references_found') }}
-						</small>
+					<div v-for="category in Object.keys(referencesList)" :key="category">
+						<AppReferencesListItem
+							v-for="item of referencesList[category]"
+							:key="item.id"
+							:item="item"
+							@on-remove="(id) => removeReference(category, id)" />
 					</div>
 				</div>
 			</section>
@@ -163,14 +129,14 @@ const resultsHeaders = computed(() => {
 	switch (selectedTab.value) {
 		case 'albums':
 			return [
-				{ label: 'Image', styles: 'col-span-2' },
-				{ label: 'Name/Artists', styles: 'col-span-5' },
+				{ label: 'Image', styles: 'col-span-1' },
+				{ label: 'Name/Artists', styles: 'col-span-6' },
 				{ label: 'Release Date', styles: 'col-span-2' },
 			];
 		case 'artists':
 			return [
-				{ label: 'Image', styles: 'col-span-2' },
-				{ label: 'Name', styles: 'col-span-7' },
+				{ label: 'Image', styles: 'col-span-1' },
+				{ label: 'Name', styles: 'col-span-8' },
 			];
 		case 'tracks':
 			return [
@@ -187,6 +153,8 @@ const removeReference = (category: string, id: string) => {
 	const index = referencesList.value[category].findIndex((item) => item.id === id);
 	referencesList.value[category].splice(index, 1);
 };
+
+const filterReferences = () => {};
 
 watch(spotifyListRef, (newValue) => {
 	if (!newValue) return;

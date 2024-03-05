@@ -2,7 +2,7 @@
 	<AppSpotifyResultsLayout :data="data">
 		<template #default="{ item, i }">
 			<!-- INDEX -->
-			<small class="text-gray-500 col-span-1">{{ i + 1 }}</small>
+			<small class="text-gray-500 col-span-1 text-center">{{ i + 1 }}</small>
 			<!-- IMAGE -->
 			<img
 				:src="
@@ -11,9 +11,9 @@
 						: 'https://via.placeholder.com/50'
 				"
 				alt="Album cover"
-				class="col-span-2" />
+				class="col-span-1" />
 			<!-- NAME -->
-			<div class="flex flex-col col-span-7">
+			<div class="flex flex-col col-span-8">
 				<small>{{ item.name }}</small>
 			</div>
 		</template>
