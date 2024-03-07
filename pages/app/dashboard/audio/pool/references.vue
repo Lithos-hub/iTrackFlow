@@ -65,7 +65,8 @@
 					<div
 						v-if="Object.values(spotifyResults).length && selectedTab"
 						ref="spotifyListRef"
-						class="overflow-y-auto max-h-[450px]">
+						class="overflow-y-auto max-h-[450px]"
+						@scroll.passive="onScrollOverSpotifySection">
 						<AppSpotifyResultsHeader
 							:headers="resultsHeaders"
 							class="sticky top-0 left-0 bg-[#101010] py-2" />
@@ -156,20 +157,22 @@ const removeReference = (category: string, id: string) => {
 
 const filterReferences = () => {};
 
-watch(spotifyListRef, (newValue) => {
-	if (!newValue) return;
+const onScrollOverSpotifySection = async () => {
+	if (!spotifyListRef.value) return;
 
-	newValue.addEventListener('scroll', async () => {
-		if (newValue.scrollTop + newValue.clientHeight >= newValue.scrollHeight && !isSearching.value) {
-			offset.value += 20;
-			await getResultsByQuery();
-			// Scroll to the middle of the list
-			setTimeout(() => {
-				newValue.scrollTop = newValue.scrollHeight / 2;
-			}, 500);
-		}
-	});
-});
+	if (
+		spotifyListRef.value.scrollTop + spotifyListRef.value.clientHeight >=
+			spotifyListRef.value.scrollHeight &&
+		!isSearching.value
+	) {
+		offset.value += 20;
+		await getResultsByQuery();
+		// Scroll to the middle of the list
+		setTimeout(() => {
+			spotifyListRef.value!.scrollTop = spotifyListRef.value!.scrollHeight / 2;
+		}, 500);
+	}
+};
 
 onMounted(async () => {
 	await getSpotifySession();
