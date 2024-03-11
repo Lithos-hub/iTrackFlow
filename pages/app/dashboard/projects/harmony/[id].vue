@@ -61,10 +61,7 @@
 					</header>
 
 					<!-- Harmony sheet -->
-					<AppMusicSheet
-						v-model="initialHarmonyState.title"
-						:data="initialHarmonyState"
-						:staffs="initialHarmonyState.chords" />
+					<AppMusicSheet v-model="initialHarmonyState.title" :data="initialHarmonyState" />
 				</div>
 			</section>
 		</div>

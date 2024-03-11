@@ -1,9 +1,9 @@
 <template>
-	<section
-		class="music-sheet relative bg-white dark:bg-softdark p-5 shadow-xl relative flex flex-col gap-5">
+	<section class="music-sheet bg-white dark:bg-softdark p-5 shadow-xl relative flex flex-col gap-5">
 		<div class="grid grid-cols-2 gap-10 w-full">
 			<BaseInput
 				v-model.trim="sheetTitle"
+				data-testid="sheet__input-title"
 				variant="underline"
 				:placeholder="$t('app.harmony.sheet_title_placeholder')"
 				class="w-1/2" />
@@ -12,25 +12,27 @@
 				<small>
 					<strong>{{ $t('app.harmony.tempo') }}:</strong>
 					{{ ' ' }}
-					<span>{{ data.tempo }} bpm</span>
+					<span data-testid="music-sheet__tempo">{{ data.tempo }} bpm</span>
 				</small>
 				<small>
 					<strong>{{ $t('app.harmony.time_signature') }}:</strong>
 					{{ ' ' }}
-					<span>{{ data.timeSignature }}</span>
+					<span data-testid="music-sheet__time-signature">{{ data.timeSignature }}</span>
 				</small>
 			</div>
 		</div>
 
 		<div
 			class="grid"
+			data-testid="music-sheet__grid"
 			:style="{
 				'grid-template-columns': `repeat(${zoomLevel}, 1fr)`,
 			}">
 			<AppMusicStaff
-				v-for="(chord, index) of staffs"
+				v-for="(chord, index) of data.chords"
 				:key="index"
 				:index="index + 1"
+				data-testid="music-sheet__staff"
 				v-bind="chord"
 				:key-signature="data.scaleType" />
 		</div>
@@ -46,12 +48,14 @@
 				<BaseIcon
 					icon="zoom-in"
 					color="white"
+					data-testid="music-sheet__zoom-in"
 					:size="25"
 					class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
 					@click="zoomIn" />
 				<BaseIcon
 					icon="zoom-out"
 					color="white"
+					data-testid="music-sheet__zoom-out"
 					:size="25"
 					class="bg-white p-1 rounded hover:bg-opacity-45 cursor-pointer"
 					@click="zoomOut" />
@@ -117,7 +121,7 @@
 import { jsPDF as JSPDF } from 'jspdf';
 import { MusicSheetProps } from './MusicSheet.interfaces';
 
-const { data, staffs } = defineProps<MusicSheetProps>();
+const { data } = defineProps<MusicSheetProps>();
 
 const sheetTitle = defineModel<string>();
 
@@ -127,7 +131,9 @@ const musicSheetTableRef = ref<HTMLDivElement>(null!);
 
 // TODO
 const outputChordsForPDF = computed(() =>
-	staffs.filter((staff) => staff.subdivisionChords.length).map((staff) => staff.subdivisionChords),
+	data.chords
+		.filter((staff) => staff.subdivisionChords.length)
+		.map((staff) => staff.subdivisionChords),
 );
 
 const zoomIn = () => {

@@ -161,7 +161,7 @@ const removeReference = (category: string, id: string) => {
 const filterReferences = () => {
 	return Object.keys(referencesList.value).reduce((acc, category) => {
 		const filtered = referencesList.value[category].filter((item) => {
-			// Search by name, album title, artist name
+			// Search by name, album title and/or artist name
 			const search = referenceQuery.value.toLowerCase();
 			return (
 				item.name.toLowerCase().includes(search) ||
