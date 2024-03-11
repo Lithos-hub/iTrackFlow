@@ -1,16 +1,18 @@
 <template>
 	<ul class="flex flex-col">
-		<li v-for="(item, i) of data" :key="item.id" class="flex">
-			<div class="result-list__item w-full" @click="goTo(item.external_urls.spotify)">
-				<!-- INDEX -->
-				<slot :item="item" :i="i" />
-			</div>
+		<div v-for="(item, i) of data" :key="item.id" class="flex">
+			<a class="flex" :href="item.external_urls.spotify" target="_blank">
+				<div class="result-list__item w-full">
+					<!-- INDEX -->
+					<slot :item="item" :i="i" />
+				</div>
+			</a>
 			<!-- ACTIONS -->
 			<div class="flex items-center col-span-2 ml-auto">
 				<BaseButton flat icon="add" icon-color="green" @click="$emit('on-add', item)" />
 				<BaseButton flat icon="trash" icon-color="red" @click="$emit('on-remove', item)" />
 			</div>
-		</li>
+		</div>
 	</ul>
 </template>
 
@@ -23,6 +25,4 @@ interface Props {
 
 defineProps<Props>();
 defineEmits(['on-add', 'on-remove']);
-
-const goTo = (href: string) => window.open(href, '_blank');
 </script>

@@ -26,23 +26,24 @@
 				</section>
 			</section>
 		</div>
-		<div class="flex gap-5 w-full h-full">
-			<section class="default_border default_mode h-auto w-1/2">
+		<div class="flex gap-5">
+			<section class="default_border default_mode w-1/2">
 				<div class="p-5 flex flex-col gap-5">
 					<strong>
 						{{ $t('app.audio.pool.references.my_references') }}
 					</strong>
-					<div v-for="category in Object.keys(referencesList)" :key="category">
-						<AppReferencesListItem
-							v-for="item of referencesList[category]"
-							:key="item.id"
-							:item="item"
-							@on-remove="(id) => removeReference(category, id)" />
+					<div class="max-h-[500px] overflow-y-auto">
+						<div v-for="category in Object.keys(computedReferencesList)" :key="category">
+							<AppReferencesListItem
+								v-for="item of computedReferencesList[category]"
+								:key="item.id"
+								:item="item"
+								@on-remove="(id) => removeReference(category, id)" />
+						</div>
 					</div>
 				</div>
 			</section>
-			<section
-				class="default_border bg-[#101010] h-auto overflow-y-auto w-1/2 text-gray-200 relative">
+			<section class="default_border bg-[#101010] h-auto w-1/2 text-gray-200 relative">
 				<div class="p-5 flex flex-col gap-5">
 					<div class="flex justify-between">
 						<strong>
@@ -150,12 +151,31 @@ const resultsHeaders = computed(() => {
 	}
 });
 
+const computedReferencesList = computed(() => filterReferences());
+
 const removeReference = (category: string, id: string) => {
 	const index = referencesList.value[category].findIndex((item) => item.id === id);
 	referencesList.value[category].splice(index, 1);
 };
 
-const filterReferences = () => {};
+const filterReferences = () => {
+	return Object.keys(referencesList.value).reduce((acc, category) => {
+		const filtered = referencesList.value[category].filter((item) => {
+			// Search by name, album title, artist name
+			const search = referenceQuery.value.toLowerCase();
+			return (
+				item.name.toLowerCase().includes(search) ||
+				(item.type === 'track' && (item as TracksItem).album.name.toLowerCase().includes(search)) ||
+				(item.type === 'track' &&
+					(item as TracksItem).artists[0].name.toLowerCase().includes(search)) ||
+				(item.type === 'album' &&
+					(item as AlbumsItem).artists[0].name.toLowerCase().includes(search))
+			);
+		});
+		acc[category] = filtered;
+		return acc;
+	}, {});
+};
 
 const onScrollOverSpotifySection = async () => {
 	if (!spotifyListRef.value) return;

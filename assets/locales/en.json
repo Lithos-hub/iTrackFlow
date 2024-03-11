@@ -17,7 +17,8 @@
 		},
 		"audio": {
 			"title": "Audio",
-			"description": "Create your own audio library with our audio tool. Organize your audios by category, instrument, duration, tempo and creator - everything you need for your project!"
+			"metadata": "Edit the metadata of your audio tracks and upload your demos to share them with the rest of the team. You can also search and save references from Spotify to inspire your projects.",
+			"references_and_demos": "Create your own audio library with our audio tool. Organize your audios by category, instrument, duration, tempo and creator: everything you need for your project!"
 		}
 	},
 	"authentication": {

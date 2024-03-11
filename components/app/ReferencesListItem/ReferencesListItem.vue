@@ -1,7 +1,11 @@
 <template>
-	<ul class="flex flex-col max-h-[500px] overflow-y-auto">
-		<li class="flex justify-between items-center gap-20">
-			<div class="flex gap-5 items-center">
+	<article class="flex flex-col max-h-[500px]">
+		<div class="flex justify-between items-center gap-20">
+			<a
+				:href="item.external_urls.spotify"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex gap-5 items-center cursor-pointer hover:bg-white/10 p-2">
 				<small
 					:class="{
 						'text-green-500 bg-green-500/10 border-green-500/50 reference__list--item':
@@ -19,10 +23,10 @@
 						{{ (item as AlbumsItem).artists[0].name }}
 					</small>
 				</div>
-			</div>
+			</a>
 			<BaseButton icon="trash" flat icon-color="red" @click="$emit('on-remove', item.id)" />
-		</li>
-	</ul>
+		</div>
+	</article>
 </template>
 
 <script setup lang="ts">

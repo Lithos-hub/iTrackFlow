@@ -7,11 +7,12 @@
 				<h2 class="text-[70px] md:text-[100px] xl:text-[125px] font-bold gradient__text--primary">
 					{{ title }}
 				</h2>
-				<div class="lg:w-[30vw]">
+				<div v-if="description" class="lg:w-[30vw]">
 					<p>
 						{{ description }}
 					</p>
 				</div>
+				<slot />
 			</div>
 			<div
 				class="w-full mx-auto lg:w-full lg:h-[80vh] lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-y-1/2 shadow-xl rounded-2xl overflow-hidden"

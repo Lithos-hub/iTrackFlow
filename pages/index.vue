@@ -23,8 +23,22 @@
 			color="primary"
 			image="/img/audio-capture.jpg"
 			:title="$t('landing.audio.title')"
-			:description="$t('landing.audio.description')"
-			class="bg-gradient-to-b from-white/50 dark:from-primary/10 to-white dark:to-secondary/40" />
+			class="bg-gradient-to-b from-white/50 dark:from-primary/10 to-white dark:to-secondary/40">
+			<ul class="flex flex-col gap-5">
+				<li class="flex flex-col gap-2.5">
+					<strong class="text-xl">Metadata</strong>
+					<p>
+						{{ $t('landing.audio.metadata') }}
+					</p>
+				</li>
+				<li class="flex flex-col gap-2.5">
+					<strong class="text-xl">Pool (References and demos)</strong>
+					<p>
+						{{ $t('landing.audio.references_and_demos') }}
+					</p>
+				</li>
+			</ul>
+		</LandingMiddleSection>
 	</div>
 </template>
 
