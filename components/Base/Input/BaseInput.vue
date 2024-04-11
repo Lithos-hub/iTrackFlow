@@ -8,11 +8,11 @@
 			v-bind="$attrs"
 			v-model="model"
 			data-testid="base-input__default"
-			:class="`input input__${variant} ${!noOutline ? 'focus:ring-2' : ''}`"
+			:class="`input input__${variant} ${!noOutline && 'focus:ring-2'}`"
 			:style="{
-				borderColor: tailwindColor,
+				borderColor: getTWColor(variant),
 				color: textColor,
-				outlineColor: tailwindColor,
+				outlineColor: getTWColor(variant),
 			}" />
 		<input
 			v-else
@@ -21,9 +21,9 @@
 			:class="`input input__${variant} ${!noOutline && 'focus:ring-2'}`"
 			:value="model"
 			:style="{
-				borderColor: tailwindColor,
+				borderColor: getTWColor(variant),
 				color: textColor,
-				outlineColor: tailwindColor,
+				outlineColor: getTWColor(variant),
 			}"
 			@input="onDebouncedInput" />
 
@@ -34,6 +34,7 @@
 <script setup lang="ts">
 import { BaseInputProps } from './BaseInput.interfaces';
 import { useScreenStore } from '@/store/screen';
+import { useColor } from '@/composables/useColor';
 
 const { lightMode } = storeToRefs(useScreenStore());
 
@@ -41,6 +42,8 @@ const { debounced, color } = withDefaults(defineProps<BaseInputProps>(), {
 	modelValue: '',
 	variant: 'bordered',
 });
+
+const { getTWColor } = useColor();
 
 const emit = defineEmits(['update:modelValue', 'input', 'change']);
 const model = defineModel<string | number>();
@@ -59,52 +62,6 @@ const textColor = computed(() => {
 	}
 
 	return lightMode?.value ? '#000000' : '#ffffff';
-});
-
-const tailwindColor = computed<string>(() => {
-	let colorReference;
-
-	switch (color) {
-		case 'primary':
-			colorReference = 'blue';
-			break;
-		case 'secondary':
-			colorReference = 'pink';
-			break;
-		case 'tertiary':
-			colorReference = 'orange';
-			break;
-		case 'success':
-			colorReference = 'green';
-			break;
-		case 'info':
-			colorReference = 'blue';
-			break;
-		case 'warning':
-			colorReference = 'orange';
-			break;
-		case 'danger':
-			colorReference = 'red';
-			break;
-		case 'none':
-			colorReference = 'transparent';
-			break;
-		case 'dark':
-			colorReference = '#00000050';
-			break;
-		case 'light':
-			colorReference = '#ffffff50';
-			break;
-		default:
-			colorReference = lightMode?.value ? '#00000050' : '#ffffff50';
-			break;
-	}
-
-	if (colorReference.charAt(0) === '#') {
-		return colorReference;
-	}
-
-	return getTailwindColor(colorReference);
 });
 
 watch(

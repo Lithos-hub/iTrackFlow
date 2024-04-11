@@ -5,9 +5,10 @@
 		data-testid="base-button"
 		:class="`button button__${flat ? 'flat' : computedColor} button__${size} button__radius--${radius} button__${variant}`"
 		:style="{
-			border: (variant === 'stealth' || variant === 'outline') && `1px solid ${tailwindColor}`,
+			border:
+				(variant === 'stealth' || variant === 'outline') && `1px solid ${getTWColor(variant)}`,
 			background: !flat && computedBackground,
-			color: variant === 'outline' || variant === 'stealth' ? tailwindColor : '',
+			color: variant === 'outline' || variant === 'stealth' ? getTWColor(variant) : '',
 		}">
 		<div v-if="!loading && !success" class="flex items-center justify-center gap-2.5 text-sm">
 			<!-- Left icon -->
@@ -66,41 +67,7 @@ const { iconColor, color, disabled, variant } = withDefaults(defineProps<BaseBut
 	icon: '',
 });
 
-const tailwindColor = computed(() => {
-	let colorReference;
-
-	switch (color) {
-		case 'primary':
-			colorReference = 'blue';
-			break;
-		case 'secondary':
-			colorReference = 'pink';
-			break;
-		case 'tertiary':
-			colorReference = 'orange';
-			break;
-		case 'success':
-			colorReference = 'green';
-			break;
-		case 'info':
-			colorReference = 'blue';
-			break;
-		case 'warning':
-			colorReference = 'orange';
-			break;
-		case 'danger':
-			colorReference = 'red';
-			break;
-		case 'none':
-			colorReference = 'transparent';
-			break;
-		default:
-			colorReference = color;
-			break;
-	}
-
-	return getTailwindColor(colorReference);
-});
+const { getTWColor } = useColor();
 
 const computedIconColor = computed<ColorName | 'white'>(() => (iconColor as ColorName) || 'white');
 
@@ -111,13 +78,13 @@ const computedColor = computed(() => {
 
 const computedBackground = computed(() => {
 	if (variant === 'outline' || variant === 'link') return 'transparent';
-	if (variant === 'stealth') return `${tailwindColor.value}30`;
+	if (variant === 'stealth') return `${getTWColor(variant)}30`;
 	if (
 		['primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'danger'].includes(color)
 	) {
 		return color;
 	}
-	return tailwindColor.value;
+	return getTWColor(variant);
 });
 </script>
 

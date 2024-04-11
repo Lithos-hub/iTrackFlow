@@ -71,6 +71,7 @@
 						<AppSpotifyResultsHeader
 							:headers="resultsHeaders"
 							class="sticky top-0 left-0 bg-[#101010] py-2" />
+						<!-- TODO: Refactor :data to apply Interface Segregation Interface -->
 						<AppSpotifyResultsAlbums
 							v-if="selectedTab === 'albums'"
 							:data="spotifyResults.albums.items"

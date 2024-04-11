@@ -3,13 +3,9 @@
 		data-testid="base-chip"
 		:class="`chip chip__${variant} ${closable && 'active:scale-110'}`"
 		:style="{
-			borderColor: tailwindColor,
+			borderColor: getTWColor(variant),
 		}">
-		<BaseIcon
-			v-if="prependIcon"
-			:icon="prependIcon"
-			:color="computedVariantColor"
-			class="h-6 w-6" />
+		<BaseIcon v-if="prependIcon" :icon="prependIcon" :color="getColor(variant)" class="h-6 w-6" />
 		<small>
 			<slot v-if="!content" />
 			<span v-else>{{ content }}</span>
@@ -17,7 +13,7 @@
 		<BaseIcon
 			v-if="appendIcon && !closable"
 			:icon="appendIcon"
-			:color="computedVariantColor"
+			:color="getColor(variant)"
 			class="h-6 w-6" />
 		<BaseIcon
 			v-if="closable"
@@ -30,10 +26,8 @@
 </template>
 
 <script script setup lang="ts">
-import { computed, ComputedRef } from 'vue';
-
 import { ChipProps } from './BaseChip.interfaces';
-import { ColorName } from '@/interfaces';
+import { useColor } from '@/composables/useColor';
 
 const { variant } = withDefaults(defineProps<ChipProps>(), {
 	variant: 'default',
@@ -45,32 +39,7 @@ const { variant } = withDefaults(defineProps<ChipProps>(), {
 
 defineEmits(['close']);
 
-const computedVariantColor: ComputedRef<ColorName> = computed(() => {
-	switch (variant) {
-		case 'default':
-			return 'warmGray';
-		case 'primary':
-			return 'blue';
-		case 'secondary':
-			return 'rose';
-		case 'success':
-			return 'green';
-		case 'danger':
-			return 'red';
-		case 'warning':
-			return 'orange';
-		case 'info':
-			return 'indigo';
-		case 'light':
-			return 'white';
-		case 'dark':
-			return 'black';
-		default:
-			return 'warmGray';
-	}
-});
-
-const tailwindColor = computed(() => getTailwindColor(computedVariantColor.value));
+const { getColor, getTWColor } = useColor();
 </script>
 
 <style scoped lang="scss">

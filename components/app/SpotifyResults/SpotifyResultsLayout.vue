@@ -3,7 +3,7 @@
 		<div v-for="(item, i) of data" :key="item.id" class="flex">
 			<a class="flex" :href="item.external_urls.spotify" target="_blank">
 				<div class="result-list__item w-full">
-					<!-- INDEX -->
+					<!-- TODO: Refactor to apply Interface Segregation Interface -->
 					<slot :item="item" :i="i" />
 				</div>
 			</a>
