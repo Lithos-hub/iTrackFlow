@@ -5,6 +5,7 @@ import { UnitTestButtons } from './BaseButton.const';
 import { piniaMock } from '@/__mocks__/store/pinia';
 
 vi.mock('@/store/screen', () => ({ useScreenStore: () => piniaMock.initialState.screen }));
+vi.mock('@/composables/useColor', () => ({ useColor: () => ({ getTWColor: () => 'color' }) }));
 
 const renderWrapper = ({ props = {} }) =>
 	render(BaseButton, {

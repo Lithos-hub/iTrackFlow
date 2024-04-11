@@ -9,6 +9,7 @@ import { piniaMock } from '~/__mocks__/store/pinia';
 
 vi.mock('@/store/user', () => ({ useUserStore: () => piniaMock.initialState.user }));
 vi.mock('@/store/screen', () => ({ useScreenStore: () => piniaMock.initialState.screen }));
+vi.mock('@/composables/useColor', () => ({ useColor: () => ({ getTWColor: () => 'color' }) }));
 
 const createWrapper = ({ props = {}, pinia = piniaMock }) =>
 	mount(BaseNavbar, {

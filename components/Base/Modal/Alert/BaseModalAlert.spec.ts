@@ -2,6 +2,8 @@ import { render } from '@testing-library/vue';
 import BaseModalAlert from './BaseModalAlert.vue';
 import { unitTestModalAlert } from './BaseModalAlert.const';
 
+vi.mock('@/composables/useColor', () => ({ useColor: () => ({ getTWColor: () => 'color' }) }));
+
 const renderWrapper = ({ props = {} }) =>
 	render(BaseModalAlert, {
 		props,
